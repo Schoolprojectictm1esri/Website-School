@@ -10,10 +10,11 @@ root {
     display: block;
 }
 
-div#column{
-	width:170px;
+td {
+	width:50px;
 	position:relative;
-	height:200px;
+	height:50px;
 	border:1px solid green	;
-	background: "yellow" ;
+	background: "red" ;
+        /* Stijl voor de agenda per vakje*/
 }
