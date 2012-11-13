@@ -1,0 +1,19 @@
+/* 
+    Document   : danielstyle
+    Created on : 13-nov-2012, 20:43:32
+    Author     : Botje
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+div#column{
+	width:170px;
+	position:relative;
+	height:200px;
+	border:1px solid green	;
+	background: "yellow" ;
+}
