@@ -1,0 +1,15 @@
+/* 
+    Document   : style
+    Created on : 13-nov-2012, 11:56:16
+    Author     : Jelle
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+div#wrapper{
+    width: 1024px;
+    margin: 0px auto;
+}
