@@ -16,6 +16,11 @@ require_once('includes/bootstrap.php');
     </title>
      <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="style/style.css" />
+    <link rel="stylesheet" type="text/css" href="style/danielstyle.css" />
+    <link rel="stylesheet" type="text/css" href="style/jellestyle.css" />
+    <link rel="stylesheet" type="text/css" href="style/thomstyle.css" />
+    <link rel="stylesheet" type="text/css" href="style/sanderstyle.css" />
+    <link rel="stylesheet" type="text/css" href="style/thomasstyle.css" />
 </head>    
 <body>
     <!-- Wrapper div for website !-->
