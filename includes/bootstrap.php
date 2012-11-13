@@ -10,7 +10,7 @@ $data['develop'] = true;
 //regelt database connectie. standaard connectie voor sql in samenwerking met xampp.
 // laad de database pedicure.
 try{
- $db = new PDO('mysql:host=localhost;dbname=pedicure', 'root', '');
+   $db = new PDO('mysql:host=localhost;dbname=pedicure', 'root', '');
 }catch(Exception $e){
     //als develop mode ingesteld is laat foutmelding zien.
     if($data['develop'] == true){
