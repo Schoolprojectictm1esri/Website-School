@@ -5,8 +5,9 @@
  * Version 1.0
  */
 
-//regelt database connectie.
-$db = '';
+//regelt database connectie. standaard connectie voor sql in samenwerking met xampp.
+// laad de database pedicure.
+ $db = new PDO('mysql:host=localhost;dbname=pedicure', 'root', '');
 
 require_once('functions.php');
 ?>
