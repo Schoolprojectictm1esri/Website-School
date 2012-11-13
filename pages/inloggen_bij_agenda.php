@@ -5,4 +5,11 @@
  * Version 1.0
  */
 ?>
- Hoi
+<div id="email_agenda">
+
+<br>
+    <form>
+    E-mailadres <input type="text" name="emailadres">
+<br>
+    Wachtwoord <input type="text" name="password">
+</div>
