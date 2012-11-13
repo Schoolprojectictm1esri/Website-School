@@ -1,7 +1,8 @@
 <form action="index.php?page=bestellenproducten">
     <div><!--naam product--></div>
     <div><!--afbeelding product--></div>
-    <div>Aantal:&nbsp&nbsp&nbsp&nbsp
+    <div>Aantal:</div>
+    <div>
         <select name="aantalproducten">
             <option>1</option>
             <option>2</option>
@@ -14,7 +15,7 @@
             <option>9</option>
             <option>10</option>
         </select>
-<!--Aantal producten-->
+        <!--Aantal producten-->
     </div><br>
     <div>Prijs:</div><br>
     <div><!--prijs product--></div>
