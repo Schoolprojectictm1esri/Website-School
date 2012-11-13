@@ -20,32 +20,48 @@ require_once('includes/bootstrap.php');
 <body>
     <!-- Wrapper div for website !-->
     <div id="wrapper">
+        <!-- Div for header!-->
+        <div id="header">
+            Header afbeelding
+        </div>
+        <div id="menu">
+           menu
+        </div>
         <!-- Div for content scripts !-->
-        <div id="content">
-            <?php
-            //haal pagina op en laad de pagina.
-            if(isset($_GET['page'])){
-                //kijk of de pagina een string is.
-                if(is_string($_GET['page'])){
-                    //kijk of het bestand bestaat.
-                    if(file_exists('pages/'.$_GET['page'].'.php')){
-                        //laad de opgevraagde pagina die bestaat.
-                        require_once('pages/'.$_GET['page'].'.php');
+        <div id="contentwrapper">
+            <div id="content-left">
+                Sidebar
+            </div>
+            <div id="content-right">
+                <?php
+                //haal pagina op en laad de pagina.
+                if(isset($_GET['page'])){
+                    //kijk of de pagina een string is.
+                    if(is_string($_GET['page'])){
+                        //kijk of het bestand bestaat.
+                        if(file_exists('pages/'.$_GET['page'].'.php')){
+                            //laad de opgevraagde pagina die bestaat.
+                            require_once('pages/'.$_GET['page'].'.php');
+                        }else{
+                            //geen pagina gevonden.
+                            echo 'De opgegeven pagina bestaat niet.';
+                        }
                     }else{
-                        //geen pagina gevonden.
-                        echo 'De opgegeven pagina bestaat niet.';
+                        //get variabele voldoet niet aan de gestelde eisen.
+                        echo 'U heeft geen geldige pagina opgegeven.';
                     }
                 }else{
-                    //get variabele voldoet niet aan de gestelde eisen.
-                    echo 'U heeft geen geldige pagina opgegeven.';
+                    //homepagina wordt geladen.
+                    require_once('pages/home.php');
                 }
-            }else{
-                //homepagina wordt geladen.
-                require_once('pages/home.php');
-            }
 
 
-            ?>
+                ?>
+            </div>
+            <div class="spacer"></div>
+        </div>
+        <div id="footer">
+            Footer!
         </div>
     </div>
 </body>

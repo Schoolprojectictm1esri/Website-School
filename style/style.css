@@ -2,8 +2,7 @@
     Document   : style
     Created on : 13-nov-2012, 11:56:16
     Author     : Jelle
-    Description:
-        Purpose of the stylesheet follows.
+    Description: General stylesheet for the site.
 */
 
 root { 
@@ -12,4 +11,38 @@ root {
 div#wrapper{
     width: 1024px;
     margin: 0px auto;
+}
+div#header{
+    margin-bottom: 10px;
+    height: 129px;
+    background-color: lightblue;
+}
+div#menu{
+    height: 50px;
+    background-color: yellow;
+    margin-bottom: 10px;
+}
+div.spacer{
+    clear:both;
+}
+div#contentwrapper{
+    width: 1024px;
+   /* min-height: 400px;*/
+   margin-bottom: 10px;
+}
+div#content-left{
+    width: 200px;
+    float: left;
+    margin-right: 50px;
+    background-color: red;
+    min-height: 300px;
+}
+div#content-right{
+    float: left;
+    background-color: green;
+    width: 774px;
+    min-height: 300px;
+}
+div#footer{
+    text-align: center;
 }
