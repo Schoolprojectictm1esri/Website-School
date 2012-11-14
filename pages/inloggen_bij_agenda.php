@@ -7,12 +7,14 @@
 ?>
 <?php
 session_start();
+
+//afkortingen//
+$email = $_POST["emailadres"];
+$password = $_POST["password"];
+
 $_SESSION["emailadres"] = $email;
 $_SESSION["password"] = $password;
 
-//afkortingen//
-$email = $_GET["emailadres"];
-$password = $_GET["password"];
 ?>
 <div id="email_agenda">
 
@@ -21,7 +23,7 @@ Zelfafhandelend formulier, controle op emailset, passoword set. Ja? verder naar 
 -->
 <p />
 
-    <form action="index.php?" method="get">
+    <form action="index.php?page=inloggen_bij_agenda" method="POST">
         <table>
             <tr>
                 <td>E-mailadres</td>
@@ -44,17 +46,16 @@ Zelfafhandelend formulier, controle op emailset, passoword set. Ja? verder naar 
         </table>
 
 <?php
-if(isset($_SESSION['emailadres']) == TRUE );{
+if(isset($_SESSION['emailadres'])){
 // actie 1
-    if(isset($_SESSION['password']) == TRUE );{
+    if(isset($_SESSION['password'])){
         //actie 2
-        else{
+    }
+            else{
             //actie 3
         }
-    }
 }
-else{ ;
+else{
 }
-
 ?>
 </div>
