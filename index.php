@@ -7,6 +7,7 @@
 
 //laad boostrap en initialiseer alle settings.
 require_once('includes/bootstrap.php');
+
 ?>
 <!doctype html>
 <html>
