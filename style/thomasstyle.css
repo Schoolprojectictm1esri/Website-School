@@ -1,0 +1,15 @@
+/* 
+    Document   : thomasstyle
+    Created on : 13-nov-2012, 20:48:21
+    Author     : Thomas
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+div#email_agenda{
+    margin: 10px;
+}

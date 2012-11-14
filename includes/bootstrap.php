@@ -19,5 +19,10 @@ try{
         echo 'Problemen met het verbinden met de database.';
     }
 }
+if($data['develop'] == true){
+    error_reporting(E_ALL);
+}else{
+    error_reporting(0);
+}
 require_once('functions.php');
 ?>
