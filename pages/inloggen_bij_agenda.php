@@ -23,15 +23,21 @@ Zelfafhandelend formulier, controle op emailset, passoword set. Ja? verder naar 
 -->
 <p />
 
+<?php
+if(isset ($_POST["emailadres"]) and ($_POST["password"])){
+// actie 1
+}
+else{
+    ?>   
     <form action="index.php?page=inloggen_bij_agenda" method="POST">
         <table>
             <tr>
                 <td>E-mailadres</td>
-                <td><input type="text" name="emailadres" /></td>
+                <td><input type="text" name="emailadres" value="<?php echo $email ?>" /></td>
             </tr>
             <tr>
                 <td>Wachtwoord</td> 
-                <td><input type="text" name="password" /></td>
+                <td><input type="text" name="password" value="<?php echo $password ?>"/></td>
             </tr>
             <tr>
                 <td>
@@ -44,18 +50,8 @@ Zelfafhandelend formulier, controle op emailset, passoword set. Ja? verder naar 
                 </td>
             </tr>
         </table>
-
+    </form>
 <?php
-if(isset($_SESSION['emailadres'])){
-// actie 1
-    if(isset($_SESSION['password'])){
-        //actie 2
-    }
-            else{
-            //actie 3
-        }
-}
-else{
 }
 ?>
 </div>
