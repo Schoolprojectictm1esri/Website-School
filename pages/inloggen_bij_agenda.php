@@ -40,7 +40,7 @@ Zelfafhandelend formulier, controle op emailset, passoword set. Ja? verder naar 
             </tr>
             <tr>
                 <td colspan="2">
-                    <a Href="index.php?page=inloggen_bij_agenda"> Wachtwoord vergeten</a>
+                    <a Href="index.php?page=inloggen_bij_agenda"> Wachtwoord opvragen</a>
                 </td>
             </tr>
         </table>
