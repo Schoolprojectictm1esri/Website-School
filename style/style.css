@@ -2,16 +2,29 @@
     Document   : style
     Created on : 13-nov-2012, 11:56:16
     Author     : Jelle
+    Updated    : 15-11-2012 by Jelle
     Description: General stylesheet for the site.
 */
-
+/* Begin standaard css styling */
 root { 
     display: block;
 }
+body{
+    /* fix voor standaard margin door browsers */
+    margin: 0px;
+    padding: 0px;
+}
+div.spacer{
+    /* Div om juiste gedrag bij float styling af te dwingen.*/
+    clear:both;
+}
 div#wrapper{
+    /*Maakt de website standaard 1024 breed en d.m.v. margin auto komt deze in het midden van de browser te staan.*/
     width: 1024px;
     margin: 0px auto;
 }
+/* Einde standaard styling */
+
 div#header{
     margin-bottom: 10px;
     height: 129px;
@@ -22,11 +35,9 @@ div#menu{
     background-color: yellow;
     margin-bottom: 10px;
 }
-div.spacer{
-    clear:both;
-}
+
 div#contentwrapper{
-    width: 1024px;
+   width: 1024px;
    margin-bottom: 10px;
 }
 div#content-left{

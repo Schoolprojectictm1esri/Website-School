@@ -2,20 +2,23 @@
 /**
  * document by Jelle Smeets.
  * Created on 13-11-2012.
+ * Last updated on: 15-11-2012 By Jelle
  * Version 1.0
  */
 
-//laad boostrap en initialiseer alle settings.
+//laad bootstrap en initialiseer alle settings.
 require_once('includes/bootstrap.php');
 
 ?>
 <!doctype html>
 <html>
 <head>
-    <title>
-        Pedicure praktijk desiree - Pagina.
+    <!-- $title komt uit de bootstrap !-->
+    <title> 
+        Pedicure praktijk D&#233;sir&#233;e <? echo $title; ?>
     </title>
      <meta charset="UTF-8">
+     <!-- Verschillende stylesheets om elkaar niet in de weg te zitten. Aan het einde van project samenvoegen !-->
     <link rel="stylesheet" type="text/css" href="style/style.css" />
     <link rel="stylesheet" type="text/css" href="style/danielstyle.css" />
     <link rel="stylesheet" type="text/css" href="style/jellestyle.css" />
