@@ -19,13 +19,14 @@ $_SESSION["password"] = $password;
 <div id="email_agenda">
 
 <!--
-Zelfafhandelend formulier, controle op emailset, passoword set. Ja? verder naar controle met DB. Nee? Terug naar formulier
+Zelfafhandelend formulier, controle op emailset, password set. Ja? verder naar controle met DB. Nee? Terug naar formulier
 -->
 <p />
 
 <?php
 if(isset ($_POST["emailadres"]) and ($_POST["password"])){
-// actie 1
+// controle e-mail en password set
+
 }
 else{
     ?>   
