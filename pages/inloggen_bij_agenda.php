@@ -9,8 +9,15 @@
 session_start();
 
 //afkortingen//
-$email = $_POST["emailadres"];
-$password = $_POST["password"];
+$email = '';
+$password = '';
+$result;
+if(isset ($_POST["emailadres"])) {
+	$email = $_POST["emailadres"];
+}
+if(isset ($_POST["password"])) {
+    $password = $_POST["password"];
+}
 
 $_SESSION["emailadres"] = $email;
 $_SESSION["password"] = $password;
@@ -26,9 +33,44 @@ Zelfafhandelend formulier, controle op emailset, password set. Ja? verder naar c
 <?php
 if(isset ($_POST["emailadres"]) and ($_POST["password"])){
 // controle e-mail en password set
+ 
+    //connectie maken met localhost
+    $con = mysql_connect("localhost","localhost");
+    if (!$con)
+    {
+        print('Could not connect: ' . mysql_error());
+    }
+    else {
+        print('Db verbinding gelukt.');
+    }
+    
+//query
+$mydb = mysql_select_db("pedicure", $con);
+    if (!$mydb){
+        die ('cant use db.'.mysql_error());
+    }
+$result = mysql_query("SELECT * FROM klanten WHERE `e-mail` = '".$email."' AND `wachtwoord` = '".$password."'");
 
+//resultaat weergeven.
+while($row = mysql_fetch_array($result)) {
+    
+    $_SESSION["isingelogd"] = TRUE;
+    print('U bent succesvol ingelogd,<br />
+            Klik op de onderstaande link om naar de homepage te gaan.<br />
+            <a Href="index.php?page=home">');
+  }
+print($password);
+mysql_close($con);
+//SELECT * FROM `klanten` WHERE 'wachtwoord' = $password AND 'e-mail' = $email;
 }
 else{
+    $show = true;
+    if(isset ($_SESSION["isingelogd"])){
+        if($_SESSION["isingelogd"] == TRUE){
+            $show = false;
+        }
+    }
+    if($show){
     ?>   
     <form action="index.php?page=inloggen_bij_agenda" method="POST">
         <table>
@@ -53,6 +95,14 @@ else{
         </table>
     </form>
 <?php
+}
+else{
+?>
+    U bent succesvol ingelogd,<br />
+    Klik op de onderstaande link om naar de homepage te gaan.<br />
+    <a Href="index.php?page=home">Klik hier</a>
+<?php
+}
 }
 ?>
 </div>
