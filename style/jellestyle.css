@@ -1,0 +1,15 @@
+/* 
+    Document   : jellestyle
+    Created on : 16-nov-2012, 20:20:17
+    Author     : Jelle
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+div#beheer-login table#table-beheer-login-form td{
+    margin: 0px;
+    padding: 0px;
+    height: auto;
+    width: auto;
+}
+

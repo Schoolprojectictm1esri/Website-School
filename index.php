@@ -8,14 +8,13 @@
 
 //laad bootstrap en initialiseer alle settings.
 require_once('includes/bootstrap.php');
-
 ?>
 <!doctype html>
 <html>
 <head>
     <!-- $title komt uit de bootstrap !-->
     <title> 
-        Pedicure praktijk D&#233;sir&#233;e <? echo $title; ?>
+        Pedicure praktijk D&#233;sir&#233;e <?php echo $title; ?>
     </title>
      <meta charset="UTF-8">
      <!-- Verschillende stylesheets om elkaar niet in de weg te zitten. Aan het einde van project samenvoegen !-->

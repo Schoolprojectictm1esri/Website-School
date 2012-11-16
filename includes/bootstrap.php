@@ -32,7 +32,8 @@ require_once('functions.php');
 //Set the title aan de hand van de op te vragen pagina.
 if(isset($_GET['page'])){
     //voeg de op gevraagde pagina toe aan de title en maak de eerste letter een hoofdletter.
-    $title = '- '.ucfirst(strtolower($_GET['page']));
+    //En vervang de _ in bestandsnamen door een spatie.
+    $title = '- '.str_replace('_', '&nbsp;',ucfirst(strtolower($_GET['page'])));
 }else{
     //voeg niks toe aan de title.
     $title = '';
