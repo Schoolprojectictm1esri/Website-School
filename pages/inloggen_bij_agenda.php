@@ -70,7 +70,7 @@ if(isset ($_POST["emailadres"]) and ($_POST["password"])){
             </tr>
             <tr>
                 <td colspan="2">
-                    <a Href="index.php?page=inloggen_bij_agenda"> Wachtwoord opvragen</a>
+                    <a Href="index.php?page=wachtwoord_vergeten"> Wachtwoord opvragen</a>
                 </td>
             </tr>
         </table>
