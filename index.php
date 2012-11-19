@@ -30,7 +30,14 @@ require_once('includes/bootstrap.php');
     <div id="wrapper">
         <!-- Div for header!-->
         <div id="header">
-            Header afbeelding
+            <img src="" alt="header image" class="headerimg" />
+            <div id="contact-info-header">
+                Pedicure praktijk D&#233;sir&#233;e <br/>
+                T: 06-41544308 <br />
+                <a href="mailto:desiree.vermeulen@home.nl">desiree.vermeulen@home.nl</a> <br />
+                Leerinkbeek 63 <br />
+                8033 EH Zwolle
+            </div>
         </div>
         <div id="menu">
            menu

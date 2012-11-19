@@ -29,6 +29,13 @@ div#header{
     margin-bottom: 10px;
     height: 129px;
     background-color: lightblue;
+    z-index: 1;
+}
+div#contact-info-header{
+    margin-top: 10px;
+    float: right;
+    width: 250px;
+    z-index: 10;
 }
 div#menu{
     height: 50px;
