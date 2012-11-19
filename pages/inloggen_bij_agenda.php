@@ -36,6 +36,8 @@ if(isset ($_POST["emailadres"]) and ($_POST["password"])){
  
     //connectie maken met localhost
     $con = mysql_connect("localhost","localhost");
+    
+    /*bij problemen met db kan dit gebruikt worden ter controle of verbinding er wel is
     if (!$con)
     {
         print('Could not connect: ' . mysql_error());
@@ -43,6 +45,7 @@ if(isset ($_POST["emailadres"]) and ($_POST["password"])){
     else {
         print('Db verbinding gelukt.');
     }
+    */
     
 //query
 $mydb = mysql_select_db("pedicure", $con);
@@ -57,7 +60,9 @@ while($row = mysql_fetch_array($result)) {
     $_SESSION["isingelogd"] = TRUE;
     print('U bent succesvol ingelogd,<br />
             Klik op de onderstaande link om naar de homepage te gaan.<br />
-            <a Href="index.php?page=home">');
+            <a Href="index.php?page=home">
+            <br>
+            <tr><td> <input type="button" name="logout" value="uitloggen"></td></tr>');
   }
 print($password);
 mysql_close($con);
@@ -80,7 +85,7 @@ else{
             </tr>
             <tr>
                 <td>Wachtwoord</td> 
-                <td><input type="text" name="password" value="<?php echo $password ?>"/></td>
+                <td><input type="password" name="password" value="<?php echo $password ?>"/></td>
             </tr>
             <tr>
                 <td>
@@ -92,6 +97,11 @@ else{
                     <a Href="index.php?page=inloggen_bij_agenda"> Wachtwoord opvragen</a>
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <input type="button" name="logout" value="uitloggen">
+                </td>
+            </tr>
         </table>
     </form>
 <?php
@@ -100,7 +110,14 @@ else{
 ?>
     U bent succesvol ingelogd,<br />
     Klik op de onderstaande link om naar de homepage te gaan.<br />
-    <a Href="index.php?page=home">Klik hier</a>
+    <a Href="index.php?page=home">Klik hier</a><br />
+    <form action:="http://localhost/Website-School/index.php?page=logout">
+    <tr>
+        <td> 
+            <input type="button" name="logout" value="uitloggen">
+        </td>
+    </tr>
+    </form>
 <?php
 }
 }
