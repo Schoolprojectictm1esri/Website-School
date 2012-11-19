@@ -33,36 +33,17 @@ Zelfafhandelend formulier, controle op emailset, password set. Ja? verder naar c
 <?php
 if(isset ($_POST["emailadres"]) and ($_POST["password"])){
 // controle e-mail en password set
- 
-    //connectie maken met localhost
-    $con = mysql_connect("localhost","localhost");
     
-    /*bij problemen met db kan dit gebruikt worden ter controle of verbinding er wel is
-    if (!$con)
-    {
-        print('Could not connect: ' . mysql_error());
-    }
-    else {
-        print('Db verbinding gelukt.');
-    }
-    */
-    
-    //query
-    $mydb = mysql_select_db("pedicure", $con);
-        if (!$mydb){
-            die ('can not use db.'.mysql_error());
-      //Maken van de wachtwoord verkeert.              //print('');     
-    }
-    $result = mysql_query("SELECT * FROM klanten WHERE `e-mail` = '".$email."' AND `wachtwoord` = '".$password."'");
+    $stmt = $db->query("SELECT * FROM klanten WHERE `e-mail` = '".$email."' AND `wachtwoord` = '".$password."'");
+    $result = $stmt->fetchObject();
 
     //resultaat weergeven.
-    while($row = mysql_fetch_array($result)) {
-
+    if(!empty($result)){
         $_SESSION["isingelogd"] = TRUE;
       }
-    print($password);
-    mysql_close($con);
-    //SELECT * FROM `klanten` WHERE 'wachtwoord' = $password AND 'e-mail' = $email;
+    else{
+        print('Onjuiste inlog gegevens');
+    }
 }
     $show = true;
     if(isset ($_SESSION["isingelogd"])){

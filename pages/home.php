@@ -7,3 +7,4 @@
 
 echo 'Homepage';
 ?>
+<a href="index.php?page=inloggen_bij_agenda"> jaja</a>
