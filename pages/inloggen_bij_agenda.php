@@ -50,8 +50,9 @@ if(isset ($_POST["emailadres"]) and ($_POST["password"])){
 //query
 $mydb = mysql_select_db("pedicure", $con);
     if (!$mydb){
-        die ('cant use db.'.mysql_error());
-    }
+        die ('can not use db.'.mysql_error());
+  //Maken van de wachtwoord verkeert.              //print('');     
+}
 $result = mysql_query("SELECT * FROM klanten WHERE `e-mail` = '".$email."' AND `wachtwoord` = '".$password."'");
 
 //resultaat weergeven.
