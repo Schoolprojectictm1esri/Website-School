@@ -97,11 +97,6 @@ else{
                     <a Href="index.php?page=inloggen_bij_agenda"> Wachtwoord opvragen</a>
                 </td>
             </tr>
-            <tr>
-                <td>
-                    <input type="button" name="logout" value="uitloggen">
-                </td>
-            </tr>
         </table>
     </form>
 <?php
@@ -111,10 +106,10 @@ else{
     U bent succesvol ingelogd,<br />
     Klik op de onderstaande link om naar de homepage te gaan.<br />
     <a Href="index.php?page=home">Klik hier</a><br />
-    <form action:="http://localhost/Website-School/index.php?page=logout">
+    <form action="http://localhost/Website-School/index.php?page=logout" method="POST">
     <tr>
         <td> 
-            <input type="button" name="logout" value="uitloggen">
+            <input type="submit" name="logout" value="uitloggen">
         </td>
     </tr>
     </form>
