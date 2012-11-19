@@ -42,7 +42,7 @@ for($dag = 1; $dag <= 7; $dag+1)
 
 
 
-
+<!-- output om zo overzicht te krijgen. Na 7 dagen volgende regel. -->
 print"</td> ";
         if ($datum == 7){
         print "</tr><tr>";
@@ -63,40 +63,43 @@ print"</td> ";
              <td span class="tagendaavail">1</td>
              <td span class="tagendaavail">2</td>
              <td span class="tagendaavail">3</td>
-             <td span class="tagendaavail">4</td>             
+             <td span class="tagendaavail">4</td>
+			 <td span class="tagendaavail">5</td>   
+			 <td span class="tagendaavail">6</td>   
+			 <td span class="tagendaavail">7</td>   
+             
          </tr>
          <!-- elke knop moet een TD zijn om zo nieuwe pagina met tijden te kunnen openen?-->
            <tr>
              <td span class="tagendaavail">1</td>
              <td span class="tagendaavail">2</td>
              <td span class="tagendaavail">3</td>
-             <td span class="tagendaavail">4</td>             
+             <td span class="tagendaavail">4</td>
+			 <td span class="tagendaavail">5</td>
+             <td span class="tagendaavail">6</td>
+             <td span class="tagendaavail">7</td>              
          </tr>
           <tr>
                  <td span class="tagendabusy">1</td>
                  <td span class="tagendabusy">2</td>
                  <td span class="tagendabusy">3</td>
                  <td span class="tagendabusy">4</td>
+				 <td span class="tagendabusy">5</td>
+                 <td span class="tagendabusy">6</td>
+                 <td span class="tagendabusy">7</td>
               
          </tr>
-           <tr>
-             <td span class="tagendaavail">1</td>
-             <td span class="tagendaavail">2</td>
-             <td span class="tagendaavail">3</td>
-             <td span class="tagendaavail">4</td>             
-         </tr>
+      
           <tr>
              <td span class="tagendafull">1</td>
              <td span class="tagendafull">2</td>
              <td span class="tagendafull">3</td>
-             <td span class="tagendafull">4</td>             
+             <td span class="tagendafull">4</td>
+             <td span class="tagendafull">5</td>
+             <td span class="tagendafull">6</td>
+             <td span class="tagendafull">7</td>              
          </tr>
-           <tr>
-             <td span class="tagendaavail">1</td>
-             <td span class="tagendaavail">2</td>
-             <td span class="tagendaavail">3</td>
-             <td span class="tagendaavail">4</td>             
-         </tr>
+          
     </table>
 </html>
 <!--<?php
