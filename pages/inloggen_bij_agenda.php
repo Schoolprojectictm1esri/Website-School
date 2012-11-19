@@ -47,29 +47,23 @@ if(isset ($_POST["emailadres"]) and ($_POST["password"])){
     }
     */
     
-//query
-$mydb = mysql_select_db("pedicure", $con);
-    if (!$mydb){
-        die ('can not use db.'.mysql_error());
-  //Maken van de wachtwoord verkeert.              //print('');     
-}
-$result = mysql_query("SELECT * FROM klanten WHERE `e-mail` = '".$email."' AND `wachtwoord` = '".$password."'");
+    //query
+    $mydb = mysql_select_db("pedicure", $con);
+        if (!$mydb){
+            die ('can not use db.'.mysql_error());
+      //Maken van de wachtwoord verkeert.              //print('');     
+    }
+    $result = mysql_query("SELECT * FROM klanten WHERE `e-mail` = '".$email."' AND `wachtwoord` = '".$password."'");
 
-//resultaat weergeven.
-while($row = mysql_fetch_array($result)) {
-    
-    $_SESSION["isingelogd"] = TRUE;
-    print('U bent succesvol ingelogd,<br />
-            Klik op de onderstaande link om naar de homepage te gaan.<br />
-            <a Href="index.php?page=home">
-            <br>
-            <tr><td> <input type="button" name="logout" value="uitloggen"></td></tr>');
-  }
-print($password);
-mysql_close($con);
-//SELECT * FROM `klanten` WHERE 'wachtwoord' = $password AND 'e-mail' = $email;
+    //resultaat weergeven.
+    while($row = mysql_fetch_array($result)) {
+
+        $_SESSION["isingelogd"] = TRUE;
+      }
+    print($password);
+    mysql_close($con);
+    //SELECT * FROM `klanten` WHERE 'wachtwoord' = $password AND 'e-mail' = $email;
 }
-else{
     $show = true;
     if(isset ($_SESSION["isingelogd"])){
         if($_SESSION["isingelogd"] == TRUE){
@@ -107,7 +101,7 @@ else{
     U bent succesvol ingelogd,<br />
     Klik op de onderstaande link om naar de homepage te gaan.<br />
     <a Href="index.php?page=home">Klik hier</a><br />
-    <form action="http://localhost/Website-School/index.php?page=logout" method="POST">
+    <form action="http://localhost/Website-School/index.php?page=logout" method="GET">
     <tr>
         <td> 
             <input type="submit" name="logout" value="uitloggen">
@@ -115,7 +109,6 @@ else{
     </tr>
     </form>
 <?php
-}
 }
 //uitlog button maken
 ?>
