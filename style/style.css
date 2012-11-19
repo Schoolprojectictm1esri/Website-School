@@ -26,6 +26,8 @@ div#wrapper{
 /* Einde standaard styling */
 
 div#header{
+    background-image: url('afbeeldingen/header.png');
+    background-repeat: no-repeat;
     margin-bottom: 10px;
     height: 129px;
     background-color: lightblue;

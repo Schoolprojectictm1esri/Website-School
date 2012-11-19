@@ -30,7 +30,6 @@ require_once('includes/bootstrap.php');
     <div id="wrapper">
         <!-- Div for header!-->
         <div id="header">
-            <img src="" alt="header image" class="headerimg" />
             <div id="contact-info-header">
                 Pedicure praktijk D&#233;sir&#233;e <br/>
                 T: 06-41544308 <br />
