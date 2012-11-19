@@ -1,10 +1,9 @@
- 
+
 <html>
    <link rel="stylesheet" type="text/css" href="danielstyle.css" />
    <th>Beschikbaarheid.</th>      
    <table border="2">
-   <!--if statement
-}-->
+   
    
 <!--$beschikbaarheid = beschikbaarheid uit database
  if($beschikbaarheid == "beschikbaar")
@@ -22,6 +21,44 @@
             }
 
 -->
+
+for($dag = 1; $dag <= 7; $dag+1)
+
+    { 
+        $tijdstempel = mktime(1,1,1,$11,$19,$2012);
+<!-- bovenstaande geeft 11-19-2012 weer -->
+<!-- http://us3.php.net/manual/en/function.date.php -->
+        if(date('l', $tijdstempel) == $vandaag)
+        
+        
+        if(date('d',$timestamp) == 1)
+        {
+        
+        <!--$dagenindemaand afgekort didm
+        http://php.net/manual/en/function.cal-days-in-month.php-->
+        $didm = cal_days_in_month(CAL_GREGORIAN, $month, $year);
+        
+        for($datum = 1; $datum <=$didm; $datum++)
+
+
+
+
+print"</td> ";
+        if ($datum == 7){
+        print "</tr><tr>";
+        }
+        if ($datum == 14){
+        print "</tr><tr>";
+        }
+        if ($datum== 21){
+        print "</tr><tr>";
+        }
+        if ($datum == 28){
+        print "</tr>";
+
+
+
+
          <tr>
              <td span class="tagendaavail">1</td>
              <td span class="tagendaavail">2</td>
@@ -63,18 +100,7 @@
     </table>
 </html>
 <!--<?php
- 
-// Inlog gegegevens e.d.
-//$db_host = "localhost"; 
-//$db_user = "Desi"; 
-//$db_pass = "ree"; 
-//$db_name = "Pedicure.db"; 
- 
-//$connection = mysql_connect($db_host,$db_user,$db_pass); 
-	//if (!(mysql_select_db($db_name,$connection))) { 
-       // echo "Database niet bereikbaar"; 
-		//}
-		// Connectie met de database proberen te maken
+
 ?>-->
 
 <!-- namen van de maanden en dagen
