@@ -1,9 +1,14 @@
 <?php
 session_start();
-//controleer of er een gebruikte sessie 
+//controleer of er een gebruikte cookie is.
 //als post submit geset is is het formulier verstuurd.
-if(isset($_SESSION['beheerder_id'])){
+if(isset($_COOKIE['beheerder_id']) && $_COOKIE['beheerder_id'] != '' && is_numeric($_COOKIE['beheerder_id'])){
+    $_SESSION['beheerder_id'] = $_COOKIE['beheerder_id'];
     header('location: index.php?page=beheer');
+}elseif(isset($_SESSION['beheerder_id'])){
+    //controleer of sessie bestaat.
+
+       header('location: index.php?page=beheer'); 
 }
 if(isset($_POST['submit'])){
     //als wachtwoord en gebruikersnaam niet leeg zijn.
@@ -17,7 +22,9 @@ if(isset($_POST['submit'])){
             echo 'De combinatie van gebruikersnaam en wachtwoord is onjuist.';
         }else{
             //start sessie met gebruikersnaam.
-            
+            if($_POST['stayloggedin'] == true){
+                setcookie('beheerder_id', $result->beheerder_id, time() +360000);
+            }
             $_SESSION['beheerder_id'] = $result->beheerder_id;
             $_SESSION['gebruikersnaam'] = $result->gebruikersnaam;
             header('location: index.php?page=beheer');
@@ -36,6 +43,10 @@ if(isset($_POST['submit'])){
                 <tr>
                     <td> Wachtwoord:</td>
                     <td><input type="password" name="password" /></td>
+                </tr>
+                <tr>
+                    <td>Ingelogd blijven?</td>
+                    <td><input type="checkbox" name="stayloggedin" /></td>
                 </tr>
                 <tr>
                     <td colspan="2"><input type="submit" name="submit" value="login" /></td>
@@ -62,6 +73,10 @@ if(isset($_POST['submit'])){
                 <tr>
                     <td> Wachtwoord:</td>
                     <td><input type="password" name="password" /></td>
+                </tr>
+                <tr>
+                    <td>Ingelogd blijven?</td>
+                    <td><input type="checkbox" name="stayloggedin" /></td>
                 </tr>
                 <tr>
                     <td colspan="2"><input type="submit" name="submit" value="login" /></td>
