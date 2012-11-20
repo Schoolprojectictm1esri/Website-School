@@ -1,10 +1,11 @@
 
 <html>
    <link rel="stylesheet" type="text/css" href="danielstyle.css" />
+   <form>
    <th>Beschikbaarheid.</th>      
    <table border="2">
    
-   
+ <php 
 <!--$beschikbaarheid = beschikbaarheid uit database
  if($beschikbaarheid == "beschikbaar")
                 {
@@ -56,7 +57,7 @@ print"</td> ";
         if ($datum == 28){
         print "</tr>";
 
-
+?>
 
 
          <tr>
@@ -101,6 +102,7 @@ print"</td> ";
          </tr>
           
     </table>
+   </form>
 </html>
 <!--<?php
 
