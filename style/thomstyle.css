@@ -10,3 +10,28 @@ root {
     display: block;
 }
 
+div#categories {
+    margin: 25px;
+    width: 341px;
+    float: left;
+    
+}
+
+div#productinfo {
+    width: 341px;
+    float: left;
+    height: 75px;
+    bottom: 0px; 
+}
+
+div#bestelknop {
+    text-align: center;
+    float: left;
+    height: 25px;
+ 
+}
+
+div#resultaten {
+    width: 341px;
+    float: left;
+}
