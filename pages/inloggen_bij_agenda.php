@@ -7,6 +7,9 @@
 ?>
 <?php
 session_start();
+if(isset($_SESSION[''])){
+
+}
 //is het formulier verstuurd?
 if(isset($_POST['submit'])){
     if($_POST['emailadres'] != '' && $_POST['password'] != ''){
@@ -17,17 +20,47 @@ if(isset($_POST['submit'])){
         $result = $stmt->fetchObject();
         if(!empty($result)){
             //gebruiker id in sessie.
-            $_SESSION['klant_id'] = $result->klant_id;
+           if($_POST['stayloggedin'] == true){
+            }
             $_SESSION['voornaam'] = $result->voornaam;
-             header('location: index.php?page=agenda');
+            $_SESSION['achternaam'] = $result->achternaam;
+            header('location: index.php?page=beheer');
+        
             //gebruiker doorsturen naar agenda.php
           }
         else{
-            print('Onjuiste inlog gegevens');
+            print('');
+ ?>  
+        <form action="index.php?page=inloggen_bij_agenda" method="POST">
+            <table>
+                <tr>
+                    <td>E-mailadres</td>
+                    <td><input type="text" name="emailadres" value="<?php echo $_POST['emailadres']; ?>"/></td>
+                </tr>
+                <tr>
+                    <td>Wachtwoord</td> 
+                    <td><input type="password" name="password"/></td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" name="submit" value="Inloggen" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <a Href="index.php?page=wachtwoord_vergeten"> Wachtwoord opvragen</a>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <div class="error">
+            Onjuiste inlog gegevens.
+        </div>
+<?php
         }
     }else{
         //niet alles is correct ingevuld.
-           ?>
+?>
             <form action="index.php?page=inloggen_bij_agenda" method="POST">
             <table>
                 <tr>
@@ -53,11 +86,11 @@ if(isset($_POST['submit'])){
         <div class="error">
             U heeft niet alle velden ingevuld.
         </div>
-    <?php
+<?php
     }
 }else{
     //toon leeg formulier
-    ?>
+?>
             <form action="index.php?page=inloggen_bij_agenda" method="POST">
             <table>
                 <tr>
