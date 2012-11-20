@@ -7,8 +7,12 @@
 ?>
 <?php
 session_start();
-if(isset($_SESSION[''])){
-
+if(isset($_COOKIE['klanten_id']) && $_COOKIE['klanten_id'] != '' && is_numeric($_COOKIE['klanten_id'])){
+    $_SESSION['klanten_id'] = $_COOKIE['klanten_id'];
+    header('location: index.php?page=agenda');
+}elseif(isset($_SESSION['klanten_id'])){
+    //controleer of sessie bestaat.
+    
 }
 //is het formulier verstuurd?
 if(isset($_POST['submit'])){
@@ -22,15 +26,16 @@ if(isset($_POST['submit'])){
             //gebruiker id in sessie.
            if($_POST['stayloggedin'] == true){
             }
-            $_SESSION['voornaam'] = $result->voornaam;
+            $_SESSION['klanten_id'] = $result->klanten_id;
             $_SESSION['achternaam'] = $result->achternaam;
-            header('location: index.php?page=beheer');
+            header('location: index.php?page=agenda');
         
             //gebruiker doorsturen naar agenda.php
           }
         else{
             print('');
  ?>  
+<div id="inloggenagenda">
         <form action="index.php?page=inloggen_bij_agenda" method="POST">
             <table>
                 <tr>
@@ -56,11 +61,13 @@ if(isset($_POST['submit'])){
         <div class="error">
             Onjuiste inlog gegevens.
         </div>
+</div>
 <?php
         }
     }else{
         //niet alles is correct ingevuld.
 ?>
+<div id="inloggenagenda">
             <form action="index.php?page=inloggen_bij_agenda" method="POST">
             <table>
                 <tr>
@@ -86,11 +93,13 @@ if(isset($_POST['submit'])){
         <div class="error">
             U heeft niet alle velden ingevuld.
         </div>
+</div>
 <?php
     }
 }else{
     //toon leeg formulier
 ?>
+<div id="inloggenagenda">
             <form action="index.php?page=inloggen_bij_agenda" method="POST">
             <table>
                 <tr>
@@ -113,5 +122,6 @@ if(isset($_POST['submit'])){
                 </tr>
             </table>
         </form>
+</div>
     <?php
 }
