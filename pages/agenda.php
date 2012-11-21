@@ -1,27 +1,34 @@
 
 <html>
    <link rel="stylesheet" type="text/css" href="danielstyle.css" />
-   <form>
    <th>Beschikbaarheid.</th>      
    <table border="2">
    
- <php 
-<!--$beschikbaarheid = beschikbaarheid uit database
- if($beschikbaarheid == "beschikbaar")
+
+$beschikbaarheid = $db->query(COUNT b.id FROM behandelingen B 
+                                JOIN afspraken A ON B.id = A.id bevestigd = "TRUE"
+                                AND WHERE DATUM = NOW()
+                                JOIN behandeling B ON a.id = b.ID WHERE actief = "TRUE" );
+<!--  JOIN behandeling B ON a.id = b.ID WHERE actief = "TRUE" );
+("SELECT datum FROM afspraken WHERE bevestigd = "TRUE"); -->
+
+
+
+ if($beschikbaarheid <= "5")
                 {
                  print("tagendaavail");
 }
         
-            Elseif($beschikbaarheid == "druk")
+            Elseif($beschikbaarheid => "6" AND <= "9")
             { 
                 Print("tagendabusy");
             }
-             Else($beschikbaarheid == "vol")
+             Else($beschikbaarheid => "10")
             { 
                 Print("tagendafull");
             }
 
--->
+
 
 for($dag = 1; $dag <= 7; $dag+1)
 
@@ -57,7 +64,7 @@ print"</td> ";
         if ($datum == 28){
         print "</tr>";
 
-?>
+
 
 
          <tr>
@@ -102,7 +109,6 @@ print"</td> ";
          </tr>
           
     </table>
-   </form>
 </html>
 <!--<?php
 
