@@ -6,7 +6,18 @@ if(isset($_POST['registreren']))
         || $_POST['postcode']!='' || $_POST['telefoonnummer']!=''
         || $_POST['wachtwoord']!=''|| $_POST['herhaalwachtwoord']!='')
     {
-        echo 'test';
+        $email = $_POST['email'];
+        $voornaam = $_POST['voornaam'];
+        $achternaam = $_POST['achternaam'];
+        $woonplaats = $_POST['woonplaats'];
+        $adres = $_POST['adres'];
+        $postcode = $_POST['postcode'];
+        $telefoonnr = $_POST['telefoonnummer'];
+        $sql="insert into klanten (email, wachtwoord, /*registratiedatum*/, voornaam, achternaam, adres, woonplaats, postcode, telefoonnr) 
+                values ('$email', '$voornaam', '$achternaam', '$woonplaats', '$adres', '$postcode', '$telefoonnr');";
+        $sth = $db->prepare($sql);
+        $success = $sth->execute();
+                //versturen naar database
     }
     else{
        print 'U bent vergeten een veld in te vullen';
@@ -15,15 +26,6 @@ if(isset($_POST['registreren']))
     {
     }
     
-$_POST['email'] = '';
-$_POST['voornaam'] = '';
-$_POST['achternaam'] = '';
-$_POST['woonplaats'] = '';
-$_POST['adres'] = '';
-$_POST['postcode'] = '';
-$_POST['telefoonnummer'] = '';
-$_POST['wachtwoord'] = '';
-$_POST['herhaaldwachtwoord'] = '';  
 ?>
 <form action="index.php?page=aanmeldenklant" method="POST">
         <table border="0">
