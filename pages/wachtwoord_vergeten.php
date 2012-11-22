@@ -1,9 +1,39 @@
 <?php
+
 if(isset($_POST['submit'])){
     if($_POST['emailadres'] != ''){
-        $stmt = $db->query("SELECT * FROM klanten WHERE `e-mail` = '".$_POST['emailadres']."'");
+        
+        $stmt = $db->query("SELECT * FROM klanten WHERE `e-mail` = '".mysql_real_escape_string($_POST['emailadres'])."'");
         $result = $stmt->fetchObject();
             if(!empty($result)){
+            //mail
+                $to = $_POST['emailadres'];
+                $subject = "Wachtwoord vergeten";
+                $from = "noreply@pedicurepraktijkdesiree.nl";
+                $message = "
+                    <html>
+                        <head>
+                            <title>Wachtwoord vergeten</title>
+                        </head>
+                    <body>
+                        <table>
+                            <tr>
+                                <th>Beste,<th>
+                            </tr>
+                            <tr>
+                                <td>Klik op de onderstaande link om uw wachtwoord opnieuw in te voeren</td>
+                            </tr>
+                            <tr>
+                                <td>".$emailadres." </td> <!-- en de rest ofcourse!!! -->
+                            </tr>
+                            <tr>
+                                <td>Met vriendelijke groet PedicurePraktijk Desiree.
+                            </tr>
+                        </table>
+                    </body>
+                    </html>
+                    ";
+                mail($to,$from,$subject,$message);
             echo 'Email word verzonden.';
             }
             else {
