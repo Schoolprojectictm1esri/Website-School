@@ -5,7 +5,7 @@
    <table border="2">
    
 
-$beschikbaarheid = $db->query(COUNT b.id FROM behandelingen B 
+$beschikbaarheid = $db->query(COUNT (B.id) FROM behandelingen B 
                                 JOIN afspraken A ON B.id = A.id bevestigd = "TRUE"
                                 AND WHERE DATUM = NOW()
                                 JOIN behandeling B ON a.id = b.ID WHERE actief = "TRUE" );
@@ -19,11 +19,11 @@ $beschikbaarheid = $db->query(COUNT b.id FROM behandelingen B
                  print("tagendaavail");
 }
         
-            Elseif($beschikbaarheid => "6" AND <= "9")
+            Elseif($beschikbaarheid >= "6" AND <= "9")
             { 
                 Print("tagendabusy");
             }
-             Else($beschikbaarheid => "10")
+             Else($beschikbaarheid >= "10")
             { 
                 Print("tagendafull");
             }
@@ -45,7 +45,8 @@ for($dag = 1; $dag <= 7; $dag+1)
         <!--$dagenindemaand afgekort didm
         http://php.net/manual/en/function.cal-days-in-month.php-->
         $didm = cal_days_in_month(CAL_GREGORIAN, $month, $year);
-        
+        $vandaag = date();
+        for($datum = $vandaag; $datum <= $vandaag; $datum++);
         for($datum = 1; $datum <=$didm; $datum++)
 
 
