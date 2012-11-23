@@ -1,3 +1,10 @@
+<?
+/**
+ * document by Thomas Vermeulen.
+ * Created on 21-11-2012.
+ * Version 1.0
+ */
+?>
 <?php
 
 if(isset($_POST['submit'])){
