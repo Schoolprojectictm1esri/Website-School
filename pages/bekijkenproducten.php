@@ -1,24 +1,40 @@
 
 <!-- Linkerblok !-->
-
+<div id="categories">
 <?php
 
 
-$sql = "SELECT * FROM categorieen";
-$stmt = $db->query($sql);
-$result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+$stmt = $db->query('SELECT * FROM categorieen');
+$result = $stmt->fetchall();
 foreach ($result as $row){
-    var_dump($row);
-    print ('<a href="index.php?page=bekijkenproducten&categorie='.$row['id'].'">'.$row['naam'].'</a>');
-}
-    
-  
+echo '<a href="index.php?page=bekijkenproducten&categorie='.$row['id'].'">'.$row['naam'].'</a>' ; echo "<br>";
+
+} 
+
+
 ?>
 
+</div>
 
 <!-- Middenblok !-->
 <div id="resultaten">
-    hoi
+   <?php
+ 
+
+   
+$stmt2 = $db->query('SELECT * FROM producten1');
+$result2 = $stmt2->fetchall();
+foreach ($result2 as $row2){
+echo '<a href="index.php?page=bekijkenproducten&categorie='.$row['id'].'&product='.$row2['productID'].'">'.$row2['naam'].'</a>' ; echo "<br>";
+ 
+}
+   
+  
+ 
+   
+   
+   ?>
 </div>
 
 
