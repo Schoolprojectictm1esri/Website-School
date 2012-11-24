@@ -33,18 +33,47 @@ require_once('includes/bootstrap.php');
             <div id="contact-info-header">
                 Pedicure praktijk D&#233;sir&#233;e <br/>
                 T: 06-41544308 <br />
-                <a href="mailto:desiree.vermeulen@home.nl">desiree.vermeulen@home.nl</a> <br />
+                E: <a href="mailto:desiree.vermeulen@home.nl">desiree.vermeulen@home.nl</a> <br />
                 Leerinkbeek 63 <br />
                 8033 EH Zwolle
             </div>
         </div>
         <div id="menu">
-           menu
+            <div class="menuitem">
+                Home
+            </div>  
+            <div class="menuitem">
+                Agenda
+            </div>
         </div>
         <!-- Div for content scripts !-->
         <div id="contentwrapper">
             <div id="content-left">
-                Sidebar
+                <div class="sidebar">
+                    <img src="style/afbeeldingen/sidebanner_stripe.png" class="sidebannerstripe sidebartop" alt="" />
+                    <div class="innersidebar">
+                        Sub menu item.
+                    </div>
+                    <img src="style/afbeeldingen/sidebanner_stripe.png" class="sidebannerstripe sidebarbottom" alt="" />
+                </div>
+                <div class="sidebar">
+                    <div class="innersidebar">
+                        Sub menu item.
+                    </div>
+                    <img src="style/afbeeldingen/sidebanner_stripe.png" class="sidebannerstripe sidebarbottom" alt="" />
+                </div>
+                <div class="sidebar">
+                    <div class="innersidebar">
+                        Sub menu item.
+                    </div>
+                    <img src="style/afbeeldingen/sidebanner_stripe.png" class="sidebannerstripe sidebarbottom" alt="" />
+                </div>
+                <div class="sidebar">
+                    <div class="innersidebar">
+                        Sub menu item.
+                    </div>
+                    <img src="style/afbeeldingen/sidebanner_stripe.png" class="sidebannerstripe sidebarbottom" alt="" />
+                </div>
             </div>
             <div id="content-right">
                 <?php
@@ -75,7 +104,12 @@ require_once('includes/bootstrap.php');
             <div class="spacer"></div>
         </div>
         <div id="footer">
-            Footer!
+            <?php if(date('Y') == 2012){
+                echo 'Copyright &copy;  Pedicure praktijk D&#233;sir&#233;e 2012';
+            }else{
+                echo 'Copyright &copy;  Pedicure praktijk D&#233;sir&#233;e 2012 -  '.date("Y");
+            }
+           ?> 
         </div>
     </div>
 </body>

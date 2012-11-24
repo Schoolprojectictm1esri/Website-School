@@ -13,6 +13,7 @@ body{
     /* fix voor standaard margin door browsers */
     margin: 0px;
     padding: 0px;
+    font-family: 'Calisto MT', 'Arial';
 }
 div.spacer{
     /* Div om juiste gedrag bij float styling af te dwingen.*/
@@ -41,24 +42,64 @@ div#contact-info-header{
 }
 div#menu{
     height: 50px;
-    background-color: yellow;
+    background-color: #aab4c0;
     margin-bottom: 10px;
 }
+div#menu:first-child{
+    margin-left: 5px !important; 
+}
+div.menuitem{
+    float: left;
+    color: black;
+    height: 45px;
+    font-size: 30px;
+    padding-top: 5px;
+    margin-left: 10px;
+}
+div.menuitem:hover,
+div.menuactive{
+    background-color: #b8cdd6;
+    color: #06a583;
+}
+
 
 div#contentwrapper{
    width: 1024px;
    margin-bottom: 10px;
+   background-image: url('afbeeldingen/sitebg_false.png');
+   min-height: 645px;
 }
 div#content-left{
     width: 200px;
     float: left;
     margin-right: 50px;
-    background-color: red;
     min-height: 300px;
+    font-size: 26px;
+}
+img.sidebannerstripe{
+    width: 191px;
+
+}
+img.sidebartop{
+    position: absolute;
+    top: 0px;
+}
+img.sidebarbottom{
+    position: absolute;
+    top: 43px;
+}
+div.sidebar{
+    position: relative;
+    width: 191px;
+    height: 50px;
+    display: block;
+}
+div.innersidebar{
+    position: relative;
+    top: 10px;
 }
 div#content-right{
     float: left;
-    background-color: green;
     width: 774px;
     min-height: 300px;
 }
