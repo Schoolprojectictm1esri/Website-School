@@ -43,6 +43,16 @@ select {
 }
 
 
+a:hover {font-size: 125%}
+a:hover {color: purple;}
 
+
+table,td {
+    border: 1px solid black;
+}
+
+.vet {
+    font-weight: bold;
+}
 
 

@@ -1,14 +1,19 @@
 
 <!-- Linkerblok !-->
 <div id="categories">
-<?php
+Kies een categorie:
+<br>
+<br>
+    
+    <?php
 
 
 
 $stmt = $db->query('SELECT * FROM categorieen');
 $result = $stmt->fetchall();
 foreach ($result as $row){
-echo '<a href="index.php?page=bekijkenproducten&categorie='.$row['id'].'">'.$row['naam'].'</a>' ; echo "<br>";
+echo '<a href="index.php?page=bekijkenproducten&categorie='.$row['id'].'">'.$row['naam'].'</a>' ; echo "<br> <br>
+    " ;
 
 } 
 
@@ -19,21 +24,22 @@ echo '<a href="index.php?page=bekijkenproducten&categorie='.$row['id'].'">'.$row
 
 <!-- Middenblok !-->
 <div id="resultaten">
+    Kies een product:
+    <br>
+    <br>
    <?php
- 
-
-   
-$stmt2 = $db->query('SELECT * FROM producten1');
-$result2 = $stmt2->fetchall();
+$stmt2 = $db->query("SELECT * 
+FROM producten1
+WHERE categorieID = productID");
+$result2 = $stmt2-> fetchall();
 foreach ($result2 as $row2){
-echo '<a href="index.php?page=bekijkenproducten&categorie='.$row['id'].'&product='.$row2['productID'].'">'.$row2['naam'].'</a>' ; echo "<br>";
- 
+echo '<a href="index.php?page=bekijkenproducten&categorie='.$row['id'].'&product='.$row2['productID'].'">'.$row2['naam'].'</a>' ; echo "<br> <br>";
+
 }
-   
-  
- 
-   
-   
+
+
+
+    
    ?>
 </div>
 
