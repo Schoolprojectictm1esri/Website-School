@@ -45,7 +45,11 @@ for($dag = 1; $dag <= 7; $dag+1)
         <!--$dagenindemaand afgekort didm
         http://php.net/manual/en/function.cal-days-in-month.php-->
         $didm = cal_days_in_month(CAL_GREGORIAN, $month, $year);
-        $vandaag = date();
+        
+        
+        
+        $vandaag = date(y,d,m);
+        
         for($datum = $vandaag; $datum <= $vandaag; $datum++);
         for($datum = 1; $datum <=$didm; $datum++)
 
