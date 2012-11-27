@@ -6,14 +6,15 @@
  */
 ?>
 <?php
-
+//check submit
 if(isset($_POST['submit'])){
+    //check email niet leeg
     if($_POST['emailadres'] != ''){
         
         $stmt = $db->query("SELECT * FROM klanten WHERE `e-mail` = '".mysql_real_escape_string($_POST['emailadres'])."'");
         $result = $stmt->fetchObject();
             if(!empty($result)){
-            //mail
+                //mail
                 $to = $_POST['emailadres'];
                 $subject = "Wachtwoord vergeten";
                 $from = "noreply@pedicurepraktijkdesiree.nl";
@@ -31,7 +32,7 @@ if(isset($_POST['submit'])){
                                 <td>Klik op de onderstaande link om uw wachtwoord opnieuw in te voeren</td>
                             </tr>
                             <tr>
-                                <td>".$emailadres." </td> <!-- en de rest ofcourse!!! -->
+                                <td>thomasvermeulen_2@hotmail.com </td> <!-- en de rest ofcourse!!! -->
                             </tr>
                             <tr>
                                 <td>Met vriendelijke groet PedicurePraktijk Desiree.
@@ -40,11 +41,17 @@ if(isset($_POST['submit'])){
                     </body>
                     </html>
                     ";
-                mail($to,$from,$subject,$message);
+                // tryout mail
+                try{
+                    mail($to,$from,$subject,$message);
+                }catch(Exception $e){
+                    var_dump($e->getMessage());
+                }
+            //eindpagina
             echo 'Email word verzonden.';
             }
             else {
-?>
+?>          <!-- formulier !-->
             <div id="wwvergeten">
                 <form action="index.php?page=wachtwoord_vergeten" method="POST">
                     <table>
@@ -73,7 +80,7 @@ if(isset($_POST['submit'])){
             }
     }
     else {
-?>
+?>      <!-- formulier !-->
         <div id="wwvergeten">
             <form action="index.php?page=wachtwoord_vergeten" method="POST">
                 <table>
@@ -103,6 +110,7 @@ if(isset($_POST['submit'])){
 }
 else {
 ?>
+<!-- formulier !-->
 <div id="wwvergeten">
     <form action="index.php?page=wachtwoord_vergeten" method="POST">
         <table>
