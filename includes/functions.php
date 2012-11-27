@@ -24,4 +24,11 @@ function hashPassword($password){
     //return het gesalte wachtwoord.
     return $saltedpass;
 }
+
+function hashpasswordrecovery($id){
+    //toevoegen voornaam
+    $hash = md5($id.date().'asdfasdkkdjj');
+    //return
+    return $hash;
+}
 ?>
