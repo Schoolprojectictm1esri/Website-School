@@ -17,7 +17,7 @@ for($row = 0; $row<4; $row++)
     //For every column in the table
     for($column = 0; $column<7; $column++)
     {        
-        // $STMT, bron : http://acronyms.thefreedictionary.com/STMT
+        //$STMT, bron : http://acronyms.thefreedictionary.com/STMT
         //$SankuyoTshwaraganoManagementTrust = $db->query("COUNT id FROM behandelingen WHERE actief = 'TRUE'");
         //$numberOfApp = $SankuyoTshwaraganoManagementTrust->fetchall();
 
