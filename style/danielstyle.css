@@ -10,16 +10,28 @@ root {
     display: block;
 }
 
+#table_agenda
+{
+	border: 1px solid black;
+	width: 100%;
+	height: 300px;
+}
 
-.tagendaavail {
+#table_agenda td
+{
+	border-left: 1px solid black;
+	border-bottom: 1px solid black;
+}
+
+.agendaavail {
 	width:50px;
 	position:float;
 	height:50px;
-	border:5px solid green;
+	border:5px solid black;
 	
         /* Stijl voor de agenda per vakje beschikbaar*/
 }
-.tagendafull {
+.agendafull {
 	width:50px;
 	position:relative;
 	height:50px;
@@ -28,7 +40,7 @@ root {
 	
         /* Stijl voor de agenda per vakje Vol*/
 }
-.tagendabusy {
+.agendabusy {
 	width:50px;
 	position:relative;
 	height:50px;
