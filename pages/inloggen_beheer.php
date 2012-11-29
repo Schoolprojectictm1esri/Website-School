@@ -19,7 +19,30 @@ if(isset($_POST['submit'])){
         $stmt = $db->query('select * from beheerder where gebruikersnaam = "'.$naam.'" AND wachtwoord = "'.$wachtwoord.'" AND actief = 1 LIMIT 0,1');
         $result = $stmt->fetchObject();
         if(empty($result)){
-            echo 'De combinatie van gebruikersnaam en wachtwoord is onjuist.';
+            echo '';
+            ?>
+            <div id="beheer-login">
+                <form id="beheer-form" action="index.php?page=inloggen_beheer" method="POST">
+                    <table id="table-beheer-login-form">
+                        <tr>
+                            <td> Gebruikersnaam: </td>
+                            <td><input type="text" name="username" value="<?php echo $_POST['username']; ?>"/></td>
+                        </tr>
+                        <tr>
+                            <td> Wachtwoord:</td>
+                            <td><input type="password" name="password" /></td>
+                        </tr>
+                        <tr>
+                            <td>Ingelogd blijven?</td>
+                            <td><input type="checkbox" name="stayloggedin" /></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><input type="submit" name="submit" value="login" /></td>
+                        </tr>
+                    </table>
+                </form>
+                <div class="error">De combinatie van gebruikersnaam en wachtwoord is onjuist.</div>
+            <?php
         }else{
             //start sessie met gebruikersnaam.
             if($_POST['stayloggedin'] == true){

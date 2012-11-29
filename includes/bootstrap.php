@@ -6,6 +6,7 @@
  * Version 1.1
  */
 //maak globale variabele met instellingen.
+
 global $data;
 $data['develop'] = true;
 //regelt database connectie. standaard connectie voor sql in samenwerking met xampp.
@@ -38,4 +39,5 @@ if(isset($_GET['page'])){
     //voeg niks toe aan de title.
     $title = '';
 }
+require_once('pagelist.php');
 ?>

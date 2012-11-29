@@ -62,11 +62,11 @@ div.menuactive{
     color: #06a583;
 }
 
-
 div#contentwrapper{
    width: 1024px;
    margin-bottom: 10px;
    background-image: url('afbeeldingen/sitebg_false.png');
+   background-repeat: no-repeat;
    min-height: 645px;
 }
 div#content-left{

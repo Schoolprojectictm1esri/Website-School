@@ -1,4 +1,5 @@
 <?php
+ob_start();
 /**
  * document by Jelle Smeets.
  * Created on 13-11-2012.
@@ -16,8 +17,11 @@ require_once('includes/bootstrap.php');
     <?php
     //als pagina routebeschrijving geladen is laat google api jquery stuff.
     if(isset($_GET['page']) && $_GET['page'] == 'routebeschrijving'){
-        echo '<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=false&amp;key=ABQIAAAAuPsJpk3MBtDpJ4G8cqBnjRRaGTYH6UMl8mADNa0YKuWNNa8VNxQCzVBXTx2DYyXGsTOxpWhvIG7Djw" type="text/javascript"></script>';
-        echo '<script type="text/javascript" src="includes/routebeschrijving.js"></script>';
+        ?>
+        <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=false&amp;key=ABQIAAAAuPsJpk3MBtDpJ4G8cqBnjRRaGTYH6UMl8mADNa0YKuWNNa8VNxQCzVBXTx2DYyXGsTOxpWhvIG7Djw" type="text/javascript"></script>
+        <script type="text/javascript" src="includes/routebeschrijving.js"></script>
+    
+        <?php
     }
     ?>
     <!-- $title komt uit de bootstrap !-->
@@ -92,7 +96,19 @@ require_once('includes/bootstrap.php');
                         //kijk of het bestand bestaat.
                         if(file_exists('pages/'.$_GET['page'].'.php')){
                             //laad de opgevraagde pagina die bestaat.
-                            require_once('pages/'.$_GET['page'].'.php');
+                            if(isset($pagelist[$_GET['page']]) && is_numeric($pagelist[$_GET['page']])){
+                                if(getRole() >= $pagelist[$_GET['page']]){
+                                    require_once('pages/'.$_GET['page'].'.php');
+                                }else{
+                                   echo '<p class="permission_error">U heeft onvoldoende rechten om deze pagina te bekijken. <br />
+                                        Mocht deze fout zich vaker voordoen terwijl u wel voldoende rechten heeft, neemt u dan alstublieft contact op met de  Pedicure praktijk D&#233;sir&#233;e.
+                                        </p>';
+                                }
+                            }else{
+                                //anonieme gebruikers zijn toegestaan.
+                                require_once('pages/'.$_GET['page'].'.php');
+                            }
+                            
                         }else{
                             //geen pagina gevonden.
                             echo 'De opgegeven pagina bestaat niet.';
@@ -122,3 +138,6 @@ require_once('includes/bootstrap.php');
     </div>
 </body>
 </html>
+<?php
+ob_end_flush();
+?>
