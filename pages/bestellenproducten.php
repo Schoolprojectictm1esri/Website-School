@@ -22,5 +22,32 @@
     <div><input type="submit" value="Bestel" name="bestel" /></div>
 </form>
 <?php
-// put your code here
+if (isset($_POST['bestel']))
 ?>
+<table id="bestellenproducten">
+        <tr>
+            <td><!--naam product--></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><!--afbeelding product--></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Aantal</td>
+            <td>
+                <select name="aantalproducten">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                </select>
+            </td>
+        </tr>
+</table>

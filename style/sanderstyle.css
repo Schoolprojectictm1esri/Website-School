@@ -10,6 +10,18 @@ root {
     display: block;
 }
 
-div#aanmelden {
+div#aanmeldenklant {
     margin: 25px;
+}
+
+table#aanmeldenklant {
+    border: 0px none;
+}
+
+table#aanmeldenklant td {
+    border: 0px none;
+}
+
+table#bestellenproducten {
+    border: 0px none;
 }
