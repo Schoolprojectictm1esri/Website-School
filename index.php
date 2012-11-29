@@ -15,7 +15,7 @@ require_once('includes/bootstrap.php');
     <script type="text/javascript" src="includes/jquery-1.8.3.js"></script>
     <?php
     //als pagina routebeschrijving geladen is laat google api jquery stuff.
-    if($_GET['page'] == 'routebeschrijving'){
+    if(isset($_GET['page']) && $_GET['page'] == 'routebeschrijving'){
         echo '<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=false&amp;key=ABQIAAAAuPsJpk3MBtDpJ4G8cqBnjRRaGTYH6UMl8mADNa0YKuWNNa8VNxQCzVBXTx2DYyXGsTOxpWhvIG7Djw" type="text/javascript"></script>';
         echo '<script type="text/javascript" src="includes/routebeschrijving.js"></script>';
     }

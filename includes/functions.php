@@ -25,6 +25,29 @@ function hashPassword($password){
     return $saltedpass;
 }
 
+/**
+ * @author Jelle Smeets
+ * @created 29-11-2012
+ * @description Get the Role of the current visitor 0 is anoniem, 1 is klant, 2 is beheerder
+ * @return Int with role level.
+ */
+function getRole(){  
+    if(isset($_COOKIE['beheerder_id']) && is_numeric($_COOKIE['beheerder_id'])){
+        $_SESSION['beheerder_id'] = $_COOKIE['beheerder_id'];   
+        return 2;
+    }elseif(isset($_SESSION['beheerder_id'])&& is_numeric($_SESSION['beheerder_id'])){
+        return 2;
+    }
+    
+    if(isset($_COOKIE['klanten_id']) && is_numeric($_COOKIE['klanten_id'])){
+        $_SESSION['klanten_id'] = $_COOKIE['klanten_id'];   
+        return 1;
+    }elseif(isset($_SESSION['klanten_id'])&& is_numeric($_SESSION['klanten_id'])){
+        return 1;
+    }
+    
+    return 0;
+}
 function hashpasswordrecovery($id){
     //toevoegen voornaam
     $hash = md5($id.date().'asdfasdkkdjj');
