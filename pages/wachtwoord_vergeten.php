@@ -12,12 +12,12 @@ if(isset($_POST['submit'])){
     //check email niet leeg
     if($_POST['emailadres'] != ''){
         
-        $stmt = $db->query("SELECT * FROM klanten WHERE `e-mail` = '".mysql_real_escape_string($_POST['emailadres'])."'");
+        $stmt = $db->query("SELECT * FROM klanten WHERE `emailadres` = '".mysql_real_escape_string($_POST['emailadres'])."'");
         $result = $stmt->fetchObject();
             if(!empty($result)){
                 //aanmaken hass voor link
                 $hash = hashpasswordrecovery2($_POST['emailadres']);
-                $db->query("UPDATE `klanten` SET `hash`='".$hash."' WHERE `e-mail`='".$_POST['emailadres']."'");
+                $db->query("UPDATE `klanten` SET `hash`='".$hash."' WHERE `emailadres`='".$_POST['emailadres']."'");
                 //mail
                 $to = $_POST['emailadres'];
                 $subject = "Wachtwoord vergeten";

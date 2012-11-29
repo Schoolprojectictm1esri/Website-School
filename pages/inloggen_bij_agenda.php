@@ -6,7 +6,6 @@
  */
 ?>
 <?php
-session_start();
 if(isset($_COOKIE['klanten_id']) && $_COOKIE['klanten_id'] != '' && is_numeric($_COOKIE['klanten_id'])){
     $_SESSION['klanten_id'] = $_COOKIE['klanten_id'];
     header('location: index.php?page=agenda');
@@ -20,7 +19,7 @@ if(isset($_POST['submit'])){
         //beide velden zijn ingevuld.
         $email = mysql_real_escape_string($_POST['emailadres']);
         $password = mysql_real_escape_string($_POST['password']);
-        $stmt = $db->query("SELECT * FROM klanten WHERE `e-mail` = '".$email."' AND `wachtwoord` = '".$password."'");
+        $stmt = $db->query("SELECT * FROM klanten WHERE `emailadres` = '".$email."' AND `wachtwoord` = '".$password."'");
         $result = $stmt->fetchObject();
         if(!empty($result)){
             //gebruiker id in sessie.

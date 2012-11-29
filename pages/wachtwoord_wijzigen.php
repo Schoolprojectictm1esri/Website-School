@@ -7,25 +7,40 @@
 ?>
 <?php
 $hash = '';
+$emailadres = '';
 if(isset($_GET['value'])){
-    ;
+    $hash = $_GET['value'];
+    $stmt = $db->query("SELECT `emailadres` FROM `klanten` WHERE `hash` = '".$hash."'");
+    
+    $result = $stmt->fetchObject();
+    
+    if(!empty($result)){
+        $emailadres = $result->emailadres;      
+    }
+    else{
+        header('location: index.php');
+    }
 }
 else {
-    header('location: index.php');
+    if(!isset($_POST['submit'])){
+        header('location: index.php');
+    }
 }
 // controleer of hash bestaat
-$hash = $_GET['value'];
 //65dcf551912dbd829eea17885cf14e88
 //kijkt of submit is
 if(isset($_POST['submit'])){
+    if(isset($_POST["emailadres"]))
+    {
+        $emailadres = $_POST["emailadres"];
+    }
     //controleert of alles is ingevult
     if(($_POST['ww1'] != '') and ($_POST['ww2'] != '')){
         //controleer of wachtwoorden aan elkaar gelijk zijn
         if(($_POST['ww1']) == ($_POST['ww2'])){
             $ww1 = mysql_real_escape_string($_POST['ww1']);
-            $emailadres = $_POST['emailadres'];
-            $stmt = $db->query("update `klanten` SET `wachtwoord` = '".$ww1."', `emailadres` = '".$emailadres."'");
-            echo 'Uw wachtwoord is gewijzigd';
+            $stmt = $db->query("update `klanten` SET `wachtwoord` = '".$ww1."', `hash` = '' WHERE `emailadres` = '".$emailadres."'");
+            echo 'Uw wachtwoord is gewijzigd <br/> <a href="http://localhost/Website-School/index.php">Klik hier</a> om naar home te gaan.';
         }
         else {
 ?> 
@@ -35,7 +50,12 @@ if(isset($_POST['submit'])){
                 <table>
                     <tr>
                         <td>Emailadres</td>
-                        <td>"'".$_POST['emailadres']."'"</td>
+                        <td>
+                            <?php 
+                            echo $emailadres;
+                            echo "<input type='hidden' name='emailadres' value='".$emailadres."' >";
+                            ?>                        
+                        </td>
                     </tr>
                     <tr>
                         <td>Wachtwoord</td>
@@ -48,7 +68,7 @@ if(isset($_POST['submit'])){
                     </tr>
                     <tr>
                         <td></td>
-                        <td><input type="submit" name="submit" value="aanpassen" </td>
+                        <td><input type="submit" name="submit" value="Aanpassen" </td>
                     </tr>
                 </table>
             </form>
@@ -65,7 +85,12 @@ if(isset($_POST['submit'])){
             <table>
                 <tr>
                     <td>Emailadres</td>
-                    <td>".$_POST['emailadres']."</td>
+                    <td>
+                        <?php 
+                        echo $emailadres;
+                        echo "<input type='hidden' name='emailadres' value='".$emailadres."' >";
+                        ?>                        
+                    </td>
                 </tr>
                 <tr>
                     <td>Wachtwoord</td>
@@ -96,7 +121,12 @@ else {
         <table>
             <tr>
                 <td>Emailadres</td>
-                <td>".$_POST['emailadres']."</td>
+                    <td>
+                        <?php 
+                        echo $emailadres;
+                        echo "<input type='hidden' name='emailadres' value='".$emailadres."' >";
+                        ?>                        
+                    </td>
             </tr>
             <tr>
                 <td>Wachtwoord</td>

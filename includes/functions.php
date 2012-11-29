@@ -48,10 +48,18 @@ function getRole(){
     
     return 0;
 }
-function hashpasswordrecovery($id){
+
+function hashpasswordrecovery($date){
     //toevoegen voornaam
-    $hash = md5($id.date().'asdfasdkkdjj');
+    $hash = md5($date.date().'asdfasdkkdjj');
+    //return
+    return $hash;
+}
+function hashpasswordrecovery2($string){
+    //toevoegen voornaam
+    $hash = md5($string.'asdfasdkkdjj');
     //return
     return $hash;
 }
 ?>
+
