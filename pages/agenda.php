@@ -17,13 +17,20 @@ for($row = 0; $row<4; $row++)
     //For every column in the table
     for($column = 0; $column<7; $column++)
     {        
-        //$STMT, bron : http://acronyms.thefreedictionary.com/STMT
-        //$SankuyoTshwaraganoManagementTrust = $db->query("COUNT id FROM behandelingen WHERE actief = 'TRUE'");
-        //$numberOfApp = $SankuyoTshwaraganoManagementTrust->fetchall();
-
+        
+        $SankuyoTshwaraganoManagementTrust = $db->query("SELECT COUNT(id) FROM behandelingen WHERE actief = 'TRUE'");
+        $numberOfApp = $SankuyoTshwaraganoManagementTrust->fetchall();
+        
         //print_r($numberOfApp);
+        //$stmt           = $db->query("SELECT * FROM klanten WHERE achternaam = 'smit' ");
+       // $result         = $stmt->fetchall();
 
-        $numberOfApp = 14;
+        
+
+        //Test w/o db : $numberOfApp = 14;
+        //Test w/o db : $numberOfApp = 5;
+        //Test w/o db : $numberOfApp = 15;
+        //Test w/o db : $numberOfApp = 0;
 
         // Check availability 
         
@@ -42,7 +49,8 @@ for($row = 0; $row<4; $row++)
 
         echo "<td class='$available'>";
         // Link to open Agenda
-        echo "<a href=\"www.agendaopvragen.nl?variabele=$dedag&vazr2=maand\">";//$_GET['variabele']
+        echo "<a href=\"http://localhost/index.php?page=agenda\">";
+        //echo "<a href=\"www.letmegooglethatforyou.com?variabele=dedag&vazr2=maand\">";//$_GET['variabele']
 
         // Shows current day 
         echo substr($date->dayOfWeek(), 0, 2) . ". " . $date->day . " " . substr($date->monthOfTheYear(), 0, 3) . ".";
