@@ -1,15 +1,18 @@
 <?php
 session_start();
-//controleer of er een gebruikte cookie is.
-//als post submit geset is is het formulier verstuurd.
+
+
+//als een gebruiker al ingelogd is met een cookie of een sessie stuur deze dan door naar beheer pagina. Je hoeft immers geen 2x in te loggen.
 if(isset($_COOKIE['beheerder_id']) && $_COOKIE['beheerder_id'] != '' && is_numeric($_COOKIE['beheerder_id'])){
     $_SESSION['beheerder_id'] = $_COOKIE['beheerder_id'];
     header('location: index.php?page=beheer');
 }elseif(isset($_SESSION['beheerder_id'])){
     //controleer of sessie bestaat.
-
-       header('location: index.php?page=beheer'); 
+    header('location: index.php?page=beheer'); 
 }
+
+
+//controle en verwerking.
 if(isset($_POST['submit'])){
     //als wachtwoord en gebruikersnaam niet leeg zijn.
     if($_POST['username'] != '' && $_POST['password'] != ''){
@@ -18,8 +21,8 @@ if(isset($_POST['submit'])){
         $wachtwoord = hashPassword($_POST['password']);
         $stmt = $db->query('select * from beheerder where gebruikersnaam = "'.$naam.'" AND wachtwoord = "'.$wachtwoord.'" AND actief = 1 LIMIT 0,1');
         $result = $stmt->fetchObject();
+        //als resultaat leeg is, toon het formulier dat het inloggen niet gelukt is.
         if(empty($result)){
-            echo '';
             ?>
             <div id="beheer-login">
                 <form id="beheer-form" action="index.php?page=inloggen_beheer" method="POST">
@@ -46,6 +49,7 @@ if(isset($_POST['submit'])){
         }else{
             //start sessie met gebruikersnaam.
             if($_POST['stayloggedin'] == true){
+                //als er ingelogd moet blijven start dan ook cookies.
                 setcookie('beheerder_id', $result->beheerder_id, time() +360000);
             }
             $_SESSION['beheerder_id'] = $result->beheerder_id;
@@ -83,7 +87,6 @@ if(isset($_POST['submit'])){
     }
 
 }else{
-    //toon formulier.
     ?>
     <!-- Toon formulier !-->
     <div id="beheer-login">

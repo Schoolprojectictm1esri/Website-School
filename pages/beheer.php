@@ -1,10 +1,5 @@
 <?php
-session_start();
-//even lelijke oplossing voor het cookie probleem
-if(isset($_COOKIE['beheerder_id']) && $_COOKIE['beheerder_id'] != '' && is_numeric($_COOKIE['beheerder_id']) && !isset($_SESSION['beheerder_id'])){
-    $_SESSION['beheerder_id'] = $_COOKIE['beheerder_id'];
-}
-if(isset($_SESSION['beheerder_id']) && $_SESSION['beheerder_id'] != ''){
+// als er gebruik gemaakt wordt van cookies is de gebruikersnaam niet geset. Deze even controleren om netjes de naam te tonen bij inloggen.
     if(!isset($_SESSION['gebruikersnaam'])){
         $stmt = $db->query('select * from beheerder where beheerder_id = "'.$_SESSION['beheerder_id'].'"');
         $result = $stmt->fetchObject();
@@ -19,11 +14,4 @@ if(isset($_SESSION['beheerder_id']) && $_SESSION['beheerder_id'] != ''){
     echo 'Welkom '.$gebruikersnaam;
     echo '<br />';
     echo '<a href="index.php?page=logout">Log uit</a>';
-}else{
-    echo 'Log alstublieft in.';
-}
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 ?>
