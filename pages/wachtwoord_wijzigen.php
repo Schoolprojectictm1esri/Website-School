@@ -6,6 +6,16 @@
  */
 ?>
 <?php
+$hash = '';
+if(isset($_GET['value'])){
+    ;
+}
+else {
+    header('location: index.php');
+}
+// controleer of hash bestaat
+$hash = $_GET['value'];
+//65dcf551912dbd829eea17885cf14e88
 //kijkt of submit is
 if(isset($_POST['submit'])){
     //controleert of alles is ingevult

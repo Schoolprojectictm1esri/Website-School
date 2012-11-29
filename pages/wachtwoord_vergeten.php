@@ -6,6 +6,7 @@
  */
 ?>
 <?php
+require_once('includes/functions.php');
 //check submit
 if(isset($_POST['submit'])){
     //check email niet leeg
@@ -14,6 +15,9 @@ if(isset($_POST['submit'])){
         $stmt = $db->query("SELECT * FROM klanten WHERE `e-mail` = '".mysql_real_escape_string($_POST['emailadres'])."'");
         $result = $stmt->fetchObject();
             if(!empty($result)){
+                //aanmaken hass voor link
+                $hash = hashpasswordrecovery2($_POST['emailadres']);
+                $db->query("UPDATE `klanten` SET `hash`='".$hash."' WHERE `e-mail`='".$_POST['emailadres']."'");
                 //mail
                 $to = $_POST['emailadres'];
                 $subject = "Wachtwoord vergeten";
@@ -35,6 +39,9 @@ if(isset($_POST['submit'])){
                                 <td>thomasvermeulen_2@hotmail.com </td> <!-- en de rest ofcourse!!! -->
                             </tr>
                             <tr>
+                                <a href='http://localhost/Website-School/index.php?page=wachtwoord_wijzigen&value=".$hash."'>Klik hier</a>
+                            </tr>
+                            <tr>
                                 <td>Met vriendelijke groet PedicurePraktijk Desiree.
                             </tr>
                         </table>
@@ -42,6 +49,7 @@ if(isset($_POST['submit'])){
                     </html>
                     ";
                 // tryout mail
+                // Value in link zetten die uitgelezen word.
                 try{
                     mail($to,$from,$subject,$message);
                 }catch(Exception $e){
