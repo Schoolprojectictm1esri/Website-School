@@ -12,4 +12,8 @@ $pagelist['home'] = 0;
 $pagelist['inloggen_beheer'] = 0;
 $pagelist['routebeschrijving'] = 0;
 $pagelist['beheer'] = 2;
+// pagina's van Daniël
+$pagelist['aanpassenklantegegevens'] = 2;
+$pagelist['inzienagenda'] = 1;
+$pagelist['aanpassenproducten'] = 2;
 ?>
