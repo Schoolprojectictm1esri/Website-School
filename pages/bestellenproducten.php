@@ -1,53 +1,49 @@
-<form action="index.php?page=bestellenproducten">
-    <div><!--naam product--></div>
-    <div><!--afbeelding product--></div>
-    <div>Aantal:</div>
-    <div>
-        <select name="aantalproducten">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-            <option>6</option>
-            <option>7</option>
-            <option>8</option>
-            <option>9</option>
-            <option>10</option>
-        </select>
-        <!--Aantal producten-->
-    </div><br>
-    <div>Prijs:</div><br>
-    <div><!--prijs product--></div>
-    <div><input type="submit" value="Bestel" name="bestel" /></div>
-</form>
+<table id="bestellenproducten">
+        <tr>
+            <td colspan="2"><img src="C:\Users\Sander\Downloads\Black Dragon Witch.jpg" width="500" height="400" alt="Black Dragon Witch"/>
+                <!--afbeelding product-->
+            </td>
+        </tr>
+        <tr>
+            <td><?php 
+                    $productid = 0;
+                    $stmt = $db->query
+                        ('select naam from producten where id= "'.$productid.'"'); ?>
+                <!--naam product--></td>
+            <td>Aantal:
+                <form action="aantal" method="POST">
+                    <select name="aantalproducten">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                Prijs:
+                <?php 
+                //$aantal= $_POST['aantal'];
+                $prijs= 1.95;
+                $totaal =/*$aantal**/$prijs;
+                echo "€ $totaal";
+                ?>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Bestel" name="bestel" /></td>
+        </tr>
+</table>
 <?php
 if (isset($_POST['bestel']))
 ?>
-<table id="bestellenproducten">
-        <tr>
-            <td><!--naam product--></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td><!--afbeelding product--></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Aantal</td>
-            <td>
-                <select name="aantalproducten">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>7</option>
-                    <option>8</option>
-                    <option>9</option>
-                    <option>10</option>
-                </select>
-            </td>
-        </tr>
-</table>
