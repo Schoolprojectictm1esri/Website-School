@@ -1,14 +1,14 @@
 <table id="bestellenproducten">
         <tr>
-            <td colspan="2"><img src="C:\Users\Sander\Downloads\Black Dragon Witch.jpg" width="500" height="400" alt="Black Dragon Witch"/>
-                <!--afbeelding product-->
+            <td colspan="2"><img src="<?php $stmt = $db->query ('SELECT foto FROM producten WHERE id="'.$productid.'"')  ?>"/>
+                                 <!--afbeelding product-->
             </td>
         </tr>
         <tr>
             <td><?php 
                     $productid = 0;
                     $stmt = $db->query
-                        ('select naam from producten where id= "'.$productid.'"'); ?>
+                        ('SELECT naam FROM producten WHERE id= "'.$productid.'"'); ?>
                 <!--naam product--></td>
             <td>Aantal:
                 <form action="aantal" method="POST">
@@ -33,7 +33,7 @@
                 Prijs:
                 <?php 
                 //$aantal= $_POST['aantal'];
-                $prijs= 1.95;
+                $prijs= $stmt = $db->query ('SELECT prijs FROM producten WHERE id="'.$productid.'"');
                 $totaal =/*$aantal**/$prijs;
                 echo "€ $totaal";
                 ?>

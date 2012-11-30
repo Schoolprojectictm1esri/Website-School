@@ -67,7 +67,7 @@ if(isset($_POST['registreren']))
                 VALUES ('$email', '$voornaam', '$achternaam', '$woonplaats', '$adres', '$postcode', '$telefoonnr');";
         $stmt = $db->prepare($sql);
         $result = $stmt->execute();
-        }
+                    }
 		else{
 			print 'Een veld is nog niet ingevuld';
                     }
