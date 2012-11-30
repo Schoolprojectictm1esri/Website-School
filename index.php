@@ -16,13 +16,17 @@ require_once('includes/bootstrap.php');
 <head>
     <script type="text/javascript" src="includes/jquery-1.8.3.js"></script>
     <?php
-    //als pagina routebeschrijving geladen is laat google api jquery stuff.
-    if(isset($_GET['page']) && $_GET['page'] == 'routebeschrijving'){
+    //kunnen meer pagina's worden toegevoegd voor custom jquery/javascript scripts.
+    if(isset($_GET['page'])){
+        //als pagina routebeschrijving geladen is laat google api jquery stuff.
+        if($_GET['page'] == 'routebeschrijving'){
+    
         ?>
         <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=false&amp;key=ABQIAAAAuPsJpk3MBtDpJ4G8cqBnjRRaGTYH6UMl8mADNa0YKuWNNa8VNxQCzVBXTx2DYyXGsTOxpWhvIG7Djw" type="text/javascript"></script>
         <script type="text/javascript" src="includes/routebeschrijving.js"></script>
     
         <?php
+        }
     }
     ?>
     <!-- $title komt uit de bootstrap !-->
