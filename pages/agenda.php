@@ -4,6 +4,9 @@ include './includes/Date.php';
 
 $date = new Date();
 
+echo "Plaatje met legenda";
+
+
 // Get the current day
 $date->now();
 
@@ -18,8 +21,8 @@ for($row = 0; $row<4; $row++)
     for($column = 0; $column<7; $column++)
     {        
         
-        $SankuyoTshwaraganoManagementTrust = $db->query("SELECT COUNT(id) FROM behandelingen WHERE actief = 'TRUE'");
-        $numberOfApp = $SankuyoTshwaraganoManagementTrust->fetchall();
+        //$SankuyoTshwaraganoManagementTrust = $db->query("SELECT COUNT(id) FROM behandelingen WHERE actief = 'TRUE'");
+        //$numberOfApp = $SankuyoTshwaraganoManagementTrust->fetchall();
         
         //print_r($numberOfApp);
         //$stmt           = $db->query("SELECT * FROM klanten WHERE achternaam = 'smit' ");
@@ -28,7 +31,7 @@ for($row = 0; $row<4; $row++)
         
 
         //Test w/o db : $numberOfApp = 14;
-        //Test w/o db : $numberOfApp = 5;
+        /*Test w/o db :*/ $numberOfApp = 5;
         //Test w/o db : $numberOfApp = 15;
         //Test w/o db : $numberOfApp = 0;
 

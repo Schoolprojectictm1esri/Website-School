@@ -27,9 +27,15 @@ root {
 	width:50px;
 	position:float;
 	height:50px;
-	border:5px solid black;
+	border:5px solid green;
 	
         /* Stijl voor de agenda per vakje beschikbaar*/
+}
+.agendabusy {
+	width:50px;
+	position:relative;
+	height:50px;
+	border:5px solid orange;
 }
 .agendafull {
 	width:50px;
@@ -40,11 +46,36 @@ root {
 	
         /* Stijl voor de agenda per vakje Vol*/
 }
-.agendabusy {
-	width:50px;
+
+	
+        /* Stijl voor de agenda per vakje druk*/
+
+
+#legendaavail
+{
+        width:50px;
+	position:relative;
+	height:50px;
+	border:5px solid green;  
+}
+#legendabusy{
+        width:50px;
 	position:relative;
 	height:50px;
 	border:5px solid orange;
-	
-        /* Stijl voor de agenda per vakje druk*/
+        color:red;
+}
+
+#legendafull{
+        width:50px;
+	position:relative;
+	height:50px;
+	border:5px solid red;
+}
+
+#legendavacancy{
+        width:50px;
+	position:relative;
+	height:50px;
+	border:5px solid black
 }
