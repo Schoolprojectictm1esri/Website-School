@@ -57,6 +57,7 @@ if(isset($_POST['registreren']))
     //Controleert of er velden leeg zijn
                     {
         $email = $_POST['email'];
+        $wachtwoord = $_POST['wachtwoord'];
         $voornaam = $_POST['voornaam'];
         $achternaam = $_POST['achternaam'];
         $woonplaats = $_POST['woonplaats'];
@@ -64,16 +65,18 @@ if(isset($_POST['registreren']))
         $postcode = $_POST['postcode'];
         $telefoonnr = $_POST['telefoonnr'];
         $sql="INSERT INTO klanten (email, wachtwoord, voornaam, achternaam, adres, woonplaats, postcode, telefoonnr) 
-                VALUES ('$email', '$voornaam', '$achternaam', '$woonplaats', '$adres', '$postcode', '$telefoonnr');";
+                VALUES (':email', ':voornaam', ':achternaam', ':woonplaats', ':adres', ':postcode', ':telefoonnr');";
         $stmt = $db->prepare($sql);
-        $result = $stmt->execute();
+        $stmt->execute(array(':email'=>$email,':wachtwoord'=>$wachtwoord,':voornaam'=>$voornaam,':achternaam'=>$achternaam,
+                                ':adres'=>$adres,':woonplaats'=>$woonplaats,':postcode'=>$postcode,':telefoonnr'=>$telefoonnr,));
+ 
                     }
 		else{
-			print 'Een veld is nog niet ingevuld';
+			print 'Een veld is nog niet ingevuld.';
                     }
     }
     else{
-            print 'Wachtwoorden komen niet overeen';
+            print 'Wachtwoorden komen niet overeen.';
         }
 }
 else{
