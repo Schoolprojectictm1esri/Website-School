@@ -4,22 +4,23 @@ if (isset($_POST['bestel'])) {
 }
     
 else { 
-    $productid = 0;
-    $stmt = $db->query('SELECT foto FROM producten WHERE id="'.$productid.'"');
-    var_dump($stmt->fetchobject());
+    $productid = 1;
+    $stmt = $db->query('SELECT * FROM producten WHERE id="'.$productid.'"');
+    $result = $stmt->fetchobject();
     ?> 
-<table id="bestellenproducten">
+<div id="bestellenproducten">
+    <table id="bestellenproducten">
         <tr>
-            <td colspan="2"><img src="<?php $stmt = $db->query('SELECT foto FROM producten WHERE id="'.$productid.'"');  ?>"/>
+            <td colspan="2"><img src="<?php echo $result->foto; ?>" alt=""/>
             <!--afbeelding product-->
             </td>
         </tr>
         <tr>
             <td><?php 
-                     //met GET vanuit bekijkenproducten en die moet gelinkt zijn aan deze.
-                    $stmt = $db->query
-                        ('SELECT naam FROM producten WHERE id= "'.$productid.'"'); ?>
-                <!--naam product--></td>
+                     //productid verkrijgen met GET vanuit bekijkenproducten en die moet gelinkt zijn aan deze.
+                    echo $result->naam; ?>
+                <!--naam product-->
+            </td>
             <td>
                 <form name="aantal" method="POST">
                     Aantal:
@@ -49,8 +50,8 @@ else {
                 else{
                     $aantal = 1;
                 }
-                $prijs= 3;//$stmt = $db->query ('SELECT prijs FROM producten WHERE id="'.$productid.'"');
-                $totaal =$aantal*$prijs;
+                $prijs = $result->prijs;
+                $totaal = $aantal*$prijs;
                 echo "€ $totaal";
                 ?>
             </td>
@@ -59,5 +60,6 @@ else {
             <td></td>
             <td><input type="submit" value="Bestel" name="bestel" /></td>
         </tr>
-</table>
+    </table>
+</div>
 <?php } ?>

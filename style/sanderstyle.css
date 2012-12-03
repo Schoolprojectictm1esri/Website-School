@@ -22,6 +22,10 @@ table#aanmeldenklant td {
     border: 0px none;
 }
 
+div#bestellendproducten {
+    margin: 25px;    
+}
+
 table#bestellenproducten {
     border: 0px none;
 }
