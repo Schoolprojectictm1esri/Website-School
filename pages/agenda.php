@@ -52,7 +52,7 @@ for($row = 0; $row<4; $row++)
 
         echo "<td class='$available'>";
         // Link to open Agenda
-        echo "<a href=\"http://localhost/index.php?page=agenda\">";
+        echo "<a href=\"/index.php?page=agenda\">";
         //echo "<a href=\"www.letmegooglethatforyou.com?variabele=dedag&vazr2=maand\">";//$_GET['variabele']
 
         // Shows current day 
