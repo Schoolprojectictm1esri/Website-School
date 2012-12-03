@@ -1,49 +1,51 @@
 <?php
 if(isset($_POST['registreren']))
 { ?> 
-<!--Controleerd of er op registreer is geklikt-->
+<!--Controleert of er op registreer is geklikt-->
 <form action="index.php?page=aanmeldenklant" method="POST">
     <div id="aanmeldenklant"><table id="aanmeldenklant">
             <tr>
                     <td>Email-adres:</td>
                     <td><input type="text" name="email" value="<?php echo $_POST['email']; ?>" /></td>
-                </tr>
+                </tr> <!-- Invulveld voor email -->
                 <tr>
                     <td>Voornaam:</td>
                     <td><input type="text" name="voornaam" value="<?php echo $_POST['voornaam']; ?>" /></td>
-                </tr>
+                </tr> <!-- Invulveld voor voornaam -->
                 <tr>
                     <td>Achternaam:</td>
                     <td><input type="text" name="achternaam" value="<?php echo $_POST['achternaam']; ?>" /></td>
-                </tr>
+                </tr> <!-- Invulveld voor achternaam -->
                 <tr>
                     <td>Woonplaats:</td>
                     <td><input type="text" name="woonplaats" value="<?php echo $_POST['woonplaats']; ?>" /></td>
-                </tr>
+                </tr> <!-- Invulveld voor woonplaats -->
                 <tr>
                     <td>Adres:</td>
                     <td><input type="text" name="adres" value="<?php echo $_POST['adres']; ?>" /></td>
-                </tr>
+                </tr> <!-- Invulveld voor adres -->
                 <tr>
                     <td>Postcode:</td>
                     <td><input type="text" name="postcode" value="<?php echo $_POST['postcode']; ?>" /></td>
-                </tr>
+                </tr> <!-- Invulveld voor postcode -->
                 <tr>
                     <td>Telefoonnummer:</td>
                     <td><input type="text" name="telefoonnr" value="<?php echo $_POST['telefoonnr']; ?>" /></td>
-                </tr>
+                </tr> <!-- Invulveld voor telefoonnummer -->
                 <tr>
                     <td>Wachtwoord:</td>
                     <td><input type="password" name="wachtwoord" value="" /></td>
-                </tr>
+                </tr> <!-- Invulveld voor wachtwoord -->
                 <tr>
                     <td>Herhaal wachtwoord:</td>
                     <td><input type="password" name="herhaalwachtwoord" value="" /></td>
-                </tr>
+                </tr> <!-- Invulveld voor herhaling wachtwoord -->
                 <tr>
                     <td colspan="2"><input type="submit" value="Registreer" name="registreren" /></td>
-                </tr>
-        </table></div>
+                </tr> <!-- Submitknop voor het versturen van de formulier -->
+        </table></div> 
+    <!-- Formulier waar de velden ingevuld blijven als er iets fout gaat
+        tijdens het invullen zoals leeg veld of niet overeenkomend wachtwoord -->
 </form>
 <!--Het aanmeld formulier waarbij ingevulde waarden blijven staan-->
 <?php
@@ -51,10 +53,10 @@ if(isset($_POST['registreren']))
     //Controleert of de wachtwoorden overeen komen
         {
 		if ($_POST['email']!='' || $_POST['voornaam']!='' || $_POST['achternaam']!=''
-        || $_POST['woonplaats']!='' || $_POST['adres']!=''
-        || $_POST['postcode']!='' || $_POST['telefoonnr']!=''
-        || $_POST['wachtwoord']!=''|| $_POST['herhaalwachtwoord']!='')
-    //Controleert of er velden leeg zijn
+                    || $_POST['woonplaats']!='' || $_POST['adres']!=''
+                    || $_POST['postcode']!='' || $_POST['telefoonnr']!=''
+                    || $_POST['wachtwoord']!=''|| $_POST['herhaalwachtwoord']!='')
+                //Controleert of er velden leeg zijn
                     {
         $email = $_POST['email'];
         $wachtwoord = $_POST['wachtwoord'];
@@ -65,10 +67,9 @@ if(isset($_POST['registreren']))
         $postcode = $_POST['postcode'];
         $telefoonnr = $_POST['telefoonnr'];
         $sql="INSERT INTO klanten (email, wachtwoord, voornaam, achternaam, adres, woonplaats, postcode, telefoonnr) 
-                VALUES (':email', ':voornaam', ':achternaam', ':woonplaats', ':adres', ':postcode', ':telefoonnr');";
+                VALUES ('.$email.', '.$wachtwoord.', '.$voornaam.', '.$achternaam.', '.$adres.', '.$woonplaats.', '.$postcode.', '.$telefoonnr.')";
         $stmt = $db->prepare($sql);
-        $stmt->execute(array(':email'=>$email,':wachtwoord'=>$wachtwoord,':voornaam'=>$voornaam,':achternaam'=>$achternaam,
-                                ':adres'=>$adres,':woonplaats'=>$woonplaats,':postcode'=>$postcode,':telefoonnr'=>$telefoonnr,));
+        $stmt->execute();
  
                     }
 		else{

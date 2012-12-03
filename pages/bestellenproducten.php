@@ -3,20 +3,26 @@ if (isset($_POST['bestel'])) {
 /*$stmt = $db->query ('INSERT INTO bestelling_producten VALUES "'.$bestellingid.'","'.$productid.'",aantal'); */
 }
     
-else { ?> <table id="bestellenproducten">
+else { 
+    $productid = 0;
+    $stmt = $db->query('SELECT foto FROM producten WHERE id="'.$productid.'"');
+    var_dump($stmt->fetchobject());
+    ?> 
+<table id="bestellenproducten">
         <tr>
-            <td colspan="2"><img src=""/><!--<?php $stmt = $db->query ('SELECT foto FROM producten WHERE id="'.$productid.'"')  ?>-->
-                                 <!--afbeelding product-->
+            <td colspan="2"><img src="<?php $stmt = $db->query('SELECT foto FROM producten WHERE id="'.$productid.'"');  ?>"/>
+            <!--afbeelding product-->
             </td>
         </tr>
         <tr>
             <td><?php 
-                    $productid = 0;
+                     //met GET vanuit bekijkenproducten en die moet gelinkt zijn aan deze.
                     $stmt = $db->query
                         ('SELECT naam FROM producten WHERE id= "'.$productid.'"'); ?>
                 <!--naam product--></td>
-            <td>Aantal:
-                <form action="aantal" method="POST">
+            <td>
+                <form name="aantal" method="POST">
+                    Aantal:
                     <select name="aantalproducten">
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -29,6 +35,7 @@ else { ?> <table id="bestellenproducten">
                         <option value="9">9</option>
                         <option value="10">10</option>
                     </select>
+                    <input type="submit" value="Bereken" name="berekenen" />
                 </form>
             </td>
         </tr>
@@ -36,9 +43,14 @@ else { ?> <table id="bestellenproducten">
             <td></td>
             <td>Prijs:
                 <?php 
-                //$aantal= $_POST['aantal'];
-                $prijs= $stmt = $db->query ('SELECT prijs FROM producten WHERE id="'.$productid.'"');
-                $totaal =/*$aantal**/$prijs;
+                if (isset($aantal)) {
+                $aantal = $_POST['berekenen'];
+                }
+                else{
+                    $aantal = 1;
+                }
+                $prijs= 3;//$stmt = $db->query ('SELECT prijs FROM producten WHERE id="'.$productid.'"');
+                $totaal =$aantal*$prijs;
                 echo "€ $totaal";
                 ?>
             </td>
