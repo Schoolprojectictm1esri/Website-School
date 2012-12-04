@@ -31,40 +31,46 @@ for($row = 0; $row<4; $row++)
         
 
         //Test w/o db : $numberOfApp = 14;
-        /*Test w/o db :*/ $numberOfApp = 5;
+        /*Test w/o db :*/ $numberOfApp = 9;
         //Test w/o db : $numberOfApp = 15;
         //Test w/o db : $numberOfApp = 0;
 
         // Check availability 
-        
-        
-        if      ( $numberOfApp <= 8)
-            $available = "agendaavail";
+        if ($date->dayOfWeek()=="Zondag"){
+            $available ="agandavacancy";
+        }
+        else {   
 
-        else if ( $numberOfApp >= 9 && $numberOfApp <= 14)
-            $available = "agendabusy";
+            if      ( $numberOfApp <= 8)
+                $available = "agendaavail";
 
-        else if ( $numberOfApp >= 15)
-            $available = "agendafull";
+            else if ( $numberOfApp >= 9 && $numberOfApp <= 14)
+                $available = "agendabusy";
 
-        else  
-            $available = "agendavacancy";
+            else if ( $numberOfApp >= 15)
+                $available = "agendafull";
 
+            else  
+                $available = "agendavacancy";
+        }
         echo "<td class='$available'>";
-        // Link to open Agenda
+        // Link om agenda te openen
         echo "<a href=\"/index.php?page=agenda\">";
         //echo "<a href=\"www.letmegooglethatforyou.com?variabele=dedag&vazr2=maand\">";//$_GET['variabele']
 
-        // Shows current day 
+        // Laat vandaag zien
         echo substr($date->dayOfWeek(), 0, 2) . ". " . $date->day . " " . substr($date->monthOfTheYear(), 0, 3) . ".";
 
         echo "</a>";
 
-        //Shows current day and calculates next day.
+        
+        //Laat vandaag zien en berekend de volgende dag
         //echo $date->toString();
         $date->addDays(1);
 
         echo "</td>";
+        
+        // return $available
     }
 
     echo "</tr>";
