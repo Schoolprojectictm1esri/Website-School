@@ -27,7 +27,7 @@ else {
     }
 }
 // controleer of hash bestaat
-//65dcf551912dbd829eea17885cf14e88
+// hash van voorbeeld account :65dcf551912dbd829eea17885cf14e88
 //kijkt of submit is
 if(isset($_POST['submit'])){
     if(isset($_POST["emailadres"]))
