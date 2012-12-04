@@ -20,8 +20,18 @@ require_once('includes/bootstrap.php');
             //als pagina routebeschrijving geladen is laat google api jquery stuff.
             if ($_GET['page'] == 'routebeschrijving') {
                 ?>
-                <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=false&amp;key=ABQIAAAAuPsJpk3MBtDpJ4G8cqBnjRRaGTYH6UMl8mADNa0YKuWNNa8VNxQCzVBXTx2DYyXGsTOxpWhvIG7Djw" type="text/javascript"></script>
-                <script type="text/javascript" src="includes/routebeschrijving.js"></script>
+                <script type="text/javascript">
+                    <!--
+                    var anwb_tool="adresnv";
+                    var anwb_tool_type="normal";
+                    var anwb_tool_tekst="Pedicure praktijk Desiree";
+                    var anwb_tool_lon="";
+                    var anwb_tool_lat="";
+                    var anwb_tool_postcode="8033 EH";
+                    var anwb_tool_nr="63";
+                    //-->
+                </script>
+                
 
         <?php
     }
