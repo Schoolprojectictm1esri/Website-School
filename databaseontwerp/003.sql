@@ -1,7 +1,10 @@
+
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
+CREATE SCHEMA IF NOT EXISTS `pedicure` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
+USE `pedicure` ;
 
 -- -----------------------------------------------------
 -- Table `pedicure`.`beheerder`
@@ -13,6 +16,19 @@ CREATE  TABLE IF NOT EXISTS `pedicure`.`beheerder` (
   `email` VARCHAR(255) NULL ,
   `actief` TINYINT(1) NULL ,
   PRIMARY KEY (`beheerder_id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `pedicure`.`hash`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `pedicure`.`hash` (
+  `hash` VARCHAR(255) NOT NULL ,
+  `klant_id` INT NOT NULL ,
+  `geldig` DATETIME NOT NULL ,
+  `soort` ENUM('wachtwoord', 'activeren', 'afspraak') NOT NULL ,
+  `actief` TINYINT(1) NOT NULL ,
+  PRIMARY KEY (`actief`, `soort`, `geldig`, `klant_id`) )
 ENGINE = InnoDB;
 
 
