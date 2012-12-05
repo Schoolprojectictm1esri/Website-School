@@ -1,12 +1,12 @@
 <?php   
-    
-        $stmt           = $db->query("SELECT * FROM behandelingen WHERE ID = '13' ");
+        $id = $_GET['id'];
+        $stmt           = $db->query("SELECT * FROM behandelingen WHERE ID = ".$id." ");
         $result         = $stmt->fetchall();
         
         
             
         
-        
+        $img = $db->query("SELECT productencol FROM producten WHERE ID= ".$id."");
            //  Afbeelding uit de database halen
 ?>
             <form action="" method ="post">
@@ -21,7 +21,7 @@
                     </tr>
                     <tr>
                         <td></td>
-                        <td><?php echo '<img src="imagesdatabase/nummer 1.gif">'?></td>
+                        <td><?php echo '<img src="'.$img.'">'?></td>
                         <td><input type="text" name="wVoornaam" value="<?php echo $result[0]['omschrijvingen']; ?>"></td>
                     </tr>
                 </table>

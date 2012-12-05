@@ -1,21 +1,24 @@
 <?php
-$id = 4;
-//$id = $_GET['id'];
+$klant_id = 1;
+//$klant_id = $_GET['klant_id'];
 
-$details = 4;
-//$stmt = $db->query("SELECT * FROM klanten WHERE ID ".$id." ");
-//$result = $stmt->fetchall();
 
-//foreach ($result as $details)
+$stmt = $db->query("SELECT klant_id, email, voornaam, achternaam, 
+    adres, woonplaats, postcode, telefoonnr FROM klanten WHERE klant_id = '1' ");
+$result = $stmt->fetchAll();
 //print_r($result);
+
+foreach ($result as $details)
+
+
     
-    ?>    
+?>    
 
 <?php
 
 if (!isset($_POST['wijzig'])) {
     
-    ?>
+?>
 <form action="index.php?page=aanpassenklantgegevens" method ="post">
 
     <table border="0">
@@ -24,14 +27,14 @@ if (!isset($_POST['wijzig'])) {
         <tr></tr>
 
         <td>Klant nummer: </td>
-        <td> <input type="text" name ="klantnummer" value="<?php echo $details['id']; ?>"</td>
+        <td> <input type="text" name ="klantnummer" value="<?php echo $details['klant_id']; ?>"</td>
         <td></tr>
         <td>Email:</td>
         <td><input type="text" name="email" value="<?php echo $details['email']; ?>"<td>
         <tr></tr>
 
         <td>Voornaam:</td>
-        <td><input type="text" name="voornaam" value="<?php echo $details['naam']; ?>"></td>
+        <td><input type="text" name="voornaam" value="<?php echo $details['voornaam']; ?>"></td>
         <tr></tr>
 
         <td>Achternaam:</td>
@@ -39,8 +42,8 @@ if (!isset($_POST['wijzig'])) {
         <tr></tr>
 
         <td>Adres:</td>
-        <td><input type="text" name="straat" value="<?php echo $details['straat']; ?>"</td>
-        <input type="text" name="huisnummer" value="<?php echo $details['huisnummer']; ?>"
+        <td><input type="text" name="adres" value="<?php echo $details['adres']; ?>"</td>
+        <input type="text" name="huisnummer" value="<?php //echo $details['huisnummer']; ?>"
                <tr></tr>
 
         <td>Woonplaats:</td>
@@ -52,7 +55,7 @@ if (!isset($_POST['wijzig'])) {
         <tr></tr>
 
         <td>Telnr:</td> 
-        <td><input type="text" name="telnr" value="<?php echo $details['telnr']; ?>"</td>
+        <td><input type="text" name="telefoonnr" value="<?php echo $details['telefoonnr']; ?>"</td>
 
 
 
@@ -64,16 +67,22 @@ if (!isset($_POST['wijzig'])) {
 </form>
 
 <?php
-} ?>
- <?php
+} 
+?>
+    
+
+<?php
+if (isset($_POST['wijzig'])) {
+    
+
     if ($_POST['email'] != ""
             || $_POST['voornaam'] != ""
             || $_POST['achternaam'] != ""
-            //|| $_POST['naam'] != ""
+            || $_POST['naam'] != ""
             || $_POST['woonplaats'] != ""
             || $_POST['telnr'] != ""
             || $_POST['postcode'] != ""
-            || $_POST['straat'] != ""
+            || $_POST['adres'] != ""
             || $_POST['huisnummer'] != "")
         ;
 
@@ -82,45 +91,49 @@ if (!isset($_POST['wijzig'])) {
     else {
         echo 'Alles moet correct ingevuld zijn';
     }
-    $id         = $_POST['id'];
+    //$klant_id   = $_POST['klant_id'];
     $email      = $_POST['email'];
     $voornaam   = $_POST['voornaam'];
     $achternaam = $_POST['achternaam'];
     $woonplaats = $_POST['woonplaats'];
-    $telnr      = $_POST['telnr'];
+    $telefoonnr = $_POST['telefoonnr'];
     $postcode   = $_POST['postcode'];
-    $straat     = $_POST['straat'];
+    $adres      = $_POST['adres'];
     $huisnummer = $_POST['huisnummer'];
-    $sql        = ("UPDATE klanten 
-                SET email = '$email', voornaam = '$voornaam', achternaam = '$achternaam', woonplaats = '$woonplaats', telnr = '$telnr', straat = '$straat', huisnummer = '$huisnummer', where id = '$id'");
-
-
-
+    $sql        = ("
+                UPDATE klanten 
+                SET 
+                email = ".$email.", 
+                voornaam = '$voornaam', 
+                achternaam = '$achternaam', 
+                woonplaats = '$woonplaats', 
+                telefoonnr = '$telefoonnr', 
+                adres = '$adres', 
+                 
+                where klant_id = '1'");
+    print_r ($sql);
     $stmt = $db->prepare($sql);
-    $doorvoeren = $stmt->execute();
-    
-    ?>
-<?php
-if (isset($_POST['wijzig'])) {
-    ?>
+    $stmt->execute();
+    //print_r ($stmt);
+?>
 
 
     <form action="index.php?page=aanpassenklantgegevens" method ="post">
 
-        <table border="0">
+        <table>
 
             <td>Klant gegevens</td>
             <tr></tr>
 
             <td>Klant nummer: </td>
-            <td> <input type="text" name ="klantid" value="<?php echo $details['id']; ?>"</td>
+            <td> <input type="text" name ="klant_id" value="<?php echo $details['klant_id']; ?>"</td>
             <td></tr>
             <td>Email:</td>
             <td><input type="text" name="email" value="<?php echo $details['email']; ?>"<td>
             <tr></tr>
 
             <td>Voornaam:</td>
-            <td><input type="text" name="voornaam" value="<?php echo $details['naam']; ?>"></td>
+            <td><input type="text" name="voornaam" value="<?php echo $details['voornaam']; ?>"></td>
             <tr></tr>
 
             <td>Achternaam:</td>
@@ -128,8 +141,8 @@ if (isset($_POST['wijzig'])) {
             <tr></tr>
 
             <td>Adres:</td>
-            <td><input type="text" name="straat" value="<?php echo $details['straat']; ?>"</td>
-            <input type="text" name="huisnummer" value="<?php echo $details['huisnummer']; ?>"
+            <td><input type="text" name="adres" value="<?php echo $details['adres']; ?>"</td>
+            <input type="text" name="huisnummer" value="<?php// echo $details['huisnummer']; ?>"
             <tr></tr>
 
             <td>Woonplaats:</td>
@@ -141,7 +154,7 @@ if (isset($_POST['wijzig'])) {
             <tr></tr>
 
             <td>Telnr:</td> 
-            <td><input type="text" name="telnr" value="<?php echo $details['telnr']; ?>"</td>
+            <td><input type="text" name="telefoonnr" value="<?php echo $details['telefoonnr']; ?>"</td>
 
 
 
@@ -163,7 +176,7 @@ if (isset($_POST['wijzig'])) {
 
 <?php
 if (isset($_POST['verwijderen'])) {
-    $sql = ("DELETE FROM behandelingen Where email = '$email', voornaam = '$voornaam', achternaam = '$achternaam', woonplaats = '$woonplaats', telnr = '$telnr', straat = '$straat', huisnummer = '$huisnummer',id = '$id'");
+    $sql = ("DELETE FROM behandelingen Where email = '$email', voornaam = '$voornaam', achternaam = '$achternaam', woonplaats = '$woonplaats', telefoonnr = '$telefoonnr', adres = '$adres', huisnummer = '$huisnummer',id = '$klant_id'");
     $stmt = $db->prepare($sql);
     $doorvoeren = $stmt->execute();
 }

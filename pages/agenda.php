@@ -31,13 +31,14 @@ for($row = 0; $row<4; $row++)
         
 
         //Test w/o db : $numberOfApp = 14;
-        /*Test w/o db :*/ $numberOfApp = 9;
+        /*Test w/o db :*/ $numberOfApp = 2;
         //Test w/o db : $numberOfApp = 15;
         //Test w/o db : $numberOfApp = 0;
 
         // Check availability 
         if ($date->dayOfWeek()=="Zondag"){
-            $available ="agandavacancy";
+            $available ="agendaholiday";
+            echo "<a href=\"/index.php?page=agendanietbeschikbaar\">";
         }
         else {   
 

@@ -24,7 +24,7 @@ root {
 }
 
 .agendaavail {
-	width:50px;
+	width:14%;
 	position:float;
 	height:50px;
 	border:5px solid green;
@@ -32,16 +32,26 @@ root {
         /* Stijl voor de agenda per vakje beschikbaar*/
 }
 .agendabusy {
-	width:50px;
+	width:14%;
 	position:relative;
 	height:50px;
 	border:5px solid orange;
 }
 .agendafull {
-	width:50px;
+	width:14%;
 	position:relative;
 	height:50px;
 	border:5px solid red;
+        
+	
+        /* Stijl voor de agenda per vakje Vol*/
+}
+.agendaholiday {
+	width:14%;
+	position:relative;
+	height:50px;
+	border:5px solid;
+        background: niet beschikbaar;
         
 	
         /* Stijl voor de agenda per vakje Vol*/
