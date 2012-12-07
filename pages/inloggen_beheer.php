@@ -20,9 +20,8 @@ if(isset($_POST['submit'])){
         $naam = mysql_real_escape_string($_POST['username']);
         $wachtwoord = hashPassword($_POST['password']);
         $stmt = $db->query('select * from beheerder where gebruikersnaam = "'.$naam.'" AND wachtwoord = "'.$wachtwoord.'" AND actief = 1 LIMIT 0,1');
-        $result = $stmt->fetchObject();
         //als resultaat leeg is, toon het formulier dat het inloggen niet gelukt is.
-        if(empty($result)){
+        if(empty($stmt)){
             ?>
             <div id="beheer-login">
                 <form id="beheer-form" action="index.php?page=inloggen_beheer" method="POST">
@@ -47,6 +46,7 @@ if(isset($_POST['submit'])){
                 <div class="error">De combinatie van gebruikersnaam en wachtwoord is onjuist.</div>
             <?php
         }else{
+            $result = $stmt->fetchObject();
             //start sessie met gebruikersnaam.
             if($_POST['stayloggedin'] == true){
                 //als er ingelogd moet blijven start dan ook cookies.

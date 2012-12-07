@@ -19,11 +19,12 @@ if(isset($_POST['submit'])){
         //beide velden zijn ingevuld.
         $email = mysql_real_escape_string($_POST['emailadres']);
         $password = mysql_real_escape_string($_POST['password']);
-        $stmt = $db->query("SELECT * FROM klanten WHERE `emailadres` = '".$email."' AND `wachtwoord` = '".$password."'");
+        $stmt = $db->query("SELECT * FROM klanten WHERE `emailadres` = '".$email."' AND `wachtwoord` = '".$password."'");   
+        if(!empty($stmt)){
         $result = $stmt->fetchObject();
-        if(!empty($result)){
             //gebruiker id in sessie.
            if($_POST['stayloggedin'] == true){
+            setcookie('klanten_id', $result->klanten_id, time() +360000);
             }
             $_SESSION['klanten_id'] = $result->klanten_id;
             $_SESSION['achternaam'] = $result->achternaam;
