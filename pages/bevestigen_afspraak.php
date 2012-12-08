@@ -40,7 +40,6 @@ if(isset($_POST['submit'])){
 else {
     
 }
-
 ?>
 
 
@@ -114,3 +113,56 @@ else {
         </html>
         "
 ?>
+
+<?php
+//formulier voor accepteren/afwijzen
+$datum = '';
+$klant = '';
+?>
+<form action="index.php?page=bevestigen_afsrpaak" method="POST">
+    <table>
+        <tr>
+            <th>Afspraak gegevens:</th>
+        </tr>
+        <tr>
+            <td>Klant: .$klantnaam. </td>
+        </tr>
+        <tr>
+            <td>Datum: .$datum. </td>
+        </tr>
+        <tr>
+            <td><input type="submit" name="accepterenafspraak" value="accepteren" /></td>
+            <td><input type="submit" name="afwijzenafspraak" value="afwijzen" /></td>
+        </tr>
+        <tr>
+            <td><a href='agenda.php'>Annuleren</a></td>
+        </tr>
+    </table>
+</form>
+
+
+<?php
+//formulier voor verwijderenafspraak
+$datum = '';
+$klant = '';
+?>
+<form action="index.php?page=bevestigen_afsrpaak" method="POST">
+    <table>
+        <tr>
+            <th>Afspraak gegevens:</th>
+        </tr>
+        <tr>
+            <td>Klant: .$klantnaam. </td>
+        </tr>
+        <tr>
+            <td>Datum: .$datum. </td>
+        </tr>
+        <tr>
+            <td><input type="submit" name="accepterenafspraak" value="accepteren" /></td>
+            <td><input type="submit" name="afwijzenafspraak" value="afwijzen" /></td>
+        </tr>
+        <tr>
+            <td><a href='agenda.php'>Annuleren</a></td>
+        </tr>
+    </table>
+</form>
