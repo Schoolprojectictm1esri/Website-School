@@ -2,22 +2,19 @@
 <div id="categories">
 Kies een categorie:
 <br>
-<br>
-    
+<br>   
 <?php
 $stmt = $db->query('SELECT * FROM categorieen');
 $result = $stmt->fetchall();
 foreach ($result as $row){
-echo '<a href="index.php?page=bekijkenproducten&categorie='.$row['id'].'">'.$row['naam'].'</a>' ; echo "<br> <br>
-    " ;
+echo '<a href="index.php?page=bekijkenproducten&categorie='.$row['id'].'">'.$row['naam'].'</a>' ; echo "<br> <br> " ;
 } 
 ?>
-
 </div>
-
 <!-- Middenblok !-->
 <div id="resultaten">
     Kies een product:
+   
     <br>
     <br>
    <?php
@@ -29,11 +26,7 @@ $result2 = $stmt2->fetchall();
 }
 ?>
 </div>
-
-
-
 <!-- Rechterblok !-->
-
 <div id="productinfo"> 
     Productinformatie 
     <br>
@@ -47,16 +40,13 @@ $result3 = $stmt3->fetchall();
         echo "Prijs : {$row3['prijs']}"; echo '<br>';
  }
 ?>
-
 <div id="bestelknop"> 
       <form name='formulier' action='index.php?page=bestellenproducten' method='GET'>
       <input type="submit" name="submit" value="Bestel" />
       </form>
   </div>
 </div>
-
-<div class="spacer"></div>
-    
+<div class="spacer"></div>    
 <?php
 // Thom
 ?>

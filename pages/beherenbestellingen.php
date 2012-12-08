@@ -12,6 +12,8 @@ and open the template in the editor.
  <?php
  
  
+       
+ 
 $stmt = $db->query('SELECT * FROM bestelling1 b1 JOIN bestelling_producten1 bp ON b1.ID = bp.bestelling_id');
 $result = $stmt->fetchall();
 foreach ($result as $row){
@@ -23,32 +25,22 @@ foreach ($result as $row){
     echo "<tr><td>Datum afgerond</td><td>{$row['afgerond']}</td></tr>";
     echo "<tr><td>Product ID</td><td>{$row['product_id']}</td></tr>";
     echo "<tr><td>Aantal producten</td><td>{$row['aantal']}</td></tr>";
-    echo "<tr><td><form name='formulier' action='index.php?page=beherenbestellingen' method='POST'>
-      <input type='submit' name='submit' value='Verwijder' />";
+    echo "<a href=index.php?page=verwijderbestelling&id={$row['ID']}>Verwijderen</A>";
     echo "</table>";    
      
 if($row['afgerond'] == '0000-00-00') {
     print ('LET OP! Deze bestelling is nog niet afgerond!');
 }
-
-
-
+       
 }
+
+print 'Er is geen bestelling';
+
+
+        
         ?>
-    
-          <?php
-         
-          
-
-          
-          if(isset($_POST['submit'])){
-             
-         
-         
-          
-      }
-
-      ?>
+  
+  
     
     
     </body>
