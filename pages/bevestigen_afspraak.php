@@ -6,16 +6,17 @@
  */
 ?>
 <?php
-// controleer of hash bestaat
-$hash = '';
-$emailadres = '';
+// controleer of er een value is
+$afspraakid = '';
+$datumafspraak = '';
 if(isset($_GET['value'])){
-    $hash = $_GET['value'];
-    $stmt = $db->query("SELECT `emailadres` FROM `klanten` WHERE `hash` = '".$hash."'"); 
+    $afspraakid = $_GET['value'];
+    $stmt = $db->query("SELECT `datum`,`klant_id` FROM `afspraken` WHERE `id` = '".$afspraakid."'"); 
     $result = $stmt->fetchObject();
-    
+    //controleer of value in db bekent is
     if(!empty($result)){
-        $emailadres = $result->emailadres;      
+        $datumafspraak = $result->datum;
+        $afspraakid = $result->id;
     }
     else{
         header('location: index.php');
@@ -116,8 +117,6 @@ else {
 
 <?php
 //formulier voor accepteren/afwijzen
-$datum = '';
-$klant = '';
 ?>
 <form action="index.php?page=bevestigen_afsrpaak" method="POST">
     <table>
@@ -125,7 +124,7 @@ $klant = '';
             <th>Afspraak gegevens:</th>
         </tr>
         <tr>
-            <td>Klant: .$klantnaam. </td>
+            <td>Afspraak: .$afspraakid. </td>
         </tr>
         <tr>
             <td>Datum: .$datum. </td>
@@ -143,8 +142,6 @@ $klant = '';
 
 <?php
 //formulier voor verwijderenafspraak
-$datum = '';
-$klant = '';
 ?>
 <form action="index.php?page=bevestigen_afsrpaak" method="POST">
     <table>
@@ -152,7 +149,7 @@ $klant = '';
             <th>Afspraak gegevens:</th>
         </tr>
         <tr>
-            <td>Klant: .$klantnaam. </td>
+            <td>Afspraak: .$afspraakid. </td>
         </tr>
         <tr>
             <td>Datum: .$datum. </td>
