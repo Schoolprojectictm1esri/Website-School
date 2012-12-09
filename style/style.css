@@ -130,3 +130,12 @@ div#routeplanner{
 }
 
 /*END ROUTEBESCHRIJVING */
+
+/* TOEVOEGEN KLANT */
+table#table_klant_toevoeg,
+table#table_kant_toevoeg tr,
+table#table_klant_toevoeg td{
+    margin: 0px;
+    padding:0px;
+}
+/* EIND TOEVOEGEN KLANT */
