@@ -10,6 +10,78 @@
 if(isset($_POST['submit'])){
     if($_POST['achternaam'] != '' && $_POST['voorletters'] != ''){
         //succes
+        if($_POST['geboortedatum'] != ''){
+            list($d, $m, $y) = explode('-', $_POST['geboortedatum']);
+           if(checkdate($m, $d, $y)){
+               //amerikaanse notatie
+              $_POST['geboortedatum'] = $y.'-'.$m.'-'.$d;
+            }
+        }
+        //ugly fix for checkboxes
+        if(!isset($_POST['orthopedische_afwijking'])){
+            $_POST['orthopedische_afwijking'] = false;
+        }else{
+            $_POST['orthopedische_afwijking'] = true;
+        }
+        if(!isset($_POST['diabetus_melinus'])){
+            $_POST['diabetus_melinus'] = false;
+        }else{
+          $_POST['diabetus_melinus'] = true;  
+        }
+        if(!isset($_POST['hart_vaat'])){
+            $_POST['hart_vaat'] = false;
+        }else{
+           $_POST['hart_vaat'] = true;
+        }
+        if(!isset($_POST['anti_stol'])){
+            $_POST['anti_stol'] = false;
+        }else{
+            $_POST['anti_stol'] = true;
+        }
+        if(!isset($_POST['phema'])){
+            $_POST['phema'] = false;
+        }else{
+            $_POST['phema'] = true;
+        }
+        if(!isset($_POST['allergie'])){
+            $_POST['allergie'] = false;
+        }else{
+             $_POST['allergie'] = true;
+        }
+        if(!isset($_POST['hiv'])){
+            $_POST['hiv'] = false;
+        }else{
+              $_POST['hiv'] = true;
+        }
+        if(!isset($_POST['hepatitis'])){
+            $_POST['hepatitis'] = false;
+        }else{
+            $_POST['hepatitis'] = true;
+        }
+        if(!isset($_POST['hemofilie'])){
+            $_POST['hemofilie'] = false;
+        }else{
+             $_POST['hemofilie'] = true;
+        }
+        if(!isset($_POST['steunkousen'])){
+            $_POST['steunkousen'] = false;
+        }else{
+            $_POST['steunkousen'] = true;
+        }
+        if(!isset($_POST['steunzolen'])){
+            $_POST['steunzolen'] = false;
+        }else{
+             $_POST['steunzolen'] = true;
+        }
+        //end of ugly fix.
+            $stmt = $db->query('INSERT INTO `pedicure`.`klanten` (`klant_id`, `achternaam`, `tussenvoegsel`, `voorletters`, `adres`, `woonplaats`, `postcode`, `telefoonnr`, `beroep`, `geboortedatum`, `gewicht`, `orthopedische_afwijking`, `voettype`, `huidconditie`, `huidaandoening`, `nagelconditie`, `nagelaandoening`, `plantaire_rechts`, `plantaire_links`, `dorsale_rechts`, `dorsale_links`, `diabetis_melitus`, `hart_vaat`, `anti_stol`, `phema`, `allergie`, `hiv`, `hepatitis`, `hemofilie`, `steunkousen`, `steunzolen`)
+                                                             VALUES("'.mysql_real_escape_string($_POST['klant_id']).'", "'.mysql_real_escape_string($_POST['achternaam']).'", "'.mysql_real_escape_string($_POST['tussenvoegsel']).'", "'.mysql_real_escape_string($_POST['voorletters']).'",  "'.mysql_real_escape_string($_POST['adres']).'", "'.mysql_real_escape_string($_POST['woonplaats']).'", "'.mysql_real_escape_string($_POST['postcode']).'", "'.mysql_real_escape_string($_POST['telefoonnr']).'", "'.mysql_real_escape_string($_POST['beroep']).'", "'.mysql_real_escape_string($_POST['geboortedatum']).'", "'.mysql_real_escape_string($_POST['gewicht']).'", "'.mysql_real_escape_string($_POST['orthopedische_afwijking']).'", "'.mysql_real_escape_string($_POST['voettype']).'", "'.mysql_real_escape_string($_POST['huidconditie']).'", "'.mysql_real_escape_string($_POST['huidaandoening']).'", "'.mysql_real_escape_string($_POST['nagelconditie']).'", "'.mysql_real_escape_string($_POST['nagelaandoening']).'", "'.mysql_real_escape_string($_POST['plantaire_rechts']).'", "'.mysql_real_escape_string($_POST['plantaire_links']).'", "'.mysql_real_escape_string($_POST['dorsale_rechts']).'", "'.mysql_real_escape_string($_POST['dorsale_links']).'", "'.mysql_real_escape_string($_POST['diabetus_melinus']).'", "'.mysql_real_escape_string($_POST['hart_vaat']).'", "'.mysql_real_escape_string($_POST['anti_stol']).'", "'.mysql_real_escape_string($_POST['phema']).'", "'.mysql_real_escape_string($_POST['allergie']).'", "'.mysql_real_escape_string($_POST['hiv']).'", "'.mysql_real_escape_string($_POST['hepatitis']).'", "'.mysql_real_escape_string($_POST['hemofilie']).'", "'.mysql_real_escape_string($_POST['steunkousen']).'", "'.mysql_real_escape_string($_POST['steunzolen']).'")');
+            
+            if($stmt != false){
+                echo 'Het toevoegen van de klant is gelukt.';
+            }else{
+                echo 'Er is helaas iets mis gegaan met het toevoegen van de klant';
+            }
     }else{
         //alternatief
         ?>
@@ -246,7 +318,6 @@ if(isset($_POST['submit'])){
     <div class="hint"> Alle velden met een * zijn verplicht</div>
         <?php
     }
-    //var_dump($_POST);
 }else{
 ?>
 

@@ -17,15 +17,29 @@ CREATE  TABLE IF NOT EXISTS `pedicure`.`beheerder` (
   PRIMARY KEY (`beheerder_id`) )
 ENGINE = InnoDB;
 
+
+-- -----------------------------------------------------
+-- Table `pedicure`.`hash`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `pedicure`.`hash` (
+  `hash` VARCHAR(255) NOT NULL ,
+  `klant_id` INT NULL ,
+  `geldig` DATETIME NULL ,
+  `soort` ENUM('wachtwoord', 'activeren') NULL ,
+  `actief` TINYINT(1) NULL ,
+  PRIMARY KEY (`hash`) )
+ENGINE = InnoDB;
+
+
 -- -----------------------------------------------------
 -- Table `pedicure`.`klanten`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `pedicure`.`klanten` (
-  `klant_id` INT NULL AUTO_INCREMENT ,
+  `klant_id` INT NOT NULL AUTO_INCREMENT ,
   `email` VARCHAR(45) NULL ,
   `wachtwoord` VARCHAR(255) NULL ,
   `registratiedatum` DATE NULL ,
-  `voornaam` VARCHAR(45) NULL ,
+  `voorletters` VARCHAR(45) NULL ,
   `achternaam` VARCHAR(45) NULL ,
   `adres` VARCHAR(45) NULL ,
   `woonplaats` VARCHAR(45) NULL ,
@@ -55,19 +69,8 @@ CREATE  TABLE IF NOT EXISTS `pedicure`.`klanten` (
   `plantaire_links` VARCHAR(255) NULL ,
   `dorsale_rechts` VARCHAR(255) NULL ,
   `dorsale_links` VARCHAR(255) NULL ,
+  `tussenvoegsel` VARCHAR(55) NULL ,
   PRIMARY KEY (`klant_id`))
-ENGINE = InnoDB;
-
--- -----------------------------------------------------
--- Table `pedicure`.`hash`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `pedicure`.`hash` (
-  `hash` VARCHAR(255) NOT NULL ,
-  `klant_id` INT NULL ,
-  `geldig` DATETIME NULL ,
-  `soort` ENUM('wachtwoord', 'activeren') NULL ,
-  `actief` TINYINT(1) NULL ,
-  PRIMARY KEY (`hash`) )
 ENGINE = InnoDB;
 
 
