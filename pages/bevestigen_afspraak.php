@@ -11,14 +11,18 @@
 //controleer of er een value is
 $afspraakid = '';
 $datumafspraak = '';
-if(isset($_GET['value'])){
-    $afspraakid = $_GET['value'];
-    $stmt = $db->query("SELECT `datum`,`klant_id`,`id` FROM `afspraken` WHERE `id` = '".$afspraakid."'"); 
+$klant_id = '';
+$bevestigd = '';
+if(isset($_GET['id'])){
+    $afspraakid = $_GET['id'];
+    $stmt = $db->query("SELECT `datum`,`klant_id`,`id`,`bevestigd` FROM `afspraken` WHERE `id` = '".$afspraakid."'"); 
     $result = $stmt->fetchObject();
         //controleer of value in db bekent is
         if(!empty($result)){
             $datumafspraak = $result->datum;
             $afspraakid = $result->id;
+            $klanten_id = $result->klant_id;
+            $bevestigd = $result->bevestigd;
         }
         else{
              header('location: index.php');
@@ -29,20 +33,20 @@ else {
 }
 
 //kijkt of ingelogd is
-if(isset($_COOKIE['klanten_id']) && $_COOKIE['klanten_id'] != '' && is_numeric($_COOKIE['klanten_id'])){
-    $_SESSION['klanten_id'] = $_COOKIE['klanten_id'];
+if(isset($_COOKIE['beheerder_id']) && $_COOKIE['beheerder_id'] != '' && is_numeric($_COOKIE['beheerder_id'])){
+    $_SESSION['beheerder_id'] = $_COOKIE['beheerder_id'];
     //query uitvoeren
-    $stmt = $db->query("SELECT `bevestigd` FROM `afspraken` JOIN `klanten` ON `klant_id` = `klant_id` WHERE `id` = '".$_GET['value']."'");
+    $stmt = $db->query("SELECT `voorletters`,`achternaam`,`email` FROM `klanten` WHERE `klant_id` = '".$klant_id."'");
     $result = $stmt->fetchObject();
-    $bevestigd = $result->bevestigd;
-    $voornaam = $result->voornaam;
+    if(!empty($result)){
+    $voornaam = $result->voorletters;
     $achternaam = $result->achternaam;
     $emailmailadres = $result->email;
-    $datum = $result->datum;
+    }
     //check query
     if($bevestigd == TRUE){
 ?>
-        <form action="index.php?page=bevestigen_afsrpaak" method="POST">
+        <form action="index.php?page=bevestigen_afspraak" method="POST">
             <table>
                 <tr>
                     <th>Afspraak gegevens:</th>
@@ -98,7 +102,7 @@ if(isset($_COOKIE['klanten_id']) && $_COOKIE['klanten_id'] != '' && is_numeric($
     else {
         //formulier voor accepteren/afwijzen
 ?>
-        <form action="index.php?page=bevestigen_afsrpaak" method="POST">
+        <form action="index.php?page=bevestigen_afspraak" method="POST">
             <table>
                 <tr>
                     <th>Afspraak gegevens:</th>
@@ -121,7 +125,7 @@ if(isset($_COOKIE['klanten_id']) && $_COOKIE['klanten_id'] != '' && is_numeric($
 <?php
         //bevestigen afspraak (in db zetten)
         if(isset($_POST['submit1'])){
-            $sql= $db->query("INSERT INTO `afspraken` (`id`) VALUES (`TRUE`)");
+            $sql= $db->query("INSERT INTO `afspraken` (`bevestigd`) VALUES (`TRUE`)");
             $stmt = $db->prepare($sql);
             $stmt->execute(); 
             //automatische mail voor bevestiging
@@ -158,7 +162,7 @@ if(isset($_COOKIE['klanten_id']) && $_COOKIE['klanten_id'] != '' && is_numeric($
         }
         //afwijzing afspraak (in db zetten)
         elseif(isset($_POST['submit2'])){
-            $sql= $db->query("INSERT INTO `afspraken` (`id`) VALUES (`FALSE`)");
+            $sql= $db->query("INSERT INTO `afspraken` (`bevestigd`) VALUES (`FALSE`)");
             $stmt = $db->prepare($sql);
             $stmt->execute();  
             //automatische mail voor afwijzing afspraak
@@ -196,6 +200,6 @@ if(isset($_COOKIE['klanten_id']) && $_COOKIE['klanten_id'] != '' && is_numeric($
 }
 else {
     //standaard formulier nog voor bevestigen
-    header('location: index.php?page=inloggen_bij_agenda');
+    header('location: index.php?page=inloggen_beheer');
 }
 ?>

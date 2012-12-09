@@ -19,7 +19,7 @@ if(isset($_POST['submit'])){
         //beide velden zijn ingevuld.
         $email = mysql_real_escape_string($_POST['emailadres']);
         $password = mysql_real_escape_string($_POST['password']);
-        $stmt = $db->query("SELECT * FROM klanten WHERE `emailadres` = '".$email."' AND `wachtwoord` = '".$password."'");   
+        $stmt = $db->query("SELECT * FROM klanten WHERE `email` = '".$email."' AND `wachtwoord` = '".$password."'");   
         if(!empty($stmt)){
         $result = $stmt->fetchObject();
             //gebruiker id in sessie.
