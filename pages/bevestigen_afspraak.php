@@ -8,7 +8,7 @@
 
 <?php
 //deze php set uiteindelijk datumafspraak en afspraakid.
-// controleer of er een value is
+//controleer of er een value is
 $afspraakid = '';
 $datumafspraak = '';
 if(isset($_GET['value'])){
@@ -21,7 +21,7 @@ if(isset($_GET['value'])){
             $afspraakid = $result->id;
         }
         else{
-            header('location: index.php');
+             header('location: index.php');
         }
 }
 else {
@@ -37,10 +37,63 @@ if(isset($_COOKIE['klanten_id']) && $_COOKIE['klanten_id'] != '' && is_numeric($
     $bevestigd = $result->bevestigd;
     $voornaam = $result->voornaam;
     $achternaam = $result->achternaam;
+    $emailmailadres = $result->email;
     $datum = $result->datum;
     //check query
     if($bevestigd == TRUE){
-        
+?>
+        <form action="index.php?page=bevestigen_afsrpaak" method="POST">
+            <table>
+                <tr>
+                    <th>Afspraak gegevens:</th>
+                </tr>
+                <tr>
+                    <td>Naam: .$voornaam. .$achternaam. </td>
+                </tr>
+                <tr>
+                    <td>Datum: .$datum.</td>
+                </tr>
+                <tr>
+                    <td><input type="submit" name="annuleren" value="Annuleren" /></td>
+                </tr>
+                <tr>
+                    <td><a href='agenda.php'>Annuleren</a></td>
+                </tr>
+            </table>
+        </form>   
+<?php
+        if(isset($_POST['annuleren'])){
+            //email sturen voor annulering afspraak
+                $to = $emailadres;
+                $subject = "Annulering afspraak:.$datum.";
+                $from = "noreply@pedicurepraktijkdesiree.nl";
+                $message = "
+                    <html>
+                        <head>
+                            <title>Annulering afspraak</title>
+                        </head>
+                    <body>
+                        <table>
+                            <tr>
+                                <th>Beste,<th>
+                            </tr>
+                            <tr>
+                                <td>Bij deze moet ik u helaas meedelen dat de afspraak gemaakt voor</td>
+                            </tr>
+                            <tr>
+                                <td>.$datum.</td>
+                            </tr>
+                            <tr>
+                                <td>is geannuleerd.</td>
+                            </tr>
+                            <tr>
+                                <td>Met vriendelijke groet PedicurePraktijk Desiree.
+                            </tr>
+                        </table>
+                    </body>
+                    </html>
+                    ";
+        }
     }
     else {
         //formulier voor accepteren/afwijzen
@@ -57,8 +110,8 @@ if(isset($_COOKIE['klanten_id']) && $_COOKIE['klanten_id'] != '' && is_numeric($
                     <td>Datum: .$datum.</td>
                 </tr>
                 <tr>
-                    <td><input type="submit1" name="accepterenafspraak" value="accepteren" /></td>
-                    <td><input type="submit2" name="afwijzenafspraak" value="afwijzen" /></td>
+                    <td><input type="submit" name="submit1" value="accepteren" /></td>
+                    <td><input type="submit" name="submit2" value="afwijzen" /></td>
                 </tr>
                 <tr>
                     <td><a href='agenda.php'>Annuleren</a></td>
@@ -143,65 +196,6 @@ if(isset($_COOKIE['klanten_id']) && $_COOKIE['klanten_id'] != '' && is_numeric($
 }
 else {
     //standaard formulier nog voor bevestigen
-    header('location: inloggen_bij_agenda');
+    header('location: index.php?page=inloggen_bij_agenda');
 }
-?>
-
-
-<!-- 
-<?php
-/*
-
-<?php
-//formulier voor accepteren/afwijzen
-?>
-<form action="index.php?page=bevestigen_afsrpaak" method="POST">
-    <table>
-        <tr>
-            <th>Afspraak gegevens:</th>
-        </tr>
-        <tr>
-            <td>Afspraak: .$afspraakid. </td>
-        </tr>
-        <tr>
-            <td>Datum: .$datum. </td>
-        </tr>
-        <tr>
-            <td><input type="submit" name="accepterenafspraak" value="accepteren" /></td>
-            <td><input type="submit" name="afwijzenafspraak" value="afwijzen" /></td>
-        </tr>
-        <tr>
-            <td><a href='agenda.php'>Annuleren</a></td>
-        </tr>
-    </table>
-</form>
-
-
-<?php
-//formulier voor verwijderenafspraak
-?>
-<form action="index.php?page=bevestigen_afsrpaak" method="POST">
-    <table>
-        <tr>
-            <th>Afspraak gegevens:</th>
-        </tr>
-        <tr>
-            <td>Afspraak: .$afspraakid. </td>
-        </tr>
-        <tr>
-            <td>Datum: .$datum. </td>
-        </tr>
-        <tr>
-            <td><input type="submit" name="accepterenafspraak" value="accepteren" /></td>
-            <td><input type="submit" name="afwijzenafspraak" value="afwijzen" /></td>
-        </tr>
-        <tr>
-            <td><a href='agenda.php'>Annuleren</a></td>
-        </tr>
-    </table>
-</form>
-<?php
- * 
- */
-
 ?>
