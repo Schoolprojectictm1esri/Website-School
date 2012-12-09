@@ -29,7 +29,7 @@ div#wrapper{
 div#header{
     background-image: url('afbeeldingen/header.png');
     background-repeat: no-repeat;
-    margin-bottom: 10px;
+    margin-bottom: 13px;
     height: 129px;
     background-color: lightblue;
     z-index: 1;
@@ -41,45 +41,51 @@ div#contact-info-header{
     z-index: 10;
 }
 div#menu{
-    height: 50px;
-    background-color: #aab4c0;
+    height: 35px;
+    background-color: #686868;
     margin-bottom: 10px;
+    /* FIX FOR TO MANY MENU ITEMS HERE. */
+    overflow: hidden;
+    /* END OF FIX */
 }
-div#menu:first-child{
-    margin-left: 5px !important; 
+div#menu > div.menuitem:first-child{
+    margin-left: 2px !important; 
 }
 div.menuitem{
+    background-image: url('afbeeldingen/menuitem.png');
     float: left;
     color: black;
-    height: 45px;
-    font-size: 30px;
+    height: 31px;
+    font-size: 15px;
     padding-top: 5px;
-    margin-left: 10px;
+    padding-left: 10px;
+    margin-left: 13px;
+    width: 107px;
 }
 div.menuitem:hover,
 div.menuactive{
-    background-color: #b8cdd6;
+   background-image: url('afbeeldingen/menuitem_hover.png');
     color: #06a583;
 }
 
 div#contentwrapper{
    width: 1024px;
    margin-bottom: 10px;
-   background-image: url('afbeeldingen/sitebg_false.png');
+   background-image: url('afbeeldingen/background.png');
    background-repeat: no-repeat;
    min-height: 645px;
 }
 div#content-left{
-    width: 200px;
+    width: 120px;
     float: left;
-    margin-right: 50px;
+    margin-right: 120px;
     min-height: 300px;
-    font-size: 26px;
 }
 img.sidebannerstripe{
     width: 191px;
 
 }
+/*
 img.sidebartop{
     position: absolute;
     top: 0px;
@@ -87,12 +93,22 @@ img.sidebartop{
 img.sidebarbottom{
     position: absolute;
     top: 43px;
+}*/
+div.sidebar,
+div.sidebar_active{
+    position: relative;
+    width: 117px;
+    height: 44px;
+    display: block;
+    margin-bottom: 5px;
 }
 div.sidebar{
-    position: relative;
-    width: 191px;
-    height: 50px;
-    display: block;
+  background-image: url('afbeeldingen/sidemenu.png');  
+}
+div.sidebar:hover,
+div.sidebaractive{
+    background-image: url('afbeeldingen/sidemenu_hover.png');
+    
 }
 div.innersidebar{
     position: relative;

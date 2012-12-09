@@ -75,29 +75,27 @@ require_once('includes/bootstrap.php');
             <div id="contentwrapper">
                 <div id="content-left">
                     <div class="sidebar">
-                        <img src="style/afbeeldingen/sidebanner_stripe.png" class="sidebannerstripe sidebartop" alt="" />
                         <div class="innersidebar">
                             Sub menu item.
                         </div>
-                        <img src="style/afbeeldingen/sidebanner_stripe.png" class="sidebannerstripe sidebarbottom" alt="" />
                     </div>
                     <div class="sidebar">
                         <div class="innersidebar">
                             Sub menu item.
                         </div>
-                        <img src="style/afbeeldingen/sidebanner_stripe.png" class="sidebannerstripe sidebarbottom" alt="" />
+                        
                     </div>
                     <div class="sidebar">
                         <div class="innersidebar">
                             Sub menu item.
                         </div>
-                        <img src="style/afbeeldingen/sidebanner_stripe.png" class="sidebannerstripe sidebarbottom" alt="" />
+                        
                     </div>
                     <div class="sidebar">
                         <div class="innersidebar">
                             Sub menu item.
                         </div>
-                        <img src="style/afbeeldingen/sidebanner_stripe.png" class="sidebannerstripe sidebarbottom" alt="" />
+                      
                     </div>
                 </div>
                 <div id="content-right">
