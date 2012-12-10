@@ -56,7 +56,7 @@ for($row = 0; $row<4; $row++)
         }
         echo "<td class='$available'>";
         // Link om agenda te openen
-        echo "<a href=\"/index.php?page=agenda\">";
+        echo "<a href=\"/index.php?page=inplannenafspraak\">";
         //echo "<a href=\"www.letmegooglethatforyou.com?variabele=dedag&vazr2=maand\">";//$_GET['variabele']
 
         // Laat vandaag zien
