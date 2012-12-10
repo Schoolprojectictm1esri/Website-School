@@ -15,8 +15,9 @@ $klant_id = '';
 $bevestigd = '';
 if(isset($_GET['id'])){
     $afspraakid = $_GET['id'];
-    $stmt = $db->query("SELECT `datum`,`klant_id`,`id`,`bevestigd` FROM `afspraken` WHERE `id` = '".$afspraakid."'"); 
+    $stmt = $db->query("SELECT `datum`, `klant_id`, `id`, `bevestigd` FROM `afspraken` WHERE `id` = '".$afspraakid."'"); 
     $result = $stmt->fetchObject();
+    var_dump($result);
         //controleer of value in db bekent is
         if(!empty($result)){
             $datumafspraak = $result->datum;
@@ -108,10 +109,10 @@ if(isset($_COOKIE['beheerder_id']) && $_COOKIE['beheerder_id'] != '' && is_numer
                     <th>Afspraak gegevens:</th>
                 </tr>
                 <tr>
-                    <td>Naam: .$voornaam. .$achternaam. </td>
+                    <td>Naam: <?php echo $result['email'];var_dump($result['achternaam']); ?> </td>
                 </tr>
                 <tr>
-                    <td>Datum: .$datum.</td>
+                    <td>Datum: <?php echo $datum; ?></td>
                 </tr>
                 <tr>
                     <td><input type="submit" name="submit1" value="accepteren" /></td>
