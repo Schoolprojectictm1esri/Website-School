@@ -38,40 +38,41 @@ for($row = 0; $row<4; $row++)
         // Check availability 
         if ($date->dayOfWeek()=="Zondag"){
             $available ="agendaholiday";
-            echo "<a href=\"/index.php?page=agendanietbeschikbaar\">";
+            echo "<a href='index.php?page=agendanietbeschikbaar'>";
         }
-        else {   
+            else {   
 
-            if      ( $numberOfApp <= 8)
-                $available = "agendaavail";
+                if      ( $numberOfApp <= 8)
+                    $available = "agendaavail";
 
-            else if ( $numberOfApp >= 9 && $numberOfApp <= 14)
-                $available = "agendabusy";
+                else if ( $numberOfApp >= 9 && $numberOfApp <= 14)
+                    $available = "agendabusy";
 
-            else if ( $numberOfApp >= 15)
-                $available = "agendafull";
+                else if ( $numberOfApp >= 15)
+                    $available = "agendafull";
 
-            else  
-                $available = "agendavacancy";
-        }
-        echo "<td class='$available'>";
-        // Link om agenda te openen
-        echo "<a href=\"/index.php?page=inplannenafspraak\">";
-        //echo "<a href=\"www.letmegooglethatforyou.com?variabele=dedag&vazr2=maand\">";//$_GET['variabele']
+                else  
+                    $available = "agendavacancy";
+                 }
+            echo "<td class='$available'>";
+            // Link om agenda te openen
+            
+            Echo "<a href='index.php?page=inplannenafspraak&value=".$date->day."&value=".$date->month."&value=".$date->year."'>";
+            //echo "<a href=\"www.letmegooglethatforyou.com?variabele=dedag&vazr2=maand\">";//$_GET['variabele']
 
-        // Laat vandaag zien
-        echo substr($date->dayOfWeek(), 0, 2) . ". " . $date->day . " " . substr($date->monthOfTheYear(), 0, 3) . ".";
+                    
+            // Laat vandaag zien
+            Echo substr($date->dayOfWeek(), 0, 2) . ". " . $date->day . " " . substr($date->monthOfTheYear(), 0, 3) . ".";
 
-        echo "</a>";
+            echo "</a>";
 
-        
-        //Laat vandaag zien en berekend de volgende dag
-        //echo $date->toString();
-        $date->addDays(1);
 
-        echo "</td>";
-        
-        // return $available
+            //Laat vandaag zien en berekend de volgende dag
+            $date->addDays(1);
+
+            echo "</td>";
+
+            // return $available
     }
 
     echo "</tr>";
