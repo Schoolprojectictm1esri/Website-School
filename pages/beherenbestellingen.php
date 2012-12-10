@@ -14,7 +14,7 @@ and open the template in the editor.
  
        
  
-$stmt = $db->query('SELECT * FROM bestelling1 b1 JOIN bestelling_producten1 bp ON b1.ID = bp.bestelling_id');
+$stmt = $db->query('SELECT * FROM bestelling b1 JOIN bestelling_producten bp ON b1.ID = bp.bestelling_id');
 $result = $stmt->fetchall();
 foreach ($result as $row){
     echo "<table width='600' cellpadding='5' cellspacing='5'>";
