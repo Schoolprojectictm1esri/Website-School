@@ -41,6 +41,7 @@ for($row = 0; $row<4; $row++)
         if ($date->dayOfWeek()=="Zondag"){
             $available ="agendaholiday";
             echo "<a href='index.php?page=agendanietbeschikbaar'>";
+            echo "</a>";
         }
             else {   
 
