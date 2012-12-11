@@ -9,22 +9,31 @@
 <?php
 //deze php set uiteindelijk datumafspraak en afspraakid.
 //controleer of er een value is
+
 if(isset($_GET['id'])){
     $afspraakid = $_GET['id'];
     $stmt = $db->query("SELECT `datum`, `klant_id`, `id`, `bevestigd` FROM `afspraken` WHERE `id` = '".$afspraakid."'"); 
     $result1 = $stmt->fetchObject();
-        //controleer of value in db bekent is
-        if(!empty($result1)){
+var_dump($result1);        
+//controleer of value in db bekent is
+        if(empty($result1)){
 
         }
         else{
-             header('location: index.php');
+             if(isset($_POST['submit1'])){
+                $sql= $db->query("UPDATE `afspraken` SET `bevestigd`= TRUE WHERE `id` = ".$result1->id."");
+                $stmt = $db->prepare($sql);
+                $stmt->execute(); 
+             }
+             else{
+              //  header('location: index.php');
+             }
         }
 }
 else {
-    header('location: index.php');
+   // header('location: index.php');
 }
-
+die();
 //kijkt of ingelogd is
 if(isset($_COOKIE['beheerder_id']) && $_COOKIE['beheerder_id'] != '' && is_numeric($_COOKIE['beheerder_id'])){
     $_SESSION['beheerder_id'] = $_COOKIE['beheerder_id'];
@@ -120,8 +129,7 @@ if(isset($_COOKIE['beheerder_id']) && $_COOKIE['beheerder_id'] != '' && is_numer
     var_dump($result1->id);
         //bevestigen afspraak (in db zetten)
         if(isset($_POST['submit1'])){
-            $sql= $db->query("UPDATE `afspraken` SET `bevestigd`= TRUE WHERE `id` = ".$result1->id);
-            header('location: index.php?page=agenda'); 
+            //header('location: index.php?page=agenda'); 
             //automatische mail voor bevestiging
                 //email naar klant na bevestiging
                 $to = $result2->email;
