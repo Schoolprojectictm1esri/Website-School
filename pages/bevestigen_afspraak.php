@@ -12,13 +12,10 @@
 if(isset($_GET['id'])){
     $afspraakid = $_GET['id'];
     $stmt = $db->query("SELECT `datum`, `klant_id`, `id`, `bevestigd` FROM `afspraken` WHERE `id` = '".$afspraakid."'"); 
-    $result = $stmt->fetchObject();
+    $result1 = $stmt->fetchObject();
         //controleer of value in db bekent is
-        if(!empty($result)){
-            $datumafspraak = $result->datum;
-            $afspraakid = $result->id;
-            $klanten_id = $result->klant_id;
-            $bevestigd = $result->bevestigd;
+        if(!empty($result1)){
+
         }
         else{
              header('location: index.php');
@@ -32,15 +29,12 @@ else {
 if(isset($_COOKIE['beheerder_id']) && $_COOKIE['beheerder_id'] != '' && is_numeric($_COOKIE['beheerder_id'])){
     $_SESSION['beheerder_id'] = $_COOKIE['beheerder_id'];
     //query uitvoeren
-    $stmt = $db->query("SELECT `voorletters`,`achternaam`,`email` FROM `klanten` WHERE `klant_id` = '".$klanten_id."'");
-    $result = $stmt->fetchObject();
-    if(!empty($result)){
-    $voornaam = $result->voorletters;
-    $achternaam = $result->achternaam;
-    $emailmailadres = $result->email;
+    $stmt = $db->query("SELECT `voorletters`,`achternaam`,`email` FROM `klanten` WHERE `klant_id` = '".$result1->klant_id."'");
+    $result2 = $stmt->fetchObject();
+    if(!empty($result2)){
     }
     //check query
-    if($bevestigd == TRUE){
+    if($result1->bevestigd == TRUE){
 ?>
         <form action="index.php?page=bevestigen_afspraak" method="POST">
             <table>
@@ -64,7 +58,7 @@ if(isset($_COOKIE['beheerder_id']) && $_COOKIE['beheerder_id'] != '' && is_numer
 <?php
         if(isset($_POST['annuleren'])){
             //email sturen voor annulering afspraak
-                $sql= $db->query("UPDATE `afspraken` SET `bevestigd`= false WHERE `id` = '".$klanten_id."'");
+                $sql= $db->query("UPDATE `afspraken` SET `bevestigd`= NULL WHERE `id` = '".$result1->id."'");
                 $stmt = $db->prepare($sql);
                 $stmt->execute(); 
                 $to = $emailadres;
@@ -100,6 +94,7 @@ if(isset($_COOKIE['beheerder_id']) && $_COOKIE['beheerder_id'] != '' && is_numer
     }
     else {
         //formulier voor accepteren/afwijzen
+        var_dump($afspraakid);
 ?>
         <form action="index.php?page=bevestigen_afspraak" method="POST">
             <table>
@@ -107,10 +102,10 @@ if(isset($_COOKIE['beheerder_id']) && $_COOKIE['beheerder_id'] != '' && is_numer
                     <th>Afspraak gegevens:</th>
                 </tr>
                 <tr>
-                    <td>Naam: <?php echo $voornaam; ?> </td>
+                    <td>Naam: <?php echo $result2->voorletters; ?>. <?php echo $result2->achternaam; ?> </td>
                 </tr>
                 <tr>
-                    <td>Datum: <?php echo $datumafspraak; ?> </td>
+                    <td>Datum: <?php echo $result1->datum; ?> </td>
                 </tr>
                 <tr>
                     <td><input type="submit" name="submit1" value="accepteren" /></td>
@@ -122,9 +117,10 @@ if(isset($_COOKIE['beheerder_id']) && $_COOKIE['beheerder_id'] != '' && is_numer
             </table>
         </form>
 <?php
+    var_dump($result1->id);
         //bevestigen afspraak (in db zetten)
         if(isset($_POST['submit1'])){
-            $sql= $db->query("UPDATE `afspraken` SET `bevestigd`= true WHERE `id` = '".$klanten_id."'");
+            $sql= $db->query("UPDATE `afspraken` SET `bevestigd`= TRUE WHERE `id` = "echo $result1->id; " ");
             $stmt = $db->prepare($sql);
             $stmt->execute(); 
             header('location: index.php?page=agenda'); 
@@ -162,7 +158,7 @@ if(isset($_COOKIE['beheerder_id']) && $_COOKIE['beheerder_id'] != '' && is_numer
         }
         //afwijzing afspraak (in db zetten)
         elseif(isset($_POST['submit2'])){
-            $sql= $db->query("UPDATE `afspraken` SET `bevestigd`= false WHERE `id` = '".$klanten_id."'");
+            $sql= $db->query("UPDATE `afspraken` SET `bevestigd`= NULL WHERE `id` = '".$afspraakid."'");
             $stmt = $db->prepare($sql);
             $stmt->execute();  
             header('location: index.php?page=agenda');
