@@ -1,12 +1,13 @@
+<?php
 /* 
-    Document   : Danielstyle
-    Created on : 13-nov-2012, 20:43:32
+    Document   : Aanpassenproducten.php
+    Created on : 11-12-2012
     Author     : Daniel
     Description:
-        Purpose of this page follows.
+        Aanpassen van producten.
 */
 
-<?php   
+
 if (isset($_GET['id'])) {
         $id = $_GET['id'];
         $stmt           = $db->query("SELECT * FROM behandelingen WHERE ID = ".$id." ");

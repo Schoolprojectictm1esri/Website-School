@@ -1,9 +1,7 @@
 /* 
     Document   : Danielstyle
-    Created on : 13-nov-2012, 20:43:32
+    Created on : 11-12-2012
     Author     : Daniel
-    Description:
-        Purpose of the stylesheet follows.
 */
 
 root { 
@@ -12,22 +10,23 @@ root {
 
 #table_agenda
 {
-	border: 1px solid black;
-	width: 100%;
+	
+	width: 650px;
 	height: 300px;
+        table-layout: fixed;
 }
 
 #table_agenda td
 {
-	border-left: 1px solid black;
-	border-bottom: 1px solid black;
+	border-left: 1px solid #000000;
+	border-bottom: 1px solid #000000;
 }
 
 .agendaavail {
 	width:14%;
 	position:float;
 	height:50px;
-	border:5px solid green;
+	border:5px solid #008000;
 	
         /* Stijl voor de agenda per vakje beschikbaar*/
 }
@@ -35,13 +34,13 @@ root {
 	width:14%;
 	position:relative;
 	height:50px;
-	border:5px solid orange;
+	border:5px solid #FFA500;
 }
 .agendafull {
 	width:14%;
 	position:relative;
 	height:50px;
-	border:5px solid red;
+	border:5px solid #FF0000;
         
 	
         /* Stijl voor de agenda per vakje Vol*/
@@ -50,7 +49,7 @@ root {
 	width:14%;
 	position:relative;
 	height:50px;
-	border:5px solid;
+	border:5px #000000 solid;
         background: niet beschikbaar;
         
 	
@@ -66,13 +65,13 @@ root {
         width:50px;
 	position:relative;
 	height:50px;
-	border:5px solid green;  
+	border:5px solid #008000;  
 }
 #legendabusy{
         width:50px;
 	position:relative;
 	height:50px;
-	border:5px solid orange;
+	border:5px solid #FFA500;
         color:red;
 }
 
@@ -80,12 +79,12 @@ root {
         width:50px;
 	position:relative;
 	height:50px;
-	border:5px solid red;
+	border:5px solid #FF0000;
 }
 
 #legendavacancy{
         width:50px;
 	position:relative;
 	height:50px;
-	border:5px solid black
+	border:5px solid #000000;
 }
