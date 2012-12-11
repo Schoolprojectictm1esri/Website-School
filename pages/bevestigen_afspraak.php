@@ -9,15 +9,10 @@
 <?php
 //deze php set uiteindelijk datumafspraak en afspraakid.
 //controleer of er een value is
-$afspraakid = '';
-$datumafspraak = '';
-$klant_id = '';
-$bevestigd = '';
 if(isset($_GET['id'])){
     $afspraakid = $_GET['id'];
     $stmt = $db->query("SELECT `datum`, `klant_id`, `id`, `bevestigd` FROM `afspraken` WHERE `id` = '".$afspraakid."'"); 
     $result = $stmt->fetchObject();
-    var_dump($result);
         //controleer of value in db bekent is
         if(!empty($result)){
             $datumafspraak = $result->datum;
@@ -37,7 +32,7 @@ else {
 if(isset($_COOKIE['beheerder_id']) && $_COOKIE['beheerder_id'] != '' && is_numeric($_COOKIE['beheerder_id'])){
     $_SESSION['beheerder_id'] = $_COOKIE['beheerder_id'];
     //query uitvoeren
-    $stmt = $db->query("SELECT `voorletters`,`achternaam`,`email` FROM `klanten` WHERE `klant_id` = '".$klant_id."'");
+    $stmt = $db->query("SELECT `voorletters`,`achternaam`,`email` FROM `klanten` WHERE `klant_id` = '".$klanten_id."'");
     $result = $stmt->fetchObject();
     if(!empty($result)){
     $voornaam = $result->voorletters;
@@ -109,10 +104,10 @@ if(isset($_COOKIE['beheerder_id']) && $_COOKIE['beheerder_id'] != '' && is_numer
                     <th>Afspraak gegevens:</th>
                 </tr>
                 <tr>
-                    <td>Naam: <?php echo $result['email'];var_dump($result['achternaam']); ?> </td>
+                    <td>Naam: <?php echo $voornaam; ?> </td>
                 </tr>
                 <tr>
-                    <td>Datum: <?php echo $datum; ?></td>
+                    <td>Datum: <?php echo $datumafspraak; ?> </td>
                 </tr>
                 <tr>
                     <td><input type="submit" name="submit1" value="accepteren" /></td>
