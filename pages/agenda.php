@@ -59,7 +59,7 @@ for($row = 0; $row<4; $row++)
             echo "<td class='$available'>";
             // Link om agenda te openen met link waarin dag maand jaar staan.
             
-            Echo "<a href='index.php?page=inplannenafspraak&value=".$date->day."&value=".$date->month."&value=".$date->year."'>";
+            Echo "<a href='index.php?page=inplannenafspraak&dag=".$date->day."&maand=".$date->month."&jaar=".$date->year."'>";
             
 
                     
