@@ -3,6 +3,10 @@
  * @author Sander
  * @author2 Jelle opgepakt na Sander.
  */
+if(isset($_SESSION['registratie_form']) && $_SESSION['registratie_form'] >= 5){
+  echo 'U mag niet meer registreren, u heeft te vaak dit formulier gebruikt.';  
+}else{
+
 if(isset($_POST['registreren']))
 { ?> 
 <!--Controleert of er op registreer is geklikt-->
@@ -58,7 +62,7 @@ if(isset($_POST['registreren']))
     if ($_POST['wachtwoord'] == $_POST['herhaalwachtwoord'])
     //Controleert of de wachtwoorden overeen komen
         {
-		if ($_POST['email']!='' || $_POST['voornaam']!='' || $_POST['achternaam']!=''
+		if ($_POST['email']!='' || $_POST['voorletters']!='' || $_POST['achternaam']!=''
                     || $_POST['woonplaats']!='' || $_POST['adres']!=''
                     || $_POST['postcode']!='' || $_POST['telefoonnr']!=''
                     || $_POST['wachtwoord']!=''|| $_POST['herhaalwachtwoord']!='')
@@ -76,14 +80,28 @@ if(isset($_POST['registreren']))
                 VALUES ('.$email.', '.$wachtwoord.', '.$voorletters.', '.$achternaam.', '.$adres.', '.$woonplaats.', '.$postcode.', '.$telefoonnr.')";
         $stmt = $db->prepare($sql);
         $stmt->execute();
- 
+        if(isset($_SESSION['registratie_form'])){
+            $_SESSION['registratie_form'] ++;
+        }else{
+            $_SESSION['registratie_form'] = 1;
+        }
                     }
 		else{
 			print 'Een verplicht veld is nog niet ingevuld.';
+                                if(isset($_SESSION['registratie_form'])){
+                                    $_SESSION['registratie_form'] ++;
+                                }else{
+                                    $_SESSION['registratie_form'] = 1;
+                                }
                     }
     }
     else{
             print 'Wachtwoorden komen niet overeen.';
+                    if(isset($_SESSION['registratie_form'])){
+                        $_SESSION['registratie_form'] ++;
+                    }else{
+                        $_SESSION['registratie_form'] = 1;
+                    }
         }
 }
 else{
@@ -132,4 +150,5 @@ else{
         </table></div>
 </form>
 <!--Het lege aanmeld formulier-->
-<?php } ?>
+<?php }
+}?>
