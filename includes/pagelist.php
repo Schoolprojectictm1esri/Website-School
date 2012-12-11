@@ -1,4 +1,7 @@
 <?php
+/*
+ * @author Jelle
+ */
 //lijst van pagina's
 // 0 is anoniem, iedereen mag de pagina zien.
 // 1 elke klant die ingelogd is mag deze pagina zien.

@@ -1,4 +1,7 @@
 <?php
+/**
+ * @author Jelle
+ */
 // als er gebruik gemaakt wordt van cookies is de gebruikersnaam niet geset. Deze even controleren om netjes de naam te tonen bij inloggen.
     if(!isset($_SESSION['gebruikersnaam'])){
         $stmt = $db->query('select * from beheerder where beheerder_id = "'.$_SESSION['beheerder_id'].'"');

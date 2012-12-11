@@ -1,4 +1,7 @@
 <?php
+/**
+ * @author Jelle Smeets.
+ */
 session_start();
 //vernietig sessie!
 session_destroy();

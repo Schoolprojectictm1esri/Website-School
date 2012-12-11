@@ -1,5 +1,7 @@
 <?php
-
+/*
+ * @author Jelle
+ */
 
 //als een gebruiker al ingelogd is met een cookie of een sessie stuur deze dan door naar beheer pagina. Je hoeft immers geen 2x in te loggen.
 if(isset($_COOKIE['beheerder_id']) && $_COOKIE['beheerder_id'] != '' && is_numeric($_COOKIE['beheerder_id'])){
