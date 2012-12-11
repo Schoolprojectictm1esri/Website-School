@@ -12,7 +12,7 @@ if(isset($_COOKIE['beheerder_id']) && $_COOKIE['beheerder_id'] != '' && is_numer
 }
 
 // Controleer op vaker versturen dit formulier.
-if(isset($_SESSION['inlog_form_beheer']) && $_SESSION['inlog_form_beheer'] >= 5){
+if(checkSpam('inlog_form_beheer')){
     echo 'U heeft te vaak foutief proberen in te loggen.';
 }else{
     //controle en verwerking.
@@ -26,11 +26,7 @@ if(isset($_SESSION['inlog_form_beheer']) && $_SESSION['inlog_form_beheer'] >= 5)
             //als resultaat leeg is, toon het formulier dat het inloggen niet gelukt is.    
             $result = $stmt->fetchObject();
             if(empty($result)){
-               if(isset($_SESSION['inlog_form_beheer'])){
-                    $_SESSION['inlog_form_beheer'] ++;
-               }else{
-                    $_SESSION['inlog_form_beheer'] = 1;
-               }
+               setSpam('inlog_form_beheer');
                 ?>
                 <div id="beheer-login">
                     <form id="beheer-form" action="index.php?page=inloggen_beheer" method="POST">
@@ -66,11 +62,7 @@ if(isset($_SESSION['inlog_form_beheer']) && $_SESSION['inlog_form_beheer'] >= 5)
             }
         }else{
             // toon formulier met gebruikersnaam ingevuld en foutmelding.
-            if(isset($_SESSION['inlog_form_beheer'])){
-                    $_SESSION['inlog_form_beheer'] ++;
-               }else{
-                    $_SESSION['inlog_form_beheer'] = 1;
-           }
+            setSpam('inlog_form_beheer');
         ?>
         <!-- Toon formulier !-->
         <div id="beheer-login">

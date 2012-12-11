@@ -62,11 +62,46 @@ function hashpasswordrecovery($date){
     //return
     return $hash;
 }
+/**
+ * @author Thomas Vermeulen
+ * @created 23-11-2012
+ * @description Creeert een hash voor password recovery link
+ * @param type $hash
+ * @return String
+ */
 function hashpasswordrecovery2($string){
     //toevoegen voornaam
     $hash = md5($string.'asdfasdkkdjj');
     //return
     return $hash;
+}
+/*
+ * @author Jelle Smeets
+ * @created 11-12-2012
+ * @description Set spam lvl voor de naam van het formulier.
+ * @return -
+ */
+function setSpam($name){
+    if(isset($_SESSION[$name])){
+        $_SESSION[$name] ++;
+    }else{
+        $_SESSION[$name] =1;
+    }
+}
+/*
+ * @author Jelle Smeets
+ * @created 11-12-2012
+ * @description Controleerd spamaantal.
+ * @return true of false
+ */
+function checkSpam($name){
+    if(isset($_SESSION[$name])){
+        if($_SESSION[$name] >= 3){
+            return true;
+        }
+    }else{
+        return false;
+    }
 }
 ?>
 

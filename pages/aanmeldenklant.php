@@ -3,7 +3,7 @@
  * @author Sander
  * @author2 Jelle opgepakt na Sander.
  */
-if(isset($_SESSION['registratie_form']) && $_SESSION['registratie_form'] >= 5){
+if(checkSpam('registratie_form')){
   echo 'U mag niet meer registreren, u heeft te vaak dit formulier gebruikt.';  
 }else{
 
@@ -80,28 +80,16 @@ if(isset($_POST['registreren']))
                 VALUES ('.$email.', '.$wachtwoord.', '.$voorletters.', '.$achternaam.', '.$adres.', '.$woonplaats.', '.$postcode.', '.$telefoonnr.')";
         $stmt = $db->prepare($sql);
         $stmt->execute();
-        if(isset($_SESSION['registratie_form'])){
-            $_SESSION['registratie_form'] ++;
-        }else{
-            $_SESSION['registratie_form'] = 1;
-        }
+        setSpam('registratie_form');
                     }
 		else{
 			print 'Een verplicht veld is nog niet ingevuld.';
-                                if(isset($_SESSION['registratie_form'])){
-                                    $_SESSION['registratie_form'] ++;
-                                }else{
-                                    $_SESSION['registratie_form'] = 1;
-                                }
+                                setSpam('registratie_form');
                     }
     }
     else{
             print 'Wachtwoorden komen niet overeen.';
-                    if(isset($_SESSION['registratie_form'])){
-                        $_SESSION['registratie_form'] ++;
-                    }else{
-                        $_SESSION['registratie_form'] = 1;
-                    }
+                    setSpam('registratie_form');
         }
 }
 else{
