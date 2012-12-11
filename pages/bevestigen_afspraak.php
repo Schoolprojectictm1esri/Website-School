@@ -120,14 +120,12 @@ if(isset($_COOKIE['beheerder_id']) && $_COOKIE['beheerder_id'] != '' && is_numer
     var_dump($result1->id);
         //bevestigen afspraak (in db zetten)
         if(isset($_POST['submit1'])){
-            $sql= $db->query("UPDATE `afspraken` SET `bevestigd`= TRUE WHERE `id` = "echo $result1->id; " ");
-            $stmt = $db->prepare($sql);
-            $stmt->execute(); 
+            $sql= $db->query("UPDATE `afspraken` SET `bevestigd`= TRUE WHERE `id` = ".$result1->id);
             header('location: index.php?page=agenda'); 
             //automatische mail voor bevestiging
                 //email naar klant na bevestiging
-                $to = $_POST['emailadres'];
-                $subject = "Bevestiging afspraak: <?php echo $datumafspraak; ?> ";
+                $to = $result2->email;
+                $subject = "Bevestiging afspraak: $result2->datum";
                 $from = "noreply@pedicurepraktijkdesiree.nl";
                 $message = "
                     <html>
@@ -158,9 +156,6 @@ if(isset($_COOKIE['beheerder_id']) && $_COOKIE['beheerder_id'] != '' && is_numer
         }
         //afwijzing afspraak (in db zetten)
         elseif(isset($_POST['submit2'])){
-            $sql= $db->query("UPDATE `afspraken` SET `bevestigd`= NULL WHERE `id` = '".$afspraakid."'");
-            $stmt = $db->prepare($sql);
-            $stmt->execute();  
             header('location: index.php?page=agenda');
             //automatische mail voor afwijzing afspraak
                 $to = $_POST['emailadres'];
