@@ -1,5 +1,12 @@
+/* 
+    Document   : Danielstyle
+    Created on : 13-nov-2012, 20:43:32
+    Author     : Daniel
+    Description:
+        Purpose of this page follows.
+*/
 <?php
-$klant_id = 2;
+if (isset($_GET['klant_id'])) {
 $klant_id = $_GET['klant_id'];
 
 
@@ -183,4 +190,16 @@ if (!isset($_POST['wijzig'])) {
             $stmt->execute();
 }
 echo 'Klantgegevens succesvol verwijderd.';
+?>
+
+
+<?php
+} 
+Else
+{
+    Echo 'Geen klantgegevens ingevoerd.<br><br>';
+    echo "<a href='index.php?page=klantgegevens'>";
+    Echo 'Klik hier';
+    Echo "</a>";
+}
 ?>

@@ -1,4 +1,13 @@
+/* 
+    Document   : Danielstyle
+    Created on : 13-nov-2012, 20:43:32
+    Author     : Daniel
+    Description:
+        Purpose of this page follows.
+*/
+
 <?php   
+if (isset($_GET['id'])) {
         $id = $_GET['id'];
         $stmt           = $db->query("SELECT * FROM behandelingen WHERE ID = ".$id." ");
         $result         = $stmt->fetchall();
@@ -99,4 +108,16 @@ if (!isset($_POST['wijzig'])) {
             $stmt->execute();
 }
 echo 'Productgegevens zijn succesvol verwijderd.';
+?>
+
+
+<?php
+} 
+Else
+{
+    Echo 'Geen product ingevoerd.<br><br>';
+    echo "<a href='index.php?page=producteninzien'>";
+    Echo 'Klik hier';
+    Echo "</a>";
+}
 ?>

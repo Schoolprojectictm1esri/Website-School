@@ -36,6 +36,8 @@ for($row = 0; $row<4; $row++)
         //Test w/o db : $numberOfApp = 0;
 
         // Check availability 
+        // Kijkt welke dag het is, en kijk wat de beschikbaarheid op die dag is.
+                                    // Afhankelijk van die beschikbaarheid geeft het een kleur weer.
         if ($date->dayOfWeek()=="Zondag"){
             $available ="agendaholiday";
             echo "<a href='index.php?page=agendanietbeschikbaar'>";
@@ -55,10 +57,10 @@ for($row = 0; $row<4; $row++)
                     $available = "agendavacancy";
                  }
             echo "<td class='$available'>";
-            // Link om agenda te openen
+            // Link om agenda te openen met link waarin dag maand jaar staan.
             
             Echo "<a href='index.php?page=inplannenafspraak&value=".$date->day."&value=".$date->month."&value=".$date->year."'>";
-            //echo "<a href=\"www.letmegooglethatforyou.com?variabele=dedag&vazr2=maand\">";//$_GET['variabele']
+            
 
                     
             // Laat vandaag zien
