@@ -49,6 +49,13 @@ function getRole(){
     return 0;
 }
 
+/**
+ * @author Thomas Vermeulen
+ * @created 23-11-2012
+ * @description Creeert een hash voor password recovery link
+ * @param type $hash
+ * @return String
+ */
 function hashpasswordrecovery($date){
     //toevoegen voornaam
     $hash = md5($date.date().'asdfasdkkdjj');

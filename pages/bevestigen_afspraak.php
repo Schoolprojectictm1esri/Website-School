@@ -64,8 +64,11 @@ if(isset($_COOKIE['beheerder_id']) && $_COOKIE['beheerder_id'] != '' && is_numer
 <?php
         if(isset($_POST['annuleren'])){
             //email sturen voor annulering afspraak
+                $sql= $db->query("UPDATE `afspraken` SET `bevestigd`= false WHERE `id` = '".$klanten_id."'");
+                $stmt = $db->prepare($sql);
+                $stmt->execute(); 
                 $to = $emailadres;
-                $subject = "Annulering afspraak:.$datum.";
+                $subject = "Annulering afspraak:.$datumafspraak.";
                 $from = "noreply@pedicurepraktijkdesiree.nl";
                 $message = "
                     <html>
@@ -81,7 +84,7 @@ if(isset($_COOKIE['beheerder_id']) && $_COOKIE['beheerder_id'] != '' && is_numer
                                 <td>Bij deze moet ik u helaas meedelen dat de afspraak gemaakt voor</td>
                             </tr>
                             <tr>
-                                <td>.$datum.</td>
+                                <td>.$datumafspraak.</td>
                             </tr>
                             <tr>
                                 <td>is geannuleerd.</td>
@@ -121,13 +124,14 @@ if(isset($_COOKIE['beheerder_id']) && $_COOKIE['beheerder_id'] != '' && is_numer
 <?php
         //bevestigen afspraak (in db zetten)
         if(isset($_POST['submit1'])){
-            $sql= $db->query("INSERT INTO `afspraken` (`bevestigd`) VALUES (`TRUE`)");
+            $sql= $db->query("UPDATE `afspraken` SET `bevestigd`= true WHERE `id` = '".$klanten_id."'");
             $stmt = $db->prepare($sql);
             $stmt->execute(); 
+            header('location: index.php?page=agenda'); 
             //automatische mail voor bevestiging
                 //email naar klant na bevestiging
                 $to = $_POST['emailadres'];
-                $subject = "Bevestiging afspraak:.$datum.";
+                $subject = "Bevestiging afspraak: <?php echo $datumafspraak; ?> ";
                 $from = "noreply@pedicurepraktijkdesiree.nl";
                 $message = "
                     <html>
@@ -158,12 +162,13 @@ if(isset($_COOKIE['beheerder_id']) && $_COOKIE['beheerder_id'] != '' && is_numer
         }
         //afwijzing afspraak (in db zetten)
         elseif(isset($_POST['submit2'])){
-            $sql= $db->query("INSERT INTO `afspraken` (`bevestigd`) VALUES (`FALSE`)");
+            $sql= $db->query("UPDATE `afspraken` SET `bevestigd`= false WHERE `id` = '".$klanten_id."'");
             $stmt = $db->prepare($sql);
             $stmt->execute();  
+            header('location: index.php?page=agenda');
             //automatische mail voor afwijzing afspraak
                 $to = $_POST['emailadres'];
-                $subject = "Annulering afspraak:.$datum.";
+                $subject = "Annulering afspraak: <?php echo $datumafspraak; ?> ";
                 $from = "noreply@pedicurepraktijkdesiree.nl";
                 $message = "
                     <html>
