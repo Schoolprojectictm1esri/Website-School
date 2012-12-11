@@ -7,199 +7,103 @@
 ?>
 
 <?php
-//deze php set uiteindelijk datumafspraak en afspraakid.
-//controleer of er een value is
-
+//kijken of er een (afspraak)id is meegegeven
 if(isset($_GET['id'])){
     $afspraakid = $_GET['id'];
-    $stmt = $db->query("SELECT `datum`, `klant_id`, `id`, `bevestigd` FROM `afspraken` WHERE `id` = '".$afspraakid."'"); 
+    //query om te kijken of (afspraak)id bestaat, rest gegevens ophalen
+    $stmt = $db->query("SELECT `datum`,`klant_id`,`id`,`bevestigd` FROM `afspraken` WHERE `id` = '".$afspraakid."'");
     $result1 = $stmt->fetchObject();
-var_dump($result1);        
-//controleer of value in db bekent is
-        if(empty($result1)){
-
+    if(!empty($result1)){
+        //als afspraak onbevestigd is = bekijken voor bevestiging/afwijzen
+        if(!isset($_POST['submit1'])){
+            if(!isset($_POST['submit2'])){
+                if(!isset($_POST['submit3'])){
+                    //hier nog een query uitvoeren voor gegevens
+                    $stmt = $db->query("SELECT `voorletters`,`achternaam`,`email` FROM `klanten` WHERE `klant_id` = '".$result1->klant_id."'");
+                    $result2 = $stmt->fetchObject();
+                    if($result1->bevestigd == TRUE){
+                        //print formulier om te bekijken:P
+?>
+                        <form action="index.php?page=bevestigen_afspraak&id=<?php echo "$afspraakid"; ?> " method="POST">
+                            <table>
+                                <tr>
+                                    <td><b>Afspraak gegevens:</b></td>
+                                </tr>
+                                <tr>
+                                    <td>Naam: <?php echo $result2->voorletters;?>. <?php echo $result2->achternaam;?> </td>
+                                </tr>
+                                <tr>
+                                    <td>Datum: <?php echo $result1->datum; ?></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="submit" name="submit1" value="afzeggen" /></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="index.php?page=agenda">Annuleren</a></td>
+                                </tr>
+                            </table>
+                        </form>
+<?php
+                    }
+                    else{
+                        //print formulier + bevestigen
+?>
+                        <form action="index.php?page=bevestigen_afspraak&id=<?php echo "$afspraakid"; ?> " method="POST">
+                            <table>
+                                <tr>
+                                    <td><b>Afspraak gegevens:</b></td>
+                                </tr>
+                                <tr>
+                                    <td>Naam: <?php echo $result2->voorletters;?>. <?php echo $result2->achternaam;?> </td>
+                                </tr>
+                                <tr>
+                                    <td>Datum: <?php echo $result1->datum; ?></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="submit" name="submit2" value="bevestigen" /></td>
+                                    <td><input type="submit" name="submit3" value="afwijzen" /></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="index.php?page=agenda">Annuleren</a></td>
+                                </tr>
+                            </table>
+                        </form>
+<?php
+                    }
+                }
+                else{
+                    //query + wat er gebeurde door submit3
+                    $stmt = $db->query("UPDATE `afspraken` SET `bevestigd` = false WHERE `id` = '".$afspraakid."'");
+                    echo "Afspraak is afgewezen,";
+?>
+                    <a href="index.php?page=agenda">Terug naar agenda</a>
+<?php
+                }
+            } 
+            else{
+                //query + wat er gebeurde door submit2
+                $stmt = $db->query("UPDATE `afspraken` SET `bevestigd` = TRUE WHERE `id` = '".$afspraakid."'");
+                echo "Afspraak is bevestigd,";
+?>
+                <a href="index.php?page=agenda">Terug naar agenda</a>
+<?php
+            }
         }
         else{
-             if(isset($_POST['submit1'])){
-                $sql= $db->query("UPDATE `afspraken` SET `bevestigd`= TRUE WHERE `id` = ".$result1->id."");
-                $stmt = $db->prepare($sql);
-                $stmt->execute(); 
-             }
-             else{
-              //  header('location: index.php');
-             }
-        }
-}
-else {
-   // header('location: index.php');
-}
-die();
-//kijkt of ingelogd is
-if(isset($_COOKIE['beheerder_id']) && $_COOKIE['beheerder_id'] != '' && is_numeric($_COOKIE['beheerder_id'])){
-    $_SESSION['beheerder_id'] = $_COOKIE['beheerder_id'];
-    //query uitvoeren
-    $stmt = $db->query("SELECT `voorletters`,`achternaam`,`email` FROM `klanten` WHERE `klant_id` = '".$result1->klant_id."'");
-    $result2 = $stmt->fetchObject();
-    if(!empty($result2)){
-    }
-    //check query
-    if($result1->bevestigd == TRUE){
+            //query + wat er gebeurde door submit1
+            $stmt = $db->query("UPDATE `afspraken` SET `bevestigd` = FALSE WHERE `id` = '".$afspraakid."'");
+            echo "Afspraak is geannuleerd,";
 ?>
-        <form action="index.php?page=bevestigen_afspraak" method="POST">
-            <table>
-                <tr>
-                    <th>Afspraak gegevens:</th>
-                </tr>
-                <tr>
-                    <td>Naam: .$voornaam. .$achternaam. </td>
-                </tr>
-                <tr>
-                    <td>Datum: .$datum.</td>
-                </tr>
-                <tr>
-                    <td><input type="submit" name="annuleren" value="Annuleren" /></td>
-                </tr>
-                <tr>
-                    <td><a href='agenda.php'>Annuleren</a></td>
-                </tr>
-            </table>
-        </form>   
+            <a href="index.php?page=agenda">Terug naar agenda</a>
 <?php
-        if(isset($_POST['annuleren'])){
-            //email sturen voor annulering afspraak
-                $sql= $db->query("UPDATE `afspraken` SET `bevestigd`= NULL WHERE `id` = '".$result1->id."'");
-                $stmt = $db->prepare($sql);
-                $stmt->execute(); 
-                $to = $emailadres;
-                $subject = "Annulering afspraak:.$datumafspraak.";
-                $from = "noreply@pedicurepraktijkdesiree.nl";
-                $message = "
-                    <html>
-                        <head>
-                            <title>Annulering afspraak</title>
-                        </head>
-                    <body>
-                        <table>
-                            <tr>
-                                <th>Beste,<th>
-                            </tr>
-                            <tr>
-                                <td>Bij deze moet ik u helaas meedelen dat de afspraak gemaakt voor</td>
-                            </tr>
-                            <tr>
-                                <td>.$datumafspraak.</td>
-                            </tr>
-                            <tr>
-                                <td>is geannuleerd.</td>
-                            </tr>
-                            <tr>
-                                <td>Met vriendelijke groet PedicurePraktijk Desiree.
-                            </tr>
-                        </table>
-                    </body>
-                    </html>
-                    ";
         }
     }
-    else {
-        //formulier voor accepteren/afwijzen
-        var_dump($afspraakid);
-?>
-        <form action="index.php?page=bevestigen_afspraak" method="POST">
-            <table>
-                <tr>
-                    <th>Afspraak gegevens:</th>
-                </tr>
-                <tr>
-                    <td>Naam: <?php echo $result2->voorletters; ?>. <?php echo $result2->achternaam; ?> </td>
-                </tr>
-                <tr>
-                    <td>Datum: <?php echo $result1->datum; ?> </td>
-                </tr>
-                <tr>
-                    <td><input type="submit" name="submit1" value="accepteren" /></td>
-                    <td><input type="submit" name="submit2" value="afwijzen" /></td>
-                </tr>
-                <tr>
-                    <td><a href='agenda.php'>Annuleren</a></td>
-                </tr>
-            </table>
-        </form>
-<?php
-    var_dump($result1->id);
-        //bevestigen afspraak (in db zetten)
-        if(isset($_POST['submit1'])){
-            //header('location: index.php?page=agenda'); 
-            //automatische mail voor bevestiging
-                //email naar klant na bevestiging
-                $to = $result2->email;
-                $subject = "Bevestiging afspraak: $result2->datum";
-                $from = "noreply@pedicurepraktijkdesiree.nl";
-                $message = "
-                    <html>
-                        <head>
-                            <title>Bevestiging afspraak</title>
-                        </head>
-                    <body>
-                        <table>
-                            <tr>
-                                <th>Beste,<th>
-                            </tr>
-                            <tr>
-                                <td>Bij deze wil ik u meedelen dat de afspraak gemaakt voor</td>
-                            </tr>
-                            <tr>
-                                <td>.$datum.</td>
-                            </tr>
-                            <tr>
-                                <td>is bevestigd.</td>
-                            </tr>
-                            <tr>
-                                <td>Met vriendelijke groet PedicurePraktijk Desiree.
-                            </tr>
-                        </table>
-                    </body>
-                    </html>
-                    ";
-        }
-        //afwijzing afspraak (in db zetten)
-        elseif(isset($_POST['submit2'])){
-            header('location: index.php?page=agenda');
-            //automatische mail voor afwijzing afspraak
-                $to = $_POST['emailadres'];
-                $subject = "Annulering afspraak: <?php echo $datumafspraak; ?> ";
-                $from = "noreply@pedicurepraktijkdesiree.nl";
-                $message = "
-                    <html>
-                        <head>
-                            <title>Annulering afspraak</title>
-                        </head>
-                    <body>
-                        <table>
-                            <tr>
-                                <th>Beste,<th>
-                            </tr>
-                            <tr>
-                                <td>Bij deze moet ik u helaas meedelen dat de afspraak gemaakt voor</td>
-                            </tr>
-                            <tr>
-                                <td>.$datum.</td>
-                            </tr>
-                            <tr>
-                                <td>is geannuleerd.</td>
-                            </tr>
-                            <tr>
-                                <td>Met vriendelijke groet PedicurePraktijk Desiree.
-                            </tr>
-                        </table>
-                    </body>
-                    </html>
-                    ";
-        }
+    else{
+        header ('location: index.php');
     }
 }
-else {
-    //standaard formulier nog voor bevestigen
-    header('location: index.php?page=inloggen_beheer');
+else{
+    header ('location: index.php?page=inloggen_beheer');
 }
 ?>
+
