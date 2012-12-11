@@ -10,8 +10,8 @@ if(isset($_COOKIE['klanten_id']) && $_COOKIE['klanten_id'] != '' && is_numeric($
     $_SESSION['klanten_id'] = $_COOKIE['klanten_id'];
     header('location: index.php?page=agenda');
 }elseif(isset($_SESSION['klanten_id'])){
-    //controleer of sessie bestaat.
-    
+    //controleer of sessie bestaat.  
+    header('location: index.php?page=agenda');
 }
 if(checkSpam('inlog_form_klant')){
     echo 'U heeft te vaak foutief ingelogd.';
@@ -27,13 +27,14 @@ if(checkSpam('inlog_form_klant')){
             $result = $stmt->fetchObject();
                 //gebruiker id in sessie.
                if($_POST['stayloggedin'] == true){
-                setcookie('klanten_id', $result->klanten_id, time() +360000);
+                    setcookie('klanten_id', $result->klanten_id, time() +360000);
                 }
                 $_SESSION['klanten_id'] = $result->klanten_id;
                 $_SESSION['achternaam'] = $result->achternaam;
+                 //gebruiker doorsturen naar agenda.php
                 header('location: index.php?page=agenda');
 
-                //gebruiker doorsturen naar agenda.php
+               
               }
             else{
                 setSpam('inlog_form_klant');
