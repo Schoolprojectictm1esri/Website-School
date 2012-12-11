@@ -20,4 +20,9 @@ $pagelist['toevoegen_klant'] = 2;
 $pagelist['aanpassenklantegegevens'] = 2;
 $pagelist['inzienagenda'] = 1;
 $pagelist['aanpassenproducten'] = 2;
+// pagina's van Thomas
+$pagelist['bevestigen_afspraak'] = 2;
+$pagelist['wachtwoord_vergeten'] = 0;
+$pagelist['wachtwoord_wijzigen'] = 0;
+$pagelist['inloggen_bij_agenda'] = 0;
 ?>
