@@ -25,4 +25,5 @@ $pagelist['bevestigen_afspraak'] = 2;
 $pagelist['wachtwoord_vergeten'] = 0;
 $pagelist['wachtwoord_wijzigen'] = 0;
 $pagelist['inloggen_bij_agenda'] = 0;
+$pagelist['inzienklantgegevens'] = 2;
 ?>
