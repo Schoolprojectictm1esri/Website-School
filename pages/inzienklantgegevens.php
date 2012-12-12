@@ -94,7 +94,7 @@ if(isset($_GET['klant_id'])){
             </tr>
                         <!-- Waarde 15 -->
             <tr>
-                <td>Anti_stol:</td>
+                <td>Antistollingsmiddelen:</td>
                 <td><?php if($result1->anti_stol == TRUE){
                                     echo 'Ja';} 
                                     else{ 
