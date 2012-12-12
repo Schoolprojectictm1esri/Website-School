@@ -197,6 +197,10 @@ if(isset($_GET['klant_id'])){
                 <td>Voet dorsaal (links):</td>
                 <td><?php echo $result1->dorsale_links ?></td>
             </tr>
+            <tr>
+                <td></td>
+                <td><a href='index.php?page=aanpassenklantgegevens&klant_id=<?php echo $result1->klant_id ?> '>Gegevens aanpassen</a>
+            </tr>
         </table>
     </form>
 </div>
