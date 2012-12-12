@@ -75,6 +75,39 @@ if(isset($_GET['id'])){
                     //query + wat er gebeurde door submit3
                     $stmt = $db->query("UPDATE `afspraken` SET `bevestigd` = false WHERE `id` = '".$afspraakid."'");
                     echo "Afspraak is afgewezen,";
+                    //email naar klant na annulering
+                    $to = $result2->email;
+                    $subject = "Bevestiging afspraak: $result2->datum";
+                    $from = "noreply@pedicurepraktijkdesiree.nl";
+                    $message = "
+                            <html>
+                            <head>
+                                    <title>Bevestiging afspraak</title>
+                            </head>
+                            <body>
+                                <table>
+                                    <tr>
+                                        <th>Beste,<th>
+                                    </tr>
+                                    <tr>
+                                        <td>Bij deze wil ik u meedelen dat de afspraak gemaakt voor</td>
+                                    </tr>
+                                    <tr>
+                                        <td>.$datum.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>alsnog is geannuleerd.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Voor meer informatie mail
+                                    </tr>
+                                    <tr>
+                                        <td>Met vriendelijke groet PedicurePraktijk Desiree.
+                                    </tr>
+                                </table>
+                            </body>
+                            </html>
+                      ";
 ?>
                     <a href="index.php?page=agenda">Terug naar agenda</a>
 <?php
@@ -84,6 +117,39 @@ if(isset($_GET['id'])){
                 //query + wat er gebeurde door submit2
                 $stmt = $db->query("UPDATE `afspraken` SET `bevestigd` = TRUE WHERE `id` = '".$afspraakid."'");
                 echo "Afspraak is bevestigd,";
+                //email naar klant na bevestiging
+                $to = $result2->email;
+                $subject = "Bevestiging afspraak: $result2->datum";
+                $from = "noreply@pedicurepraktijkdesiree.nl";
+                $message = "
+                        <html>
+                        <head>
+                                <title>Bevestiging afspraak</title>
+                        </head>
+                        <body>
+                            <table>
+                                <tr>
+                                    <th>Beste,<th>
+                                </tr>
+                                <tr>
+                                    <td>Bij deze wil ik u meedelen dat de afspraak gemaakt voor</td>
+                                </tr>
+                                <tr>
+                                    <td>.$datum.</td>
+                                </tr>
+                                <tr>
+                                    <td>alsnog is bevestigd.</td>
+                                </tr>
+                                <tr>
+                                    <td>Voor meer informatie mail
+                                </tr>
+                                <tr>
+                                    <td>Met vriendelijke groet PedicurePraktijk Desiree.
+                                </tr>
+                            </table>
+                        </body>
+                        </html>
+                  ";
 ?>
                 <a href="index.php?page=agenda">Terug naar agenda</a>
 <?php
@@ -93,6 +159,39 @@ if(isset($_GET['id'])){
             //query + wat er gebeurde door submit1
             $stmt = $db->query("UPDATE `afspraken` SET `bevestigd` = FALSE WHERE `id` = '".$afspraakid."'");
             echo "Afspraak is geannuleerd,";
+            //email naar klant na annulering
+            $to = $result2->email;
+            $subject = "Bevestiging afspraak: $result2->datum";
+            $from = "noreply@pedicurepraktijkdesiree.nl";
+            $message = "
+                    <html>
+                    <head>
+                            <title>Bevestiging afspraak</title>
+                    </head>
+                    <body>
+                        <table>
+                            <tr>
+                                <th>Beste,<th>
+                            </tr>
+                            <tr>
+                                <td>Bij deze wil ik u meedelen dat de afspraak gemaakt voor</td>
+                            </tr>
+                            <tr>
+                                <td>.$datum.</td>
+                            </tr>
+                            <tr>
+                                <td>alsnog is geannuleerd.</td>
+                            </tr>
+                            <tr>
+                                <td>Voor meer informatie mail
+                            </tr>
+                            <tr>
+                                <td>Met vriendelijke groet PedicurePraktijk Desiree.
+                            </tr>
+                        </table>
+                    </body>
+                    </html>
+              ";
 ?>
             <a href="index.php?page=agenda">Terug naar agenda</a>
 <?php
