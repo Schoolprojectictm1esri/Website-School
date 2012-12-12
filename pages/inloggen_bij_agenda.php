@@ -21,7 +21,7 @@ if(checkSpam('inlog_form_klant')){
         if($_POST['emailadres'] != '' && $_POST['password'] != ''){
             //beide velden zijn ingevuld.
             $email = mysql_real_escape_string($_POST['emailadres']);
-            $password = mysql_real_escape_string($_POST['password']);
+            $password = hashPassword($_POST['password']);
             $stmt = $db->query("SELECT * FROM klanten WHERE `email` = '".$email."' AND `wachtwoord` = '".$password."' and actief = 1");   
             if(!empty($stmt)){
             $result = $stmt->fetchObject();
