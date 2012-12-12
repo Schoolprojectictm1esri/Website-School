@@ -103,5 +103,42 @@ function checkSpam($name){
         return false;
     }
 }
+/**
+ * @author Jelle
+ * @description check if email is email.
+ * @param type $email
+ * @return boolean
+ */
+function checkEmail($email) {
+  if(preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/", $email)) {
+    return true;
+  }
+
+  return false;
+}
+
+
+/**
+ * @author Jelle
+ * @param type $password
+ * @param type $errors
+ * @return type
+ */
+function checkPassword($pwd) {
+
+    if (strlen($pwd) < 8) {
+        return false;
+    }
+
+    if (!preg_match("#[0-9]+#", $pwd)) {
+       return false;
+    }
+
+    if (!preg_match("#[a-zA-Z]+#", $pwd)) {
+        return false;
+    }     
+
+    return true;
+}
 ?>
 
