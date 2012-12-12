@@ -65,15 +65,23 @@ require_once('includes/bootstrap.php');
             </div>
             <div id="menu">
                 <div class="menuitem">
-                    Home
+                    <a class="menulink" href="index.php?page=home">home</a>
                 </div>  
                 <div class="menuitem">
-                    Agenda
+                    <a class="menulink" href="index.php?page=agenda">agenda</a>
                 </div>
+                <div class="menuitem">
+                    <a class="menulink" href="index.php?page=inloggen_bij_agenda">inloggen</a>
+                </div>
+                <div class="menuitem">
+                    <a class="menulink" href="index.php?page=routebeschrijving">route</a>
+                </div>
+                
             </div>
             <!-- Div for content scripts !-->
             <div id="contentwrapper">
                 <div id="content-left">
+                    <!--
                     <div class="sidebar">
                         <div class="innersidebar">
                             Sub menu item.
@@ -96,7 +104,7 @@ require_once('includes/bootstrap.php');
                             Sub menu item.
                         </div>
                       
-                    </div>
+                    </div>!-->
                 </div>
                 <div id="content-right">
 <?php

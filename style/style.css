@@ -67,7 +67,14 @@ div.menuactive{
    background-image: url('afbeeldingen/menuitem_hover.png');
     color: #06a583;
 }
-
+a.menulink,
+a.menulink:hover{
+    color: #06a583;
+    text-decoration: none;
+    display: block;
+    width: 117px;
+    height: 31px;
+}
 div#contentwrapper{
    width: 1024px;
    margin-bottom: 10px;
