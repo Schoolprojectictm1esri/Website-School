@@ -11,7 +11,17 @@
         $klant_id = $_GET['klant_id'];
 
 
-        $stmt = $db->query("SELECT klant_id, email, voornaam, achternaam, adres, woonplaats, postcode, telefoonnr FROM klanten WHERE klant_id = '$klant_id' ");
+        $stmt = $db->query("SELECT 
+                `klant_id`      = '".mysql_real_escape_string($_POST['klant_id'])."'
+                `voornaam`      = '".mysql_real_escape_string($_POST['voornaam'])."'
+                `achternaam`    = '".mysql_real_escape_string($_POST['achternaam'])."'
+                `woonplaats`    = '".mysql_real_escape_string($_POST['woonplaats'])."'
+                `postcode`      = '".mysql_real_escape_string($_POST['postcode'])."'
+                `adres`         = '".mysql_real_escape_string($_POST['adres'])."'
+                `telefoonnr`    = '".mysql_real_escape_string($_POST['telefoonnr'])."'
+                `emailadres`    = '".mysql_real_escape_string($_POST['emailadres'])."'
+                FROM `klanten` 
+                WHERE `klant_id`      = '".mysql_real_escape_string($_POST['klant_id'])."'");
         $details = $stmt->fetchAll();
         
         
@@ -107,14 +117,16 @@
         $sql        = ("
                     UPDATE `klanten` 
                     SET 
-                    `email`      = '$email', 
-                    `voornaam`   = '$voornaam', 
-                    `achternaam` = '$achternaam', 
-                    `woonplaats` = '$woonplaats', 
-                    `telefoonnr` = '$telefoonnr', 
-                    `adres`      = '$adres'
+                    
+                    `voornaam`      = '".mysql_real_escape_string($_POST['voornaam'])."'
+                    `achternaam`    = '".mysql_real_escape_string($_POST['achternaam'])."'
+                    `woonplaats`    = '".mysql_real_escape_string($_POST['woonplaats'])."'
+                    `postcode`      = '".mysql_real_escape_string($_POST['postcode'])."'
+                    `adres`         = '".mysql_real_escape_string($_POST['adres'])."'
+                    `telefoonnr`    = '".mysql_real_escape_string($_POST['telefoonnr'])."'
+                    `emailadres`    = '".mysql_real_escape_string($_POST['emailadres'])."'
 
-                    where klant_id = '$klant_id'");
+                    WHERE `klant_id`= '".mysql_real_escape_string($_POST['klant_id'])."'");
         
         $stmt = $db->prepare($sql);
         $stmt->execute();
@@ -187,7 +199,7 @@
             {
             $sql = ("DELETE FROM `klanten` 
                     Where 
-                    `klant_id`	= '$klant_id';
+                    `klant_id`= '".mysql_real_escape_string($_POST['klant_id'])."'';
                     ");
             $stmt = $db->prepare($sql);
             $stmt->execute();
@@ -196,9 +208,9 @@
                 Else
                     {       // melding weergeven als er geen klant id is ingevoerd
                     Echo 'Geen klantgegevens ingevoerd.<br><br>';
-                    echo "<a href='index.php?page=klantgegevens'>";
+                    echo "<a href='index.php?page=inzienklantgegevens'>";
                     Echo 'Klik hier';
                     Echo "</a>";
-                    }
+                    
                     }
 ?>

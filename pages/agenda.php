@@ -63,7 +63,7 @@
                 echo "</a>";
 
 
-                //Laat vandaag zien en berekend de volgende dag
+                //Laat vandaag zien en berekend de datum van de volgende dag
                 $date->addDays(1);
 
                 echo "</td>";
