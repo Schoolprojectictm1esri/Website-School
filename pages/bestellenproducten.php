@@ -1,12 +1,12 @@
 <?php
-if (isset($_POST['bestel'])) {
+if (isset($_GET['Bestel'])) {
 //$bestelquery = $db->query('INSERT INTO bestelling_producten VALUES "'.$bestellingid.'","'.$productid.'","'.$aantal.'"');
 }
     
 else { 
-    $productid = 1;
-    $stmt = $db->query('SELECT * FROM producten WHERE id="'.$productid.'"');
-    $result = $stmt->fetchobject();
+    $id = 1;
+    $stmt = $db->query('SELECT * FROM producten WHERE id="'.$id.'"');
+    $result = $stmt->fetchall();
     ?>
 <table id="bestellenproducten">
         <tr>
@@ -14,12 +14,12 @@ else {
             <!--afbeelding product-->
             </td>
             <td>
-                <form name="aantal" method="POST">
+                <form name="aantal" method="GET">
                     Aantal:
                     <select name="aantalproducten" id="bestellenproducten">
                         <?php
-                        if(isset($_POST['berekenen']) && is_numeric($_POST['aantalproducten'])){
-                          $aantal = $_POST['aantalproducten'];
+                        if(isset($_GET['berekenen']) && is_numeric($_GET['aantalproducten'])){
+                          $aantal = $_GET['aantalproducten'];
                         }else{
                             $aantal = 0;
                         }
@@ -39,23 +39,27 @@ else {
                     </select>
                     <input type="submit" value="Bereken" name="berekenen" />
                 </form><br>
-                Prijs per stuk: <?php $prijs = $result->prijs;
-                        echo "€ $prijs" 
-                        ?><br><br>
+                Prijs per stuk: <?php 
+                $prijs = $result->prijs;
+                        echo "&euro; $prijs";
+                        ?>  
+                <br>
+                <br>
                 Totaal prijs:
                     <?php 
               
-                    if (isset($_POST['berekenen'])) {
+                    if (isset($_GET['berekenen'])) {
                     
-                    $aantal = $_POST['aantalproducten']; 
+                    $aantal = $_GET['aantalproducten']; 
                     }
                     else{
                         $aantal = 1;
                     }
                     $totaal = $aantal*$prijs;
-                    echo "€ $totaal";
+                    echo "&euro; $totaal";
                     ?>
             </td>
+          
         </tr>
         <tr>
             <td><?php 
