@@ -204,6 +204,26 @@ if(isset($_GET['klant_id'])){
 }
 //print formulier met alle klanten(voorletters, achternaam, email
 else{
-    
+    ?>
+<table>
+    <tr>
+        <th>Klant ID</th>
+        <th>Voorletters</th>
+        <th>Achternaam</th>
+    </tr>
+    <?php
+    $stmt = $db->query("SELECT `klant_id`,`voorletters`,`achternaam` FROM klanten");
+    $result2 = $stmt->fetchall();
+    foreach ($result2 as $row => $row2){
+        print "
+            <tr>
+                <td> ".$row2['klant_id']." </td>
+                <td> ".$row2['voorletters']." </td>
+                <td> ".$row2['achternaam']." </td>
+                <td> <a href='index.php?page=inzienklantgegevens&klant_id=".$row2['klant_id']."'>Bekijken</a> </td>
+            </tr>
+" ;
+    }
+    echo "</table>";
 }
 ?>
