@@ -140,5 +140,8 @@ function checkPassword($pwd) {
 
     return true;
 }
+function activatehash($id){
+    return md5(md5($id).md5(rand().md5(date('Y-m-d-HH:mm:ss'))));
+}
 ?>
 

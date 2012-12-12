@@ -22,7 +22,7 @@ if(checkSpam('inlog_form_klant')){
             //beide velden zijn ingevuld.
             $email = mysql_real_escape_string($_POST['emailadres']);
             $password = mysql_real_escape_string($_POST['password']);
-            $stmt = $db->query("SELECT * FROM klanten WHERE `email` = '".$email."' AND `wachtwoord` = '".$password."'");   
+            $stmt = $db->query("SELECT * FROM klanten WHERE `email` = '".$email."' AND `wachtwoord` = '".$password."' and actief = 1");   
             if(!empty($stmt)){
             $result = $stmt->fetchObject();
                 //gebruiker id in sessie.
