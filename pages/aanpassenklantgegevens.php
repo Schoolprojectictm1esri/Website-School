@@ -12,16 +12,16 @@
 
 
         $stmt = $db->query("SELECT 
-                `klant_id`      = '".mysql_real_escape_string($_POST['klant_id'])."'
-                `voornaam`      = '".mysql_real_escape_string($_POST['voornaam'])."'
-                `achternaam`    = '".mysql_real_escape_string($_POST['achternaam'])."'
-                `woonplaats`    = '".mysql_real_escape_string($_POST['woonplaats'])."'
-                `postcode`      = '".mysql_real_escape_string($_POST['postcode'])."'
-                `adres`         = '".mysql_real_escape_string($_POST['adres'])."'
-                `telefoonnr`    = '".mysql_real_escape_string($_POST['telefoonnr'])."'
-                `emailadres`    = '".mysql_real_escape_string($_POST['emailadres'])."'
+                `klant_id`      = '".($_POST['klant_id'])."'
+                `voornaam`      = '".($_POST['voornaam'])."'
+                `achternaam`    = '".($_POST['achternaam'])."'
+                `woonplaats`    = '".($_POST['woonplaats'])."'
+                `postcode`      = '".($_POST['postcode'])."'
+                `adres`         = '".($_POST['adres'])."'
+                `telefoonnr`    = '".($_POST['telefoonnr'])."'
+                `emailadres`    = '".($_POST['emailadres'])."'
                 FROM `klanten` 
-                WHERE `klant_id`      = '".mysql_real_escape_string($_POST['klant_id'])."'");
+                WHERE `klant_id`= '".(INT)$_POST['klant_id']."'");
         $details = $stmt->fetchAll();
         
         
@@ -197,9 +197,9 @@
             // Klant uit database verwijderen
             elseif(isset($_POST['verwijderen'])) 
             {
-            $sql = ("DELETE FROM `klanten` 
-                    Where 
-                    `klant_id`= '".mysql_real_escape_string($_POST['klant_id'])."'';
+            $sql = ("
+                    DELETE FROM `klanten` WHERE `klant_id`= '".(INT)$_POST['klant_id']."'
+                    
                     ");
             $stmt = $db->prepare($sql);
             $stmt->execute();
