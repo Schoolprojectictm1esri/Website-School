@@ -19,7 +19,7 @@ echo '<a href="index.php?page=bekijkenproducten&categorie='.$row['id'].'">'.$row
     <br>
    <?php
 $stmt2 = $db->query("SELECT * 
-FROM producten1 where categorieID = " . $_GET['categorie']);
+FROM producten where categorieID = " . $_GET['categorie']);
 $result2 = $stmt2->fetchall();
     foreach ($result2 as $row2){
         echo '<a href="index.php?page=bekijkenproducten&categorie='.$row['id'].'&product='.$row2['productID'].'">'.$row2['naam'].'</a>' ; echo "<br> <br>";
@@ -32,7 +32,7 @@ $result2 = $stmt2->fetchall();
     <br>
     <br>
 <?php
-$stmt3 = $db->query("SELECT * FROM producten1
+$stmt3 = $db->query("SELECT * FROM producten
 WHERE productID = " . $_GET['product']);
 $result3 = $stmt3->fetchall();
     foreach ($result3 as $row3){
