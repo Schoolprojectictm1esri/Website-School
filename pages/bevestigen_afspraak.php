@@ -13,16 +13,20 @@ if(isset($_GET['id'])){
     //query om te kijken of (afspraak)id bestaat, rest gegevens ophalen
     $stmt = $db->query("SELECT `datum`,`klant_id`,`id`,`bevestigd` FROM `afspraken` WHERE `id` = '".$afspraakid."'");
     $result1 = $stmt->fetchObject();
+    //check of re resultaat is
     if(!empty($result1)){
-        //als afspraak onbevestigd is = bekijken voor bevestiging/afwijzen
+        //check of formulier gesubmit is op:Afzeggen
         if(!isset($_POST['submit1'])){
+            //check of formulier gesubmit is op:Bevestigen
             if(!isset($_POST['submit2'])){
+                //check of formulier gesubmit is op:Afwijzen
                 if(!isset($_POST['submit3'])){
-                    //hier nog een query uitvoeren voor gegevens
+                    //query om meer gegevens op te halen
                     $stmt = $db->query("SELECT `voorletters`,`achternaam`,`email` FROM `klanten` WHERE `klant_id` = '".$result1->klant_id."'");
                     $result2 = $stmt->fetchObject();
+                    //formulier waarbij afspraak al bevestigd is
                     if($result1->bevestigd == TRUE){
-                        //print formulier om te bekijken:P
+                        //print formulier om te bekijken
 ?>
                         <form action="index.php?page=bevestigen_afspraak&id=<?php echo "$afspraakid"; ?> " method="POST">
                             <table>
@@ -72,7 +76,7 @@ if(isset($_GET['id'])){
                     }
                 }
                 else{
-                    //query + wat er gebeurde door submit3
+                    //query voor update bij afwijzing
                     $stmt = $db->query("UPDATE `afspraken` SET `bevestigd` = false WHERE `id` = '".$afspraakid."'");
                     echo "Afspraak is afgewezen,";
                     //email naar klant na annulering
@@ -114,7 +118,7 @@ if(isset($_GET['id'])){
                 }
             } 
             else{
-                //query + wat er gebeurde door submit2
+                //query met update bevestigen van afspraak
                 $stmt = $db->query("UPDATE `afspraken` SET `bevestigd` = TRUE WHERE `id` = '".$afspraakid."'");
                 echo "Afspraak is bevestigd,";
                 //email naar klant na bevestiging
@@ -156,7 +160,7 @@ if(isset($_GET['id'])){
             }
         }
         else{
-            //query + wat er gebeurde door submit1
+            //query met update annuleren van de afspraak
             $stmt = $db->query("UPDATE `afspraken` SET `bevestigd` = FALSE WHERE `id` = '".$afspraakid."'");
             echo "Afspraak is geannuleerd,";
             //email naar klant na annulering
@@ -198,10 +202,12 @@ if(isset($_GET['id'])){
         }
     }
     else{
+        //redirect bij foutmelding(onbekent afspraakID)
         header ('location: index.php');
     }
 }
 else{
+    //rederiect bij foutmelding(niet ingelogd)
     header ('location: index.php?page=inloggen_beheer');
 }
 ?>

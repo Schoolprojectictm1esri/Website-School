@@ -18,7 +18,7 @@ div#wwvergeten{
     margin: 10px;
 }
 
-div#inzienklantgegevens{
+div.inzienklantgegevens{
     height: 535px;
     width: 635px;
     overflow: auto;

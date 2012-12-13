@@ -11,9 +11,10 @@ require_once('includes/functions.php');
 if(isset($_POST['submit'])){
     //check email niet leeg
     if($_POST['emailadres'] != ''){
-        
+        //query om informatie op te halen
         $stmt = $db->query("SELECT * FROM klanten WHERE `emailadres` = '".mysql_real_escape_string($_POST['emailadres'])."'");
         $result = $stmt->fetchObject();
+            //controleert of resultaat niet leeg is
             if(!empty($result)){
                 //aanmaken hass voor link
                 $hash = hashpasswordrecovery2($_POST['emailadres']);
@@ -48,13 +49,6 @@ if(isset($_POST['submit'])){
                     </body>
                     </html>
                     ";
-                // tryout mail
-                // Value in link zetten die uitgelezen word.
-                try{
-                    mail($to,$from,$subject,$message);
-                }catch(Exception $e){
-                    var_dump($e->getMessage());
-                }
             //eindpagina
             echo 'Email word verzonden.';
             }

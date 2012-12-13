@@ -8,37 +8,39 @@
 <?php
 $hash = '';
 $emailadres = '';
+//controleerd of er een value is meegegeven
 if(isset($_GET['value'])){
     $hash = $_GET['value'];
     $stmt = $db->query("SELECT `emailadres` FROM `klanten` WHERE `hash` = '".$hash."'");
-    
     $result = $stmt->fetchObject();
-    
+    //controle of er result is
     if(!empty($result)){
         $emailadres = $result->emailadres;      
     }
     else{
+        //redirect bij foutmelding geen result
         header('location: index.php');
     }
 }
 else {
+    //redirect bij foutmelding geen value
     if(!isset($_POST['submit'])){
         header('location: index.php');
     }
 }
-// controleer of hash bestaat
-// hash van voorbeeld account :65dcf551912dbd829eea17885cf14e88
+
 //kijkt of submit is
 if(isset($_POST['submit'])){
-    if(isset($_POST["emailadres"]))
-    {
-        $emailadres = $_POST["emailadres"];
+    //controleert of er een email is
+    if(isset($_POST["emailadres"])){
+    $emailadres = $_POST["emailadres"];
     }
-    //controleert of alles is ingevult
+    //controleert of wachtwoorden niet NULL zijn
     if(($_POST['ww1'] != '') and ($_POST['ww2'] != '')){
         //controleer of wachtwoorden aan elkaar gelijk zijn
         if(($_POST['ww1']) == ($_POST['ww2'])){
-            $ww1 = mysql_real_escape_string($_POST['ww1']);
+            //insert query
+            $ww1 = hashPassword($_POST['ww1']);
             $stmt = $db->query("update `klanten` SET `wachtwoord` = '".$ww1."', `hash` = '' WHERE `emailadres` = '".$emailadres."'");
             echo 'Uw wachtwoord is gewijzigd <br/> <a href="http://localhost/Website-School/index.php">Klik hier</a> om naar home te gaan.';
         }

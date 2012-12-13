@@ -8,12 +8,13 @@
 <?php
 //controleert of er een specifieke klant is
 if(isset($_GET['klant_id'])){
+    //query om data op te halen uit DB
     $klant_id = $_GET['klant_id'];
     $stmt = $db->query("SELECT * FROM `klanten` WHERE `klant_id` = '".$klant_id."'");
     $result1 = $stmt->fetchObject();
-    
+//formulier waar alles getoont word  
 ?>
-<div id="inzienklantgegevens">
+<div class="inzienklantgegevens">
     <form action="index.php/inzienklantgegevens&klant_id=<?php echo $klant_id ?>" method="GET">
         <table>
                         <!-- Waarde 1 -->
@@ -181,22 +182,27 @@ if(isset($_GET['klant_id'])){
                 <td>Nagelaandoending:</td>
                 <td><?php echo $result1->nagelaandoening ?></td>
             </tr>
+                        <!-- Waarde 28 -->
             <tr>
                 <td>Voet plantair (rechts):</td>
                 <td><?php echo $result1->plantaire_rechts ?></td>
             </tr>
-                        <tr>
+                        <!-- Waarde 29 -->
+            <tr>
                 <td>Voet plantair (links):</td>
                 <td><?php echo $result1->plantaire_links ?></td>
             </tr>
-                        <tr>
+                        <!-- Waarde 30 -->
+            <tr>
                 <td>Voet dorsaal (rechts):</td>
                 <td><?php echo $result1->dorsale_rechts ?></td>
             </tr>
-                        <tr>
+                        <!-- Waarde 31 -->
+            <tr>
                 <td>Voet dorsaal (links):</td>
                 <td><?php echo $result1->dorsale_links ?></td>
             </tr>
+                        <!-- link naar gegevens aanpassen -->
             <tr>
                 <td></td>
                 <td><a href='index.php?page=aanpassenklantgegevens&klant_id=<?php echo $result1->klant_id ?> '>Gegevens aanpassen</a>
@@ -209,6 +215,7 @@ if(isset($_GET['klant_id'])){
 //print formulier met alle klanten(voorletters, achternaam, email
 else{
     ?>
+<div class="inzienklantgegevens">
 <table>
     <tr>
         <th>Klant ID</th>
@@ -228,6 +235,6 @@ else{
             </tr>
 " ;
     }
-    echo "</table>";
+    echo "</table></div>";
 }
 ?>
