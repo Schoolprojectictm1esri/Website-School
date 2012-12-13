@@ -9,14 +9,14 @@
 
 
     if (isset($_GET['id'])) {
-            $id = $_GET['id'];
-            $stmt           = $db->query("SELECT * FROM producten WHERE `id` = '".mysql_real_escape_string($_POST['id'])."'");
+            
+            $stmt           = $db->query("SELECT * FROM producten WHERE `id` = '".(INT)$_POST['id']."'");
             $result         = $stmt->fetchall();
 
 
 
 
-            $img = $db->query("SELECT productencol FROM producten WHERE `id` = '".mysql_real_escape_string($_POST['id'])."'");
+            $img = $db->query("SELECT foto FROM producten WHERE `id` = '".(INT)$_POST['id']."'");
             //  Afbeelding uit de database halen
 ?>
 <?php
@@ -60,14 +60,13 @@
                 }
                 $img            = $_POST['img'];
                 $omschrijving   = $_POST['omschrijving'];
-                $sql            = ("
+                $sql            = $db->query("
                                 UPDATE `klanten` 
                                 SET 
-                                WHERE `img` = '".mysql_real_escape_string($_POST['img'])."' 
-                                WHERE `omschrijving` = '".mysql_real_escape_string($_POST['omschrijving'])."'
-                                WHERE WHERE `id` = '".mysql_real_escape_string($_POST['id'])."'");
-                $stmt = $db->prepare($sql);
-                $stmt->execute();
+                                `img` = '".mysql_real_escape_string($_POST['img'])."' 
+                                `omschrijving` = '".mysql_real_escape_string($_POST['omschrijving'])."'
+                                WHERE `id` = '".(INT)$_POST['id']."'");
+                
        
 ?>
                 <form action="" method ="post">
@@ -103,11 +102,8 @@
 <?php
         if (isset($_POST['verwijderen'])) 
             {
-                $sql = ("DELETE FROM `producten` 
-                        WHERE `id` = '".mysql_real_escape_string($_POST['id'])."'
-                        ");
-                $stmt = $db->prepare($sql);
-                $stmt->execute();
+                $sql = $db->query("DELETE FROM `producten` WHERE `id` = '".(INT)$_POST['id']."'");
+                
             }
             echo 'Productgegevens zijn succesvol verwijderd.';
 ?>
