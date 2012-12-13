@@ -143,5 +143,20 @@ function checkPassword($pwd) {
 function activatehash($id){
     return md5(md5($id).md5(rand().md5(date('Y-m-d-HH:mm:ss'))));
 }
+
+/* 
+ * @author Daniel Bottinga
+ * @created 13-12-2012
+ * @description Zorgt voor een redirect.
+ */
+// ########################
+function Redirect($location) {
+// ########################
+
+  if (ob_get_length() > 0) ob_clean();
+  header("Location: ".$location); exit;
+
+}
+ 
 ?>
 
