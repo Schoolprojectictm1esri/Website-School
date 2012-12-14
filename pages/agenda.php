@@ -27,8 +27,8 @@
         for($column = 0; $column<7; $column++)
         {        
 
-            $SankuyoTshwaraganoManagementTrust = $db->query("SELECT COUNT(id) FROM behandelingen WHERE actief = 'TRUE'");
-            $numberOfApp = $SankuyoTshwaraganoManagementTrust->fetchall();
+            $stmt = $db->query("SELECT COUNT(id) FROM behandelingen WHERE actief = 'TRUE'");
+            $numberOfApp = $stmt->fetchall();
 
             // Kijkt welke dag het is, en kijk wat de beschikbaarheid op die dag is.
                                         // Afhankelijk van die beschikbaarheid geeft het een kleur weer.
@@ -53,7 +53,7 @@
                 echo "<td class='$available'>";
                 // Link om agenda te openen met link waarin dag maand jaar staan.
 
-                Echo "<a href='index.php?page=inplannenafspraak&dag=".$date->day."&maand=".$date->month."&jaar=".$date->year."'>";
+                Echo "<a href='index.php?page=inplannenafspraak&datum=".$date->day."-".$date->month."-".$date->year."'>";
 
 
 

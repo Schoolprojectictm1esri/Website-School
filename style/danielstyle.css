@@ -11,7 +11,7 @@ root {
 #table_agenda
 {
 	
-	width: 650px;
+	width: 630px;
 	height: 300px;
         table-layout: fixed;
 }
@@ -43,48 +43,12 @@ root {
 	border:5px solid #FF0000;
         
 	
-        /* Stijl voor de agenda per vakje Vol*/
+        
 }
 .agendaholiday {
 	width:14%;
 	position:relative;
 	height:50px;
 	border:5px #000000 solid;
-        background: niet beschikbaar;
-        
-	
-        /* Stijl voor de agenda per vakje Vol*/
-}
-
-	
-        /* Stijl voor de agenda per vakje druk*/
-
-
-#legendaavail
-{
-        width:50px;
-	position:relative;
-	height:50px;
-	border:5px solid #008000;  
-}
-#legendabusy{
-        width:50px;
-	position:relative;
-	height:50px;
-	border:5px solid #FFA500;
-        color:red;
-}
-
-#legendafull{
-        width:50px;
-	position:relative;
-	height:50px;
-	border:5px solid #FF0000;
-}
-
-#legendavacancy{
-        width:50px;
-	position:relative;
-	height:50px;
-	border:5px solid #000000;
+        background: niet beschikbaar;       
 }

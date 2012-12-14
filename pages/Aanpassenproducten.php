@@ -6,18 +6,20 @@
     Description:
         Aanpassen van producten.
 */
-
-
+ if (isset($_POST['id'],$_POST['verwijderen'])) 
+            {
+                $sql = $db->query("DELETE FROM `producten` WHERE `id` = '".(INT)$_POST['id']."'");
+               echo 'Productgegevens zijn succesvol verwijderd.';
+            }
+            
+            
     if (isset($_GET['id'])) {
             
             $stmt           = $db->query("SELECT * FROM producten WHERE `id` = '".(INT)$_POST['id']."'");
             $result         = $stmt->fetchall();
-
-
-
-
-            $img = $db->query("SELECT foto FROM producten WHERE `id` = '".(INT)$_POST['id']."'");
             //  Afbeelding uit de database halen
+            $img = $db->query("SELECT foto FROM producten WHERE `id` = '".(INT)$_POST['id']."'");
+            
 ?>
 <?php
 
@@ -98,16 +100,6 @@
 <?php
                     }
 ?>
-
-<?php
-        if (isset($_POST['verwijderen'])) 
-            {
-                $sql = $db->query("DELETE FROM `producten` WHERE `id` = '".(INT)$_POST['id']."'");
-                
-            }
-            echo 'Productgegevens zijn succesvol verwijderd.';
-?>
-
 
 <?php
             } 
