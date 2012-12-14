@@ -1,12 +1,13 @@
 <?php
-ob_start();
-session_start();
+
 /**
  * document by Jelle Smeets.
  * Created on 13-11-2012.
  * Last updated on: 15-11-2012 By Jelle
  * Version 1.0
  */
+ob_start();
+session_start();
 //laad bootstrap en initialiseer alle settings.
 require_once('includes/bootstrap.php');
 ?>

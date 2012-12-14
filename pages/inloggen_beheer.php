@@ -1,9 +1,11 @@
 <?php
 /*
- * @author Jelle
+ * @author Jelle Smeets
+ *  
  */
 //als een gebruiker al ingelogd is met een cookie of een sessie stuur deze dan door naar beheer pagina. Je hoeft immers geen 2x in te loggen.
 if(isset($_COOKIE['beheerder_id']) && $_COOKIE['beheerder_id'] != '' && is_numeric($_COOKIE['beheerder_id'])){
+    //maak de sessie de huidige cookie zodat op de rest van de site gebruik gemaakt kan worden.
     $_SESSION['beheerder_id'] = $_COOKIE['beheerder_id'];
     header('location: index.php?page=beheer');
 }elseif(isset($_SESSION['beheerder_id'])){
@@ -15,7 +17,7 @@ if(isset($_COOKIE['beheerder_id']) && $_COOKIE['beheerder_id'] != '' && is_numer
 if(checkSpam('inlog_form_beheer')){
     echo 'U heeft te vaak foutief proberen in te loggen.';
 }else{
-    //controle en verwerking.
+    //controle en verwerking. anders toon leeg formulier.
     if(isset($_POST['submit'])){
         //als wachtwoord en gebruikersnaam niet leeg zijn.
         if($_POST['username'] != '' && $_POST['password'] != ''){
@@ -26,6 +28,7 @@ if(checkSpam('inlog_form_beheer')){
             //als resultaat leeg is, toon het formulier dat het inloggen niet gelukt is.    
             $result = $stmt->fetchObject();
             if(empty($result)){
+                //set spam lvl een hoger
                setSpam('inlog_form_beheer');
                 ?>
                 <div id="beheer-login">
@@ -49,6 +52,7 @@ if(checkSpam('inlog_form_beheer')){
                         </table>
                     </form>
                     <div class="error">De combinatie van gebruikersnaam en wachtwoord is onjuist.</div>
+                </div>
                 <?php
             }else{
                 //start sessie met gebruikersnaam.
@@ -56,15 +60,15 @@ if(checkSpam('inlog_form_beheer')){
                     //als er ingelogd moet blijven start dan ook cookies.
                     setcookie('beheerder_id', $result->beheerder_id, time() +360000);
                 }
+                //maak sessie met gebruikersinformatie.
                 $_SESSION['beheerder_id'] = $result->beheerder_id;
                 $_SESSION['gebruikersnaam'] = $result->gebruikersnaam;
                 header('location: index.php?page=beheer');
             }
         }else{
             // toon formulier met gebruikersnaam ingevuld en foutmelding.
-            setSpam('inlog_form_beheer');
         ?>
-        <!-- Toon formulier !-->
+        <!-- Toon formulier met waardes!-->
         <div id="beheer-login">
             <form id="beheer-form" action="index.php?page=inloggen_beheer" method="POST">
                 <table id="table-beheer-login-form">
