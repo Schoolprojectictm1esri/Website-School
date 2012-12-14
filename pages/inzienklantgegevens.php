@@ -59,7 +59,7 @@ if(isset($_GET['klant_id'])){
             </tr>
                         <!-- Waarde 9 -->
             <tr>
-                <td>Klantenkaarnummer:</td>
+                <td>Klantenkaartnummer:</td>
                 <td><?php echo $result1->klant_nummer ?></td>
             </tr>
                         <!-- Waarde 10 -->
@@ -214,7 +214,14 @@ if(isset($_GET['klant_id'])){
 }
 //print formulier met alle klanten(voorletters, achternaam, email
 else{
-    ?>
+
+if(empty($result1)){
+    header('location: index.php?page=aanmeldenklant');
+    
+    }
+else{
+    
+?>
 <div class="inzienklantgegevens">
 <table>
     <tr>
@@ -236,5 +243,8 @@ else{
 " ;
     }
     echo "</table></div>";
+    }
 }
+
+
 ?>
