@@ -7,9 +7,12 @@
 ?>
 <div id="toevoegen_klant">
 <?php
+//is het formulier verstuurd ?
 if(isset($_POST['submit'])){
+    //zijn de verplichte velden ingevuld?
     if($_POST['achternaam'] != '' && $_POST['voorletters'] != ''){
         //succes
+        //als geboortedatum niet leeg is, controleer dan op de datum.
         if($_POST['geboortedatum'] != ''){
             list($d, $m, $y) = explode('-', $_POST['geboortedatum']);
            if(checkdate($m, $d, $y)){
@@ -74,16 +77,17 @@ if(isset($_POST['submit'])){
              $_POST['steunzolen'] = true;
         }
         //end of ugly fix.
-            $stmt = $db->query('INSERT INTO `pedicure`.`klanten` (`klant_id`, `achternaam`, `tussenvoegsel`, `voorletters`, `adres`, `woonplaats`, `postcode`, `telefoonnr`, `beroep`, `geboortedatum`, `gewicht`, `orthopedische_afwijking`, `voettype`, `huidconditie`, `huidaandoening`, `nagelconditie`, `nagelaandoening`, `plantaire_rechts`, `plantaire_links`, `dorsale_rechts`, `dorsale_links`, `diabetis_melitus`, `hart_vaat`, `anti_stol`, `phema`, `allergie`, `hiv`, `hepatitis`, `hemofilie`, `steunkousen`, `steunzolen`)
+            $stmt = $db->query('INSERT INTO `pedicure`.`klanten` (`klant_nummer`, `achternaam`, `tussenvoegsel`, `voorletters`, `adres`, `woonplaats`, `postcode`, `telefoonnr`, `beroep`, `geboortedatum`, `gewicht`, `orthopedische_afwijking`, `voettype`, `huidconditie`, `huidaandoening`, `nagelconditie`, `nagelaandoening`, `plantaire_rechts`, `plantaire_links`, `dorsale_rechts`, `dorsale_links`, `diabetis_melitus`, `hart_vaat`, `anti_stol`, `phema`, `allergie`, `hiv`, `hepatitis`, `hemofilie`, `steunkousen`, `steunzolen`)
                                                              VALUES("'.mysql_real_escape_string($_POST['klant_id']).'", "'.mysql_real_escape_string($_POST['achternaam']).'", "'.mysql_real_escape_string($_POST['tussenvoegsel']).'", "'.mysql_real_escape_string($_POST['voorletters']).'",  "'.mysql_real_escape_string($_POST['adres']).'", "'.mysql_real_escape_string($_POST['woonplaats']).'", "'.mysql_real_escape_string($_POST['postcode']).'", "'.mysql_real_escape_string($_POST['telefoonnr']).'", "'.mysql_real_escape_string($_POST['beroep']).'", "'.mysql_real_escape_string($_POST['geboortedatum']).'", "'.mysql_real_escape_string($_POST['gewicht']).'", "'.mysql_real_escape_string($_POST['orthopedische_afwijking']).'", "'.mysql_real_escape_string($_POST['voettype']).'", "'.mysql_real_escape_string($_POST['huidconditie']).'", "'.mysql_real_escape_string($_POST['huidaandoening']).'", "'.mysql_real_escape_string($_POST['nagelconditie']).'", "'.mysql_real_escape_string($_POST['nagelaandoening']).'", "'.mysql_real_escape_string($_POST['plantaire_rechts']).'", "'.mysql_real_escape_string($_POST['plantaire_links']).'", "'.mysql_real_escape_string($_POST['dorsale_rechts']).'", "'.mysql_real_escape_string($_POST['dorsale_links']).'", "'.mysql_real_escape_string($_POST['diabetus_melinus']).'", "'.mysql_real_escape_string($_POST['hart_vaat']).'", "'.mysql_real_escape_string($_POST['anti_stol']).'", "'.mysql_real_escape_string($_POST['phema']).'", "'.mysql_real_escape_string($_POST['allergie']).'", "'.mysql_real_escape_string($_POST['hiv']).'", "'.mysql_real_escape_string($_POST['hepatitis']).'", "'.mysql_real_escape_string($_POST['hemofilie']).'", "'.mysql_real_escape_string($_POST['steunkousen']).'", "'.mysql_real_escape_string($_POST['steunzolen']).'")');
-            
+            //als resultaat niet false is foutmelding tonen.
             if($stmt != false){
-                echo 'Het toevoegen van de klant is gelukt.';
+                echo 'Het toevoegen van de klant is gelukt.<br />';
+                echo '<a href="index.php?page=toevoegen_klant">Voeg nog een klant toe.</a>';
             }else{
                 echo 'Er is helaas iets mis gegaan met het toevoegen van de klant';
             }
     }else{
-        //alternatief
+        //alternatief scenario
         ?>
     <div class="error">Vult u alstublieft alle velden in.</div>
         <form id="form_klant_toevoeg" action="" method="POST">

@@ -145,4 +145,9 @@ table#table_klant_toevoeg td{
     margin: 0px;
     padding:0px;
 }
+form#form_klant_toevoeg{
+   height: 535px;
+    width: 635px;
+    overflow: auto;
+}
 /* EIND TOEVOEGEN KLANT */

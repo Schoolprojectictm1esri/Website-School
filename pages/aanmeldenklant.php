@@ -1,14 +1,16 @@
 <?php
 /**
- * @author Sander
- * @author2 Jelle opgepakt na Sander.
+ * @author Jelle Smeets
  */
+//controleer spam niveau
 if(checkSpam('registratie_form')){
   echo 'U mag niet meer registreren, u heeft te vaak dit formulier gebruikt.';  
 }else{
-    /* */
+    //controleer registratie
     if(isset($_POST['registreren'])){
+        //controleer wachtwoorden.
        if ($_POST['wachtwoord'] == $_POST['herhaalwachtwoord']){
+           //contreel alles + voorwaarden wachtwoord.
         if(checkPassword($_POST['wachtwoord'])){
             if (checkEmail($_POST['email']) || $_POST['voorletters']!='' || $_POST['achternaam']!=''
                 || $_POST['woonplaats']!='' || $_POST['adres']!=''
@@ -19,8 +21,10 @@ if(checkSpam('registratie_form')){
                     $checkmail = $db->query('SELECT email FROM Klanten where email = "'.$email.'"');
                     $objemail = $checkmail->fetchObject();
                     if(!empty($objemail)){
+                        //kan niet registreren emails is al bekend.
                         echo '<div class="error">Dit email adres is al bekend.</div>';
                     }else{
+                        //voeg maar in db.
                         $wachtwoord = hashPassword($_POST['wachtwoord']);
                         $voorletters = mysql_real_escape_string($_POST['voorletters']);
                         $achternaam = mysql_real_escape_string($_POST['achternaam']);
@@ -28,6 +32,7 @@ if(checkSpam('registratie_form')){
                         $adres = mysql_real_escape_string($_POST['adres']);
                         $postcode = mysql_real_escape_string($_POST['postcode']);
                         $telefoonnr = mysql_real_escape_string($_POST['telefoonnr']);
+                        //insert de klant.
                         $sql="INSERT INTO klanten (email, registratiedatum, wachtwoord, voorletters, achternaam, adres, woonplaats, postcode, telefoonnr) 
                             VALUES ('$email', '".date('Y-m-d')."', '$wachtwoord', '$voorletters', '$achternaam', '$adres', '$woonplaats', '$postcode', '$telefoonnr')";
                         $stmt = $db->prepare($sql);
@@ -35,28 +40,34 @@ if(checkSpam('registratie_form')){
                         //set mail for activation.
                         $select = $db->query("select * from klanten where email = '$email'");
                         $objid = $select->fetchObject();
+                        //maak activatie hash voor klant.
                         $hash = activatehash($objid->klant_id);
+                        //maka geldigheids datum van + 2 weken vanaf nu.
                         $geldig = date('Y-m-d',strtotime('+2 weeks'));
                         $hshqry = $db->query("insert into hash (`hash`, `klant_id`, `geldig`, `soort`, `actief`)
                                              VALUES('$hash', '$objid->klant_id', '$geldig', 'activeren', '1')");
-                        var_dump($hshqry);
+                        //stel email op.
                         $subject = 'Bevestigen account Pedicure Praktijk Desiree.';
                         $message = 'Beste '.$objid->voorletters.'&nbsp;'.$objid->achternaam.', /n/n Klik <a href="http://www.pedicurepraktijk.nl/index.php?page=activeer&hash='.$hash.'">hier</a> om uw account te activeren. /n/n Met vriendelijke groeten /n Pedicure praktijk Desiree. ';
                         $headers = 'From: no-reply@pedicurepraktijkdesiree.nl' . "\r\n" .
                             'Reply-To: no-reply@pedicurepraktijkdesiree.nl' . "\r\n" .
                             'X-Mailer: PHP/' . phpversion();
-
+                        //mail het.
                         mail($email, $subject, $message, $headers);
                         setSpam('registratie_form');
-                       // header('location: index.php?page=inloggen_bij_agenda'); 
+                        //stuur door naar activatie link.
+                        header('location: index.php?page=activeer'); 
                     }
              }else{
+                 //een verplicht veld niet ingevuld.
                 echo '<div class="error">Een verplicht veld is nog niet ingevuld.</div>';
              }
         }else{
+            //wachtwoord voldoet niet aan de eisen.
             echo '<div class="error">De wachtwoorden voldoen niet aan de eisen.</div>';
         }
        }else{
+           //wachtwoorden komen niet overeen.
           echo '<div class="error">Wachtwoorden komen niet overeen.</div>';
           
        }
