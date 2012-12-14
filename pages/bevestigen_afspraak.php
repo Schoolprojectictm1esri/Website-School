@@ -24,6 +24,9 @@ if(isset($_GET['id'])){
                     //query om meer gegevens op te halen
                     $stmt = $db->query("SELECT `voorletters`,`achternaam`,`email` FROM `klanten` WHERE `klant_id` = '".$result1->klant_id."'");
                     $result2 = $stmt->fetchObject();
+                    //query om behandeling op te halen
+                    $stmt = $db->query("SELECT `afspraak_id` FROM `afspraakbehandelingen` WHERE `afspraak_id` = '".$afspraakid."'");
+                    $result3 = $stmt->fetchObject();
                     //formulier waarbij afspraak al bevestigd is
                     if($result1->bevestigd == TRUE){
                         //print formulier om te bekijken
@@ -34,8 +37,14 @@ if(isset($_GET['id'])){
                                     <td><b>Afspraak gegevens:</b></td>
                                 </tr>
                                 <tr>
+                                    <td>Klant ID: <?php echo $afspraakid ?></td>
+                                </tr>                                
+                                <tr>
                                     <td>Naam: <?php echo $result2->voorletters;?>. <?php echo $result2->achternaam;?> </td>
                                 </tr>
+                                <tr>
+                                    <td>Behandeling: <?php echo $result3->behandeling_id;?>.</td>
+                                </tr>                                
                                 <tr>
                                     <td>Datum: <?php echo $result1->datum; ?></td>
                                 </tr>
@@ -58,7 +67,13 @@ if(isset($_GET['id'])){
                                     <td><b>Afspraak gegevens:</b></td>
                                 </tr>
                                 <tr>
+                                    <td>Klant ID: <?php echo $afspraakid ?></td>
+                                </tr>                                
+                                <tr>
                                     <td>Naam: <?php echo $result2->voorletters;?>. <?php echo $result2->achternaam;?> </td>
+                                </tr>
+                                <tr>
+                                    <td>Behandeling: <?php echo $result3->behandeling_id;?>.</td>
                                 </tr>
                                 <tr>
                                     <td>Datum: <?php echo $result1->datum; ?></td>
