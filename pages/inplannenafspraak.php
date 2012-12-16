@@ -16,29 +16,18 @@
 
              
                      
-                     $tijdenLijst=$db->query("SELECT * from afspraken where datum LIKE '$date%' ORDER BY datum ASC");
+              $tijdenLijst=$db->query("SELECT * from afspraken where datum LIKE '$date%' ORDER BY datum ASC");
              
               if($tijdenLijst != FALSE){
                
-              $result = $tijdenLijst->fetchall();
-              
-                                     
-              foreach ($result as $tijden)
-              { 
-                  print ("<br>");
-                  
-                  $time = date('H:i:s', strtotime($tijden['datum']));
-                  print ($time);
-                 
-                  
-                   
-              }            
+            
+                                                  
+            
               }                         
               else{
                   print ("Er zijn op de door u gekozen dag geen afspraken");
               }                            
-                     }
-              
+                     }             
              else {
                    print ("<br>");
                    print ("Let op! Er is geen datum geselecteed <br>");
@@ -47,16 +36,36 @@
              
 
           
-        
-//SELECT *
-//FROM afspraken AS a
-//JOIN afspraakbehandelingen AS ab ON a.id = ab.afspraak_id
-//JOIN behandelingen as b ON ab.behandeling_id = b.id    
+
      
-       
+ $joins=$db->query("SELECT lengte, datum, actief FROM afspraken AS a JOIN afspraakbehandelingen AS ab ON a.id = ab.afspraak_id JOIN behandelingen as b ON ab.behandeling_id = b.id WHERE datum LIKE '$date%' AND actief = 1 ORDER BY datum ASC");  
+ $min =$joins->fetchall();
+ 
+ foreach ($min as $duur){
+               print ("<br>");  
+                  
+                  
+                  $time = date('H:i:s', strtotime($duur['datum']));
+                  $lengteMin = date('i', strtotime($duur['lengte']));
+                  
+                  
+                 
+                 
+  $morgen = date ('H:i:s',strtotime ("$time +$lengteMin minutes+30minutes"));
+  print("$time - $morgen");
+
+               
+ }
+  
+
+
+
+
+
+
+
 
         
-     
         ?>
  
     </body>   
