@@ -127,6 +127,8 @@ if(isset($_GET['id'])){
                             </body>
                             </html>
                       ";
+                    //automatische mail
+                    mail($to, $subject, $message, $from);
 ?>
                     <a href="index.php?page=agenda">Terug naar agenda</a>
 <?php
@@ -169,6 +171,8 @@ if(isset($_GET['id'])){
                         </body>
                         </html>
                   ";
+                //automatische mail
+                mail($to, $subject, $message, $from);
 ?>
                 <a href="index.php?page=agenda">Terug naar agenda</a>
 <?php
@@ -211,6 +215,8 @@ if(isset($_GET['id'])){
                     </body>
                     </html>
               ";
+            //automatische mail
+            mail($to, $subject, $message, $from);
 ?>
             <a href="index.php?page=agenda">Terug naar agenda</a>
 <?php

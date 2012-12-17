@@ -49,6 +49,8 @@ if(isset($_POST['submit'])){
                     </body>
                     </html>
                     ";
+                //automatische mail
+                mail($to, $subject, $message, $from);
             //eindpagina
             echo 'Email word verzonden.';
             }
