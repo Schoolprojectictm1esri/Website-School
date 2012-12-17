@@ -157,6 +157,61 @@ function Redirect($location) {
   header("Location: ".$location); exit;
 
 }
- 
+/**
+ * @author Jelle Smeets
+ * @description Functie om menu op te halen aan de hand van de rol.
+ * @param type $type
+ * @return string
+ */
+function getMenu($role){
+    //menu voor rol 2 oftewel beheerder.
+    if($role ==2){
+        return '                <div class="menuitem">
+                    <a class="menulink" href="index.php?page=home">home</a>
+                </div>  
+                <div class="menuitem">
+                    <a class="menulink" href="index.php?page=agenda">agenda</a>
+                </div>
+                <div class="menuitem">
+                    <a class="menulink" href="index.php?page=uitloggen">uitloggen</a>
+                </div>
+                <div class="menuitem">
+                    <a class="menulink" href="index.php?page=routebeschrijving">route</a>
+                </div>
+                ';    
+        
+    }elseif($role== 1){
+        //menu voor rol is 1 oftewel klant.
+        return '                <div class="menuitem">
+                    <a class="menulink" href="index.php?page=home">home</a>
+                </div>  
+                <div class="menuitem">
+                    <a class="menulink" href="index.php?page=agenda">agenda</a>
+                </div>
+                <div class="menuitem">
+                    <a class="menulink" href="index.php?page=uitloggen">Uitloggen</a>
+                </div>
+                <div class="menuitem">
+                    <a class="menulink" href="index.php?page=routebeschrijving">route</a>
+                </div>
+                ';
+        
+    }else{
+        //menu rol voor anonieme bezoeker. 
+        return '                <div class="menuitem">
+                    <a class="menulink" href="index.php?page=home">home</a>
+                </div>  
+                <div class="menuitem">
+                    <a class="menulink" href="index.php?page=agenda">agenda</a>
+                </div>
+                <div class="menuitem">
+                    <a class="menulink" href="index.php?page=inloggen_bij_agenda">inloggen</a>
+                </div>
+                <div class="menuitem">
+                    <a class="menulink" href="index.php?page=routebeschrijving">route</a>
+                </div>
+                ';
+    }
+}
 ?>
 

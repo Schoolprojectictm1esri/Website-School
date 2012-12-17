@@ -65,19 +65,7 @@ require_once('includes/bootstrap.php');
                 </div>
             </div>
             <div id="menu">
-                <div class="menuitem">
-                    <a class="menulink" href="index.php?page=home">home</a>
-                </div>  
-                <div class="menuitem">
-                    <a class="menulink" href="index.php?page=agenda">agenda</a>
-                </div>
-                <div class="menuitem">
-                    <a class="menulink" href="index.php?page=inloggen_bij_agenda">inloggen</a>
-                </div>
-                <div class="menuitem">
-                    <a class="menulink" href="index.php?page=routebeschrijving">route</a>
-                </div>
-                
+                <?php echo getMenu(getRole()); ?>
             </div>
             <!-- Div for content scripts !-->
             <div id="contentwrapper">
