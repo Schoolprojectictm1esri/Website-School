@@ -10,9 +10,9 @@
 
     // Klant uit database verwijderen
     if (isset($_POST['klant_id'], $_POST['verwijderen'])) {
-        $sql = $db->query("
-                        DELETE FROM `klanten` WHERE `klant_id` = '" . (INT) $_POST['klant_id'] . "'
-                        ");
+             $sql = $db->prepare("DELETE FROM `klanten` WHERE klant_id = :klant_id");
+            $stmt->bindParam(':klant_id', $_POST['klant_id']);
+            $stmt->execute();
         Redirect("/index.php?page=inzienklantgegevens");
     }
 
@@ -20,10 +20,11 @@
     if (isset($_GET['klant_id'])) {
         $stmt = $db->query("
                     SELECT *
-                    FROM `klanten`
-                    WHERE `klant_id` = '" . (INT) $_GET['klant_id'] . "'
-                    ");
-        $details = $stmt->fetchAll();
+                    FROM `klanten` WHERE klant_id = :klant_id
+                        ");
+                        $stmt->bindParam(':klant_id', $_POST['klant_id']);
+                        $stmt->execute();
+                        $details = $stmt->fetchAll();
 ?>    
 
 <?php
@@ -86,8 +87,8 @@
                     <td><input type="text" name="hart_vaat" value="<?php echo $details[0]['hart_vaat']; ?>"></td>
                     <tr></tr>
 
-                    <td>Diabetus:</td>
-                    <td><input type="text" name="diabetus_melitus" value="<?php echo $details[0]['diabetus_melitus']; ?>"></td>
+                    <td>Diabetis:</td>
+                    <td><input type="text" name="diabetis_melitus" value="<?php echo $details[0]['diabetis_melitus']; ?>"></td>
                     <tr></tr>
 
                     <td>Antistollingsmiddelen:</td>
@@ -197,8 +198,8 @@
         $details[0]['klantenkaartnummer'] = $_POST['klantenkaartnummer'];
         $details[0]['beroep'] = $_POST['beroep'];
         $details[0]['gewicht'] = $_POST['gewicht'];
-        $details[0]['hart/vaat_ziekte'] = $_POST['hart/vaat_ziekte'];
-        $details[0]['antistollingsmiddelen'] = $_POST['antistollingsmiddelen'];
+        $details[0]['hart_vaat'] = $_POST['hart_vaat'];
+        $details[0]['anti_stol'] = $_POST['anti_stol'];
         $details[0]['phema'] = $_POST['phema'];
         $details[0]['allergie'] = $_POST['allergie'];
         $details[0]['hiv'] = $_POST['hiv'];
@@ -212,8 +213,8 @@
         $details[0]['nagelaandoening'] = $_POST['nagelaandoening'];
         $details[0]['voetplantair_rechts'] = $_POST['voetplantair_rechts'];
         $details[0]['voetplantair_links'] = $_POST['voetplantair_links'];
-        $details[0]['voetdorsaal_rechts'] = $_POST['voetdorsaal_rechts'];
-        $details[0]['voetdorsaal_links'] = $_POST['voetdorsaal_links'];
+        $details[0]['voetdorsaal_rechts'] = $_POST['dorsale_rechts'];
+        $details[0]['voetdorsaal_links'] = $_POST['dorsale_links'];
 
         $sql = $db->query("
                                 UPDATE `klanten` 
@@ -230,8 +231,8 @@
                                 `Beroep`                    = '" . mysql_real_escape_string($_POST['Beroep']) . "',
                                 `Gewicht`                   = '" . mysql_real_escape_string($_POST['Gewicht']) . "',
                                 `Diabetis`                  = '" . mysql_real_escape_string($_POST['Diabetis']) . "',
-                                `hart/vaat_ziekte`          = '" . mysql_real_escape_string($_POST['hart/vaat_ziekte']) . "',
-                                `antistollingsmiddelen`     = '" . mysql_real_escape_string($_POST['antistollingsmiddelen']) . "',
+                                `hart_vaat`          = '" . mysql_real_escape_string($_POST['hart_vaat']) . "',
+                                `anti_stol`     = '" . mysql_real_escape_string($_POST['anti_stol']) . "',
                                 `phema`                     = '" . mysql_real_escape_string($_POST['phema']) . "',
                                 `allergie`                  = '" . mysql_real_escape_string($_POST['allergie']) . "'
                                 `hiv`                       = '" . mysql_real_escape_string($_POST['hiv']) . "',
@@ -243,12 +244,44 @@
                                 `huidconditie`              = '" . mysql_real_escape_string($_POST['huidconditie']) . "',
                                 `nagelconditie`             = '" . mysql_real_escape_string($_POST['nagelconditie']) . "'
                                 `nagelaandoening`           = '" . mysql_real_escape_string($_POST['nagelaandoening']) . "'
-                                `voetplantair_rechts`       = '" . mysql_real_escape_string($_POST['voetplantair_rechts']) . "'
-                                `voetplantair_links`        = '" . mysql_real_escape_string($_POST['voetplantair_links']) . "'
-                                `voetdorsaal_rechts`        = '" . mysql_real_escape_string($_POST['voetdorsaal_rechts']) . "'
-                                `voetdorsaal_links`         = '" . mysql_real_escape_string($_POST['voetdorsaal_links']) . "'
+                                `voetplantair_rechts`       = '" . mysql_real_escape_string($_POST['plantaire_rechts']) . "'
+                                `voetplantair_links`        = '" . mysql_real_escape_string($_POST['plantaire_links']) . "'
+                                `voetdorsaal_rechts`        = '" . mysql_real_escape_string($_POST['dorsale_rechts']) . "'
+                                `voetdorsaal_links`         = '" . mysql_real_escape_string($_POST['dorsale_links']) . "'
                                 
-                                WHERE `klant_id` =  '" . (INT) $_POST['klant_id'] . "'");
+                                 WHERE klant_id = :klant_id
+                        ");
+                        $stmt->bindParam(':klant_id', $_POST['klant_id']);
+                        $stmt->bindParam(':voorletters', $_POST['voorletters']);
+                        $stmt->bindParam(':tussenvoegsel', $_POST['tussenvoegsel']);
+                        $stmt->bindParam(':achternaam', $_POST['achternaam']);
+                        $stmt->bindParam(':woonplaats', $_POST['woonplaats']);
+                        $stmt->bindParam(':postcode', $_POST['postcode']);
+                        $stmt->bindParam(':adres', $_POST['adres']);
+                        $stmt->bindParam(':telefoonnr', $_POST['telefoonnr']);
+                        $stmt->bindParam(':email', $_POST['email']);
+                        $stmt->bindParam(':Klantenkaartnummer', $_POST['Klantenkaartnummer']);
+                        $stmt->bindParam(':Beroep', $_POST['Beroep']);
+                        $stmt->bindParam(':Gewicht', $_POST['Gewicht']);
+                        $stmt->bindParam(':Diabetis', $_POST['diabetis_melitus']);
+                        $stmt->bindParam(':hart_vaat', $_POST['hart_vaat']);
+                        $stmt->bindParam(':anti_stol', $_POST['anti_stol']);
+                        $stmt->bindParam(':phema', $_POST['phema']);
+                        $stmt->bindParam(':allergie', $_POST['allergie']);
+                        $stmt->bindParam(':hiv', $_POST['hiv']);
+                        $stmt->bindParam(':hepatites', $_POST['hepatites']);
+                        $stmt->bindParam(':hemofilie', $_POST['hemofilie']);
+                        $stmt->bindParam(':steunkousen', $_POST['steunkousen']);
+                        $stmt->bindParam(':voettype', $_POST['voettype']);
+                        $stmt->bindParam(':orthopedische_afwijking', $_POST['orthopedische_afwijking']);
+                        $stmt->bindParam(':huidconditie', $_POST['huidconditie']);
+                        $stmt->bindParam(':nagelconditie', $_POST['nagelconditie']);
+                        $stmt->bindParam(':nagelaandoening', $_POST['nagelaandoening']);
+                        $stmt->bindParam(':plantaire_rechts', $_POST['plantaire_rechts']);
+                        $stmt->bindParam(':plantaire_links', $_POST['plantaire_links']);
+                        $stmt->bindParam(':dorsale_rechts', $_POST['dorsale_rechts']);
+                        $stmt->bindParam(':dorsale_links', $_POST['dorsale_links']);
+                        $stmt->execute();
   ?>
 
         <!--Formulier dat weergeeft waar de gegevens naar toe gewijzigd zijn. -->
@@ -311,8 +344,8 @@
                     <td><input type="text" name="hart_vaat" value="<?php echo $details[0]['hart_vaat']; ?>"></td>
                     <tr></tr>
 
-                    <td>Diabetus:</td>
-                    <td><input type="text" name="diabetus_melitus" value="<?php echo $details[0]['diabetus_melitus']; ?>"></td>
+                    <td>Diabetis:</td>
+                    <td><input type="text" name="diabetis_melitus" value="<?php echo $details[0]['diabetis_melitus']; ?>"></td>
                     <tr></tr>
 
                     <td>Antistollingsmiddelen:</td>
