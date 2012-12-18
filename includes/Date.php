@@ -7,7 +7,7 @@ class Date
     public $month;
     public $year;
 
-    // Set the date at today
+    // Zet de datum op vandaag.
     public function now()
     {
         $this->day         = date('j');
@@ -15,10 +15,10 @@ class Date
         $this->year     = date('Y');
     }
 
-    // Add a certain amount of days
+    // Voeg een bepaald aantal dagen toe
     public function addDays($days)
     {
-        // Add days
+        // Voeg dagen toe
         $new_date = mktime(0,0,0, $this->month, $this->day + $days, $this->year);
 
         $this->day       = date('j', $new_date);
@@ -26,7 +26,7 @@ class Date
         $this->year        = date('Y', $new_date);
     }
 
-    // Textual represetation of the day of the week
+    // Dag van de week als tekst
     public function dayOfWeek()
     {
         $current_date = mktime(0,0,0, $this->month, $this->day, $this->year);
@@ -42,7 +42,7 @@ class Date
 
         return $dayInDutch[$day_number];
     }
-    // Textual represetation of the day of the week
+    // Maand van het jaar als tekst.
     public function monthOfTheYear()
     {
         $current_date = mktime(0,0,0, $this->month, $this->day, $this->year);
@@ -65,7 +65,7 @@ class Date
     } 
 
 
-    // Write as string
+    // Zet neer als string
     public function toString()
     {
         return "$this->day $this->month $this->year";

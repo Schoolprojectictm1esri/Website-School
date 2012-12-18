@@ -7,22 +7,24 @@
   Aanpassen van producten.
  */
 // product uit database verwijderen
-if (isset($_POST['id'], $_POST['verwijderen'])) {
-    $sql = $db->query("DELETE FROM `producten` WHERE `id` = '" . (INT) $_POST['id'] . "'");
-    echo 'Productgegevens zijn succesvol verwijderd.';
-}
+    if (isset($_POST['id'], $_POST['verwijderen'])) {
+        $sql = $db->query("DELETE FROM `producten` WHERE `id` = '" . (INT) $_POST['id'] . "'");
+        echo 'Productgegevens zijn succesvol verwijderd.';
+    }
 
-// id uit de database ophalen
-if (isset($_GET['id'])) {
+    // id uit de database ophalen
+    if (isset($_GET['id'])) {
 
-    $stmt = $db->query("SELECT * FROM producten WHERE `id` = '" . (INT) $_POST['id'] . "'");
-    $result = $stmt->fetchall();
-    //  Afbeelding uit de database halen
-    $img = $db->query("SELECT foto FROM producten WHERE `id` = '" . (INT) $_POST['id'] . "'");
-    ?>
-    <?php
+        $stmt = $db->query("SELECT * FROM producten WHERE `id` = '" . (INT) $_POST['id'] . "'");
+        $result = $stmt->fetchall();
+        //  Afbeelding uit de database halen
+        $img = $db->query("SELECT foto FROM producten WHERE `id` = '" . (INT) $_POST['id'] . "'");
+?>
+
+<?php
     if (!isset($_POST['wijzig'])) {
-        ?>              <!-- Formulier om productgegevens te wijzigen -->
+?>
+    <!-- Formulier om productgegevens te wijzigen -->
         <form action="" method ="post">
             <table>
                 <tr>
@@ -43,11 +45,11 @@ if (isset($_GET['id'])) {
             <input type="submit" name="Wijzig" value="Wijzigingen opslaan">
             <input type="submit" name="annuleren" value="Annuleren">
         </form>
-        <?php
+<?php
     }
-    ?>
+?>
 
-    <?php
+<?php
     //  product gegevens wijzigen.
     if (isset($_POST['wijzig'])) {
 
@@ -64,7 +66,8 @@ if (isset($_GET['id'])) {
             echo 'Vul alstublieft een omschrijving in';
         }
         $img = $_POST['img'];
-        ?> <!-- formulier wat de product gegevens laat zien -->
+?>
+            <!-- formulier wat de product gegevens laat zien -->
         <form action="" method ="post">
             <table>
                 <tr>
@@ -86,20 +89,20 @@ if (isset($_GET['id'])) {
             <input type="submit" name="annuleren" value="Annuleren">
         </form>
 
-        <?php
+<?php
         echo 'Productgegevens zijn gewijzigd.';
-        ?>
+?>
 
-        <?php
+<?php
     }
-    ?>
+?>
 
-    <?php
+<?php
     //  geeft foutmelding als er geen gegevens zijn ingevoerd.
-} Else {
-    Echo 'Geen product ingevoerd.<br><br>';
-    Echo "<a href='index.php?page=bekijkenproducten'>";
-    Echo 'Klik hier';
-    Echo "</a>";
-}
+    } Else {
+        Echo 'Geen product ingevoerd.<br><br>';
+        Echo "<a href='index.php?page=bekijkenproducten'>";
+        Echo 'Klik hier';
+        Echo "</a>";
+    }
 ?>

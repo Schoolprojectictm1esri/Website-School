@@ -8,25 +8,25 @@
  */
 
 
-// Klant uit database verwijderen
-if (isset($_POST['klant_id'], $_POST['verwijderen'])) {
-    $sql = $db->query("
-                    DELETE FROM `klanten` WHERE `klant_id` = '" . (INT) $_POST['klant_id'] . "'
+    // Klant uit database verwijderen
+    if (isset($_POST['klant_id'], $_POST['verwijderen'])) {
+        $sql = $db->query("
+                        DELETE FROM `klanten` WHERE `klant_id` = '" . (INT) $_POST['klant_id'] . "'
+                        ");
+        Redirect("/index.php?page=inzienklantgegevens");
+    }
+
+    // klant gegevens uit de database halen.
+    if (isset($_GET['klant_id'])) {
+        $stmt = $db->query("
+                    SELECT *
+                    FROM `klanten`
+                    WHERE `klant_id` = '" . (INT) $_GET['klant_id'] . "'
                     ");
-    Redirect("/index.php?page=inzienklantgegevens");
-}
+        $details = $stmt->fetchAll();
+?>    
 
-// klant gegevens uit de database halen.
-if (isset($_GET['klant_id'])) {
-    $stmt = $db->query("
-                SELECT *
-                FROM `klanten`
-                WHERE `klant_id` = '" . (INT) $_GET['klant_id'] . "'
-                ");
-    $details = $stmt->fetchAll();
-    ?>    
-
-    <?php
+<?php
     if (!isset($_POST['wijzig'])) {
         ?>      <!-- formulier dat gegevens van de klant weergeeft -->
         <div class="inzienklantgegevens">
@@ -162,12 +162,12 @@ if (isset($_GET['klant_id'])) {
                 <input type="submit" name="annuleren" value="Annuleren">
             </form>
         </div>
-        <?php
+<?php
     }
-    ?>
+?>
 
 
-    <?php
+<?php
     // Wijzigd de gegevens van de klant.
     if (isset($_POST['wijzig'])) {
 
@@ -180,9 +180,8 @@ if (isset($_GET['klant_id'])) {
                 || empty($_POST['postcode'])
                 || empty($_POST['adres'])
                 || empty($_POST['klantenkaartnummer'])
-        //|| empty($_POST[''])
-        //|| empty($_POST[''])
-        ) {
+        )
+        {
             echo 'Alles moet ingevuld zijn';
         }
 
@@ -250,7 +249,7 @@ if (isset($_GET['klant_id'])) {
                                 `voetdorsaal_links`         = '" . mysql_real_escape_string($_POST['voetdorsaal_links']) . "'
                                 
                                 WHERE `klant_id` =  '" . (INT) $_POST['klant_id'] . "'");
-        ?>
+  ?>
 
         <!--Formulier dat weergeeft waar de gegevens naar toe gewijzigd zijn. -->
         <div class="inzienklantgegevens">
@@ -388,15 +387,15 @@ if (isset($_GET['klant_id'])) {
                 <input type="submit" name="annuleren" value="Annuleren">
             </form>
         </div>
-        <?php
+ <?php
         echo 'Gegevens zijn gewijzigd.';
     }
 }
 
-if (!isset($_GET['klant_id'])) {       // melding weergeven als er geen klant id is ingevoerd
-    Echo 'Geen klantgegevens ingevoerd.<br><br>';
-    echo "<a href='index.php?page=inzienklantgegevens'>";
-    Echo 'Klik hier';
-    Echo "</a>";
-}
+    if (!isset($_GET['klant_id'])) {       // melding weergeven als er geen klant id is ingevoerd
+        Echo 'Geen klantgegevens ingevoerd.<br><br>';
+        echo "<a href='index.php?page=inzienklantgegevens'>";
+        Echo 'Klik hier';
+        Echo "</a>";
+    }
 ?>
