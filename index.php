@@ -135,6 +135,7 @@ require_once('includes/bootstrap.php');
                         echo 'Copyright &copy;  Pedicurepraktijk D&#233;sir&#233;e 2012 -  ' . date("Y");
                     }
                     ?> 
+                <h5> <a href="index.php?page=inloggen_beheer">Inloggen</a> </h5>
             </div>
         </div>
     </body>
