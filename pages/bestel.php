@@ -9,12 +9,16 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
+          
         <?php
         
        if(isset($_GET['id']) && $_GET['aantal']){
+           $id = $_GET['id'];
            //$query = $db->query("INSERT INTO bestelling ");
            // controleert of  'id' en 'aantal' een waarde is meegegeven, zo ja, query om de bestelling in de database te zetten
-           $product1 = $db->query("SELECT naam FROM producten WHERE id =" . mysql_real_escape_string($_GET['id']));
+           $product1 = $db->prepare("SELECT naam FROM producten WHERE id = :id");
+           $product1->bindParam(':id', $id);
+             $product1->execute();
            $naamproduct = $product1->fetchall();
   
            foreach ($naamproduct as $productnaam){

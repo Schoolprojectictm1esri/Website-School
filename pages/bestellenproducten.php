@@ -3,10 +3,14 @@
 
 if(isset($_GET['id']))
     
+    
     // als er bij bekijkenproducten op een product is geselecteerd en op geklikt , wordt er gecontroleerd of er een waarde is meegegeven
            
             {
-        $product=$db->query("SELECT * FROM producten WHERE id = " . mysql_real_escape_string($_GET['id']));   
+    $id = $_GET['id'];
+        $product=$db->prepare("SELECT * FROM producten WHERE id = :id"); 
+        $product->bindParam(':id', $id);
+        $product->execute();
         $lijst = $product->fetchall();
         
      

@@ -7,10 +7,14 @@ Kies een categorie:
     <br>
     <br>   
 
+    
+
 <?php    
  
-$stmt = $db->query('SELECT * FROM categorieen');
+$stmt = $db->prepare('SELECT * FROM categorieen');
+
     $result = $stmt->fetchall();
+      $stmt->execute();
         foreach ($result as $row){
             echo '<a href="index.php?page=bekijkenproducten&categorie='.$row['id'].'">'.$row['naam'].'</a>' ; echo "<br> <br> " ;
 }
@@ -27,11 +31,16 @@ $stmt = $db->query('SELECT * FROM categorieen');
    
     <br>
     <br>
+    
+
 <?php
   
 if(isset($_GET['categorie'])){
-$stmt2 = $db->query("SELECT * FROM producten where categorieid = " . mysql_real_escape_string($_GET['categorie']));
+    $categorie = $_GET['categorie'];
+$stmt2 = $db->prepare("SELECT * FROM producten where categorieid = :categorie");
+$stmt2->bindParam(':categorie', $categorie);
     $result2 = $stmt2->fetchall();
+      $stmt2->execute();
         foreach ($result2 as $row2){
             echo '<a href="index.php?page=bekijkenproducten&categorie='.$row['id'].'&product='.$row2['id'].'">'.$row2['naam'].'</a>' ; echo "<br> <br>";
         }       
@@ -49,8 +58,14 @@ else {
     <br>
     <br>
 <?php
+
+
+            
 if(isset($_GET['product'])){
-$stmt3 = $db->query("SELECT * FROM producten WHERE id = " . mysql_real_escape_string($_GET['product']));
+    $product = $_GET['product'];
+$stmt3 = $db->prepare("SELECT * FROM producten WHERE id = :product");
+$stmt3->bindParam(':product', $product);
+  $stmt3->execute();
 // query om alle producten uit de database te halen, waarnaar wordt gevraagd
 
     $result3 = $stmt3->fetchall();

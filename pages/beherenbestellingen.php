@@ -9,8 +9,13 @@
         <div class="inzienklantgegevens">
  <?php
 
- 
-$stmt = $db->query('SELECT * FROM bestelling b1 JOIN bestelling_producten bp ON b1.ID = bp.bestelling_id');
+
+    
+$stmt = $db->prepare('SELECT * FROM bestelling b1 JOIN bestelling_producten bp ON b1.ID = bp.bestelling_id');
+$stmt->execute();
+
+
+
 // query om benodigde gegevens 
 
     if($stmt == TRUE)
