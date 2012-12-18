@@ -173,10 +173,16 @@ function getMenu($role){
                     <a class="menulink" href="index.php?page=agenda">agenda</a>
                 </div>
                 <div class="menuitem">
-                    <a class="menulink" href="index.php?page=uitloggen">uitloggen</a>
+                    <a class="menulink" href="index.php?page=bekijkenproducten">Kijkshop</a>
+                </div>
+                <div class="menuitem">
+                    <a class="menulink" href="index.php?page=inzienklantgegevens">Klantgegevens</a>
                 </div>
                 <div class="menuitem">
                     <a class="menulink" href="index.php?page=routebeschrijving">route</a>
+                </div>
+                <div class="menuitem">
+                    <a class="menulink" href="index.php?page=uitloggen">uitloggen</a>
                 </div>
                 ';    
         
@@ -189,10 +195,13 @@ function getMenu($role){
                     <a class="menulink" href="index.php?page=agenda">agenda</a>
                 </div>
                 <div class="menuitem">
-                    <a class="menulink" href="index.php?page=uitloggen">Uitloggen</a>
+                    <a class="menulink" href="index.php?page=bekijkenproducten">Kijkshop</a>
                 </div>
                 <div class="menuitem">
                     <a class="menulink" href="index.php?page=routebeschrijving">route</a>
+                </div>
+                <div class="menuitem">
+                    <a class="menulink" href="index.php?page=uitloggen">Uitloggen</a>
                 </div>
                 ';
         
