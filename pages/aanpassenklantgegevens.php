@@ -77,19 +77,15 @@
 
                     <td>Beroep:</td>
                     <td><input type="text" name="beroep" value="<?php echo $details[0]['beroep']; ?>"></td>
-                    <tr></tr>
+                    
 
                     <td>Gewicht:</td>
                     <td><input type="text" name="gewicht" value="<?php echo $details[0]['gewicht']; ?>"></td>
                     <tr></tr>
 
-                    <td>Hart/Vaat ziekte:</td>
-                    <td><input type="text" name="hart_vaat" value="<?php echo $details[0]['hart_vaat']; ?>"></td>
-                    <tr></tr>
-
-                    <td>Diabetis:</td>
+                     <td>Diabetis:</td>
                     <td><input type="text" name="diabetis_melitus" value="<?php echo $details[0]['diabetis_melitus']; ?>"></td>
-                    <tr></tr>
+                   
 
                     <td>Antistollingsmiddelen:</td>
                     <td><input type="text" name="anti_stol" value="<?php echo $details[0]['anti_stol']; ?>"></td>
@@ -97,27 +93,29 @@
 
                     <td>Phema:</td>
                     <td><input type="text" name="phema" value="<?php echo $details[0]['phema']; ?>"></td>
-                    <tr></tr>
-
+                    
+                    <td>Hart/Vaat ziekte:</td>
+                    <td><input type="text" name="hart_vaat" value="<?php echo $details[0]['hart_vaat']; ?>"></td>
+                      <tr></tr>
+                    
                     <td>Allergie:</td>
                     <td><input type="text" name="allergie" value="<?php echo $details[0]['allergie']; ?>"></td>
-                    <tr></tr>
+                   
 
                     <td>HIV:</td> 
                     <td><input type="text" name="hiv" value="<?php echo $details[0]['hiv']; ?>"></td>
                     <tr></tr>
 
                     <td>Hepatites:</td>
-                    <td><input type="text" name="hepatites" value="<?php echo $details[0]['hepatites']; ?>"><td>
-                    <tr></tr>
-
+                    <td><input type="text" name="hepatites" value="<?php echo $details[0]['hepatites']; ?>"></td>
+                    
                     <td>Hemofilie:</td>
                     <td><input type="text" name="hemofilie" value="<?php echo $details[0]['hemofilie']; ?>"></td>
                     <tr></tr>
 
                     <td>Steunkousen:</td>
                     <td><input type="text" name="steunkousen" value="<?php echo $details[0]['steunkousen']; ?>"></td>
-                    <tr></tr>
+                   
 
                     <td>Voettype:</td>
                     <td><input type="text" name="voettype" value="<?php echo $details[0]['voettype']; ?>"></td>
@@ -125,7 +123,7 @@
 
                     <td>Orthopedische Afwijking:</td>
                     <td><input type="text" name="orthopedische_afwijking" value="<?php echo $details[0]['orthopedische_afwijking']; ?>"></td>
-                    <tr></tr>
+                    
 
                     <td>Huidconditie:</td>
                     <td><input type="text" name="huidconditie" value="<?php echo $details[0]['huidconditie']; ?>"></td>
@@ -133,7 +131,7 @@
 
                     <td>Nagelconditie:</td>
                     <td><input type="text" name="nagelconditie" value="<?php echo $details[0]['nagelconditie']; ?>"></td>
-                    <tr></tr>
+                    
 
                     <td>Nagelaandoening:</td> 
                     <td><input type="text" name="nagelaandoening" value="<?php echo $details[0]['nagelaandoening']; ?>"></td>
@@ -141,7 +139,7 @@
 
                     <td>Voetplantair rechts:</td> 
                     <td><input type="text" name="plantaire_rechts" value="<?php echo $details[0]['plantaire_rechts']; ?>"></td>
-                    <tr></tr>
+                    
 
                     <td>Voetplantair links:</td> 
                     <td><input type="text" name="plantaire_links" value="<?php echo $details[0]['plantaire_links']; ?>"></td>
@@ -149,10 +147,12 @@
 
                     <td>Voetdorsaal rechts:</td> 
                     <td><input type="text" name="dorsale_rechts" value="<?php echo $details[0]['dorsale_rechts']; ?>"></td>
-                    <tr></tr>
+                    
 
                     <td>Voetdorsaal links:</td> 
                     <td><input type="text" name="dorsale_links" value="<?php echo $details[0]['dorsale_links']; ?>"></td>
+                   
+                    
 
 
 
@@ -160,7 +160,7 @@
 
                 <input type="submit" name="verwijderen" value="Verwijder deze klant">
                 <input type="submit" name="wijzig" value="Wijzigingen opslaan">
-                <input type="submit" name="annuleren" value="Annuleren">
+               
             </form>
         </div>
 <?php
@@ -195,7 +195,7 @@
                 $details[0]['telefoonnr'] = $_POST['telefoonnr'];
                 $details[0]['postcode'] = $_POST['postcode'];
                 $details[0]['adres'] = $_POST['adres'];
-                $details[0]['klantenkaartnummer'] = $_POST['klantenkaartnummer'];
+                $details[0]['klantenkaartnummer'] = $_POST['klant_nummer'];
                 $details[0]['beroep'] = $_POST['beroep'];
                 $details[0]['gewicht'] = $_POST['gewicht'];
                 $details[0]['hart_vaat'] = $_POST['hart_vaat'];
@@ -211,8 +211,8 @@
                 $details[0]['huidconditie'] = $_POST['huidconditie'];
                 $details[0]['nagelconditie'] = $_POST['nagelconditie'];
                 $details[0]['nagelaandoening'] = $_POST['nagelaandoening'];
-                $details[0]['voetplantair_rechts'] = $_POST['voetplantair_rechts'];
-                $details[0]['voetplantair_links'] = $_POST['voetplantair_links'];
+                $details[0]['voetplantair_rechts'] = $_POST['plantaire_rechts'];
+                $details[0]['voetplantair_links'] = $_POST['plantaire_links'];
                 $details[0]['voetdorsaal_rechts'] = $_POST['dorsale_rechts'];
                 $details[0]['voetdorsaal_links'] = $_POST['dorsale_links'];
 
@@ -281,7 +281,7 @@
                         $stmt->bindParam(':plantaire_links', $_POST['plantaire_links']);
                         $stmt->bindParam(':dorsale_rechts', $_POST['dorsale_rechts']);
                         $stmt->bindParam(':dorsale_links', $_POST['dorsale_links']);
-                        $stmt->execute();
+                        
   ?>
 
         <!--Formulier dat weergeeft waar de gegevens naar toe gewijzigd zijn. -->
@@ -289,16 +289,15 @@
             <form action="index.php?page=aanpassenklantgegevens&klant_id=<?php echo $details[0]['klant_id']; ?>" method ="post">
 
                 <table>
-
-                    <td>Klant gegevens</td>
+                    <th>Klant gegevens</th>
                     <tr></tr>
 
                     <td>Klant nummer: </td>
-                    <td> <input type="text" name ="klant_id" value="<?php echo $details[0]['klant_id']; ?>"READONLY></td>
-                    <td></tr>
+                    <td> <input type="text" name ="klant_id" value="<?php echo $details[0]['klant_id']; ?>" READONLY ></td>
+                    <tr></tr>
 
                     <td>Email:</td>
-                    <td><input type="text" name="email" value="<?php echo $details[0]['email']; ?>"><td>
+                    <td><input type="text" name="email" value="<?php echo $details[0]['email']; ?>"></td>
                     <tr></tr>
 
                     <td>Voorletters:</td>
@@ -329,24 +328,20 @@
                     <td><input type="text" name="telefoonnr" value="<?php echo $details[0]['telefoonnr']; ?>"></td>
 
                     <td>Klantenkaartnummer:</td>
-                    <td><input type="text" name="klant_nummer" value="<?php echo $details[0]['klant_nummer']; ?>"><td>
+                    <td><input type="text" name="klant_nummer" value="<?php echo $details[0]['klant_nummer']; ?>"></td>
                     <tr></tr>
 
                     <td>Beroep:</td>
                     <td><input type="text" name="beroep" value="<?php echo $details[0]['beroep']; ?>"></td>
-                    <tr></tr>
+                    
 
                     <td>Gewicht:</td>
                     <td><input type="text" name="gewicht" value="<?php echo $details[0]['gewicht']; ?>"></td>
                     <tr></tr>
 
-                    <td>Hart/Vaat ziekte:</td>
-                    <td><input type="text" name="hart_vaat" value="<?php echo $details[0]['hart_vaat']; ?>"></td>
-                    <tr></tr>
-
-                    <td>Diabetis:</td>
+                     <td>Diabetis:</td>
                     <td><input type="text" name="diabetis_melitus" value="<?php echo $details[0]['diabetis_melitus']; ?>"></td>
-                    <tr></tr>
+                   
 
                     <td>Antistollingsmiddelen:</td>
                     <td><input type="text" name="anti_stol" value="<?php echo $details[0]['anti_stol']; ?>"></td>
@@ -354,27 +349,29 @@
 
                     <td>Phema:</td>
                     <td><input type="text" name="phema" value="<?php echo $details[0]['phema']; ?>"></td>
-                    <tr></tr>
-
+                    
+                    <td>Hart/Vaat ziekte:</td>
+                    <td><input type="text" name="hart_vaat" value="<?php echo $details[0]['hart_vaat']; ?>"></td>
+                      <tr></tr>
+                    
                     <td>Allergie:</td>
                     <td><input type="text" name="allergie" value="<?php echo $details[0]['allergie']; ?>"></td>
-                    <tr></tr>
+                   
 
                     <td>HIV:</td> 
                     <td><input type="text" name="hiv" value="<?php echo $details[0]['hiv']; ?>"></td>
                     <tr></tr>
 
                     <td>Hepatites:</td>
-                    <td><input type="text" name="hepatites" value="<?php echo $details[0]['hepatites']; ?>"><td>
-                    <tr></tr>
-
+                    <td><input type="text" name="hepatites" value="<?php echo $details[0]['hepatites']; ?>"></td>
+                    
                     <td>Hemofilie:</td>
                     <td><input type="text" name="hemofilie" value="<?php echo $details[0]['hemofilie']; ?>"></td>
                     <tr></tr>
 
                     <td>Steunkousen:</td>
                     <td><input type="text" name="steunkousen" value="<?php echo $details[0]['steunkousen']; ?>"></td>
-                    <tr></tr>
+                   
 
                     <td>Voettype:</td>
                     <td><input type="text" name="voettype" value="<?php echo $details[0]['voettype']; ?>"></td>
@@ -382,7 +379,7 @@
 
                     <td>Orthopedische Afwijking:</td>
                     <td><input type="text" name="orthopedische_afwijking" value="<?php echo $details[0]['orthopedische_afwijking']; ?>"></td>
-                    <tr></tr>
+                    
 
                     <td>Huidconditie:</td>
                     <td><input type="text" name="huidconditie" value="<?php echo $details[0]['huidconditie']; ?>"></td>
@@ -390,7 +387,7 @@
 
                     <td>Nagelconditie:</td>
                     <td><input type="text" name="nagelconditie" value="<?php echo $details[0]['nagelconditie']; ?>"></td>
-                    <tr></tr>
+                    
 
                     <td>Nagelaandoening:</td> 
                     <td><input type="text" name="nagelaandoening" value="<?php echo $details[0]['nagelaandoening']; ?>"></td>
@@ -398,7 +395,7 @@
 
                     <td>Voetplantair rechts:</td> 
                     <td><input type="text" name="plantaire_rechts" value="<?php echo $details[0]['plantaire_rechts']; ?>"></td>
-                    <tr></tr>
+                    
 
                     <td>Voetplantair links:</td> 
                     <td><input type="text" name="plantaire_links" value="<?php echo $details[0]['plantaire_links']; ?>"></td>
@@ -406,10 +403,12 @@
 
                     <td>Voetdorsaal rechts:</td> 
                     <td><input type="text" name="dorsale_rechts" value="<?php echo $details[0]['dorsale_rechts']; ?>"></td>
-                    <tr></tr>
+                    
 
                     <td>Voetdorsaal links:</td> 
                     <td><input type="text" name="dorsale_links" value="<?php echo $details[0]['dorsale_links']; ?>"></td>
+                   
+                    
 
 
 
@@ -417,7 +416,7 @@
 
                 <input type="submit" name="verwijderen" value="Verwijder deze klant">
                 <input type="submit" name="wijzig" value="Wijzigingen opslaan">
-                <input type="submit" name="annuleren" value="Annuleren">
+                
             </form>
         </div>
  <?php

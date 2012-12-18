@@ -61,6 +61,7 @@
 
 
         if ($_POST['omschrijving'] != "")
+        {
            
         $stmt = $db->prepare("
                                 UPDATE `producten` 
@@ -71,13 +72,9 @@
             $stmt->bindParam(':img', $_POST['img']);
             $stmt->bindParam(':omschrijving', $_POST['omschrijving']);
             $stmt->execute();
-            
-           /*  if (isset($_POST['id'], $_POST['verwijderen'])) {
-            $stmt = $db->query("DELETE FROM `producten` WHERE id = :id");
-            $stmt->bindParam(':id', $_POST['id']);
-            $stmt->execute(); */
-            
-        else {
+        }
+        else 
+        {
             echo 'Vul alstublieft een omschrijving in';
         }
 ?>
