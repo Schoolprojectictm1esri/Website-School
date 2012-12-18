@@ -8,7 +8,7 @@
  */
 // product uit database verwijderen
     if (isset($_POST['id'], $_POST['verwijderen'])) {
-            $stmt = $db->query("DELETE FROM `producten` WHERE id = :id");
+            $stmt = $db->prepare("DELETE FROM `producten` WHERE id = :id");
             $stmt->bindParam(':id', $_POST['id']);
             $stmt->execute();
     }
@@ -16,12 +16,12 @@
     // id uit de database ophalen
     if (isset($_GET['id'])) {
 
-        $stmt = $db->query("SELECT * FROM producten WHERE id = :id");
+        $stmt = $db->prepare("SELECT * FROM producten WHERE id = :id");
         $stmt->bindParam(':id', $_POST['id']);
         $stmt->execute();
         $result = $stmt->fetchall();
         //  Afbeelding uit de database halen
-        $img = $db->query("SELECT foto FROM producten WHERE id = :id");
+        $img = $db->prepare("SELECT foto FROM producten WHERE id = :id");
         $stmt->bindParam(':id', $_POST['id']);
         $stmt->execute();
         
@@ -62,7 +62,7 @@
 
         if ($_POST['omschrijving'] != "")
            
-        $stmt = $db->query("
+        $stmt = $db->prepare("
                                 UPDATE `producten` 
                                 SET 
                                 `img`                  =: img 
