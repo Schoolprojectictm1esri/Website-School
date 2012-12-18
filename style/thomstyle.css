@@ -16,6 +16,19 @@ div#categories {
     
     
 }
+div#bestellenproducten {
+    width: 450px;
+    float: left;
+    height: 300px;
+    
+}
+
+div#bestellenproductenrechts {
+    width: 300px;
+    float: left;
+    height: 300px;
+    
+}
 
 div#resultaten {
     width: 225px;
@@ -37,11 +50,14 @@ div#bestelknop {
 }
 
 select { 
-    width: 100px;
+    width: 150px;
     color: blue;
     
 }
 
+div#bereken{
+    height : 300px;
+}
 
 
 

@@ -1,6 +1,4 @@
-<!--
-Auteur : Thom Geertman
--->
+<!-- Auteur : Thom Geertman -->
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,11 +10,11 @@ Auteur : Thom Geertman
  <?php
 
  
- 
 $stmt = $db->query('SELECT * FROM bestelling b1 JOIN bestelling_producten bp ON b1.ID = bp.bestelling_id');
 // query om benodigde gegevens 
 
-if($stmt == TRUE){
+    if($stmt == TRUE)
+        {
     
 $result = $stmt->fetchall();
 
@@ -30,11 +28,12 @@ foreach ($result as $row){
     echo "<tr><td>Product ID</td><td>{$row['product_id']}</td></tr>";
     echo "<tr><td>Aantal producten</td><td>{$row['aantal']}</td></tr>";
     echo "<a href=index.php?page=verwijderbestelling&id={$row['id']}>Verwijderen</A>";
+    // linkje naar het verwijderen van een bestelling uit de database
     echo "</table>";    
-// alle resultaten worden weergegeven in een tabel
+// alle resultaten worden weergegeven in een tabel over desbetreffende bestelling
     
-}
-}        
+                        }
+      }        
         ?>
   
         </div>

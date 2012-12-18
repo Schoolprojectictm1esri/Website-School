@@ -1,4 +1,5 @@
 <!-- Auteur : Thom --!>
+
 <!-- Linkerblok !-->
     <div id="categories">
 
@@ -14,7 +15,7 @@ $stmt = $db->query('SELECT * FROM categorieen');
             echo '<a href="index.php?page=bekijkenproducten&categorie='.$row['id'].'">'.$row['naam'].'</a>' ; echo "<br> <br> " ;
 }
 
-// selecteerd de categorieen waar je uit kan kiezen
+// selecteert de categorieen waar je uit kan kiezen en laat deze zien
     
 
  ?>
@@ -38,7 +39,7 @@ $stmt2 = $db->query("SELECT * FROM producten where categorieid = " . mysql_real_
 else {
     print ("Kies eerst een categorie");
 }
- // selecteerd de producten waar uit gekozen kan worden          
+ // selecteert de producten waar uit gekozen kan worden  en laat deze zien         
 ?>
 </div>
 <!-- Rechterblok !-->
@@ -50,18 +51,21 @@ else {
 <?php
 if(isset($_GET['product'])){
 $stmt3 = $db->query("SELECT * FROM producten WHERE id = " . mysql_real_escape_string($_GET['product']));
+// query om alle producten uit de database te halen, waarnaar wordt gevraagd
+
     $result3 = $stmt3->fetchall();
          foreach ($result3 as $row3){
+             echo "Foto : <img src='{$row3['foto']}'>";
              echo "Productnaam : {$row3['naam']}"; echo '<br>';
              echo "Prijs : {$row3['prijs']}"; echo '<br>';
              echo "Omschrijving : {$row3['omschrijving']}"; echo '<br>';
                                     }
-            echo '<a href="index.php?page=bestellenproducten&naam='.$row3['naam'].'">Bestel</a>' ; echo "<br> <br>"; 
+            echo '<a href="index.php?page=bestellenproducten&id='.$row3['id'].'">Bestel</a>' ; echo "<br> <br>"; 
 }
 else {
     print("Kies eerst een categorie en een product");
 }
-// geeft de productinformatie weer en de mogelijkheid te bestellen
+// geeft de productinformatie weer en geeft de mogelijkheid te bestellen
 ?>  
     <br>    
     </div>
