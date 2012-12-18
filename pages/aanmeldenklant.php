@@ -12,13 +12,14 @@ if(checkSpam('registratie_form')){
        if ($_POST['wachtwoord'] == $_POST['herhaalwachtwoord']){
            //contreel alles + voorwaarden wachtwoord.
         if(checkPassword($_POST['wachtwoord'])){
-            if (checkEmail($_POST['email']) || $_POST['voorletters']!='' || $_POST['achternaam']!=''
-                || $_POST['woonplaats']!='' || $_POST['adres']!=''
-                || $_POST['postcode']!='' || $_POST['telefoonnr']!=''
-                || $_POST['wachtwoord']!=''|| $_POST['herhaalwachtwoord']!=''){
+            if (checkEmail($_POST['email']) && $_POST['voorletters']!='' && $_POST['achternaam']!=''
+                && $_POST['woonplaats']!='' && $_POST['adres']!=''
+                && $_POST['postcode']!='' && $_POST['telefoonnr']!=''
+                && $_POST['wachtwoord']!='' && $_POST['herhaalwachtwoord']!=''){
                 //controleren email.
-                    $email = mysql_real_escape_string($_POST['email']);
-                    $checkmail = $db->query('SELECT email FROM Klanten where email = "'.$email.'"');
+                    $checkmail = $db->prepare('SELECT email FROM Klanten where email = :email');
+                    $checkmail->bindparam('email', $_POST['email']);
+                    $checkmail->execute();
                     $objemail = $checkmail->fetchObject();
                     if(!empty($objemail)){
                         //kan niet registreren emails is al bekend.
@@ -26,19 +27,25 @@ if(checkSpam('registratie_form')){
                     }else{
                         //voeg maar in db.
                         $wachtwoord = hashPassword($_POST['wachtwoord']);
-                        $voorletters = mysql_real_escape_string($_POST['voorletters']);
-                        $achternaam = mysql_real_escape_string($_POST['achternaam']);
-                        $woonplaats = mysql_real_escape_string($_POST['woonplaats']);
-                        $adres = mysql_real_escape_string($_POST['adres']);
-                        $postcode = mysql_real_escape_string($_POST['postcode']);
-                        $telefoonnr = mysql_real_escape_string($_POST['telefoonnr']);
                         //insert de klant.
                         $sql="INSERT INTO klanten (email, registratiedatum, wachtwoord, voorletters, achternaam, adres, woonplaats, postcode, telefoonnr) 
-                            VALUES ('$email', '".date('Y-m-d')."', '$wachtwoord', '$voorletters', '$achternaam', '$adres', '$woonplaats', '$postcode', '$telefoonnr')";
+                            VALUES (:email, :date, :wachtwoord, :voorletters, :achternaam, :adres, :woonplaats, :postcode, :telefoonnr)";
                         $stmt = $db->prepare($sql);
+                        $stmt->bindParam(':email', $_POST['email']);
+                        $stmt->bindParam(':date', date('Y-m-d'));
+                        $stmt->bindParam(':wachtwoord', $wachtwoord);
+                        $stmt->bindParam(':voorletters', $_POST['voorletters']);
+                        $stmt->bindParam(':achternaam', $_POST['achternaam']);
+                        $stmt->bindParam(':woonplaats', $_POST['woonplaats']);
+                        $stmt->bindParam(':adres', $_POST['adres']);
+                        $stmt->bindParam(':postcode', $_POST['postcode']);
+                        $stmt->bindParam(':telefoonnr', $_POST['telefoonnr']);
+                        
                         $stmt->execute();
                         //set mail for activation.
-                        $select = $db->query("select * from klanten where email = '$email'");
+                        $select = $db->prepare("select * from klanten where email = :email");
+                        $select->bindParam(':email', $_POST['email']);
+                        $select->execute();
                         $objid = $select->fetchObject();
                         //maak activatie hash voor klant.
                         $hash = activatehash($objid->klant_id);

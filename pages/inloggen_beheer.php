@@ -29,7 +29,6 @@ if(checkSpam('inlog_form_beheer')){
             //als resultaat leeg is, toon het formulier dat het inloggen niet gelukt is.   
             $stmt->execute();
             $result = $stmt->fetchObject();
-            var_dump($result);
            if(empty($result)){
                 //set spam lvl een hoger
                setSpam('inlog_form_beheer');
