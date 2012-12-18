@@ -8,17 +8,23 @@
  */
 // product uit database verwijderen
     if (isset($_POST['id'], $_POST['verwijderen'])) {
-        $sql = $db->query("DELETE FROM `producten` WHERE `id` = '" . (INT) $_POST['id'] . "'");
-        echo 'Productgegevens zijn succesvol verwijderd.';
+            $stmt = $db->query("DELETE FROM `producten` WHERE id = :id");
+            $stmt->bindParam(':id', $_POST['id']);
+            $stmt->execute();
     }
 
     // id uit de database ophalen
     if (isset($_GET['id'])) {
 
-        $stmt = $db->query("SELECT * FROM producten WHERE `id` = '" . (INT) $_POST['id'] . "'");
+        $stmt = $db->query("SELECT * FROM producten WHERE id = :id");
+        $stmt->bindParam(':id', $_POST['id']);
+        $stmt->execute();
         $result = $stmt->fetchall();
         //  Afbeelding uit de database halen
-        $img = $db->query("SELECT foto FROM producten WHERE `id` = '" . (INT) $_POST['id'] . "'");
+        $img = $db->query("SELECT foto FROM producten WHERE id = :id");
+        $stmt->bindParam(':id', $_POST['id']);
+        $stmt->execute();
+        
 ?>
 
 <?php
@@ -56,16 +62,24 @@
 
         if ($_POST['omschrijving'] != "")
            
-        $sql = $db->query("
+        $stmt = $db->query("
                                 UPDATE `producten` 
                                 SET 
-                                `img` = '" . mysql_real_escape_string($_POST['img']) . "' 
-                                `omschrijving` = '" . mysql_real_escape_string($_POST['omschrijving']) . "'
-                                WHERE `id` = '" . (INT) $_POST['id'] . "'");
+                                `img`                  =: img 
+                                `omschrijving` =:omschrijving
+                                WHERE id = :id");
+            $stmt->bindParam(':img', $_POST['img']);
+            $stmt->bindParam(':omschrijving', $_POST['omschrijving']);
+            $stmt->execute();
+            
+           /*  if (isset($_POST['id'], $_POST['verwijderen'])) {
+            $stmt = $db->query("DELETE FROM `producten` WHERE id = :id");
+            $stmt->bindParam(':id', $_POST['id']);
+            $stmt->execute(); */
+            
         else {
             echo 'Vul alstublieft een omschrijving in';
         }
-        $img = $_POST['img'];
 ?>
             <!-- formulier wat de product gegevens laat zien -->
         <form action="" method ="post">

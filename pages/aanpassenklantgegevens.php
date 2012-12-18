@@ -10,7 +10,7 @@
 
     // Klant uit database verwijderen
     if (isset($_POST['klant_id'], $_POST['verwijderen'])) {
-             $sql = $db->prepare("DELETE FROM `klanten` WHERE klant_id = :klant_id");
+            $stmt = $db->prepare("DELETE FROM `klanten` WHERE klant_id = :klant_id");
             $stmt->bindParam(':klant_id', $_POST['klant_id']);
             $stmt->execute();
         Redirect("/index.php?page=inzienklantgegevens");
@@ -18,7 +18,7 @@
 
     // klant gegevens uit de database halen.
     if (isset($_GET['klant_id'])) {
-        $stmt = $db->query("
+        $stmt = $db->prepare("
                     SELECT *
                     FROM `klanten` WHERE klant_id = :klant_id
                         ");
@@ -186,68 +186,68 @@
             echo 'Alles moet ingevuld zijn';
         }
 
-        $details[0]['klant_id'] = $_POST['klant_id'];
-        $details[0]['email'] = $_POST['email'];
-        $details[0]['voorletters'] = $_POST['voorletters'];
-        $details[0]['tussenvoegsel'] = $_POST['tussenvoegsel'];
-        $details[0]['achternaam'] = $_POST['achternaam'];
-        $details[0]['woonplaats'] = $_POST['woonplaats'];
-        $details[0]['telefoonnr'] = $_POST['telefoonnr'];
-        $details[0]['postcode'] = $_POST['postcode'];
-        $details[0]['adres'] = $_POST['adres'];
-        $details[0]['klantenkaartnummer'] = $_POST['klantenkaartnummer'];
-        $details[0]['beroep'] = $_POST['beroep'];
-        $details[0]['gewicht'] = $_POST['gewicht'];
-        $details[0]['hart_vaat'] = $_POST['hart_vaat'];
-        $details[0]['anti_stol'] = $_POST['anti_stol'];
-        $details[0]['phema'] = $_POST['phema'];
-        $details[0]['allergie'] = $_POST['allergie'];
-        $details[0]['hiv'] = $_POST['hiv'];
-        $details[0]['hepatites'] = $_POST['hepatites'];
-        $details[0]['hemofilie'] = $_POST['hemofilie'];
-        $details[0]['steunkousen'] = $_POST['steunkousen'];
-        $details[0]['voettype'] = $_POST['voettype'];
-        $details[0]['orthopedische_afwijking'] = $_POST['orthopedische_afwijking'];
-        $details[0]['huidconditie'] = $_POST['huidconditie'];
-        $details[0]['nagelconditie'] = $_POST['nagelconditie'];
-        $details[0]['nagelaandoening'] = $_POST['nagelaandoening'];
-        $details[0]['voetplantair_rechts'] = $_POST['voetplantair_rechts'];
-        $details[0]['voetplantair_links'] = $_POST['voetplantair_links'];
-        $details[0]['voetdorsaal_rechts'] = $_POST['dorsale_rechts'];
-        $details[0]['voetdorsaal_links'] = $_POST['dorsale_links'];
+                $details[0]['klant_id'] = $_POST['klant_id'];
+                $details[0]['email'] = $_POST['email'];
+                $details[0]['voorletters'] = $_POST['voorletters'];
+                $details[0]['tussenvoegsel'] = $_POST['tussenvoegsel'];
+                $details[0]['achternaam'] = $_POST['achternaam'];
+                $details[0]['woonplaats'] = $_POST['woonplaats'];
+                $details[0]['telefoonnr'] = $_POST['telefoonnr'];
+                $details[0]['postcode'] = $_POST['postcode'];
+                $details[0]['adres'] = $_POST['adres'];
+                $details[0]['klantenkaartnummer'] = $_POST['klantenkaartnummer'];
+                $details[0]['beroep'] = $_POST['beroep'];
+                $details[0]['gewicht'] = $_POST['gewicht'];
+                $details[0]['hart_vaat'] = $_POST['hart_vaat'];
+                $details[0]['anti_stol'] = $_POST['anti_stol'];
+                $details[0]['phema'] = $_POST['phema'];
+                $details[0]['allergie'] = $_POST['allergie'];
+                $details[0]['hiv'] = $_POST['hiv'];
+                $details[0]['hepatites'] = $_POST['hepatites'];
+                $details[0]['hemofilie'] = $_POST['hemofilie'];
+                $details[0]['steunkousen'] = $_POST['steunkousen'];
+                $details[0]['voettype'] = $_POST['voettype'];
+                $details[0]['orthopedische_afwijking'] = $_POST['orthopedische_afwijking'];
+                $details[0]['huidconditie'] = $_POST['huidconditie'];
+                $details[0]['nagelconditie'] = $_POST['nagelconditie'];
+                $details[0]['nagelaandoening'] = $_POST['nagelaandoening'];
+                $details[0]['voetplantair_rechts'] = $_POST['voetplantair_rechts'];
+                $details[0]['voetplantair_links'] = $_POST['voetplantair_links'];
+                $details[0]['voetdorsaal_rechts'] = $_POST['dorsale_rechts'];
+                $details[0]['voetdorsaal_links'] = $_POST['dorsale_links'];
 
-        $sql = $db->query("
+        $stmt = $db->prepare("
                                 UPDATE `klanten` 
                                 SET
-                                `voorletters`               = '" . mysql_real_escape_string($_POST['voorletters']) . "',
-                                `tussenvoegsel`             = '" . mysql_real_escape_string($_POST['tussenvoegsel']) . "',
-                                `achternaam`                = '" . mysql_real_escape_string($_POST['achternaam']) . "',
-                                `woonplaats`                = '" . mysql_real_escape_string($_POST['woonplaats']) . "',
-                                `postcode`                  = '" . mysql_real_escape_string($_POST['postcode']) . "',
-                                `adres`                     = '" . mysql_real_escape_string($_POST['adres']) . "',
-                                `telefoonnr`                = '" . mysql_real_escape_string($_POST['telefoonnr']) . "',
-                                `email`                     = '" . mysql_real_escape_string($_POST['email']) . "'
-                                `Klantenkaartnummer`        = '" . mysql_real_escape_string($_POST['Klantenkaartnummer']) . "',
-                                `Beroep`                    = '" . mysql_real_escape_string($_POST['Beroep']) . "',
-                                `Gewicht`                   = '" . mysql_real_escape_string($_POST['Gewicht']) . "',
-                                `Diabetis`                  = '" . mysql_real_escape_string($_POST['Diabetis']) . "',
-                                `hart_vaat`          = '" . mysql_real_escape_string($_POST['hart_vaat']) . "',
-                                `anti_stol`     = '" . mysql_real_escape_string($_POST['anti_stol']) . "',
-                                `phema`                     = '" . mysql_real_escape_string($_POST['phema']) . "',
-                                `allergie`                  = '" . mysql_real_escape_string($_POST['allergie']) . "'
-                                `hiv`                       = '" . mysql_real_escape_string($_POST['hiv']) . "',
-                                `hepatites`                 = '" . mysql_real_escape_string($_POST['hepatites']) . "',
-                                `hemofilie`                 = '" . mysql_real_escape_string($_POST['hemofilie']) . "',
-                                `steunkousen`               = '" . mysql_real_escape_string($_POST['steunkousen']) . "',
-                                `voettype`                  = '" . mysql_real_escape_string($_POST['voettype']) . "',
-                                `orthopedische_afwijking`   = '" . mysql_real_escape_string($_POST['orthopedische_afwijking']) . "',
-                                `huidconditie`              = '" . mysql_real_escape_string($_POST['huidconditie']) . "',
-                                `nagelconditie`             = '" . mysql_real_escape_string($_POST['nagelconditie']) . "'
-                                `nagelaandoening`           = '" . mysql_real_escape_string($_POST['nagelaandoening']) . "'
-                                `voetplantair_rechts`       = '" . mysql_real_escape_string($_POST['plantaire_rechts']) . "'
-                                `voetplantair_links`        = '" . mysql_real_escape_string($_POST['plantaire_links']) . "'
-                                `voetdorsaal_rechts`        = '" . mysql_real_escape_string($_POST['dorsale_rechts']) . "'
-                                `voetdorsaal_links`         = '" . mysql_real_escape_string($_POST['dorsale_links']) . "'
+                                `voorletters`                                     =:voorletters
+                                `tussenvoegsel`                              =:tussenvoegsel
+                                `achternaam`                                   =:achternaam
+                                `woonplaats`                                   =:woonplaats
+                                `postcode`                                       =:postcode
+                                `adres`                                          =:adres
+                                `telefoonnr`                                    =:telefoonnr
+                                `email`                                            =:email
+                                `Klantenkaartnummer`               =:Klantenkaartnummer
+                                `Beroep`                                        =:Beroep
+                                `Gewicht`                                        =:Gewicht
+                                `Diabetis`                                       =:Diabetis
+                                `hart_vaat`                                        =:hart_vaat
+                                `anti_stol`                                       =:anti_stol
+                                `phema`                                          =:phema
+                                `allergie`                                           =:allergie
+                                `hiv`                                                    =:hiv
+                                `hepatites`                                      =:hepatites
+                                `hemofilie`                                     =:hemofilie
+                                `steunkousen`                               =:steunkousen
+                                `voettype`                                         =:voettype
+                                `orthopedische_afwijking`           =:orthopedische_afwijking
+                                `huidconditie`                                  =:huidconditie
+                                `nagelconditie`                                =:nagelconditie
+                                `nagelaandoening`                        =:nagelaandoening
+                                `voetplantair_rechts`                      =:voetplantair_rechts
+                                `voetplantair_links`                         =:voetplantair_links
+                                `voetdorsaal_rechts`                      =:voetdorsaal_rechts
+                                `voetdorsaal_links`                         =:voetdorsaal_links
                                 
                                  WHERE klant_id = :klant_id
                         ");
