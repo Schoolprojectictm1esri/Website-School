@@ -63,11 +63,13 @@
 
   
  }
- 
+
+ if(isset($_GET['tijd'])){
  
  if(isset($_GET['date']) && ($_GET['tijd'])){
-      
-     print ("Hoi");
+
+     print ("U heeft de volgende tijd gekozen {$_GET['tijd']} <br>");
+     print ("Selecteer een behandeling a.u.b. <br>");
  
  
   
@@ -78,9 +80,11 @@
 
             }
 
+            }
 
-
-
+else{
+    print ("hoi");
+}
 
         
         ?>
