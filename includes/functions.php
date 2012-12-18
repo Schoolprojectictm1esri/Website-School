@@ -211,6 +211,9 @@ function getMenu($role){
                     <a class="menulink" href="index.php?page=home">home</a>
                 </div>  
                 <div class="menuitem">
+                    <a class="menulink" href="index.php?page=aanmeldenklant">Registreren</a>
+                </div>
+                <div class="menuitem">
                     <a class="menulink" href="index.php?page=agenda">agenda</a>
                 </div>
                 <div class="menuitem">
