@@ -30,5 +30,5 @@ $pagelist['inzienklantgegevens'] = 2;
 $pagelist['beherenbestellingen'] = 2;
 $pagelist['bekijkenproducten'] = 0;
 $pagelist['bestellenproducten'] = 1;
-$pagelist['inplannenafspraak'] = 1;
+$pagelist['inplannenafspraak'] = 0;
 ?>

@@ -59,7 +59,7 @@
  
   
   
-  echo "<a href=index.php?page=inplannenafspraak&date={$_GET['date']}&tijd=$nieuweTijd>$nieuweTijd</a><br>";
+  echo "<a href=index.php?page=kiesbehandeling&date={$_GET['date']}&tijd=$nieuweTijd>$nieuweTijd</a><br>";
 
   
  }
@@ -68,9 +68,12 @@
  
  if(isset($_GET['date']) && ($_GET['tijd'])){
 
-     print ("U heeft de volgende tijd gekozen {$_GET['tijd']} <br>");
-     print ("Selecteer een behandeling a.u.b. <br>");
+     print ("Door op een tijd te klikken komt u bij de behandelingskeuze<br>");
+     
  
+     
+       
+     }
  
   
  }
@@ -78,7 +81,7 @@
  else("Geen tijd");
 
 
-            }
+            
 
             }
 
