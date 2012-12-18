@@ -22,12 +22,15 @@ if(checkSpam('inlog_form_beheer')){
         //als wachtwoord en gebruikersnaam niet leeg zijn.
         if($_POST['username'] != '' && $_POST['password'] != ''){
             //nu valideer met database.
-            $naam = mysql_real_escape_string($_POST['username']);
             $wachtwoord = hashPassword($_POST['password']);
-            $stmt = $db->query('select * from beheerder where gebruikersnaam = "'.$naam.'" AND wachtwoord = "'.$wachtwoord.'" AND actief = 1 LIMIT 0,1');
-            //als resultaat leeg is, toon het formulier dat het inloggen niet gelukt is.    
+            $stmt = $db->prepare('select * from beheerder where gebruikersnaam = :naam AND wachtwoord = :wachtwoord AND actief = 1 LIMIT 0,1');
+            $stmt->bindParam(':naam', $_POST['username']);
+            $stmt->bindParam(':wachtwoord', $wachtwoord);
+            //als resultaat leeg is, toon het formulier dat het inloggen niet gelukt is.   
+            $stmt->execute();
             $result = $stmt->fetchObject();
-            if(empty($result)){
+            var_dump($result);
+           if(empty($result)){
                 //set spam lvl een hoger
                setSpam('inlog_form_beheer');
                 ?>
