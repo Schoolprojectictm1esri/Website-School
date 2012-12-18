@@ -11,7 +11,9 @@ $emailadres = '';
 //controleerd of er een value is meegegeven
 if(isset($_GET['value'])){
     $hash = $_GET['value'];
-    $stmt = $db->query("SELECT `emailadres` FROM `klanten` WHERE `hash` = '".$hash."'");
+    $stmt = $db->prepare("SELECT `emailadres` FROM `klanten` WHERE `hash` = :hash");
+    $stmt->bindParam(':hash', $hash);
+    $stmt->execute();
     $result = $stmt->fetchObject();
     //controle of er result is
     if(!empty($result)){
@@ -41,7 +43,10 @@ if(isset($_POST['submit'])){
         if(($_POST['ww1']) == ($_POST['ww2'])){
             //insert query
             $ww1 = hashPassword($_POST['ww1']);
-            $stmt = $db->query("update `klanten` SET `wachtwoord` = '".$ww1."', `hash` = '' WHERE `emailadres` = '".$emailadres."'");
+            $stmt = $db->prepare("update `klanten` SET `wachtwoord` = :ww1, `hash` = '' WHERE `emailadres` = :emailadres");
+            $stmt->bindParam(':ww1', $ww1);
+            $stmt->bindParam(':emailadrs', $emailadres);
+            $stmt->execute();
             echo 'Uw wachtwoord is gewijzigd <br/> <a href="http://localhost/Website-School/index.php">Klik hier</a> om naar home te gaan.';
         }
         else {

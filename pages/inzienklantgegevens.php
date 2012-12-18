@@ -10,7 +10,9 @@
 if(isset($_GET['klant_id'])){
     //query om data op te halen uit DB
     $klant_id = $_GET['klant_id'];
-    $stmt = $db->query("SELECT * FROM `klanten` WHERE `klant_id` = '".$klant_id."'");
+    $stmt = $db->prepare("SELECT * FROM `klanten` WHERE `klant_id` = :klant_id");
+    $stmt->bindParam(':klant_id', $klant_id);
+    $stmt->execute();
     $result1 = $stmt->fetchObject();
 //formulier waar alles getoont word  
 ?>
@@ -228,7 +230,7 @@ else{
             <th>Achternaam</th>
         </tr>
         <?php
-        $stmt = $db->query("SELECT `klant_id`,`voorletters`,`achternaam` FROM klanten");
+        $stmt = $db->execute("SELECT `klant_id`,`voorletters`,`achternaam` FROM klanten");
         $result2 = $stmt->fetchall();
         foreach ($result2 as $row => $row2){
             print "

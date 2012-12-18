@@ -11,7 +11,9 @@
 if(isset($_GET['id'])){
     $afspraakid = $_GET['id'];
     //query om te kijken of (afspraak)id bestaat, rest gegevens ophalen
-    $stmt = $db->query("SELECT `datum`,`klant_id`,`id`,`bevestigd` FROM `afspraken` WHERE `id` = '".$afspraakid."'");
+    $stmt = $db->prepare("SELECT `datum`,`klant_id`,`id`,`bevestigd` FROM `afspraken` WHERE `id` = :afspraakid");
+    $stmt->bindParam(':afspraakid', $afspraakid);
+    $stmt->execute();
     $result1 = $stmt->fetchObject();
     //check of re resultaat is
     if(!empty($result1)){
@@ -22,10 +24,14 @@ if(isset($_GET['id'])){
                 //check of formulier gesubmit is op:Afwijzen
                 if(!isset($_POST['submit3'])){
                     //query om meer gegevens op te halen
-                    $stmt = $db->query("SELECT `voorletters`,`achternaam`,`email` FROM `klanten` WHERE `klant_id` = '".$result1->klant_id."'");
+                    $stmt = $db->prepare("SELECT `voorletters`,`achternaam`,`email` FROM `klanten` WHERE `klant_id` = :resultklantid");
+                    $stmt->bindParam(':resultklantid', $result1->klant_id);
+                    $stmt->execute();
                     $result2 = $stmt->fetchObject();
                     //query om behandeling op te halen
-                    $stmt = $db->query("SELECT `afspraak_id` FROM `afspraakbehandelingen` WHERE `afspraak_id` = '".$afspraakid."'");
+                    $stmt = $db->prepare("SELECT `afspraak_id` FROM `afspraakbehandelingen` WHERE `afspraak_id` = :afspraakid");
+                    $stmt->bindParam(':afspraakid', $afspraakid);
+                    $stmt->execute();
                     $result3 = $stmt->fetchObject();
                     //formulier waarbij afspraak al bevestigd is
                     if($result1->bevestigd == TRUE){
@@ -92,7 +98,9 @@ if(isset($_GET['id'])){
                 }
                 else{
                     //query voor update bij afwijzing
-                    $stmt = $db->query("UPDATE `afspraken` SET `bevestigd` = false WHERE `id` = '".$afspraakid."'");
+                    $stmt = $db->prepare("UPDATE `afspraken` SET `bevestigd` = false WHERE `id` = :afspraakid");
+                    $stmt->bindParam(':afspraakid', $afspraakid);
+                    $stmt->execute();
                     echo "Afspraak is afgewezen,";
                     //email naar klant na annulering
                     $to = $result2->email;
@@ -136,7 +144,9 @@ if(isset($_GET['id'])){
             } 
             else{
                 //query met update bevestigen van afspraak
-                $stmt = $db->query("UPDATE `afspraken` SET `bevestigd` = TRUE WHERE `id` = '".$afspraakid."'");
+                $stmt = $db->prepare("UPDATE `afspraken` SET `bevestigd` = TRUE WHERE `id` = :afspraakid");
+                $stmt->bindParam(':afspraakid', $afspraakid);
+                $stmt->execute();
                 echo "Afspraak is bevestigd,";
                 //email naar klant na bevestiging
                 $to = $result2->email;
@@ -180,7 +190,9 @@ if(isset($_GET['id'])){
         }
         else{
             //query met update annuleren van de afspraak
-            $stmt = $db->query("UPDATE `afspraken` SET `bevestigd` = FALSE WHERE `id` = '".$afspraakid."'");
+            $stmt = $db->prepare("UPDATE `afspraken` SET `bevestigd` = FALSE WHERE `id` = :afspraakid");
+            $stmt->bindParam(':afspraakid', $afspraakid);
+            $stmt->execute();
             echo "Afspraak is geannuleerd,";
             //email naar klant na annulering
             $to = $result2->email;

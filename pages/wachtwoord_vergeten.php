@@ -12,13 +12,18 @@ if(isset($_POST['submit'])){
     //check email niet leeg
     if($_POST['emailadres'] != ''){
         //query om informatie op te halen
-        $stmt = $db->query("SELECT * FROM klanten WHERE `emailadres` = '".mysql_real_escape_string($_POST['emailadres'])."'");
+        $stmt = $db->prepare("SELECT * FROM klanten WHERE `emailadres` = :email");
+        $stmt->bindParam(':email', $_POST['emailadres']);
+        $stmt->execute();
         $result = $stmt->fetchObject();
             //controleert of resultaat niet leeg is
             if(!empty($result)){
                 //aanmaken hass voor link
                 $hash = hashpasswordrecovery2($_POST['emailadres']);
-                $db->query("UPDATE `klanten` SET `hash`='".$hash."' WHERE `emailadres`='".$_POST['emailadres']."'");
+                $stmt = $db->prepare("UPDATE `klanten` SET `hash`= :hash WHERE `emailadres`= :emailadres");
+                $stmt->bindParam(':hash', $hash);
+                $stmt->bindParam(':emailadres', $_POST['emailadres']);
+                $stmt->execute();
                 //mail
                 $to = $_POST['emailadres'];
                 $subject = "Wachtwoord vergeten";
