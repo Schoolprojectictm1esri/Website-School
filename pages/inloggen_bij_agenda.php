@@ -33,7 +33,7 @@ if(checkSpam('inlog_form_klant')){
                     if($result->actief == 1){
                     //gebruiker id in sessie.
                     setcookie('klanten_id', $result->klanten_id, time() +360000);
-                    $_SESSION['klanten_id'] = $result->klanten_id;
+                    $_SESSION['klanten_id'] = $result->klant_id;
                     $_SESSION['achternaam'] = $result->achternaam;
                      //gebruiker doorsturen naar agenda.php
                     header('location: index.php?page=agenda');
