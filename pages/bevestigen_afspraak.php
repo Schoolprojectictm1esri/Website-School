@@ -236,7 +236,11 @@ if(isset($_GET['id'])){
     }
     else{
         //redirect bij foutmelding(onbekent afspraakID)
-        header ('location: bevestigen_afspraak');
+        ?>
+            Onbekende afspraak. <br />
+            Ga terug naar alle afspraken, <br />
+            <a href="index.php?page=bevestigen_afspraak">Klik hier</a>
+        <?php
     }
 }
 else{
