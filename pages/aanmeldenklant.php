@@ -59,10 +59,13 @@ if(checkSpam('registratie_form')){
                         $hshqry->execute();
                         //stel email op.
                         $subject = 'Bevestigen account Pedicure Praktijk Desiree.';
-                        $message = 'Beste '.$objid->voorletters.' '.$objid->achternaam.', <br /> Klik <a href="http://www.pedicurepraktijk.nl/index.php?page=activeer&hash='.$hash.'">hier</a> om uw account te activeren. <br /> Met vriendelijke groeten /n Pedicure praktijk Desiree. ';
-                        $headers = 'From: no-reply@pedicurepraktijkdesiree.nl' . "\r\n" .
+                        $message = 'Beste '.$objid->voorletters.' '.$objid->achternaam.',<br /> Klik <a href="http://www.pedicurepraktijk.nl/index.php?page=activeer&hash='.$hash.'">hier</a> om uw account te activeren. <br /> Met vriendelijke groeten <br /> Pedicurepraktijk Desiree. ';
+                        $headers = "MIME-Version: 1.0". "\r\n";
+                        $headers .= "Content-type:text/html;charset=iso-8859-1". "\r\n";
+                        $headers .= "From: <noreply@pedicurepraktijkdesiree.nl>"."\r\n";
+                        /* $headers = 'From: no-reply@pedicurepraktijkdesiree.nl.' . "\r\n" .
                             'Reply-To: no-reply@pedicurepraktijkdesiree.nl' . "\r\n" .
-                            'X-Mailer: PHP/' . phpversion();
+                            'X-Mailer: PHP/' . phpversion();*/
                         //mail het.
                         mail($_POST['email'], $subject, $message, $headers);
                         setSpam('registratie_form');
