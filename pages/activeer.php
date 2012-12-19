@@ -3,9 +3,8 @@
  * @author Jelle Smeets
  */
 if(isset($_GET['hash'])){
-    $hash = mysql_real_escape_string($_GET['hash']);
-    $activate = $db->prepare('select * from hash where hash = :hash');
-    $activate->bindParam(':hash', $_POST['hash']);
+    $activate = $db->prepare('select * from `hash` where hash = :hash and actief = 1');
+    $activate->bindParam(':hash', $_GET['hash']);
     $activate->execute();
     $hashobj =  $activate->fetchObject();
     //als hash in de database staat
@@ -14,9 +13,9 @@ if(isset($_GET['hash'])){
        if($hashobj->geldig >= date('Y-m-d H:m:s')){
            //update de boel
           $qry1 = $db->prepare("update hash set actief = 0 WHERE hash = :hash");
-          $qry1->bindParam(':hash', $_POST['hash']);
+          $qry1->bindParam(':hash', $_GET['hash']);
           $qry1->execute();
-          $qry2 = $db->prepare('update klanten set actief = 1 WHERE klanten_id = :klantid');
+          $qry2 = $db->prepare('update klanten set actief = true WHERE klant_id = :klantid');
           $qry2->bindparam(':klantid', $hashobj->klant_id);
           $qry2->execute();
           //link om in te loggen.
@@ -27,7 +26,7 @@ if(isset($_GET['hash'])){
        }
        //de hash is al in gebruik.
     }else{
-        echo '<div class="error">De activeerlink is al gebruikt.</div>';
+        echo '<div class="error">Het is niet gelukt om uw account te activeren.</div>';
     }
     //geen hash ingevuld toon activatie tekst.
 }else{
