@@ -18,7 +18,7 @@ if(isset($_GET['id']))
             print ("U heeft gekozen voor het volgende product :<br> Naam : {$info['naam']} <br> ");
             print("Prijs : &euro;{$info['prijs']},- <br>");
             print("Omschrijving : {$info['omschrijving']} <br>");
-            print("Foto : <img src='{$info['foto']}'> <br>");
+            print("Foto : <img src='{$info['foto']}' class='imgt'> <br>");
             // query en foreach om voor de producten die uit de database worden gehaald te selecteren en deze te laten zien
             
         }      
@@ -31,14 +31,6 @@ if(isset($_GET['id']))
             
 
 <div id="bestellenproductrechts">
-
-   
-
-
-
-
-
-
             
             
     </select
@@ -47,7 +39,7 @@ if(isset($_GET['id']))
 <div id="bereken">
 <?php
 
-$id = $_GET['id'];
+
 echo '<a href="index.php?page=bestellenproducten&id='.$id.'&aantal=1">1</a><br>' ;
 echo '<a href="index.php?page=bestellenproducten&id='.$id.'&aantal=2">2</a><br>' ;
 echo '<a href="index.php?page=bestellenproducten&id='.$id.'&aantal=3">3</a><br>' ;
@@ -70,6 +62,7 @@ $prijs = $info['prijs'];
 $i = $_GET['aantal'];
     echo 'Let op! Selecteer eerst een aantal voordat u verdergaat <br>';
     echo "Let op! Bij klikken op 'Bestel' zet u een bestelling <br>";
+   
     echo '<a href="index.php?page=bestel&id='.$id.'&aantal='.$i.'">Bestel</a><br><br>' ;
     
          }

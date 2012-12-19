@@ -62,7 +62,7 @@ div#bereken{
 
 
 
-tdo {
+.tdo {
     border: 1px solid black;
 }
 
@@ -71,3 +71,8 @@ tdo {
 }
 
 
+.imgt {
+    height:175px;
+    width:175px;
+    
+}

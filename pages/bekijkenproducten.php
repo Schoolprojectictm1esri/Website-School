@@ -52,15 +52,9 @@ else {
 ?>
 </div>
 <!-- Rechterblok !-->
-
     <div id="productinfo"> 
     Productinformatie 
-    <br>
-    <br>
-<?php
-
-
-            
+<?php            
 if(isset($_GET['product'])){
     $product = $_GET['product'];
 $stmt3 = $db->prepare("SELECT * FROM producten WHERE id = :product");
@@ -70,10 +64,12 @@ $stmt3->bindParam(':product', $product);
 
     $result3 = $stmt3->fetchall();
          foreach ($result3 as $row3){
-             echo "Foto : <img src='{$row3['foto']}'>";
-             echo "Productnaam : {$row3['naam']}"; echo '<br>';
-             echo "Prijs : {$row3['prijs']}"; echo '<br>';
-             echo "Omschrijving : {$row3['omschrijving']}"; echo '<br>';
+             echo "<table>";        
+             echo "<tr><td>Productnaam:</td><td>{$row3['naam']}</td></tr>";echo '<br>';
+             echo "<tr><td>Prijs:</td><td>{$row3['prijs']}</td></tr>";echo '<br>';
+             echo "<tr><td>Omschrijving:</td><td>{$row3['omschrijving']}</td></tr>";echo '<br>';
+             echo "<tr><td>Foto:</td><td><img src='{$row3['foto']}' class='imgt'></td></tr>";echo '<br>';
+             echo "</table>";
                                     }
             echo '<a href="index.php?page=bestellenproducten&id='.$row3['id'].'">Bestel</a>' ; echo "<br> <br>"; 
 }
