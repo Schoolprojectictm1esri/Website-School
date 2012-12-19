@@ -121,6 +121,8 @@ a.submenu{
     width: 117px;
     height: 44px;
     display: block;
+    color: black;
+    text-decoration: none;
 }
 div.innersidebar{
     position: relative;
