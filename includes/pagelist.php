@@ -17,8 +17,8 @@ $pagelist['routebeschrijving'] = 0;
 $pagelist['beheer'] = 2;
 $pagelist['toevoegen_klant'] = 2;
 // pagina's van Daniel
-$pagelist['aanpassenklantegegevens'] = 2;
-$pagelist['inzienagenda'] = 1;
+$pagelist['aanpassenklantgegevens'] = 2;
+$pagelist['agenda'] = 1;
 $pagelist['aanpassenproducten'] = 2;
 // pagina's van Thomas
 $pagelist['bevestigen_afspraak'] = 2;
