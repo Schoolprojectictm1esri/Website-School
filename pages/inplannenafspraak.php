@@ -17,7 +17,9 @@
 
              
                      
-              $tijdenLijst=$db->query("SELECT * from afspraken where datum LIKE '$date%' ORDER BY datum ASC");
+              $tijdenLijst = $db->prepare("SELECT * from afspraken where datum LIKE ':date%' ORDER BY datum ASC");
+              $tijdenLijst->bindParam(':date', $date);
+              $tijdenLijst->execute();
              // query om de afspraken op de desbetreffende dag op te halen
               if($tijdenLijst != FALSE){
                
@@ -40,7 +42,9 @@
           
 
      
- $joins=$db->query("SELECT lengte, datum, actief FROM afspraken AS a JOIN afspraakbehandelingen AS ab ON a.id = ab.afspraak_id JOIN behandelingen as b ON ab.behandeling_id = b.id WHERE datum LIKE '$date%' AND actief = 1 ORDER BY datum ASC");  
+ $joins=$db->prepare("SELECT lengte, datum, actief FROM afspraken AS a JOIN afspraakbehandelingen AS ab ON a.id = ab.afspraak_id JOIN behandelingen as b ON ab.behandeling_id = b.id WHERE datum LIKE ':date%' AND actief = 1 ORDER BY datum ASC");  
+$tijdenLijst->bindParam(':date', $date);
+ $joins->execute();
  $min =$joins->fetchall();
  //query om de behandelingen aan de afspraken te koppelen en zodanig de afspraaktijd + behandeltijd te printen
  foreach ($min as $duur){

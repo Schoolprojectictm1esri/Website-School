@@ -281,7 +281,7 @@
                         $stmt->bindParam(':plantaire_links', $_POST['plantaire_links']);
                         $stmt->bindParam(':dorsale_rechts', $_POST['dorsale_rechts']);
                         $stmt->bindParam(':dorsale_links', $_POST['dorsale_links']);
-                        
+                    $stmt->execute();
   ?>
 
         <!--Formulier dat weergeeft waar de gegevens naar toe gewijzigd zijn. -->

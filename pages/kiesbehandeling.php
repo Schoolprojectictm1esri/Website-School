@@ -19,7 +19,8 @@ and open the template in the editor.
            
            print ("U heeft de volgende datum gekozen : $datum om $tijd <br>");
            
-           $behandeling = $db->query("SELECT * FROM behandelingen ORDER BY id ASC");
+           $behandeling = $db->prepare("SELECT * FROM behandelingen ORDER BY id ASC");
+           $behandeling->execute();
            $Behandelnaam = $behandeling->fetchall();
                
            echo '<select>';   

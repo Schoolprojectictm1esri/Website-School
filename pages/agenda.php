@@ -27,7 +27,8 @@
         for($column = 0; $column<7; $column++)
         {        
 
-            $stmt = $db->query("SELECT COUNT(id) FROM behandelingen WHERE actief = 'TRUE'");
+            $stmt = $db->prepare("SELECT COUNT(id) FROM behandelingen WHERE actief = 'TRUE'");
+            $stmt->execute();
             $numberOfApp = $stmt->fetchall();
 
             // Kijkt welke dag het is, en kijk wat de beschikbaarheid op die dag is.
