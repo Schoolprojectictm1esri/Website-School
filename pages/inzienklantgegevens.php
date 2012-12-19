@@ -216,11 +216,6 @@ if(isset($_GET['klant_id'])){
 }
 //print formulier met alle klanten(voorletters, achternaam, email
 else{
-
-if(empty($result1)){
-    print("<a href='index.php?page=toevoegen_klant'> Klik hier om een klant toe te voegen. </a>");
-    }
-else{ 
 ?>
     <div class="inzienklantgegevens">
     <table>
@@ -232,6 +227,10 @@ else{
         <?php
         $stmt = $db->execute("SELECT `klant_id`,`voorletters`,`achternaam` FROM klanten");
         $result2 = $stmt->fetchall();
+        if(empty($result1)){
+        print("<a href='index.php?page=toevoegen_klant'> Klik hier om een klant toe te voegen. </a>");
+        }
+        else{
         foreach ($result2 as $row => $row2){
             print "
                 <tr>
@@ -241,9 +240,9 @@ else{
                     <td> <a href='index.php?page=inzienklantgegevens&klant_id=".$row2['klant_id']."'>Bekijken</a> </td>
                 </tr>
 " ;
-    }
+                }
+            }
     echo "</table></div>";
-    }
 }
 
 
