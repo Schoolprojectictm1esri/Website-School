@@ -214,10 +214,7 @@ function getMenu($role){
                     <a class="menulink" href="index.php?page=aanmeldenklant">Registreren</a>
                 </div>
                 <div class="menuitem">
-                    <a class="menulink" href="index.php?page=agenda">agenda</a>
-                </div>
-                <div class="menuitem">
-                    <a class="menulink" href="index.php?page=inloggen_bij_agenda">inloggen</a>
+                    <a class="menulink" href="index.php?page=inloggen_bij_agenda">Inloggen</a>
                 </div>
                 <div class="menuitem">
                     <a class="menulink" href="index.php?page=routebeschrijving">Route</a>
@@ -232,9 +229,11 @@ function getMenu($role){
  * @param type $page
  * @return string
  */
-function getSubmenu($page){
-        if($page == 'beheer' || $page == 'toevoegen_klant' || $page == 'aanpassenklantgegevens' || $page == 'aanpassenproducten' || $page == 'bevestigen_afspraak' || $page == 'inzienklantgegevens' || $page == 'beherenbestellingen'){
-           return '   
+function getSubmenu($role){
+    //toon submenu als de ingelogde gebruiker een beheerder is. Voor makkelijkere navigatie.
+        //if($page == 'beheer' || $page == 'toevoegen_klant' || $page == 'aanpassenklantgegevens' || $page == 'aanpassenproducten' || $page == 'bevestigen_afspraak' || $page == 'inzienklantgegevens' || $page == 'beherenbestellingen'){
+    if($role == 2){
+        return '   
                 <div class="sidebar">
                     <div class="innersidebar">
                         <a class="submenu" href="index.php?page=toevoegen_klant">Toevoegen Klant</a>

@@ -66,9 +66,8 @@ require_once('includes/bootstrap.php');
             <div id="contentwrapper">
                 <div id="content-left">
                     <?php 
-                    if(isset($_GET['page'])){
-                        echo getSubmenu($_GET['page']);
-                    }?>
+                        echo getSubmenu(getRole());
+                    ?>
                 </div>
                 <div id="content-right">
                     <?php
@@ -115,7 +114,7 @@ require_once('includes/bootstrap.php');
                         echo 'Copyright &copy;  Pedicurepraktijk D&#233;sir&#233;e 2012 -  ' . date("Y");
                     }
                     ?> 
-                <h5> <a href="index.php?page=inloggen_beheer">Inloggen</a> </h5>
+                <h5> <a href="index.php?page=inloggen_beheer">Inloggen Beheer</a> </h5>
             </div>
         </div>
     </body>
