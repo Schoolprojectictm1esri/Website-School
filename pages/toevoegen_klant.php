@@ -120,6 +120,7 @@ if(isset($_POST['submit'])){
             $stmt->bindParam(':telefoonnr', $_POST['telefoonnr']);
             $stmt->bindParam(':beroep', $_POST['beroep']);
             $stmt->bindParam(':geboortedatum', $_POST['geboortedatum']);
+            $stmt->bindParam(':gewicht', $_POST['gewicht']);
             $stmt->bindParam(':orthopedische_afwijking', $_POST['orthopedische_afwijking']);
             $stmt->bindParam(':voettype', $_POST['voettype']);
             $stmt->bindParam(':huidconditie', $_POST['huidconditie']);
@@ -138,8 +139,8 @@ if(isset($_POST['submit'])){
             $stmt->bindParam(':hiv', $_POST['hiv']);
             $stmt->bindParam(':hepatitis', $_POST['hepatitis']);
             $stmt->bindParam(':hemofilie', $_POST['steunkousen']);
-            $stmt->bindParam(':steunzolen', $_POST['steunzolen']);
             $stmt->bindParam(':steunkousen', $_POST['steunkousen']);
+            $stmt->bindParam(':steunzolen', $_POST['steunzolen']);  
 
             $stmt->execute();
             //als resultaat niet false is foutmelding tonen.
