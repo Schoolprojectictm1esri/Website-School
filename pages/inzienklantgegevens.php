@@ -227,7 +227,7 @@ else{
         <?php
         $stmt = $db->query("SELECT `klant_id`,`voorletters`,`achternaam` FROM klanten");
         $result2 = $stmt->fetchall();
-        if(empty($result1)){
+        if(empty($result2)){
         print("<a href='index.php?page=toevoegen_klant'> Klik hier om een klant toe te voegen. </a>");
         }
         else{
