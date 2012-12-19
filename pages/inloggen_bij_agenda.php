@@ -21,23 +21,31 @@ if(checkSpam('inlog_form_klant')){
         if($_POST['emailadres'] != '' && $_POST['password'] != ''){
             //beide velden zijn ingevuld.
             $password = hashPassword($_POST['password']);
-            $stmt = $db->prepare("SELECT * FROM klanten WHERE `email` = :email AND `wachtwoord` = :password and actief = 1");
+            //querie voor controle DataBase
+            $stmt = $db->prepare("SELECT * FROM klanten WHERE `email` = :email AND `wachtwoord` = :password");
             $stmt->bindParam(':email', $_POST['emailadres']);
             $stmt->bindParam(':password', $password);
             $stmt->execute();
-            if(!empty($stmt)){
-            $result = $stmt->fetchObject();
-                //gebruiker id in sessie.
-               if($_POST['stayloggedin'] == true){
+                //Als er een return
+                $result = $stmt->fetchObject();
+                if(!empty($stmt)){
+                    //kijken of actief is
+                    if($result->actief == 1){
+                    //gebruiker id in sessie.
                     setcookie('klanten_id', $result->klanten_id, time() +360000);
+                    $_SESSION['klanten_id'] = $result->klanten_id;
+                    $_SESSION['achternaam'] = $result->achternaam;
+                     //gebruiker doorsturen naar agenda.php
+                    header('location: index.php?page=agenda');
                 }
-                $_SESSION['klanten_id'] = $result->klanten_id;
-                $_SESSION['achternaam'] = $result->achternaam;
-                 //gebruiker doorsturen naar agenda.php
-                header('location: index.php?page=agenda');
-
-               
-              }
+                    else{
+                        ?>
+                        Activeer eerst uw account. Of ga terug naar de homepagina <br />
+                        <a href="index.php">Klik hier.</a>
+                        <?php
+                    
+                    }
+                }
             else{
                 setSpam('inlog_form_klant');
      ?>  
