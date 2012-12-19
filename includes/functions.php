@@ -167,10 +167,10 @@ function getMenu($role){
     //menu voor rol 2 oftewel beheerder.
     if($role ==2){
         return '                <div class="menuitem">
-                    <a class="menulink" href="index.php?page=home">home</a>
+                    <a class="menulink" href="index.php?page=home">Home</a>
                 </div>  
                 <div class="menuitem">
-                    <a class="menulink" href="index.php?page=agenda">agenda</a>
+                    <a class="menulink" href="index.php?page=agenda">Agenda</a>
                 </div>
                 <div class="menuitem">
                     <a class="menulink" href="index.php?page=bekijkenproducten">Kijkshop</a>
@@ -182,17 +182,17 @@ function getMenu($role){
                     <a class="menulink" href="index.php?page=routebeschrijving">Route</a>
                 </div>
                 <div class="menuitem">
-                    <a class="menulink" href="index.php?page=logout">uitloggen</a>
+                    <a class="menulink" href="index.php?page=logout">Uitloggen</a>
                 </div>
                 ';    
         
     }elseif($role== 1){
         //menu voor rol is 1 oftewel klant.
         return '                <div class="menuitem">
-                    <a class="menulink" href="index.php?page=home">home</a>
+                    <a class="menulink" href="index.php?page=home">Home</a>
                 </div>  
                 <div class="menuitem">
-                    <a class="menulink" href="index.php?page=agenda">agenda</a>
+                    <a class="menulink" href="index.php?page=agenda">Agenda</a>
                 </div>
                 <div class="menuitem">
                     <a class="menulink" href="index.php?page=bekijkenproducten">Kijkshop</a>

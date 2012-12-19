@@ -22,7 +22,7 @@ require_once('includes/bootstrap.php');
                     <!--
                     var anwb_tool="adresnv";
                     var anwb_tool_type="normal";
-                    var anwb_tool_tekst="Pedicure praktijk Desiree";
+                    var anwb_tool_tekst="Pedicurepraktijk Desiree";
                     var anwb_tool_lon="";
                     var anwb_tool_lat="";
                     var anwb_tool_postcode="8033 EH";
