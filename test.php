@@ -1,5 +1,5 @@
 <?php
-$to = 'thomasvermeulen_2@hotmail.om';
+$to = 'thomasvermeulen_2@hotmail.com';
 $subject = 'test';
 $txt = 'KBS TEST';
 $headers = 'FROM: noreply@pedicurepraktijkdesiree.nl';
