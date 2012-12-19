@@ -27,7 +27,7 @@
         for($column = 0; $column<7; $column++)
         {        
 
-            $stmt = $db->prepare("SELECT COUNT(id) FROM behandelingen WHERE actief = 'TRUE'");
+            $stmt = $db->prepare("SELECT COUNT(lengte) FROM behandelingen WHERE actief = 'TRUE'");
             $stmt->execute();
             $numberOfApp = $stmt->fetchall();
 

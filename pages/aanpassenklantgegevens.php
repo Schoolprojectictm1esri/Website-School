@@ -30,7 +30,7 @@
         ){ echo 'Alles moet ingevuld zijn'; }
 
                 $details[0]['email'] = $_POST['email'];
-                $details[0]['voorletters'] = $_POST['voorletters'];
+                $details[0][`voorletters`] = $_POST['voorletters'];
                 $details[0]['tussenvoegsel'] = $_POST['tussenvoegsel'];
                 $details[0]['achternaam'] = $_POST['achternaam'];
                 $details[0]['woonplaats'] = $_POST['woonplaats'];
@@ -62,9 +62,9 @@
                 $stmt = $db->prepare("
                                 UPDATE `klanten` 
                                 SET
-                                `voorletters`                                      =:voorletters,
-                                `tussenvoegsel`                                    =:tussenvoegsel,
-                                `achternaam`                                       =:achternaam,
+                                voorletters=                                       :voorletters, 
+                                `tussenvoegsel`                                    = :tussenvoegsel,
+                                `achternaam`                                       = :achternaam,
                                 `woonplaats`                                       =:woonplaats,
                                 `postcode`                                         =:postcode,
                                 `adres`                                            =:adres,
@@ -124,10 +124,8 @@
                         $stmt->bindParam(':plantaire_links', $_POST['plantaire_links']);
                         $stmt->bindParam(':dorsale_rechts', $_POST['dorsale_rechts']);
                         $stmt->bindParam(':dorsale_links', $_POST['dorsale_links']);
-                        
-                        var_dump($stmt);
                         $stmt->execute();
-    }
+                        }
 
     // klant gegevens uit de database halen.
     if (isset($_GET['klant_id'])) {
