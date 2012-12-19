@@ -77,8 +77,71 @@ if(isset($_POST['submit'])){
              $_POST['steunzolen'] = true;
         }
         //end of ugly fix.
-            $stmt = $db->query('INSERT INTO `pedicure`.`klanten` (`klant_nummer`, `achternaam`, `tussenvoegsel`, `voorletters`, `adres`, `woonplaats`, `postcode`, `telefoonnr`, `beroep`, `geboortedatum`, `gewicht`, `orthopedische_afwijking`, `voettype`, `huidconditie`, `huidaandoening`, `nagelconditie`, `nagelaandoening`, `plantaire_rechts`, `plantaire_links`, `dorsale_rechts`, `dorsale_links`, `diabetis_melitus`, `hart_vaat`, `anti_stol`, `phema`, `allergie`, `hiv`, `hepatitis`, `hemofilie`, `steunkousen`, `steunzolen`)
-                                                             VALUES("'.mysql_real_escape_string($_POST['klant_id']).'", "'.mysql_real_escape_string($_POST['achternaam']).'", "'.mysql_real_escape_string($_POST['tussenvoegsel']).'", "'.mysql_real_escape_string($_POST['voorletters']).'",  "'.mysql_real_escape_string($_POST['adres']).'", "'.mysql_real_escape_string($_POST['woonplaats']).'", "'.mysql_real_escape_string($_POST['postcode']).'", "'.mysql_real_escape_string($_POST['telefoonnr']).'", "'.mysql_real_escape_string($_POST['beroep']).'", "'.mysql_real_escape_string($_POST['geboortedatum']).'", "'.mysql_real_escape_string($_POST['gewicht']).'", "'.mysql_real_escape_string($_POST['orthopedische_afwijking']).'", "'.mysql_real_escape_string($_POST['voettype']).'", "'.mysql_real_escape_string($_POST['huidconditie']).'", "'.mysql_real_escape_string($_POST['huidaandoening']).'", "'.mysql_real_escape_string($_POST['nagelconditie']).'", "'.mysql_real_escape_string($_POST['nagelaandoening']).'", "'.mysql_real_escape_string($_POST['plantaire_rechts']).'", "'.mysql_real_escape_string($_POST['plantaire_links']).'", "'.mysql_real_escape_string($_POST['dorsale_rechts']).'", "'.mysql_real_escape_string($_POST['dorsale_links']).'", "'.mysql_real_escape_string($_POST['diabetus_melinus']).'", "'.mysql_real_escape_string($_POST['hart_vaat']).'", "'.mysql_real_escape_string($_POST['anti_stol']).'", "'.mysql_real_escape_string($_POST['phema']).'", "'.mysql_real_escape_string($_POST['allergie']).'", "'.mysql_real_escape_string($_POST['hiv']).'", "'.mysql_real_escape_string($_POST['hepatitis']).'", "'.mysql_real_escape_string($_POST['hemofilie']).'", "'.mysql_real_escape_string($_POST['steunkousen']).'", "'.mysql_real_escape_string($_POST['steunzolen']).'")');
+            $stmt = $db->prepare('INSERT INTO `pedicure`.`klanten` (`klant_nummer`, `achternaam`, `tussenvoegsel`, `voorletters`, `adres`, `woonplaats`, `postcode`, `telefoonnr`, `beroep`, `geboortedatum`, `gewicht`, `orthopedische_afwijking`, `voettype`, `huidconditie`, `huidaandoening`, `nagelconditie`, `nagelaandoening`, `plantaire_rechts`, `plantaire_links`, `dorsale_rechts`, `dorsale_links`, `diabetis_melitus`, `hart_vaat`, `anti_stol`, `phema`, `allergie`, `hiv`, `hepatitis`, `hemofilie`, `steunkousen`, `steunzolen`)
+                                  VALUES(:klantid, 
+                                         :achternaam, 
+                                         :tussenvoegsel, 
+                                         :voorletters,  
+                                         :adres, 
+                                         :woonplaats, 
+                                         :postcode, 
+                                         :telefoonnr, 
+                                         :beroep, 
+                                         :geboortedatum, 
+                                         :gewicht, 
+                                         :orthopedische_afwijking, 
+                                         :voettype, 
+                                         :huidconditie, 
+                                         :huidaandoening, 
+                                         :nagelconditie, 
+                                         :nagelaandoening, 
+                                         :plantaire_rechts, 
+                                         :plantaire_links, 
+                                         :dorsale_rechts, 
+                                         :dorsale_links, 
+                                         :diabetis_melitus, 
+                                         :hart_vaat, 
+                                         :anti_stol, 
+                                         :phema, 
+                                         :allergie, 
+                                         :hiv, 
+                                         :hepatitis, 
+                                         :hemofilie, 
+                                         :steunkousen, 
+                                         :steunzolen)');
+            
+            $stmt->bindParam(':klantid', $_POST['klant_id']);
+            $stmt->bindParam(':achternaam', $_POST['achternaam']);
+            $stmt->bindParam(':tussenvoegsel', $_POST['tussenvoegsel']);
+            $stmt->bindParam(':voorletters', $_POST['voorletters']);
+            $stmt->bindParam(':adres', $_POST['adres']);
+            $stmt->bindParam(':woonplaats', $_POST['woonplaats']);
+            $stmt->bindParam(':postcode', $_POST['postcode']);
+            $stmt->bindParam(':telefoonnr', $_POST['telefoonnr']);
+            $stmt->bindParam(':beroep', $_POST['beroep']);
+            $stmt->bindParam(':geboortedatum', $_POST['geboortedatum']);
+            $stmt->bindParam(':orthopedische_afwijking', $_POST['orthopedische_afwijking']);
+            $stmt->bindParam(':voettype', $_POST['voettype']);
+            $stmt->bindParam(':huidconditie', $_POST['huidconditie']);
+            $stmt->bindParam(':huidaandoening', $_POST['huidaandoening']);
+            $stmt->bindParam(':nagelconditie', $_POST['nagelconditie']);
+            $stmt->bindParam(':nagelaandoening', $_POST['nagelaandoening']);
+            $stmt->bindParam(':plantaire_rechts', $_POST['plantaire_rechts']);
+            $stmt->bindParam(':plantaire_links', $_POST['plantaire_links']);
+            $stmt->bindParam(':dorsale_rechts', $_POST['dorsale_rechts']);
+            $stmt->bindParam(':dorsale_links', $_POST['dorsale_links']);
+            $stmt->bindParam(':diabetis_melitus', $_POST['diabetus_melitus']);
+            $stmt->bindParam(':hart_vaat', $_POST['hart_vaat']);
+            $stmt->bindParam(':anti_stol', $_POST['anti_stol']);
+            $stmt->bindParam(':phema', $_POST['phema']);
+            $stmt->bindParam(':allergie', $_POST['allergie']);
+            $stmt->bindParam(':hiv', $_POST['hiv']);
+            $stmt->bindParam(':hepatitis', $_POST['hepatitis']);
+            $stmt->bindParam(':hemofilie', $_POST['steunkousen']);
+            $stmt->bindParam(':steunzolen', $_POST['steunzolen']);
+            $stmt->bindParam(':steunkousen', $_POST['steunkousen']);
+
+            $stmt->execute();
             //als resultaat niet false is foutmelding tonen.
             if($stmt != false){
                 echo 'Het toevoegen van de klant is gelukt.<br />';

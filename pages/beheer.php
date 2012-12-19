@@ -4,7 +4,9 @@
  */
 // als er gebruik gemaakt wordt van cookies is de gebruikersnaam niet geset. Deze even controleren om netjes de naam te tonen bij inloggen.
     if(!isset($_SESSION['gebruikersnaam'])){
-        $stmt = $db->query('select * from beheerder where beheerder_id = "'.$_SESSION['beheerder_id'].'"');
+        $stmt = $db->prepare('select * from beheerder where beheerder_id = :beheerderid');
+        $stmt->bindParam(':beheerderid', $_SESSION['beheerder_id']);
+        $stmt->execute();
         $result = $stmt->fetchObject();
         if(!empty($result)){
             $gebruikersnaam = $result->gebruikersnaam;

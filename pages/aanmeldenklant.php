@@ -51,8 +51,12 @@ if(checkSpam('registratie_form')){
                         $hash = activatehash($objid->klant_id);
                         //maka geldigheids datum van + 2 weken vanaf nu.
                         $geldig = date('Y-m-d',strtotime('+2 weeks'));
-                        $hshqry = $db->query("insert into hash (`hash`, `klant_id`, `geldig`, `soort`, `actief`)
-                                             VALUES('$hash', '$objid->klant_id', '$geldig', 'activeren', '1')");
+                        $hshqry = $db->prepare("insert into hash (`hash`, `klant_id`, `geldig`, `soort`, `actief`)
+                                             VALUES(:hash, :klantid, :geldig, 'activeren', '1')");
+                        $hshqry->bindParam(':hash', $hash);
+                        $hshqry->bindParam(':klantid', $objid->klant_id);
+                        $hshqry->bindParam(':geldig', $geldig);
+                        $hshqry->execute();
                         //stel email op.
                         $subject = 'Bevestigen account Pedicure Praktijk Desiree.';
                         $message = 'Beste '.$objid->voorletters.'&nbsp;'.$objid->achternaam.', /n/n Klik <a href="http://www.pedicurepraktijk.nl/index.php?page=activeer&hash='.$hash.'">hier</a> om uw account te activeren. /n/n Met vriendelijke groeten /n Pedicure praktijk Desiree. ';
@@ -60,7 +64,7 @@ if(checkSpam('registratie_form')){
                             'Reply-To: no-reply@pedicurepraktijkdesiree.nl' . "\r\n" .
                             'X-Mailer: PHP/' . phpversion();
                         //mail het.
-                        mail($email, $subject, $message, $headers);
+                        mail($_POST['email'], $subject, $message, $headers);
                         setSpam('registratie_form');
                         //stuur door naar activatie link.
                         header('location: index.php?page=activeer'); 

@@ -218,7 +218,7 @@ if(isset($_GET['klant_id'])){
 else{
 
 if(empty($result1)){
-    print("<a href='index.php?page=aanmeldenklant'> Klik hier om een klant toe te voegen. </a>");
+    print("<a href='index.php?page=toevoegen_klant'> Klik hier om een klant toe te voegen. </a>");
     }
 else{ 
 ?>
