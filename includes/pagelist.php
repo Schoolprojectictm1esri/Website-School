@@ -28,7 +28,7 @@ $pagelist['inloggen_bij_agenda'] = 0;
 $pagelist['inzienklantgegevens'] = 2;
 // pagina's van Thom
 $pagelist['beherenbestellingen'] = 2;
-$pagelist['bekijkenproducten'] = 0;
+$pagelist['bekijkenproducten'] = 1;
 $pagelist['bestellenproducten'] = 1;
-$pagelist['inplannenafspraak'] = 0;
+$pagelist['inplannenafspraak'] = 1;
 ?>
