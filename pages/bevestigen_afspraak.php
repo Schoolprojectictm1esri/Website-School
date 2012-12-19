@@ -236,12 +236,41 @@ if(isset($_GET['id'])){
     }
     else{
         //redirect bij foutmelding(onbekent afspraakID)
-        header ('location: index.php');
+        header ('location: bevestigen_afspraak');
     }
 }
 else{
-    //rederiect bij foutmelding(niet ingelogd)
-    header ('location: index.php?page=inloggen_beheer');
+    //laat overzicht zien van afspraken
+?>
+    <div class="inzienklantgegevens">
+    <table>
+        <tr>
+            <th>Klant ID</th>
+            <th>Voorletters</th>
+            <th>Achternaam</th>
+            <th>Afspraak datum</th>
+        </tr>
+<?php
+        $stmt = $db->prepare("SELECT `klant_id`,`voorletters`,`achternaam`, `datum`, `bevestigd` FROM klanten A JOIN ");
+        $stmt->execute();
+        $result2 = $stmt->fetchall();
+        if(empty($result2)){
+        print("Er zijn geen afspraken ");
+        }
+        else{
+        foreach ($result2 as $row => $row2){
+            print "
+                <tr>
+                    <td> ".$row2['klant_id']." </td>
+                    <td> ".$row2['voorletters']." </td>
+                    <td> ".$row2['achternaam']." </td>
+                    <td> ".$row2['Datum']." </td>
+                    <td> <a href='index.php?page=bevestigen_afspraak&afspraak_id=".$row2['afspraak_id']."'>Bevestigen/afwijzen</a> </td>
+                </tr>
+" ;
+                }
+            }
+    echo "</table></div>";
 }
 ?>
 
