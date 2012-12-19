@@ -65,30 +65,7 @@ require_once('includes/bootstrap.php');
             <!-- Div for content scripts !-->
             <div id="contentwrapper">
                 <div id="content-left">
-                    <!--
-                    <div class="sidebar">
-                        <div class="innersidebar">
-                            Sub menu item.
-                        </div>
-                    </div>
-                    <div class="sidebar">
-                        <div class="innersidebar">
-                            Sub menu item.
-                        </div>
-                        
-                    </div>
-                    <div class="sidebar">
-                        <div class="innersidebar">
-                            Sub menu item.
-                        </div>
-                        
-                    </div>
-                    <div class="sidebar">
-                        <div class="innersidebar">
-                            Sub menu item.
-                        </div>
-                      
-                    </div>!-->
+                    <?php echo getSubmenu($_GET['page']); ?>
                 </div>
                 <div id="content-right">
                     <?php

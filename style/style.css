@@ -117,9 +117,14 @@ div.sidebaractive{
     background-image: url('afbeeldingen/sidemenu_hover.png');
     
 }
+a.submenu{
+    width: 117px;
+    height: 44px;
+    display: block;
+}
 div.innersidebar{
     position: relative;
-    top: 10px;
+    
 }
 div#content-right{
     float: left;

@@ -224,6 +224,42 @@ function getMenu($role){
                 </div>
                 ';
     }
+    
+}
+/**
+ * @author Jelle Smeets
+ * @description Creer submenu voor pagina.
+ * @param type $page
+ * @return string
+ */
+function getSubmenu($page){
+        if($page == 'beheer' || $page == 'toevoegen_klant' || $page == 'aanpassenklantgegevens' || $page == 'aanpassenproducten' || $page == 'bevestigen_afspraak' || $page == 'inzienklantgegevens' || $page == 'beherenbestellingen'){
+           return '   
+                <div class="sidebar">
+                    <div class="innersidebar">
+                        <a class="submenu" href="index.php?page=toevoegen_klant">Toevoegen Klant</a>
+                    </div>
+                </div>
+                <div class="sidebar">
+                    <div class="innersidebar">
+                        <a class="submenu" href="index.php?page=inzienklantgegevens">Inzien Klantgegevens</a>
+                    </div>
+
+                </div>
+                <div class="sidebar">
+                    <div class="innersidebar">
+                        <a class="submenu" href="index.php?page=beherenbestellingen">Beheren Bestellingen</a>
+                    </div>
+
+                </div>
+                <div class="sidebar">
+                    <div class="innersidebar">
+                        <a class="submenu" href="index.php?page=bevestigen_afspraak">Bevestigen Afspraak</a>
+                    </div>
+                </div>';
+        } else{
+            return '';
+        }
 }
 ?>
 
