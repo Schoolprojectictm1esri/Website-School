@@ -225,7 +225,7 @@ else{
             <th>Achternaam</th>
         </tr>
         <?php
-        $stmt = $db->execute("SELECT `klant_id`,`voorletters`,`achternaam` FROM klanten");
+        $stmt = $db->query("SELECT `klant_id`,`voorletters`,`achternaam` FROM klanten");
         $result2 = $stmt->fetchall();
         if(empty($result1)){
         print("<a href='index.php?page=toevoegen_klant'> Klik hier om een klant toe te voegen. </a>");
