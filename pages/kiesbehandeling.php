@@ -48,13 +48,22 @@ and open the template in the editor.
            
        }
        ?>
-           <input type="submit" value="Kies">
+           <input type="hidden" value="$tijd" name="tijd" />
+           <input type="hidden" value="$datum" name="datum" />
+           <input type="submit" name="kiezen" value="Kies">
            
            <?php
            
-           if (isset($submit))
+           
+           if (isset($_POST['kiezen'])){
+               echo '<br>';
+               print ( "U heeft de volgende behandeling gekozen: {$BehNaam['naam']} op $datum om $tijd");
+               
+               
+           }
            
            ?>
+        
        </form>
     </body>
 </html>

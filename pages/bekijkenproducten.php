@@ -12,9 +12,9 @@ Kies een categorie:
 <?php    
  
 $stmt = $db->prepare('SELECT * FROM categorieen');
-
+$stmt->execute();
     $result = $stmt->fetchall();
-      $stmt->execute();
+      
         foreach ($result as $row){
             echo '<a href="index.php?page=bekijkenproducten&categorie='.$row['id'].'">'.$row['naam'].'</a>' ; echo "<br> <br> " ;
 }
