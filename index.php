@@ -65,7 +65,10 @@ require_once('includes/bootstrap.php');
             <!-- Div for content scripts !-->
             <div id="contentwrapper">
                 <div id="content-left">
-                    <?php echo getSubmenu($_GET['page']); ?>
+                    <?php 
+                    if(isset($_GET['page'])){
+                        echo getSubmenu($_GET['page']);
+                    }?>
                 </div>
                 <div id="content-right">
                     <?php

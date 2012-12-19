@@ -179,10 +179,10 @@ function getMenu($role){
                     <a class="menulink" href="index.php?page=inzienklantgegevens">Klantgegevens</a>
                 </div>
                 <div class="menuitem">
-                    <a class="menulink" href="index.php?page=routebeschrijving">route</a>
+                    <a class="menulink" href="index.php?page=routebeschrijving">Route</a>
                 </div>
                 <div class="menuitem">
-                    <a class="menulink" href="index.php?page=uitloggen">uitloggen</a>
+                    <a class="menulink" href="index.php?page=logout">uitloggen</a>
                 </div>
                 ';    
         
@@ -198,17 +198,17 @@ function getMenu($role){
                     <a class="menulink" href="index.php?page=bekijkenproducten">Kijkshop</a>
                 </div>
                 <div class="menuitem">
-                    <a class="menulink" href="index.php?page=routebeschrijving">route</a>
+                    <a class="menulink" href="index.php?page=routebeschrijving">Route</a>
                 </div>
                 <div class="menuitem">
-                    <a class="menulink" href="index.php?page=uitloggen">Uitloggen</a>
+                    <a class="menulink" href="index.php?page=logout">Uitloggen</a>
                 </div>
                 ';
         
     }else{
         //menu rol voor anonieme bezoeker. 
         return '                <div class="menuitem">
-                    <a class="menulink" href="index.php?page=home">home</a>
+                    <a class="menulink" href="index.php?page=home">Home</a>
                 </div>  
                 <div class="menuitem">
                     <a class="menulink" href="index.php?page=aanmeldenklant">Registreren</a>
@@ -220,7 +220,7 @@ function getMenu($role){
                     <a class="menulink" href="index.php?page=inloggen_bij_agenda">inloggen</a>
                 </div>
                 <div class="menuitem">
-                    <a class="menulink" href="index.php?page=routebeschrijving">route</a>
+                    <a class="menulink" href="index.php?page=routebeschrijving">Route</a>
                 </div>
                 ';
     }
