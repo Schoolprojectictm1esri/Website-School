@@ -19,9 +19,21 @@
         // Voor elke column in de table
         for($column = 0; $column<7; $column++)
         {        
-            $stmt = $db->prepare("SELECT COUNT(lengte) FROM behandelingen WHERE actief = 'TRUE'");
+            $stmt = $db->prepare("SELECT SUM(lengte) as totaallengte FROM behandelingen WHERE id in(
+                                        SELECT behandeling_id 
+                                        FROM afspraakbehandelingen
+                                        WHERE afspraak_id IN(
+                                            SELECT id 
+                                            FROM afspraken
+                                            WHERE datum LIKE :date
+                                        )
+                                )");
+            $qrdate = $date->year.'-'.$date->month.'-'.$date->day.'%';
+
+            $stmt->bindParam(':date', $qrdate);
             $stmt->execute();
-            $numberOfApp = $stmt->fetchall();
+            $total = $stmt->fetchObject();
+            $numberOfApp = $total->totaallengte;
             // Kijkt welke dag het is, en kijk wat de beschikbaarheid op die dag is.
                                         // Afhankelijk van die beschikbaarheid geeft het een kleur weer.
             if ($date->dayOfWeek()=="Zondag"){
@@ -38,28 +50,23 @@
                 }     
             }
                 echo "<td class='$available'>";
-                // Link om agenda te openen met link waarin dag maand jaar staan.
+               
                 if($date->dayOfWeek() == "Zondag"){
+                    //niet klikbaar
                     echo substr($date->dayOfWeek(), 0,2)."-".$date->day."-".substr($date->monthOfTheYear(), 0, 3);
                 }else{
+                     // Link om agenda te openen met link waarin dag maand jaar staan.
                     echo "<a href='index.php?page=inplannenafspraak&date=".$date->day."-".$date->month."-".$date->year."'>
                         ".substr($date->dayOfWeek(), 0,2)."-".$date->day."-".substr($date->monthOfTheYear(), 0, 3)."
                         </a>";
                 }          
                 //Laat vandaag zien en berekend de datum van de volgende dag
                 $date->addDays(1);
-
-                echo "</td>";
-
-                
+                echo "</td>";              
         }
-
         echo "</tr>";
     }
-
-
     echo "</table>";
-
 ?>
 
 
