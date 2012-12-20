@@ -41,7 +41,7 @@ if (isset($_GET['id'], $_POST['verwijderen'])) {
             $stmt->bindParam(':omschrijving', $_POST['omschrijving']);
             $stmt->bindParam(':actief', $_POST['actief']);
             $stmt->bindParam(':categorieid', $_POST['categorieid']);
-            $stmt->execute();
+            var_dump($_POST['categorieid']);
                 echo 'Productgegevens zijn gewijzigd.';
                 echo "<a href='index.php?page=bekijkenproducten'>Klik hier</a>";
                 //  geeft foutmelding als er geen gegevens zijn ingevoerd.
@@ -77,7 +77,7 @@ if (isset($_GET['id'], $_POST['verwijderen'])) {
                         <td>Categorie ID</td>
                         <td><select name="categorieid"><?php 
                             foreach($result10 as $key => $val){ 
-                                ?><option value=".$val[id]."><?php echo $val['naam'] ?></option> <?php
+                                ?><option><?php echo $val['id'] ?></option> <?php
                             }?></select></td>
                     </tr>
                     <tr>
@@ -102,9 +102,8 @@ if (isset($_GET['id'], $_POST['verwijderen'])) {
     } 
     else {
         if(isset($_GET['categorieid'])){
-            $categorieid = $_GET['categorieid'];
-            $stmt = $db->prepare("SELECT * FROM producten WHERE categorieid= :categorieid");
-            $stmt->bindParam(':categorieid', $categorieid);
+            $stmt = $db->prepare("SELECT * FROM producten WHERE categorieid = :cate");
+            $stmt->bindParam(':cate', $_GET['categorieid']);
             $stmt->execute();
             $result5 = $stmt->fetchall();
 ?>
