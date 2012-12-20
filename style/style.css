@@ -13,9 +13,11 @@ body{
     /* fix voor standaard margin door browsers */
     margin: 0px;
     padding: 0px;
-    font-family: 'Calisto MT', 'Arial';
+    font-family: 'Arial';
+    
 }
 a{
+    color: #000000;
     text-decoration: none;
 }
 a:hover{
