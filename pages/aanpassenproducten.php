@@ -47,6 +47,8 @@ if (isset($_GET['id'], $_POST['verwijderen'])) {
                 //  geeft foutmelding als er geen gegevens zijn ingevoerd.
         }
         else{
+        $stmt = $db->query("SELECT * FROM categorieen");
+        $result10 = $stmt->fetchall();
 ?>
 <div class="inzienklantgegevens">
         <!-- Formulier om productgegevens te wijzigen -->
@@ -72,8 +74,11 @@ if (isset($_GET['id'], $_POST['verwijderen'])) {
                         <td><textarea name="omschrijving" rows="3" cols="20"><?php echo $result->omschrijving; ?></textarea></td>
                     </tr>
                     <tr>
-                        <td>Categorie ID:</td>
-                        <td><input type="text" name="categorieid" value="<?php echo $result->categorieid; ?>"></td>
+                        <td>Categorie ID</td>
+                        <td><select name="categorieid"><?php 
+                            foreach($result10 as $key => $val){ 
+                                ?><option value=".$val[id]."><?php echo $val['naam'] ?></option> <?php
+                            }?></select></td>
                     </tr>
                     <tr>
                         <td>Foto:</td>

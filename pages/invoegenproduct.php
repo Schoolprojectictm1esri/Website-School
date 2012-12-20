@@ -24,21 +24,50 @@ if(isset($_POST['submit'])){
             $stmt->execute();
 }
 else {
-    
+    $stmt = $db->query("SELECT * FROM categorieen");
+    $result = $stmt->fetchall();
+    ?>
+    <div class="inzienklantgegevens">
+        <!-- Formulier om productgegevens te wijzigen -->
+            <form action="" method ="POST">
+                <table>
+                    <tr>
+                        <th colspan="3">Product gegevens</th>
+                    </tr>
+                    <tr>
+                        <td>Product id:</td>
+                        <td>Word automatisch toegekent</td>
+                    </tr>
+                    <tr>
+                        <td>Naam:</td>
+                        <td><input type="text" name="naam"></td>
+                    </tr>
+                    <tr>
+                        <td>Prijs:</td>
+                        <td><input type="text" name="prijs"></td>
+                    </tr>
+                    <tr>
+                        <td>Omschrijving:</td>
+                        <td><textarea name="omschrijving" rows="3" cols="20"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>Categorie ID</td>
+                        <td><select name="categorieid"><?php 
+                            foreach($result as $key => $val){ 
+                                ?><option value=".$val[id]."><?php echo $val['naam'] ?></option> <?php
+                            }?></select></td>
+                    </tr>
+                    <tr>
+                        <td>Actief:</td>
+                        <td><input type="checkbox" name="actief" value="1"> </td>
+                    </tr>
+                </table>
+                <input type="submit" name="Opslaan" value="Opslaan">
+                <br />
+                <a href="index.php?page=bekijkenproducten">Annuleren</a>
+            </form>
+<?php 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ?>
+</div>
