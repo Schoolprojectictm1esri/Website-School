@@ -30,7 +30,7 @@
         ){ echo 'Alles moet ingevuld zijn'; }
 
                 $details[0]['email'] = $_POST['email'];
-                $details[0][`voorletters`] = $_POST['voorletters'];
+                $details[0]['voorletters'] = $_POST['voorletters'];
                 $details[0]['tussenvoegsel'] = $_POST['tussenvoegsel'];
                 $details[0]['achternaam'] = $_POST['achternaam'];
                 $details[0]['woonplaats'] = $_POST['woonplaats'];
