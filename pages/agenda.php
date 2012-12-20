@@ -39,11 +39,11 @@
             if ($date->dayOfWeek()=="Zondag"){
                 $available ="agendaholiday";
             }else{   
-                if( $numberOfApp <= 8){
+                if( $numberOfApp <= 120){
                     $available = "agendaavail";
-                }elseif( $numberOfApp >= 9 && $numberOfApp <= 14){
+                }elseif( $numberOfApp >= 121 && $numberOfApp <= 360){
                     $available = "agendabusy";
-                }elseif( $numberOfApp >= 15){
+                }elseif( $numberOfApp >= 361){
                     $available = "agendafull";
                 }else{
                     $available = "agendavacancy"; 
