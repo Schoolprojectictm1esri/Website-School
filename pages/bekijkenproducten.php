@@ -37,12 +37,12 @@ $stmt->execute();
   
 if(isset($_GET['categorie'])){
     $categorie = $_GET['categorie'];
-$stmt2 = $db->prepare("SELECT * FROM producten where categorieid = :categorie");
-$stmt2->bindParam(':categorie', $categorie);
-$stmt2->execute();
+    $stmt2 = $db->prepare("SELECT * FROM producten where categorieid = :categorie");
+    $stmt2->bindParam(':categorie', $categorie);
+    $stmt2->execute();
     $result2 = $stmt2->fetchall();
         foreach ($result2 as $row2){
-            echo '<a href="index.php?page=bekijkenproducten&categorie='.$row['id'].'&product='.$row2['id'].'">'.$row2['naam'].'</a>' ; echo "<br> <br>";
+            echo '<a href="index.php?page=bekijkenproducten&categorie='.$row2['categorieid'].'&product='.$row2['id'].'">'.$row2['naam'].'</a>' ; echo "<br> <br>";
         }       
 }    
 else {

@@ -85,13 +85,14 @@ div#contentwrapper{
    width: 1024px;
    margin-bottom: 10px;
    background-image: url('afbeeldingen/background.png');
+   background-position:0px 0px;
    background-repeat: no-repeat;
    min-height: 645px;
 }
 div#content-left{
     width: 120px;
     float: left;
-    margin-right: 120px;
+    margin: 50px 120px 0px 0px;
     min-height: 300px;
 }
 img.sidebannerstripe{
@@ -135,6 +136,8 @@ div.innersidebar{
     
 }
 div#content-right{
+    /* fix for styling top */
+    margin-top: 50px;
     float: left;
     width: 774px;
     min-height: 300px;
@@ -162,5 +165,8 @@ form#form_klant_toevoeg{
    height: 535px;
     width: 635px;
     overflow: auto;
+}
+div.content{
+    width: 650px;
 }
 /* EIND TOEVOEGEN KLANT */
