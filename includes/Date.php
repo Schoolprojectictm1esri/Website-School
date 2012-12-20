@@ -66,7 +66,8 @@ class Date
 
 
     // Zet neer als string
-    public function toString()
+    //update Jelle, Created magic method.
+    public function __toString()
     {
         return "$this->day $this->month $this->year";
     }

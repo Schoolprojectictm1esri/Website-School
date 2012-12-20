@@ -35,22 +35,17 @@
                     $available = "agendafull";
                 }else{
                     $available = "agendavacancy"; 
-                }  
-                        
-                     }
+                }     
+            }
                 echo "<td class='$available'>";
                 // Link om agenda te openen met link waarin dag maand jaar staan.
-
-                Echo "<a href='index.php?page=inplannenafspraak&date=".$date->day."-".$date->month."-".$date->year."'>";
-
-
-
-                // Laat vandaag zien
-                Echo substr($date->dayOfWeek(), 0, 2) . ". " . $date->day . " " . substr($date->monthOfTheYear(), 0, 3) . ".";
-
-                echo "</a>";
-
-
+                if($date->dayOfWeek() == "Zondag"){
+                    echo substr($date->dayOfWeek(), 0,2)."-".$date->day."-".substr($date->monthOfTheYear(), 0, 3);
+                }else{
+                    echo "<a href='index.php?page=inplannenafspraak&date=".$date->day."-".$date->month."-".$date->year."'>
+                        ".substr($date->dayOfWeek(), 0,2)."-".$date->day."-".substr($date->monthOfTheYear(), 0, 3)."
+                        </a>";
+                }          
                 //Laat vandaag zien en berekend de datum van de volgende dag
                 $date->addDays(1);
 

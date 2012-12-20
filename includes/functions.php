@@ -255,7 +255,13 @@ function getSubmenu($role){
                     <div class="innersidebar">
                         <a class="submenu" href="index.php?page=bevestigen_afspraak">Bevestigen Afspraak</a>
                     </div>
-                </div>';
+                </div>
+                <div class="sidebar">
+                    <div class="innersidebar">
+                        <a class="submenu" href="index.php?page=aanpassenproducten">Aanpassen producten</a>
+                    </div>
+                </div>
+                ';
         } else{
             return '';
         }
