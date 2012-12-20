@@ -15,7 +15,7 @@
 // product uit database verwijderen
 if (isset($_GET['id'], $_POST['verwijderen'])) {
         $stmt = $db->prepare("DELETE FROM `producten` WHERE id = :id");
-        $stmt->bindParam(':id', $_POST['id']);
+        $stmt->bindParam(':id', $_GET['id']);
         $stmt->execute();
 }
 
@@ -27,10 +27,30 @@ if (isset($_GET['id'], $_POST['verwijderen'])) {
         $stmt->execute();
         $result = $stmt->fetchObject();    
 
-        if (!isset($_POST['wijzig'])) {
-    ?>
+        if (isset($_POST['wijzig'])) {
+            $stmt = $db->prepare("UPDATE    `producten` set 
+                                            naam = :naam,
+                                            prijs = :prijs, 
+                                            omschrijving = :omschrijving,
+                                            actief = :actief, 
+                                            categorieid = :categorieid 
+                                            WHERE id = :id");
+            $stmt->bindParam(':id', $_GET['id']);
+            $stmt->bindParam(':naam', $_POST['naam']);
+            $stmt->bindParam(':prijs', $_POST['prijs']);
+            $stmt->bindParam(':omschrijving', $_POST['omschrijving']);
+            $stmt->bindParam(':actief', $_POST['actief']);
+            $stmt->bindParam(':categorieid', $_POST['categorieid']);
+            $stmt->execute();
+                echo 'Productgegevens zijn gewijzigd.';
+                echo "<a href='index.php?page=bekijkenproducten'>Klik hier</a>";
+                //  geeft foutmelding als er geen gegevens zijn ingevoerd.
+        }
+        else{
+?>
+<div class="inzienklantgegevens">
         <!-- Formulier om productgegevens te wijzigen -->
-            <form action="" method ="post">
+            <form action="" method ="POST">
                 <table>
                     <tr>
                         <th colspan="3">Product gegevens</th>
@@ -41,76 +61,43 @@ if (isset($_GET['id'], $_POST['verwijderen'])) {
                     </tr>
                     <tr>
                         <td>Naam:</td>
-                        <td><textarea rows="1" cols="10"><?php echo $result->naam; ?></textarea></td>
+                        <td><input type="text" name="naam" value="<?php echo $result->naam; ?>"></td>
                     </tr>
                     <tr>
                         <td>Prijs:</td>
-                        <td><textarea rows="1" cols="10"><?php echo $result->prijs; ?></textarea></td>
+                        <td><input type="text" name="prijs" value="<?php echo $result->prijs; ?>"></td>
                     </tr>
                     <tr>
                         <td>Omschrijving:</td>
-                        <td><textarea rows="3" cols="20"><?php echo $result->omschrijving; ?></textarea></td>
+                        <td><textarea name="omschrijving" rows="3" cols="20"><?php echo $result->omschrijving; ?></textarea></td>
                     </tr>
                     <tr>
                         <td>Categorie ID:</td>
-                        <td><textarea rows="1" cols="10"><?php echo $result->categorieid; ?></textarea></td>
+                        <td><input type="text" name="categorieid" value="<?php echo $result->categorieid; ?>"></td>
                     </tr>
                     <tr>
                         <td>Foto:</td>
                         <td><?php echo '<img width=200px height=200px src="'.$result->foto.'">' ?></td>
+                        <td><input type="submit" name="uploaden" value="upload foto"</td>
                     </tr>
                     <tr>
                         <td>Actief:</td>
                         <td><input type="checkbox" name="actief" value="1" <?php echo (isset($result->actief) ? 'checked="TRUE"' : ''); ?>> </td>
                     </tr>
                 </table>
+                <input type="submit" name="wijzig" value="Wijzigingen opslaan">
                 <input type="submit" name="verwijderen" value="Verwijder dit product">
-                <input type="submit" name="Wijzig" value="Wijzigingen opslaan">
+                <br />
+                <a href="index.php?page=invoegenproduct">Nieuw product toevoegen</a>
                 <br />
                 <a href="index.php?page=bekijkenproducten">Annuleren</a>
             </form>
 <?php
         }
-        //  product gegevens wijzigen.
-        if (isset($_POST['wijzig'])) {      
-                $stmt = $db->prepare("UPDATE `producten` SET `img` =: img `omschrijving` =:omschrijving WHERE id = :id");
-                $stmt->bindParam(':img', $_POST['img']);
-                $stmt->bindParam(':omschrijving', $_POST['omschrijving']);
-                $stmt->execute();
-        }
-            else {
-                echo 'Vul alstublieft een omschrijving in';
-            }
-?>
-            <!-- formulier wat de product gegevens laat zien -->
-            <form action="" method ="post">
-                <table>
-                    <tr>
-                        <td colspan="3">Product gegevens</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>Afbeelding</td>
-                        <td>Productbeschrijving</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td><?php echo '<img src="' .$result->foto. '">' ?></td>
-                        <td><input type="text" name="omschrijving" value="<?php echo $result[0]['omschrijvingen']; ?>"></td>
-                    </tr>
-                </table>
-                <input type="submit" name="verwijderen" value="Verwijder dit product">
-                <input type="submit" name="Wijzig" value="Wijzigingen opslaan">
-                <br />
-                <a href="index.php?page=bekijkenproducten">Annuleren</a>
-            </form>
-
-<?php
-        echo 'Productgegevens zijn gewijzigd.';
-    //  geeft foutmelding als er geen gegevens zijn ingevoerd.
     } 
-    Else {
-        Echo 'Geen product ingevoerd.<br><br>';
-        Echo "<a href='index.php?page=bekijkenproducten'>Klik hier</a>";
+    else {
+        echo 'Onbekent product<br><br>';
+        echo "<a href='index.php?page=bekijkenproducten'>Klik hier</a>";
     }
 ?>
+</div>
