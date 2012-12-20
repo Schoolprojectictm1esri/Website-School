@@ -101,8 +101,63 @@ if (isset($_GET['id'], $_POST['verwijderen'])) {
         }
     } 
     else {
-        echo 'Onbekent product<br><br>';
-        echo "<a href='index.php?page=bekijkenproducten'>Klik hier</a>";
+        if(isset($_GET['categorieid'])){
+            $categorieid = $_GET['categorieid'];
+            $stmt = $db->prepare("SELECT * FROM producten WHERE categorieid= :categorieid");
+            $stmt->bindParam(':categorieid', $categorieid);
+            $stmt->execute();
+            $result5 = $stmt->fetchall();
+?>
+            <table>
+                <tr>
+                    <th>Product ID:</th>
+                    <th>Naam:</th>
+                </tr>
+<?php                
+            foreach($result5 as $aa => $ab){
+                ?>
+                    <tr>
+                        <td>
+                            <?php echo $ab['id'] ?>
+                        </td>
+                        <td>
+                            <?php echo $ab['naam'] ?>
+                        </td>
+                        <td>
+                            <a href="index.php?page=aanpassenproducten&id=<?php echo $ab['id'] ?>">Aanpassen</a>
+                        </td>
+                    </tr>
+<?php
+            }
+?>
+            </table>
+<?php
+        }
+        else{
+        $stmt = $db->query("SELECT * FROM categorieen");
+        $result10 = $stmt->fetchall();
+        ?>
+                <table>
+                    <th colspan="2">
+                        Selecteer een categorie:
+                    </th>
+                <?php
+                foreach($result10 as $keys => $vals){
+                ?>
+                    <tr>
+                        <td>
+                            <?php echo $vals['naam'] ?>
+                        </td>
+                        <td>
+                            <a href="index.php?page=aanpassenproducten&categorieid=<?php echo $vals['id'] ?>">Aanpassen</a>
+                        </td>
+                    </tr>
+        <?php
+        }
+?> 
+                </table>
+<?php
+        }
     }
 ?>
 </div>
