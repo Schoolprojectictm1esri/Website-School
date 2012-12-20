@@ -113,8 +113,15 @@ require_once('includes/bootstrap.php');
                     } else {
                         echo 'Copyright &copy;  Pedicurepraktijk D&#233;sir&#233;e 2012 -  ' . date("Y");
                     }
+                    echo '<br />';
+                    if(getRole() == 2){
+                        echo '<a href="index.php?page=logout"> Uitloggen </a>';
+                    }else{
+                        echo ' <h5> <a href="index.php?page=inloggen_beheer">Inloggen Beheer</a> </h5>';
+                    }
+                    
                     ?> 
-                <h5> <a href="index.php?page=inloggen_beheer">Inloggen Beheer</a> </h5>
+               
             </div>
         </div>
     </body>

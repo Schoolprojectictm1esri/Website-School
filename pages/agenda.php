@@ -8,7 +8,45 @@
 */
     include './includes/Date.php';
     $date = new Date();
-    echo "Plaatje met legenda";
+    echo "  <div class='legenda'>
+                <table class='legenda_table'>
+                    <tr>
+                        <th>Legenda</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            Zwart:
+                        </td>
+                        <td>
+                            Onbeschikbaar
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Rood:
+                        </td>
+                        <td>
+                            Vol
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Geel:
+                        </td>
+                        <td>
+                            Beperkte plaatsen beschikbaar
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Groen:
+                        </td>
+                        <td>
+                            Beschikbaar
+                        </td>
+                    </tr>
+                </table>
+            </div>";
     // Vandaag
     $date->now();
     echo "<table id=table_agenda>";
