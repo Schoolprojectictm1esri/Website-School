@@ -18,7 +18,7 @@ $stmt->execute();
 
 // query om benodigde gegevens 
 
-    if($stmt == TRUE)
+    if($stmt != FALSE)
         {
     
 $result = $stmt->fetchall();

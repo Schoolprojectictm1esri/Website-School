@@ -90,7 +90,7 @@ $tijdenLijst->bindParam(':date', $date);
             }
 
 else{
-    print ("hoi");
+    print ("Helaas! Er is geen geldige datum geselecteerd");
 }
 
         

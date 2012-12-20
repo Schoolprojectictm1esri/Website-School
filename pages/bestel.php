@@ -11,10 +11,23 @@ and open the template in the editor.
     <body>
           
         <?php
-        
+        if (isset($_SESSION['klanten_id'])){
+                $klant_id = $_SESSION['klanten_id'];
        if(isset($_GET['id']) && $_GET['aantal']){
            $id = $_GET['id'];
-           //$query = $db->query("INSERT INTO bestelling ");
+           
+           
+           
+            $joins=$db->prepare("SELECT * FROM bestelling AS b JOIN bestelling_producten AS bp ON b.id = bp.bestelling_id JOIN producten as p ON bp.product_id = p.id"); 
+            $joins->execute();
+            
+           
+           $insert=$db->prepare("INSERT INTO bestelling (klant_id, datum) VALUES (:klant_id, :date ");
+           $insert->bindParam(':klant_id', $klant_id);
+           $insert->bindParam(':date', date('Y-m-d'));
+           $insert->execute();
+           
+           
            // controleert of  'id' en 'aantal' een waarde is meegegeven, zo ja, query om de bestelling in de database te zetten
            $product1 = $db->prepare("SELECT naam FROM producten WHERE id = :id");
            $product1->bindParam(':id', $id);
@@ -35,7 +48,10 @@ and open the template in the editor.
             echo 'Om terug te gaan klik op de volgende link <a href="index.php?page=bestellenproduct">Klik hier</a>';
             
              }
-              
+        }
+        else{
+            print ("Log eerst in a.u.b.");
+        }
         ?>
     </body>
 </html>

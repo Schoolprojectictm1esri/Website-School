@@ -29,15 +29,7 @@ and open the template in the editor.
                
                echo '<option value='.$BehNaam['id'].'>'.$BehNaam['naam'].'</option>';
               
-               
-             
-               
-          
-      
-               
         
-                   
-       
         ?>     
         <?php
         
@@ -53,15 +45,28 @@ and open the template in the editor.
            <input type="submit" name="kiezen" value="Kies">
            
            <?php
-           
-           
-           if (isset($_POST['kiezen'])){
+          
+           if (isset($_SESSION['klanten_id'])){
+                $klant_id = $_SESSION['klanten_id'];
+                if (isset($_POST['kiezen'])){
                echo '<br>';
                print ( "U heeft de volgende behandeling gekozen: {$BehNaam['naam']} op $datum om $tijd");
-               
+               print ("$klant_id");
                
            }
            
+           else{
+               print ("Selecteer een behandeling a.u.b.");
+           }
+           
+           
+           }
+           
+                    
+           
+           
+           
+        
            ?>
         
        </form>
