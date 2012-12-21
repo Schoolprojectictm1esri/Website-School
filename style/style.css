@@ -170,5 +170,13 @@ form#form_klant_toevoeg{
 }
 div.content{
     width: 650px;
+    height: 490px;
+    overflow: auto;
 }
 /* EIND TOEVOEGEN KLANT */
+
+/* Inplannen afspraak */
+table.inplannenafspraak{
+    margin: 0px auto;
+}
+/* Einde inplannen afspraak */

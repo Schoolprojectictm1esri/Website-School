@@ -57,6 +57,7 @@
         // Voor elke column in de table
         for($column = 0; $column<7; $column++)
         {        
+            //haal de totale lengte van alle afspraken op aan de hand van de gekoppelde behandelingen.
             $stmt = $db->prepare("SELECT SUM(lengte) as totaallengte FROM behandelingen WHERE id in(
                                         SELECT behandeling_id 
                                         FROM afspraakbehandelingen
@@ -66,6 +67,7 @@
                                             WHERE datum LIKE :date
                                         )
                                 )");
+            //maak datum goed voor like functie.
             $qrdate = $date->year.'-'.$date->month.'-'.$date->day.'%';
 
             $stmt->bindParam(':date', $qrdate);
@@ -73,8 +75,8 @@
             $total = $stmt->fetchObject();
             $numberOfApp = $total->totaallengte;
             // Kijkt welke dag het is, en kijk wat de beschikbaarheid op die dag is.
-                                        // Afhankelijk van die beschikbaarheid geeft het een kleur weer.
-            if ($date->dayOfWeek()=="Zondag"){
+            // Afhankelijk van die beschikbaarheid geeft het een kleur weer.
+            if ($date->dayOfWeek()=="Zondag" || invakantie($date)){
                 $available ="agendaholiday";
             }else{   
                 if( $numberOfApp <= 120){
@@ -88,8 +90,8 @@
                 }     
             }
                 echo "<td class='$available'>";
-               
-                if($date->dayOfWeek() == "Zondag"){
+               //als datum zondag of vakantie is niet klikbaar maken.
+                if($date->dayOfWeek() == "Zondag" || invakantie($date)){
                     //niet klikbaar
                     echo substr($date->dayOfWeek(), 0,2)."-".$date->day."-".substr($date->monthOfTheYear(), 0, 3);
                 }else{

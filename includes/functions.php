@@ -266,5 +266,14 @@ function getSubmenu($role){
             return '';
         }
 }
+/**
+ * @author Jelle
+ * @description Functie om te bepalen of een datum in de vakantie ligt.
+ * @param type $date
+ * @return boolean
+ */
+function invakantie($date){
+    return false;
+}
 ?>
 
