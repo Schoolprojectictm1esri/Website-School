@@ -91,7 +91,7 @@
             }
                 echo "<td class='$available'>";
                //als datum zondag of vakantie is niet klikbaar maken.
-                if($date->dayOfWeek() == "Zondag" || invakantie($date)){
+                if($date->dayOfWeek() == "Zondag" || invakantie($date->year.'-'.$date->month.'-'.$date->day)){
                     //niet klikbaar
                     echo substr($date->dayOfWeek(), 0,2)."-".$date->day."-".substr($date->monthOfTheYear(), 0, 3);
                 }else{
