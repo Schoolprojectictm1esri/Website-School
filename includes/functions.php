@@ -290,5 +290,63 @@ function invakantie($date){
     //als er nog niks gereturnd is is er geen match met een vakantie. 
     return false;
 }
+/**
+ * @author Jelle
+ * @description Functie om de tijd te controleren in de database voor afspraken.
+ * @param type $tijd
+ * @param type $datum
+ * @return boolean
+ */
+function checktijd($tijd, $datum){
+    //gebruik globale database.
+    global $db;
+    $date = date('Y-m-d', strtotime($datum)); 
+    $dbdate = $date.'%';
+    $stmt = $db->prepare("SELECT * from afspraken where datum LIKE :dbdate order by datum ASC");
+    $stmt->bindParam(':dbdate', $dbdate);
+    $stmt->execute();
+    $result = $stmt->fetchAll();
+    //controleer of er resultaten zijn.
+    if($result != false){
+        //loop door resultaten heen.
+        foreach($result as $key => $val){
+            //is de startdatum gelijk aan start van afspraakdatum.
+            if($tijd == date('G:i',strtotime($val['datum']))){
+                return true;
+            }
+            
+            //loopt de afspraak dodate('G:i',strtotime($val['datum'])or tijdens deze tijd.
+            $stmt = $db->prepare("SELECT SUM(lengte) as totaallengte FROM behandelingen WHERE id in(
+                                        SELECT behandeling_id 
+                                        FROM afspraakbehandelingen
+                                        WHERE afspraak_id IN(
+                                            SELECT id 
+                                            FROM afspraken
+                                            WHERE datum LIKE :date
+                                        )
+                                )");
+            $stmt->bindParam(':date', $dbdate);
+            $stmt->execute();
+            $valres = $stmt->fetchObject();
+            if($valres != false){
+                //lelijke manier om einddatum te berekenen.
+                $start = date('G:i',strtotime($val['datum']));
+                //schoonmaakperiode duurt 15 min.
+                $schoonmaakperiode = 15;
+                //voeg alles samen om toe te kunnen voegen aan string to time.
+                $dbduur = '+'.$valres->totaallengte+$schoonmaakperiode.' minutes';
+                $eind = date('G:i', strtotime($dbduur, strtotime($val['datum']))); 
+                var_dump($eind);
+                if($start <= $tijd && $eind > $tijd){
+                    return true;
+                }
+                //vergelijk nu om te bepalen of de huidige tijd in de behandeling valt.
+            }
+            
+        }
+    }else{
+        return false;   
+    }
+}
 ?>
 
