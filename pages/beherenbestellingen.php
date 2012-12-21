@@ -11,6 +11,25 @@ $result = $stmt->fetchall();
 
 if(!empty($result)){
     if(isset($_GET['id'])){
+        $stmt = $db->prepare("SELECT * FROM `bestelling` WHERE `id` = :id");
+        $stmt->bindParam(':id', $_GET['id']);
+        $stmt->execute();
+        $result1 = $stmt->fetchall();
+        
+        $stmt = $db->prepare("SELECT * FROM `bestelling_producten` WHERE `bestelling_id` = :id");
+        $stmt->bindParam(':id', $_GET['id']);
+        $stmt->execute();
+        $result2 = $stmt->fetchobject();
+        
+        $stmt = $db->prepare("SELECT * FROM `klanten` WHERE `klant_id` = :klant_id");
+        $stmt->bindParam(':klant_id', $result1->klant_id);
+        $stmt->execute();
+        $result3 = $stmt->fetchobject();
+        
+        $stmt = $db->prepare("SELECT * FROM `producten` WHERE `id` = :productid");
+        $stmt->bindParam(':productid', $result2->product_id);
+        $stmt->execute();
+        $result4 = $stmt->fetchobject();
 ?>
 <form action="index.php?page=beherenbestellingen" method="POST">
     <table>
