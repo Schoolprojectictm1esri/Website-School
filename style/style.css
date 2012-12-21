@@ -179,4 +179,10 @@ div.content{
 table.inplannenafspraak{
     margin: 0px auto;
 }
+div#kiesbehandeling{
+    margin: 0px auto;
+}
+select.behandeling{
+    width: 250px;
+}
 /* Einde inplannen afspraak */

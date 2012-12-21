@@ -300,6 +300,7 @@ function invakantie($date){
 function checktijd($tijd, $datum){
     //gebruik globale database.
     global $db;
+    //haal alle afspraken op deze dag op.
     $date = date('Y-m-d', strtotime($datum)); 
     $dbdate = $date.'%';
     $stmt = $db->prepare("SELECT * from afspraken where datum LIKE :dbdate order by datum ASC");
@@ -347,6 +348,84 @@ function checktijd($tijd, $datum){
     }else{
         return false;   
     }
+}
+/**
+ * @author Jelle Smeets
+ * @description FUnctie om ophalen behandelingen makkelijker te maken.
+ * @global type $db
+ * @return type
+ */
+function getbehandelingen(){
+    global $db;
+    $stmt = $db->query('select * from behandelingen where actief = 1');
+    $result = $stmt->fetchAll();
+    return $result;
+}
+/**
+ * @author Jelle Smeets
+ * @description Functie om behandelingen die geinsert worden te controleren.
+ * @param type $tijd
+ * @param type $datum
+ * @param type $behandelingen array
+ */
+function checkinsertbehandelingen($tijd, $datum, $behandelingen){
+    //gebruik globale database.
+    global $db;
+    //haal alle afspraken op deze dag op.
+    $date = date('Y-m-d', strtotime($datum)); 
+    $dbdate = $date.'%';
+    $stmt = $db->prepare("SELECT * from afspraken where datum LIKE :dbdate order by datum ASC");
+    $stmt->bindParam(':dbdate', $dbdate);
+    $stmt->execute();
+    $result = $stmt->fetchAll();
+    //controleer of er resultaten zijn.
+    if($result != false){
+        //loop door resultaten heen.
+        foreach($result as $key => $val){
+            //is de startdatum gelijk aan start van afspraakdatum.
+            if($tijd == date('G:i',strtotime($val['datum']))){
+                return true;
+            }
+            //als er twee behandelingen zijn. gebruik dan 2 lengtes.
+            if(isset($behandelingen['behandeling2'])){
+                $stmt1 = $db->prepare("SELECT SUM(lengte) as totaallengte FROM behandelingen WHERE id in(:behandeling1, :behandeling2)");
+                $stmt1->bindParam(':behandeling1', $behandelingen['behandeling1']);
+                $stmt1->bindParam(':behandeling2', $behandelingen['behandeling2']);
+                $stmt1->execute();
+                //haal totale lengte van behandelingen op en werk daarmee verder.
+                $valres = $stmt1->fetchObject();
+                
+            }else{    
+                $stmt2 = $db->prepare("SELECT SUM(lengte) as totaallengte FROM behandelingen WHERE id in(:behandeling1)");
+                $stmt2->bindParam(':behandeling1', $behandelingen['behandeling1']);
+                $stmt2->execute();
+                //haal totale lengte van behandelingen op en werk daarmee verder.
+                $valres = $stmt2->fetchObject();
+            }
+            
+            
+            if($valres != false){
+                //lelijke manier om einddatum te berekenen.
+                $start = date('G:i',strtotime($val['datum']));
+                //schoonmaakperiode duurt 15 min.
+                $schoonmaakperiode = 15;
+                //voeg alles samen om toe te kunnen voegen aan string to time.
+                $dbduur = '+'.$valres->totaallengte+$schoonmaakperiode.' minutes';
+                $eind = date('G:i', strtotime($dbduur, strtotime($val['datum']))); 
+                //als tijd in deze periode valt kan er niet geboekt worden.
+                if($start <= $tijd && $eind > $tijd){
+                    return true;
+                }elseif($start >= $tijd && $eind >= $tijd){
+                    return true;
+                }
+                //vergelijk nu om te bepalen of de huidige tijd in de behandeling valt.
+            }
+            
+        } 
+    }
+    
+    //als er nog niks gevonden is mag het gebeuren
+    return false;
 }
 ?>
 
