@@ -336,7 +336,7 @@ function checktijd($tijd, $datum){
                 //voeg alles samen om toe te kunnen voegen aan string to time.
                 $dbduur = '+'.$valres->totaallengte+$schoonmaakperiode.' minutes';
                 $eind = date('G:i', strtotime($dbduur, strtotime($val['datum']))); 
-                var_dump($eind);
+                //als tijd in deze periode valt kan er niet geboekt worden.
                 if($start <= $tijd && $eind > $tijd){
                     return true;
                 }
