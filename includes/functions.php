@@ -273,6 +273,21 @@ function getSubmenu($role){
  * @return boolean
  */
 function invakantie($date){
+    //laad globale variabele $db in om gebruik van te kunnen maken.
+    global $db;
+    //zet datum om naar goede vorm voor db.
+    $date = date('Y-m-d', strtotime($date)); 
+    $vandaag = date('Y-m-d');
+    $vakanties = $db->prepare('SELECT * FROM vakantie');
+    $vakanties->bindParam(':vandaag', $vandaag);
+    $vakanties->execute();
+    $vakantiesresult = $vakanties->fetchAll();
+    foreach($vakantiesresult as $key => $val){
+        if($date >= $val['start'] && $date <= $val['end']){
+            return true;
+        }
+    }
+    //als er nog niks gereturnd is is er geen match met een vakantie. 
     return false;
 }
 ?>

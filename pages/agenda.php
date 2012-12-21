@@ -76,7 +76,7 @@
             $numberOfApp = $total->totaallengte;
             // Kijkt welke dag het is, en kijk wat de beschikbaarheid op die dag is.
             // Afhankelijk van die beschikbaarheid geeft het een kleur weer.
-            if ($date->dayOfWeek()=="Zondag" || invakantie($date)){
+            if ($date->dayOfWeek()=="Zondag" || invakantie($date->year.'-'.$date->month.'-'.$date->day)){
                 $available ="agendaholiday";
             }else{   
                 if( $numberOfApp <= 120){

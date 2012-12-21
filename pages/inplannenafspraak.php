@@ -24,7 +24,7 @@ if(isset($_GET['date'])){
         echo '<table class="inplannenafspraak">';
         foreach($result as $key => $val){
             echo '';
-            var_dump($val);
+            //var_dump($val);
         }
         echo '</table>';
     }else{
