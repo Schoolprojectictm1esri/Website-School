@@ -41,7 +41,7 @@ if (isset($_GET['id'], $_POST['verwijderen'])) {
             $stmt->bindParam(':omschrijving', $_POST['omschrijving']);
             $stmt->bindParam(':actief', $_POST['actief']);
             $stmt->bindParam(':categorieid', $_POST['categorieid']);
-            var_dump($_POST['categorieid']);
+            $stmt->execute();
                 echo 'Productgegevens zijn gewijzigd.';
                 echo "<a href='index.php?page=bekijkenproducten'>Klik hier</a>";
                 //  geeft foutmelding als er geen gegevens zijn ingevoerd.

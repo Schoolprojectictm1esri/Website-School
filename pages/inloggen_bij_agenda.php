@@ -26,8 +26,8 @@ if(checkSpam('inlog_form_klant')){
             $stmt->bindParam(':email', $_POST['emailadres']);
             $stmt->bindParam(':password', $password);
             $stmt->execute();
-                //Als er een return
-                
+                //Als er een return   
+            
                 if(!empty($stmt)){
                     $result = $stmt->fetchObject();                    
                     //kijken of actief is
