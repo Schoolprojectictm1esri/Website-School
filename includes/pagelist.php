@@ -16,6 +16,13 @@ $pagelist['inloggen_beheer'] = 0;
 $pagelist['routebeschrijving'] = 0;
 $pagelist['beheer'] = 2;
 $pagelist['toevoegen_klant'] = 2;
+$pagelist['aanmeldenklant'] = 0;
+$pagelist['activeer'] = 0;
+$pagelist['bestel'] = 1;
+$pagelist['invoegenproduct'] = 2;
+$pagelist['kiesbehandeling'] = 1;
+$pagelist['logout'] = 0;
+$pagelist['verwijder_bestelling'] = 2;
 // pagina's van Daniel
 $pagelist['aanpassenklantgegevens'] = 2;
 $pagelist['agenda'] = 1;

@@ -2,7 +2,7 @@
 /*
   Document   : Aanpassenklantgegevens.php
   Created on : 11-12-2012
-  Author     : Daniel
+  Author     : Daniel en Jelle
   Description:
   Aanpassen van de klantgegevens.
  */
