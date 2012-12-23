@@ -26,7 +26,7 @@ if (isset($_GET['id'], $_POST['verwijderen'])) {
         $stmt->bindParam(':id', $_GET['id']);
         $stmt->execute();
         $result = $stmt->fetchObject();    
-
+        // update query
         if (isset($_POST['wijzig'])) {
             $stmt = $db->prepare("UPDATE    `producten` set 
                                             naam = :naam,
@@ -46,6 +46,7 @@ if (isset($_GET['id'], $_POST['verwijderen'])) {
                 echo "<a href='index.php?page=bekijkenproducten'>Klik hier</a>";
                 //  geeft foutmelding als er geen gegevens zijn ingevoerd.
         }
+        // query om alle categorieen op teh alen
         else{
         $stmt = $db->query("SELECT * FROM categorieen");
         $result10 = $stmt->fetchall();
@@ -101,6 +102,7 @@ if (isset($_GET['id'], $_POST['verwijderen'])) {
         }
     } 
     else {
+        // als er een categorie is laat alle producten en namen zien.
         if(isset($_GET['categorieid'])){
             $stmt = $db->prepare("SELECT * FROM producten WHERE categorieid = :cate");
             $stmt->bindParam(':cate', $_GET['categorieid']);
@@ -132,6 +134,7 @@ if (isset($_GET['id'], $_POST['verwijderen'])) {
             </table>
 <?php
         }
+        //eerste formulier om categorieen te kiezen
         else{
         $stmt = $db->query("SELECT * FROM categorieen");
         $result10 = $stmt->fetchall();
