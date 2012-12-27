@@ -1,57 +1,75 @@
-<!--
-To change this template, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title></title>
-    </head>
-    <body>
-          
-        <?php
-        if (isset($_SESSION['klanten_id'])){
-                $klant_id = $_SESSION['klanten_id'];
-       if(isset($_GET['id']) && $_GET['aantal']){
-           $id = $_GET['id'];
-           
-           
-           
-            $joins=$db->prepare("SELECT * FROM bestelling AS b JOIN bestelling_producten AS bp ON b.id = bp.bestelling_id JOIN producten as p ON bp.product_id = p.id"); 
-            $joins->execute();
+<?php
+/**
+ * @author Jelle Smeets
+ */
+echo '<div id="bestel">';
+if(isset($_POST['submit'])){
+    if(check_wagentje()){
+        //als formulier verstuurd is plaats bestelling.
+            //eerste query voor bestellingen tabel.
+        $insertbestellingen = $db->prepare('insert into bestelling (klant_id, datum) VALUES(:klant_id, :datum)');
+        $insertbestellingen->bindParam(':klant_id', $_SESSION['klanten_id']);
+        $datum = date('Y-m-d');
+        $insertbestellingen->bindParam(':datum', $datum);
+        $insertbestellingen->execute();
+        $id = $db->lastInsertId();
+        //query nummer 2 wordt een loop die elke keer opnieuw een prodid en aantal insert in bestellingproducten
+        $insertbestprod = $db->prepare('insert into bestelling_producten (bestelling_id, product_id, aantal) VALUES (:b_id, :p_id, :aantal)');
+        $insertbestprod->bindParam(':b_id', $id);
+        //loop door alle winkelwagen items heen en insert deze.
+        foreach($_SESSION['winkelwagen'] as $key => $val){
             
-           
-           $insert=$db->prepare("INSERT INTO bestelling (klant_id, datum) VALUES (:klant_id, :date ");
-           $insert->bindParam(':klant_id', $klant_id);
-           $insert->bindParam(':date', date('Y-m-d'));
-           $insert->execute();
-           
-           
-           // controleert of  'id' en 'aantal' een waarde is meegegeven, zo ja, query om de bestelling in de database te zetten
-           $product1 = $db->prepare("SELECT naam FROM producten WHERE id = :id");
-           $product1->bindParam(':id', $id);
-             $product1->execute();
-           $naamproduct = $product1->fetchall();
-  
-           foreach ($naamproduct as $productnaam){
-           
-           
-           
-           $aantal = $_GET['aantal'];
-           print ("Uw bestelling van $aantal keer het product : {$productnaam['naam']} is verwerkt! ");
-                                                }
-       }
-       
-        else {
-            print ("U heeft geen geldig product gekozen of geen geldig aantal! <br> Selecteert u eerst een product of aantal ");
-            echo 'Om terug te gaan klik op de volgende link <a href="index.php?page=bestellenproduct">Klik hier</a>';
-            
-             }
+            $insertbestprod->bindParam(':p_id', $val['id']);
+            $insertbestprod->bindParam(':aantal', $val['aantal']);
+            $insertbestprod->execute();
         }
-        else{
-            print ("Log eerst in a.u.b.");
-        }
-        ?>
-    </body>
-</html>
+        
+        //leeg hierna de winkelwagen.
+        leeg_wagentje();
+        echo 'Het plaatsen van de bestelling is gelukt!';
+    }else{
+        echo '<div class="error"> Er is geen winkelwagentje. Er kan dus ook niks besteld worden. </div>';
+    }
+}else{
+    //controleer of er een winkelwagen is.
+    if(check_wagentje()){
+      echo 'U heeft de volgende producten in uw winkelwagentje: <br />';
+      echo '<form name="bestel" action="index.php?page=bestel" method="POST">
+          <table>
+                <tr>
+                    <th> Product: </th>
+                    <th> Aantal: </th>
+                    <th> Totaalprijs per product: </th>
+                </tr>';
+      $prod = $db->prepare('select * from producten where id = :id');
+      $totprijs = 0;
+      //toon naam bij product.
+      foreach($_SESSION['winkelwagen'] as $key => $val){
+          $prod->bindParam(':id', $val['id']);
+          $prod->execute();
+          $objprod = $prod->fetchObject();
+          if($objprod != false){
+              $prijs = $val['aantal'] * $objprod->prijs;
+              $totprijs = $totprijs + $prijs;
+            echo '<tr>
+                <td>'.$objprod->naam.'</td>
+                <td>'.$val['aantal'].'</td>
+                <td>&euro;'.$prijs.'</td>
+            </tr>';  
+          }else{
+              //fout met een product. Toon dit in de tabel.
+              echo '<tr><td>Fout met productid: </td><td>'.$val['id'].'</td></tr>';
+          }
+      }
+      //toon de totaalprijs en bestelknop.
+      echo '<tr><td> Totaal prijs bestelling: </td><td colspan=2>&euro;'.$totprijs.'</td></tr>';
+      echo '<tr><td><input type="submit" name="submit" value="bestel" />';
+      echo '</table>
+          </form>';
+    }else{
+        //geen winkelwagentje beschikbaar.
+          echo '<div class="error">U heeft geen winkelwagentje. Klik <a href="index.php?page=bekijkenproducten">hier</a> om terug te gaan naar de productenpagina.</div>';
+    }
+}
+echo '</div>';
+?>

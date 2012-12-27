@@ -427,5 +427,49 @@ function checkinsertbehandelingen($tijd, $datum, $behandelingen){
     //als er nog niks gevonden is mag het gebeuren
     return false;
 }
+/**
+ * @author Jelle Smeets
+ * @description Functie om winkelwagen te controleren.
+ * @return boolean
+ */
+function check_wagentje(){
+    if(isset($_SESSION['winkelwagen'])){
+        return true;
+    }else{
+        return false;
+    }
+}
+/**
+ * @author Jelle Smeets
+ * @description Functie om producten en aantallen toe te voegen in het winkelwagentje.
+ * @param type $id
+ * @param type $aantal
+ */
+function voeg_toe_winkelwagen($id, $aantal){
+    //controleer winkelwagen.
+    if(check_wagentje()){
+        //als bestaat voeg toe.
+        $counter = count($_SESSION['winkelwagen']);
+        //Controleer of het product al in de winkelwagen zit.
+        foreach($_SESSION['winkelwagen'] as $key => $val){
+            if($val['id'] == $id){
+                //update het winkelwagentje naar het nieuwe aantal.
+                 $_SESSION['winkelwagen'][$key]['aantal'] = $aantal;  
+            }
+        }
+        $_SESSION['winkelwagen'][$counter]['id'] = $id;
+        $_SESSION['winkelwagen'][$counter]['aantal'] = $aantal;      
+    }else{
+        //creeer nieuwe winkelwagen.
+        $_SESSION['winkelwagen'][0]['id'] = $id;
+        $_SESSION['winkelwagen'][0]['aantal'] = $aantal;
+    }
+}
+function leeg_wagentje(){
+    if(check_wagentje()){
+      unset($_SESSION['winkelwagen']);
+    }
+    
+}
 ?>
 
