@@ -96,7 +96,7 @@ if (isset($_GET['id'], $_POST['verwijderen'])) {
                 <br />
                 <a href="index.php?page=invoegenproduct">Nieuw product toevoegen</a>
                 <br />
-                <a href="index.php?page=bekijkenproducten">Annuleren</a>
+                <a href="index.php?page=aanpassenproducten">Annuleren</a>
             </form>
 <?php
         }
