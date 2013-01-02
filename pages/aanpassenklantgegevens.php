@@ -14,21 +14,13 @@
         $stmt = $db->prepare("DELETE FROM `klanten` WHERE klant_id = :klant_id");
         $stmt->bindParam(':klant_id', $_POST['klant_id']);
         $stmt->execute();
-        Redirect("/index.php?page=inzienklantgegevens");
+        redirect("/index.php?page=inzienklantgegevens");
     }
 
     // Wijzigd de gegevens van de klant.
     if (isset($_POST['wijzig'])) {
-        if (empty($_POST['email'])
-                || empty($_POST['voorletters'])
-                || empty($_POST['achternaam'])
-                || empty($_POST['woonplaats'])
-                || empty($_POST['postcode'])
-                || empty($_POST['adres'])
-
-        ){
-            echo 'Vul alstublieft alle verplichte velden in.'; 
-            
+        if (empty($_POST['voorletters']) || empty($_POST['achternaam'])){
+            echo 'Vul alstublieft alle verplichte velden in.';       
         }else{
             //succesfull
             $stmt = $db->prepare("UPDATE `klanten` set voorletters = :voorletters,
@@ -61,10 +53,11 @@
                                                    plantaire_rechts = :plantaire_rechts,
                                                    plantaire_links = :plantaire_links,
                                                    dorsale_rechts = :dorsale_rechts,
-                                                   dorsale_links = :dorsale_links
+                                                   dorsale_links = :dorsale_links,
+                                                   geboortedatum = :geboortedatum
                                                    where klant_id = :klant_id");
            
-
+                        
                         $stmt->bindParam(':klant_id', $_GET['klant_id']);
                         $stmt->bindParam(':voorletters', $_POST['voorletters']);
                         $stmt->bindParam(':tussenvoegsel', $_POST['tussenvoegsel']);
@@ -97,6 +90,7 @@
                         $stmt->bindParam(':plantaire_links', $_POST['plantaire_links']);
                         $stmt->bindParam(':dorsale_rechts', $_POST['dorsale_rechts']);
                         $stmt->bindParam(':dorsale_links', $_POST['dorsale_links']);
+                        $stmt->bindParam(':geboortedatum', $_POST['geboortedatum']);
                         $updateresult = $stmt->execute();
                        if($updateresult != false){
                            echo '<div class="success">Het opslaan is gelukt!.</div>';
@@ -187,6 +181,8 @@
                      
                     <td>Gewicht:</td>
                     <td><input type="text" name="gewicht" value="<?php echo $details[0]['gewicht']; ?>"></td>
+                    <td> Geboortedatum: </td>
+                    <td><input type="text" name="geboortedatum" value="<?php echo $details[0]['geboortedatum']; ?>"></td>
                     </tr><tr>
                    
                     <td>Voettype:</td>
