@@ -5,6 +5,7 @@
  * Version 1.0
  */
 ?>
+<div class="inzienklantgegevens">
 <?php
 //controleert of er een specifieke klant is
 if(isset($_GET['klant_id'])){
@@ -16,7 +17,6 @@ if(isset($_GET['klant_id'])){
     $result1 = $stmt->fetchObject();
 //formulier waar alles getoont word  
 ?>
-<div class="inzienklantgegevens">
     <form action="index.php/inzienklantgegevens&klant_id=<?php echo $klant_id ?>" method="GET">
         <table>
                         <!-- Waarde 1 -->
@@ -211,7 +211,6 @@ if(isset($_GET['klant_id'])){
             </tr>
         </table>
     </form>
-</div>
 <?php
 }
 //print formulier met alle klanten(voorletters, achternaam, email
@@ -247,3 +246,4 @@ else{
 
 
 ?>
+</div>

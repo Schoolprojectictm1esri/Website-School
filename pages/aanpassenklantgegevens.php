@@ -6,8 +6,9 @@
   Description:
   Aanpassen van de klantgegevens.
  */
-
-
+?>
+<div class="inzienklantgegevens">
+<?php
     // Klant uit database verwijderen
     if (isset($_POST['klant_id'], $_POST['verwijderen'])) {
         $stmt = $db->prepare("DELETE FROM `klanten` WHERE klant_id = :klant_id");
@@ -118,7 +119,6 @@
     ?>
 
         <!--Formulier dat weergeeft waar de gegevens naar toe gewijzigd zijn. -->
-        <div class="inzienklantgegevens">
             <form name="klantgegevens" action="index.php?page=aanpassenklantgegevens&klant_id=<?php echo $klant_id ?>" method ="post">
 
                 <table>
