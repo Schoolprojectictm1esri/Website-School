@@ -172,7 +172,7 @@ if(isset($_GET['afspraak_id'])){
                             </html>
                       ";
                     //automatische mail
-                    mail($to, $subject, $message, $from);
+                    mail($to, $subject, $message, $headers);
 ?>
                     <a href="index.php?page=bevestigen_afspraak">Terug naar afspraken</a>
 <?php
@@ -224,7 +224,7 @@ if(isset($_GET['afspraak_id'])){
                         </html>
                   ";
                 //automatische mail
-                mail($to, $subject, $message, $from);
+                mail($to, $subject, $message, $headers);
 ?>
                 <a href="index.php?page=bevestigen_afspraak">Terug naar afspraken</a>
 <?php
@@ -276,7 +276,7 @@ if(isset($_GET['afspraak_id'])){
                     </html>
               ";
             //automatische mail
-            mail($to, $subject, $message, $from);
+            mail($to, $subject, $message, $headers);
 ?>
             <a href="index.php?page=bevestigen_afspraak">Terug naar afspraken</a>
 <?php
