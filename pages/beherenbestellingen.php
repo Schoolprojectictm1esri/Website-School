@@ -127,30 +127,37 @@ else{
         $stmt = $db->prepare("SELECT `klant_id`, `id`, `datum`, `afgerond` FROM `bestelling`");
         $stmt->execute();
         $result5 = $stmt->fetchall();
+            if(!empty($result5)){
+
 ?>
-            <form action="index.php?page=beherenbestellingen" method="POST">
-                <table>
+                <form action="index.php?page=beherenbestellingen" method="POST">
+                    <table>
 <?php         
-                    foreach ($result5 as $key => $value) {
+                        foreach ($result5 as $key => $value) {
 ?>
-                    <tr>
-                        <th>Bestelling ID:</th>
-                        <th>Klant ID:</th>
-                        <th>Besteldatum:</th>
-                        <th>Afgerond:</th>
-                    </tr>
-                    <tr>
-                        <td><?php echo $value['id'] ?></td>
-                        <td><?php echo $value['klant_id'] ?></td>
-                        <td><?php echo $value['datum'] ?></td>
-                        <td><?php echo $value['afgerond'] ?></td>
-                    </tr>
+                        <tr>
+                            <th>Bestelling ID:</th>
+                            <th>Klant ID:</th>
+                            <th>Besteldatum:</th>
+                            <th>Afgerond:</th>
+                        </tr>
+                        <tr>
+                            <td><?php echo $value['id'] ?></td>
+                            <td><?php echo $value['klant_id'] ?></td>
+                            <td><?php echo $value['datum'] ?></td>
+                            <td><?php echo $value['afgerond'] ?></td>
+                        </tr>
 <?php
-                    }
+                        }
 ?>               
-                </table>
-            </form>
+                    </table>
+                </form>
 <?php
+            }
+            else{
+                echo'Er is nog nooit een bestelling geweest';
+
+            }
         }
 
     else {
