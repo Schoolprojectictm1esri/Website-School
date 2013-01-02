@@ -182,9 +182,6 @@ function getMenu($role){
                     <a class="menulink" href="index.php?page=routebeschrijving">Route</a>
                 </div>
                 <div class="menuitem">
-                    <a class="menulink" href="index.php?page=bestel">Winkelwagen</a>
-                </div>
-                <div class="menuitem">
                     <a class="menulink" href="index.php?page=logout">Uitloggen</a>
                 </div>
                 ';    
