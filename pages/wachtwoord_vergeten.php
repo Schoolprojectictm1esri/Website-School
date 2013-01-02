@@ -27,7 +27,9 @@ if(isset($_POST['submit'])){
                 //mail
                 $to = $_POST['emailadres'];
                 $subject = "Wachtwoord vergeten";
-                $from = "noreply@pedicurepraktijkdesiree.nl";
+                $headers = "MIME-Version: 1.0". "\r\n";
+                $headers .= "Content-type:text/html;charset=iso-8859-1". "\r\n";
+                $headers .= "From: <noreply@pedicurepraktijkdesiree.nl>"."\r\n";
                 $message = "
                     <html>
                         <head>

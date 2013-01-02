@@ -139,7 +139,9 @@ if(isset($_GET['afspraak_id'])){
                     //email naar klant na annulering
                     $to = $result2->email;
                     $subject = "Bevestiging afspraak: $result1->datum";
-                    $from = "noreply@pedicurepraktijkdesiree.nl";
+                    $headers = "MIME-Version: 1.0". "\r\n";
+                    $headers .= "Content-type:text/html;charset=iso-8859-1". "\r\n";
+                    $headers .= "From: <noreply@pedicurepraktijkdesiree.nl>"."\r\n";
                     $message = "
                             <html>
                             <head>
@@ -189,7 +191,9 @@ if(isset($_GET['afspraak_id'])){
                 //email naar klant na bevestiging
                 $to = $result2->email;
                 $subject = "Bevestiging afspraak: $result1->datum";
-                $from = "noreply@pedicurepraktijkdesiree.nl";
+                $headers = "MIME-Version: 1.0". "\r\n";
+                $headers .= "Content-type:text/html;charset=iso-8859-1". "\r\n";
+                $headers .= "From: <noreply@pedicurepraktijkdesiree.nl>"."\r\n";
                 $message = "
                         <html>
                         <head>
@@ -239,7 +243,9 @@ if(isset($_GET['afspraak_id'])){
             //email naar klant na annulering
             $to = $result2->email;
             $subject = "Bevestiging afspraak: $result1->datum";
-            $from = "noreply@pedicurepraktijkdesiree.nl";
+            $headers = "MIME-Version: 1.0". "\r\n";
+            $headers .= "Content-type:text/html;charset=iso-8859-1". "\r\n";
+            $headers .= "From: <noreply@pedicurepraktijkdesiree.nl>"."\r\n";
             $message = "
                     <html>
                     <head>
