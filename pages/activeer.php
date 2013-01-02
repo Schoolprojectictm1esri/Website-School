@@ -15,7 +15,7 @@ if(isset($_GET['hash'])){
           $qry1 = $db->prepare("update hash set actief = 0 WHERE hash = :hash");
           $qry1->bindParam(':hash', $_GET['hash']);
           $qry1->execute();
-          $qry2 = $db->prepare('update klanten set actief = true WHERE klant_id = :klantid');
+          $qry2 = $db->prepare('update klanten set actief = 1 WHERE klant_id = :klantid');
           $qry2->bindparam(':klantid', $hashobj->klant_id);
           $qry2->execute();
           //link om in te loggen.
