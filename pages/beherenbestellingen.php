@@ -68,6 +68,9 @@ if(!empty($result)){
                     $result5 = $stmt->fetchObject();
 ?>
                     <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
                         <td>Product naam:</td>
                         <td><?php echo $result5->naam; ?></td>
                     </tr>
@@ -78,6 +81,9 @@ if(!empty($result)){
                     <tr>
                         <td>Aantal:</td>
                         <td><?php echo $val['aantal']; ?></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
                     </tr>
 <?php
                     }
