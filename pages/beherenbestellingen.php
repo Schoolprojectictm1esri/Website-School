@@ -44,11 +44,6 @@ if(!empty($result)){
             $stmt->bindParam(':klant_id', $result1->klant_id);
             $stmt->execute();
             $result3 = $stmt->fetchobject();
-            // query om product gegevens erbij te halen
-            $stmt = $db->prepare("SELECT * FROM `producten` WHERE `id` = :productid");
-            $stmt->bindParam(':productid', $result2->product_id);
-            $stmt->execute();
-            $result4 = $stmt->fetchobject();
                 //formulier met resultaten.
     ?>
                 <form action="index.php?page=beherenbestellingen&id=<?php echo $_GET['id'] ?>" method="POST">
