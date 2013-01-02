@@ -2,12 +2,14 @@
 /* 
     Document   : Agenda.php
     Created on : 11-12-2012
-    Author     : Daniel
+    Author     : Daniel en Jelle.
     Description:
         Het weergeven van de agenda.
 */
+//include data classe
     include './includes/Date.php';
     $date = new Date();
+    //toon eerste gedeelte formulier.
     echo "  <div class='legenda'>
                 <table class='legenda_table'>
                     <tr>
@@ -50,11 +52,12 @@
     // Vandaag
     $date->now();
     echo "<table id=table_agenda>";
-    // Voor elke row in de table
+    // toon 4 rijen.
     for($row = 0; $row<4; $row++)
     {                
         echo "<tr>";
         // Voor elke column in de table
+        //met daarin 7 dagen.
         for($column = 0; $column<7; $column++)
         {        
             //haal de totale lengte van alle afspraken op aan de hand van de gekoppelde behandelingen.

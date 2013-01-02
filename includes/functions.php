@@ -315,7 +315,6 @@ function checktijd($tijd, $datum){
             if($tijd == date('G:i',strtotime($val['datum']))){
                 return true;
             }
-            
             //loopt de afspraak dodate('G:i',strtotime($val['datum'])or tijdens deze tijd.
             $stmt = $db->prepare("SELECT SUM(lengte) as totaallengte FROM behandelingen WHERE id in(
                                         SELECT behandeling_id 
@@ -338,7 +337,7 @@ function checktijd($tijd, $datum){
                 $dbduur = '+'.$valres->totaallengte+$schoonmaakperiode.' minutes';
                 $eind = date('G:i', strtotime($dbduur, strtotime($val['datum']))); 
                 //als tijd in deze periode valt kan er niet geboekt worden.
-                if($start <= $tijd && $eind > $tijd){
+                if(strtotime($start) <= strtotime($tijd) && strtotime($eind) >= strtotime($tijd)){
                     return true;
                 }
                 //vergelijk nu om te bepalen of de huidige tijd in de behandeling valt.
@@ -346,12 +345,13 @@ function checktijd($tijd, $datum){
             
         }
     }else{
+        //als er geen afspraken op deze dag zijn return false.
         return false;   
     }
 }
 /**
  * @author Jelle Smeets
- * @description FUnctie om ophalen behandelingen makkelijker te maken.
+ * @description Functie om ophalen behandelingen makkelijker te maken.
  * @global type $db
  * @return type
  */
@@ -396,6 +396,7 @@ function checkinsertbehandelingen($tijd, $datum, $behandelingen){
                 $valres = $stmt1->fetchObject();
                 
             }else{    
+                //anders gebruik 1 lengte
                 $stmt2 = $db->prepare("SELECT SUM(lengte) as totaallengte FROM behandelingen WHERE id in(:behandeling1)");
                 $stmt2->bindParam(':behandeling1', $behandelingen['behandeling1']);
                 $stmt2->execute();

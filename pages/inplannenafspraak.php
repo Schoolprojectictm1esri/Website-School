@@ -5,7 +5,9 @@
 //include date classe.
 echo '<div class="content">';
 include './includes/Date.php';
+//is get datum geset om beschikbaarheid te bepalen.
 if(isset($_GET['date'])){
+    //instancier klasse.
    $objdb = new Date();
    $date = date('Y-m-d', strtotime($_GET['date'])); 
    //als datum zondag is of in vakantie valt.
@@ -48,7 +50,7 @@ if(isset($_GET['date'])){
     
     if($result != false){
         //er zijn al dagen beschikbaar
-        //loop door dagen heen en 
+        //loop door dagen heen en controleer deze.
         echo '<table class="inplannenafspraak">
                        <tr>
                <th> Tijd:</th>
@@ -60,6 +62,7 @@ if(isset($_GET['date'])){
                   '.$val['tijd'].'
                </td>
                <td>';
+            //als tijd niet beschikbaar is toon dan bezet, anders link met beschikbaar.
             if(checktijd($val['tijd'], $date)){
                 echo 'Bezet';
             }else{
@@ -76,13 +79,14 @@ if(isset($_GET['date'])){
                     <th> Tijd:</th>
                     <th>Beschikbaarheid: </th>
                 </tr>';
+      //geen bezette tijden gevonden, toon alle tijden met een linkje.
       foreach($tijden as $key => $val){
       echo '<tr>
                <td>
                   '.$val['tijd'].'
                </td>
                <td>
-                   <a href="index.php?page=kiesbehandeling&datum='.$date.'<?php echo $date;?>&tijd='.$val['tijd'].'">Beschikbaar</a>
+                   <a href="index.php?page=kiesbehandeling&datum='.$date.'&tijd='.$val['tijd'].'">Beschikbaar</a>
                </td>
            </tr>';
         }
