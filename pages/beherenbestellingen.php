@@ -38,7 +38,7 @@ if(!empty($result)){
             $stmt = $db->prepare("SELECT * FROM `bestelling_producten` WHERE `bestelling_id` = :id");
             $stmt->bindParam(':id', $_GET['id']);
             $stmt->execute();
-            $result2 = $stmt->fetchobject();
+            $result2 = $stmt->fetchall();
             // query om klantgegevens op te halen
             $stmt = $db->prepare("SELECT * FROM `klanten` WHERE `klant_id` = :klant_id");
             $stmt->bindParam(':klant_id', $result1->klant_id);
@@ -65,14 +65,28 @@ if(!empty($result)){
                         <td>Achternaam:</td>
                         <td><?php echo $result3->achternaam ?></td>
                     </tr>
+<?php
+                    $stmt = $db->prepare("SELECT `naam` FROM `producten` WHERE `id` = :productid");
+                    foreach($result2 as $key => $val){
+                    $stmt->bindParam(':productid', $val['product_id']);
+                    $stmt->execute();
+                    $result5 = $stmt->fetchObject();
+?>
+                    <tr>
+                        <td>Product naam:</td>
+                        <td><?php echo $result5->naam; ?></td>
+                    </tr>
                     <tr>
                         <td>Product ID:</td>
-                        <td><?php echo $result2->product_id ?></td>
+                        <td><?php echo $val['product_id']; ?></td>
                     </tr>
                     <tr>
                         <td>Aantal:</td>
-                        <td><?php echo $result2->aantal ?></td>
+                        <td><?php echo $val['aantal']; ?></td>
                     </tr>
+<?php
+                    }
+?>
                     <tr>
                         <td>Besteldatum:</td>
                         <td><?php echo $result1->datum ?></td>
