@@ -132,7 +132,7 @@ if(isset($_GET['afspraak_id'])){
                     $stmt->execute();
                     $result2 = $stmt->fetchObject();
                     //query voor update bij afwijzing
-                    $stmt = $db->prepare("UPDATE `afspraken` SET `bevestigd` = false WHERE `id` = :afspraakid");
+                    $stmt = $db->prepare("delete FROM `afspraken` WHERE `id` = :afspraakid");
                     $stmt->bindParam(':afspraakid', $afspraakid);
                     $stmt->execute();
                     echo "Afspraak is afgewezen,";
@@ -232,7 +232,7 @@ if(isset($_GET['afspraak_id'])){
             $stmt->execute();
             $result2 = $stmt->fetchObject();
             //query met update annuleren van de afspraak
-            $stmt = $db->prepare("UPDATE `afspraken` SET `bevestigd` = FALSE WHERE `id` = :afspraakid");
+            $stmt = $db->prepare("delete FROM `afspraken` WHERE `id` = :afspraakid");
             $stmt->bindParam(':afspraakid', $afspraakid);
             $stmt->execute();
             echo "Afspraak is geannuleerd,";
