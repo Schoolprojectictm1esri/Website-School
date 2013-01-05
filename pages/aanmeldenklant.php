@@ -90,6 +90,7 @@ if(checkSpam('registratie_form')){
         <form action="index.php?page=aanmeldenklant" method="POST">
             <div id="aanmeldenklant">
                 <table id="aanmeldenklant">
+Door het invullen van onderstaande gegeven kunt u zich laten registreren. <br /> U krijgt een bevestigingsmail.Hierna kunt u een afspraak maken via de site “inloggen” <p />                     
                     <tr>
                         <td>Email-adres:</td>
                         <td><input type="text" name="email" value="<?php echo $_POST['email']; ?>" /></td>
@@ -119,15 +120,18 @@ if(checkSpam('registratie_form')){
                         <td><input type="text" name="telefoonnr" value="<?php echo $_POST['telefoonnr']; ?>" /></td>
                    </tr>
                    <tr>
-                        <td>Wachtwoord:</td>
+                        <td>*Wachtwoord:</td>
                         <td><input type="password" name="wachtwoord" value="" /></td>
                    </tr>
                    <tr>
-                        <td>Herhaal wachtwoord:</td>
+                        <td>*Herhaal wachtwoord:</td>
                         <td><input type="password" name="herhaalwachtwoord" value="" /></td>
                    </tr>
                    <tr>
                         <td colspan="2"><input type="submit" value="Registreer" name="registreren" /></td>
+                   </tr>
+                   <tr>
+                            <td colspan="2"><h5>*Wachtwoordeisen: Minimaal 1 hoofdletter gebruiken</h5></td>
                    </tr>
                 </table>
             </div> 
@@ -137,8 +141,10 @@ if(checkSpam('registratie_form')){
         //leeg inlogformulier.
        ?>
         <form action="index.php?page=aanmeldenklant" method="POST">
-            <div id="aanmeldenklant"><table id="aanmeldenklant">
-                    <tr>
+            <div id="aanmeldenklant">
+                <table id="aanmeldenklant">
+Door het invullen van onderstaande gegeven kunt u zich laten registreren. <br /> U krijgt een bevestigingsmail.Hierna kunt u een afspraak maken via de site “inloggen” <p /> 
+                        <tr>
                             <td>Email-adres:</td>
                             <td><input type="text" name="email" value="" /></td>
                         </tr>
@@ -167,15 +173,18 @@ if(checkSpam('registratie_form')){
                             <td><input type="text" name="telefoonnr" value="" /></td>
                         </tr>
                         <tr>
-                            <td>Wachtwoord:</td>
+                            <td>*Wachtwoord:</td>
                             <td><input type="password" name="wachtwoord" value="" /></td>
                         </tr>
                         <tr>
-                            <td>Herhaal wachtwoord:</td>
+                            <td>*Herhaal wachtwoord:</td>
                             <td><input type="password" name="herhaalwachtwoord" value="" /></td>
                         </tr>
                         <tr>
                             <td colspan="2"><input type="submit" value="Registreer" name="registreren" /></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><h5>*Wachtwoordeisen: Minimaal 1 hoofdletter gebruiken</h5></td>
                         </tr>
                 </table></div>
         </form>
