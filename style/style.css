@@ -186,3 +186,6 @@ select.behandeling{
     width: 250px;
 }
 /* Einde inplannen afspraak */
+div.route_text{
+    width: 600px;
+}
