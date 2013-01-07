@@ -11,13 +11,22 @@ $emailadres = '';
 //controleerd of er een value is meegegeven
 if(isset($_GET['value'])){
     $hash = $_GET['value'];
-    $stmt = $db->prepare("SELECT `emailadres` FROM `klanten` WHERE `hash` = :hash");
+    $stmt = $db->prepare("SELECT `klant_id` FROM `hash` WHERE `hash` = :hash AND `actief` = 1" );
     $stmt->bindParam(':hash', $hash);
     $stmt->execute();
     $result = $stmt->fetchObject();
+    
+    //2e query om emailadres op te halen
+    $stmt = $db->prepare("SELECT `email` FROM `klanten` WHERE `klant_id` = :klantid");
+    $stmt->bindParam(':klantid', $result->klant_id);
+    $stmt->execute();
+    $result2 = $stmt->fetchObject();
+    
+    $emailadres = $result2->email;
+    
     //controle of er result is
     if(!empty($result)){
-        $emailadres = $result->emailadres;      
+        $klantid = $result->klant_id;      
     }
     else{
         //redirect bij foutmelding geen result
@@ -43,9 +52,9 @@ if(isset($_POST['submit'])){
         if(($_POST['ww1']) == ($_POST['ww2'])){
             //insert query
             $ww1 = hashPassword($_POST['ww1']);
-            $stmt = $db->prepare("update `klanten` SET `wachtwoord` = :ww1, `hash` = '' WHERE `emailadres` = :emailadres");
+            $stmt = $db->prepare("UPDATE `klanten` SET `wachtwoord` = :ww1 WHERE `email` = :emailadres");
             $stmt->bindParam(':ww1', $ww1);
-            $stmt->bindParam(':emailadrs', $emailadres);
+            $stmt->bindParam(':emailadres', $emailadres);
             $stmt->execute();
             echo 'Uw wachtwoord is gewijzigd <br/> <a href="'.$data['baseurl'].'index.php">Klik hier</a> om naar home te gaan.';
         }

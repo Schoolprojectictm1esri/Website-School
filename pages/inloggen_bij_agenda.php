@@ -15,27 +15,27 @@ if(isset($_COOKIE['klanten_id']) && $_COOKIE['klanten_id'] != '' && is_numeric($
 }
 if(checkSpam('inlog_form_klant')){
     echo 'U heeft te vaak foutief ingelogd.';
-}else{
-    echo 'Om een afspraak dient u ingelogd te zijn. <br />Vul hieronder u login en password in.';
+}
+else{
+    echo 'Om een afspraak te maken dient u ingelogd te zijn. <br />Vul hieronder u login en password in. <br />';
     //is het formulier verstuurd?
     if(isset($_POST['submit'])){
         if($_POST['emailadres'] != '' && $_POST['password'] != ''){
             //beide velden zijn ingevuld.
-            $password = hashPassword($_POST['password']);
+            $pass = hashPassword($_POST['password']);
             //querie voor controle DataBase
-            $stmt = $db->prepare("SELECT * FROM klanten WHERE `email` = :email AND `wachtwoord` = :password");
+            $stmt = $db->prepare("SELECT * FROM `klanten` WHERE `email` = :email AND `wachtwoord` = :password");
             $stmt->bindParam(':email', $_POST['emailadres']);
-            $stmt->bindParam(':password', $password);
+            $stmt->bindParam(':password', $pass);
             $stmt->execute();
+            $result = $stmt->fetchObject();
                 //Als er een return   
             
-                if(!empty($stmt)){
-                    $result = $stmt->fetchObject();                    
+                if(!empty($result)){
+                    $registratie = $result->registratiedatum;
                     //kijken of actief is
-                    if(!$result){
-                        echo 'Inloggen is mislukt! ';
-                    }else{
-                        if($result->actief == 1){
+
+                        if($registratie != ''){
                             //gebruiker id in sessie.
                             setcookie('klanten_id', $result->klanten_id, time() +360000);
                             $_SESSION['klanten_id'] = $result->klant_id;
@@ -49,7 +49,7 @@ if(checkSpam('inlog_form_klant')){
                             <?php
                     
                         }   
-                    }
+                    
 
                 }
             else{
