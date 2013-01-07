@@ -131,7 +131,7 @@ Door het invullen van onderstaande gegeven kunt u zich laten registreren. <br />
                         <td colspan="2"><input type="submit" value="Registreer" name="registreren" /></td>
                    </tr>
                    <tr>
-                            <td colspan="2"><h5>*Wachtwoordeisen: Minimaal 1 hoofdletter gebruiken <br />
+                            <td colspan="2"><h5>*Wachtwoordeisen: Minimaal 8 karakters <br />
                                             *Wachtwoordeisen: Minimaal 1 hoofdletter gebruiken.    <br />
                                             *Wachtwoordeisen: Minimaal 1 cijfer.</h5></td>
                     </tr>
@@ -186,7 +186,7 @@ Door het invullen van onderstaande gegeven kunt u zich laten registreren. <br />
                             <td colspan="2"><input type="submit" value="Registreer" name="registreren" /></td>
                         </tr>
                         <tr>
-                            <td colspan="2"><h5>*Wachtwoordeisen: Minimaal 1 hoofdletter gebruiken <br />
+                            <td colspan="2"><h5>*Wachtwoordeisen: Minimaal 8 karakters <br />
                                             *Wachtwoordeisen: Minimaal 1 hoofdletter gebruiken.    <br />
                                             *Wachtwoordeisen: Minimaal 1 cijfer.</h5></td>
                         </tr>

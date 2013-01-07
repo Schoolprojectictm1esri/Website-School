@@ -16,6 +16,7 @@ if(isset($_COOKIE['klanten_id']) && $_COOKIE['klanten_id'] != '' && is_numeric($
 if(checkSpam('inlog_form_klant')){
     echo 'U heeft te vaak foutief ingelogd.';
 }else{
+    echo 'Om een afspraak dient u ingelogd te zijn. <br />Vul hieronder u login en password in.';
     //is het formulier verstuurd?
     if(isset($_POST['submit'])){
         if($_POST['emailadres'] != '' && $_POST['password'] != ''){
