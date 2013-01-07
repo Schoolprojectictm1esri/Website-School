@@ -47,7 +47,7 @@ if(isset($_POST['submit'])){
                                 <td>thomasvermeulen_2@hotmail.com </td> <!-- en de rest ofcourse!!! -->
                             </tr>
                             <tr>
-                                <a href='http://localhost/Website-School/index.php?page=wachtwoord_wijzigen&value=".$hash."'>Klik hier</a>
+                                <a href='".$data['baseurl']."index.php?page=wachtwoord_wijzigen&value=".$hash."'>Klik hier</a>
                             </tr>
                             <tr>
                                 <td>Met vriendelijke groet PedicurePraktijk Desiree.

@@ -47,7 +47,7 @@ if(isset($_POST['submit'])){
             $stmt->bindParam(':ww1', $ww1);
             $stmt->bindParam(':emailadrs', $emailadres);
             $stmt->execute();
-            echo 'Uw wachtwoord is gewijzigd <br/> <a href="http://localhost/Website-School/index.php">Klik hier</a> om naar home te gaan.';
+            echo 'Uw wachtwoord is gewijzigd <br/> <a href="'.$data['baseurl'].'index.php">Klik hier</a> om naar home te gaan.';
         }
         else {
 ?> 
