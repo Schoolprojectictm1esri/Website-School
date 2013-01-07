@@ -8,7 +8,7 @@
 ?>
 <?php
 
-if(isset($_POST['submit'])){
+if(isset($_POST['Opslaan'])){
     $stmt = $db->prepare("INSERT INTO `producten`(`naam`, `prijs`, `omschrijving`, `actief`, `foto`, `categorieid`) 
                                        VALUES    (naam = :naam,
                                             prijs = :prijs, 
@@ -22,6 +22,7 @@ if(isset($_POST['submit'])){
             $stmt->bindParam(':actief', $_POST['actief']);
             $stmt->bindParam(':categorieid', $_POST['categorieid']);
             $stmt->execute();
+        echo 'Product is toegevoegt, <a href=index.php?page=aanpassenproducten>Klik hier </a>';
 }
 else {
     $stmt = $db->query("SELECT * FROM categorieen");
@@ -29,7 +30,7 @@ else {
     ?>
     <div class="inzienklantgegevens">
         <!-- Formulier om productgegevens te wijzigen -->
-            <form action="" method ="POST">
+            <form action="index.php?page=invoegenproduct" method ="POST">
                 <table>
                     <tr>
                         <th colspan="3">Product gegevens</th>
