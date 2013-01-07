@@ -9,6 +9,11 @@
 
 global $data;
 $data['develop'] = true;
+if($data['develop']){
+    $data['baseurl'] = 'http://ictm1e.pedicurepraktijkdesiree.nl/';
+}else{
+    $data['baseurl'] = 'http://www.pedicurepraktijkdesiree.nl/';
+}
 //regelt database connectie. standaard connectie voor sql in samenwerking met xampp.
 // laad de database pedicure.
 try{

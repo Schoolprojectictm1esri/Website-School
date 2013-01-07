@@ -59,7 +59,7 @@ if(checkSpam('registratie_form')){
                         $hshqry->execute();
                         //stel email op.
                         $subject = 'Bevestigen account Pedicure Praktijk Desiree.';
-                        $message = 'Beste '.$objid->voorletters.' '.$objid->achternaam.',<br /> Klik <a href="http://www.pedicurepraktijk.nl/index.php?page=activeer&hash='.$hash.'">hier</a> om uw account te activeren. <br /> Met vriendelijke groeten <br /> Pedicurepraktijk Desiree. ';
+                        $message = 'Beste '.$objid->voorletters.' '.$objid->achternaam.',<br /> Klik <a href="'.$data['baseurl'].'index.php?page=activeer&hash='.$hash.'">hier</a> om uw account te activeren. <br /> Met vriendelijke groeten <br /> Pedicurepraktijk Desiree. ';
                         $headers = "MIME-Version: 1.0". "\r\n";
                         $headers .= "Content-type:text/html;charset=iso-8859-1". "\r\n";
                         $headers .= "From: <noreply@pedicurepraktijkdesiree.nl>"."\r\n";
