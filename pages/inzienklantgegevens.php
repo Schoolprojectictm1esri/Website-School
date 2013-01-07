@@ -16,8 +16,13 @@ if(isset($_GET['klant_id'])){
     $stmt->execute();
     $result1 = $stmt->fetchObject();
 //formulier waar alles getoont word  
+    if(empty($result1)){
+        echo 'Onbekent klant id,';
+        echo '<a href=index.php?page=inzienklantgegevens>klik hier</a>';
+       }
+    else{
 ?>
-    <form action="index.php/inzienklantgegevens&klant_id=<?php echo $klant_id ?>" method="GET">
+    <form action="index.php?page=inzienklantgegevens&klant_id=<?php echo $klant_id ?>" method="GET">
         <table>
                         <!-- Waarde 1 -->
             <tr>
@@ -212,6 +217,7 @@ if(isset($_GET['klant_id'])){
         </table>
     </form>
 <?php
+    }
 }
 //print formulier met alle klanten(voorletters, achternaam, email
 else{
